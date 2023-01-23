@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.kosmo.music.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "MixinMinecraftClient",
+    "MixinToastManagerEntry",
+    "MixinWorldRenderer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

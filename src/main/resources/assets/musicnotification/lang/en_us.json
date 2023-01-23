@@ -1,0 +1,18 @@
+{
+  "key.musicnotification.openGui": "Show history & library screen",
+  "key.musicnotification.category": "Music client",
+
+  "gui.musicnotification.library": "Library",
+  "gui.musicnotification.history": "History",
+
+  "text.autoconfig.musicnotification.title": "Client music config",
+  "text.autoconfig.musicnotification.option.hideAuthor": "Hide author",
+  "text.autoconfig.musicnotification.option.showSoundtrackName": "Show soundtrack name",
+  "text.autoconfig.musicnotification.option.enableBetaGui": "Enable the beta GUI",
+  "text.autoconfig.musicnotification.option.enableBetaGui.@Tooltip": "Default Key-bind: M",
+  "text.autoconfig.musicnotification.option.disableToastSound": "Disable toast notifications sounds",
+  "text.autoconfig.musicnotification.option.disableToastSound.@Tooltip": "Disable the sound when a toast appears and disappears.\nENABLED_ALL = Vanilla\nDISABLED_MUSIC = Mute the sound for the Music Toast\nDISABLE_ALL = Mute for every Toasts",
+  "text.autoconfig.musicnotification.option.displayDuration": "How long the toast should be displayed (in ms)",
+
+  "modmenu.descriptionTranslation.musicnotification": "Client music mod"
+}

@@ -1,0 +1,51 @@
+name: Publish on Curseforge & Modrinth
+
+on: [ workflow_dispatch ]
+
+env:
+  MINECRAFT_VERSION: 1.19.2
+  JAVA_VERSION: 17
+  RELEASE_NAME: MusicNotification
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Environment Variables
+        run: env
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: "temurin"
+          java-version: 17
+
+      - name: Make Gradle Wrapper Executable
+        if: ${{ runner.os != 'Windows' }}
+        run: chmod +x ./gradlew
+
+      - name: Build
+        run: ./gradlew clean build
+
+      - name: Publish (CurseForge/Modrinth)
+        uses: Kir-Antipov/mc-publish@v3.2
+        with:
+          curseforge-id: 817206
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          modrinth-id: A4YQgwzz
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          loaders: fabric
+          name: ${{env.RELEASE_NAME}}
+          version-type: release
+          changelog-file: CHANGELOG.md
+          files: build/libs/!(*-@(dev|sources|javadoc)).jar

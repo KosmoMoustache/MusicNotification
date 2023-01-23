@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "musicnotification",
+  "version": "${version}",
+
+  "name": "Music Notification",
+  "description": "Add toast notification when music is played in game with the name.",
+  "authors": [
+    "KosmoMoustache"
+  ],
+  "contact": {
+    "homepage": "https://mod.kosmo.ovh/",
+    "sources": "https://github.com/KosmoMoustache/MusicNotification"
+  },
+
+  "license": "LGPL-3.0-only",
+  "icon": "assets/musicnotification/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.kosmo.music.ClientMusic"
+    ],
+    "modmenu": [
+      "net.kosmo.music.ModMenuCompatibility"
+    ]
+  },
+  "mixins": [
+    "mixins.clientmusic.json"
+  ],
+  "accessWidener": "clientmusic.aw",
+  "depends": {
+    "fabricloader": ">=0.14.11",
+    "minecraft": "~1.19.2"
+  },
+
+  "suggests": {}
+}

@@ -1,0 +1,1 @@
+magick mogrify -resize 200x200 *.jpg
