@@ -6,6 +6,7 @@ env:
   MINECRAFT_VERSION: 1.19.2
   JAVA_VERSION: 17
   RELEASE_NAME: MusicNotification
+  RELEASE_VERSION: 1.0.0
 
 permissions:
   contents: write
@@ -45,7 +46,7 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
           loaders: fabric
-          name: ${{env.RELEASE_NAME}}
+          name: "${{env.RELEASE_NAME}} ${{env.RELEASE_VERSION}}"
           version-type: release
           changelog-file: CHANGELOG.md
           files: build/libs/!(*-@(dev|sources|javadoc)).jar

@@ -4,4 +4,5 @@
 - publish.yml
   - Minecraft version
   - release name
+  - mod version
 - CHANGELOG.md
