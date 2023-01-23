@@ -83,7 +83,7 @@ java {
 }
 
 jar {
-    from "LICENSE.text"
+    from "LICENSE"
 }
 
 // configure the maven publication
