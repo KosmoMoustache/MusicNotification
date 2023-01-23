@@ -3,7 +3,7 @@ name: Publish on Curseforge & Modrinth
 on: [ workflow_dispatch ]
 
 env:
-  MINECRAFT_VERSION: 1.19.2
+  MINECRAFT_VERSION: 1.19.3
   JAVA_VERSION: 17
   RELEASE_NAME: MusicNotification
   RELEASE_VERSION: 1.0.0
@@ -49,7 +49,7 @@ jobs:
           github-token: ${{ secrets.P_GITHUB_TOKEN }}
 
           game-versions: |
-            1.19.2
+            1.19.3
           loaders: fabric
           name: "${{env.RELEASE_NAME}} ${{env.RELEASE_VERSION}}"
           version-type: release

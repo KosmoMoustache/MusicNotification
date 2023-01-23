@@ -14,10 +14,10 @@ import net.kosmo.music.MusicManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.function.Consumer;
 
@@ -61,7 +61,7 @@ public class ListMusicGui extends LightweightGuiDescription {
 
     private void Library(WBox box, WScrollPanel scrollPanel/*, String search*/) {
 //        box.add(new WLabel(Text.of(search)), 200, 20);
-        for (SoundEvent sound : Registry.SOUND_EVENT) {
+        for (SoundEvent sound : Registries.SOUND_EVENT) {
             if (sound.getId().getPath().contains("music")) {
                 WButton button;
                 Icon icon = new TextureIcon(new Identifier(ClientMusic.MOD_ID, "textures/widget/note_1.png"));
