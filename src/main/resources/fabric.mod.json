@@ -30,9 +30,7 @@
   ],
   "accessWidener": "clientmusic.aw",
   "depends": {
-    "fabricloader": ">=0.14.11",
-    "minecraft": "~1.19.2"
-  },
-
-  "suggests": {}
+    "minecraft": "~1.19.2",
+    "fabricloader": ">=0.14.11"
+  }
 }
