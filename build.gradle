@@ -12,7 +12,7 @@ version = project.mod_version
 group = project.maven_group
 
 loom {
-    accessWidenerPath = file('src/main/resources/clientmusic.aw')
+    accessWidenerPath = file('src/main/resources/clientmusic.accesswidener')
 }
 
 repositories {
@@ -47,8 +47,7 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    // LibGUi
-    modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
+
 
     modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
