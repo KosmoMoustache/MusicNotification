@@ -7,7 +7,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.kosmo.music.toast.MusicToast;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundInstanceListener;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.item.MusicDiscItem;
@@ -18,8 +17,6 @@ import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Environment(EnvType.CLIENT)
 public class ClientMusic implements ClientModInitializer {
@@ -30,16 +27,12 @@ public class ClientMusic implements ClientModInitializer {
     public static ResourceManager resourceManager;
     public static ModConfig config;
     public static MinecraftClient client;
-    public static Collection<SoundInstance> musicHistory = new ArrayList<>();
-    public static SoundInstance nowPlaying;
     public static MusicManager musicManager;
 
     @Override
     public void onInitializeClient() {
         LOGGER.info("Music Notification initialized");
         client = MinecraftClient.getInstance();
-
-        KeyInputHandler.register();
 
         // Config
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
