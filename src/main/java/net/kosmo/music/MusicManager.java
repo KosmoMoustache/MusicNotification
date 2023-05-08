@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.kosmo.music.toast.MusicToast;
 import net.minecraft.util.JsonHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -12,16 +13,18 @@ import java.util.Map;
 public class MusicManager {
     public Map<String, Entry> music = Maps.newHashMap();
 
-    public MusicManager(JsonObject json) {
-        if (json != null) {
-            for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
-                music.put(entry.getKey(), new Entry((JsonObject) entry.getValue()));
-            }
-        }
+    public MusicManager(@NotNull  JsonObject json) {
+        setMusicEntries(json);
     }
 
     public Map<String, Entry> getEntries() {
         return music;
+    }
+
+    public void setMusicEntries(JsonObject json) {
+            for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+                music.put(entry.getKey(), new Entry((JsonObject) entry.getValue()));
+            }
     }
 
     public Entry getEntry(String name) {
@@ -45,6 +48,7 @@ public class MusicManager {
         }
 
         private MusicToast.AlbumCover parseAlbumCover() {
+            if (this.soundtrack == null) return MusicToast.AlbumCover.CD;
             if (this.soundtrack.contains("Alpha")) return MusicToast.AlbumCover.ALPHA;
             if (this.soundtrack.contains("Beta")) return MusicToast.AlbumCover.BETA;
             if (this.soundtrack.contains("Axolotl")) return MusicToast.AlbumCover.AXOLOTL;
@@ -68,7 +72,7 @@ public class MusicManager {
             return soundtrack;
         }
 
-        public MusicToast.AlbumCover getAlbumCover() {
+        public MusicToast.@Nullable AlbumCover getAlbumCover() {
             return albumCover;
         }
 

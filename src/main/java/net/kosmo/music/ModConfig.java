@@ -13,8 +13,6 @@ public class ModConfig implements ConfigData {
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
     public disableToastSoundState disableToastSound = disableToastSoundState.DISABLE_MUSIC;
     public long displayDuration = 5000;
-    @ConfigEntry.Gui.Tooltip
-    public boolean enableBetaGui = false;
 
     @Override
     public void validatePostLoad() throws ValidationException {
