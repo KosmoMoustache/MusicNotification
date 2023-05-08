@@ -21,8 +21,8 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
      *  This mixins modify the argument `y` of MatrixStack.translate(x, y, z) to return the correct y position when drawing a MusicToast
      *  TODO: Other toast can overlap the {@link MusicToast} toast when showing soundtrack
      */
-    @ModifyArg(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(DDD)V"), index = 1)
-    public double modifyY(double y) {
+    @ModifyArg(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V"), index = 1)
+    public float modifyY(float y) {
         if (this.instance instanceof MusicToast && !ClientMusic.config.showSoundtrackName) {
             return this.topIndex * this.instance.getHeight();
         }

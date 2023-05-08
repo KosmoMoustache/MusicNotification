@@ -28,9 +28,9 @@
   "mixins": [
     "mixins.clientmusic.json"
   ],
-  "accessWidener": "clientmusic.aw",
+  "accessWidener": "clientmusic.accesswidener",
   "depends": {
-    "minecraft": "~1.19.2",
+    "minecraft": "~1.19.4",
     "fabricloader": ">=0.14.11"
   }
 }
