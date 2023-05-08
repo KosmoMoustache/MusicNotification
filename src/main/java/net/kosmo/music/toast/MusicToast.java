@@ -18,7 +18,7 @@ public class MusicToast implements Toast {
     private static final Type DEFAULT = Type.DEFAULT;
     private final long displayDuration;
     private AlbumCover albumCover;
-    private Type type;
+    private final Type type;
     private long startTime;
     private boolean justUpdated;
     private Text title;
@@ -84,8 +84,8 @@ public class MusicToast implements Toast {
             this.justUpdated = false;
         }
         RenderSystem.setShaderTexture(0, TEXTURE);
-        manager.drawTexture(matrices, 0, 0, 0, ClientMusic.config.showSoundtrackName ? 32 : 0, this.getWidth(), this.getHeight());
-        this.albumCover.drawIcon(matrices, manager, 6, 6);
+        DrawableHelper.drawTexture(matrices, 0, 0, 0, ClientMusic.config.showSoundtrackName ? 32 : 0, this.getWidth(), this.getHeight());
+        this.albumCover.drawIcon(matrices, 6, 6);
 
         manager.getClient().textRenderer.draw(matrices, this.title, 30.0f, 7.0f, -11534256);
         if (!ClientMusic.config.hideAuthor) {
@@ -141,9 +141,9 @@ public class MusicToast implements Toast {
             this.textureSlotY = textureSlotY;
         }
 
-        public void drawIcon(MatrixStack matrices, DrawableHelper helper, int x, int y) {
+        public void drawIcon(MatrixStack matrices, int x, int y) {
             RenderSystem.enableBlend();
-            helper.drawTexture(matrices, x, y, 176 + this.textureSlotX * 20, this.textureSlotY * 20, 20, 20);
+            DrawableHelper.drawTexture(matrices, x, y, 176 + this.textureSlotX * 20, this.textureSlotY * 20, 20, 20);
             RenderSystem.enableBlend();
         }
     }

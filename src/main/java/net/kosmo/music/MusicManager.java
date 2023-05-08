@@ -48,6 +48,7 @@ public class MusicManager {
         }
 
         private MusicToast.AlbumCover parseAlbumCover() {
+            if (this.soundtrack == null) return MusicToast.AlbumCover.CD;
             if (this.soundtrack.contains("Alpha")) return MusicToast.AlbumCover.ALPHA;
             if (this.soundtrack.contains("Beta")) return MusicToast.AlbumCover.BETA;
             if (this.soundtrack.contains("Axolotl")) return MusicToast.AlbumCover.AXOLOTL;
@@ -71,7 +72,7 @@ public class MusicManager {
             return soundtrack;
         }
 
-        public MusicToast.AlbumCover getAlbumCover() {
+        public MusicToast.@Nullable AlbumCover getAlbumCover() {
             return albumCover;
         }
 
