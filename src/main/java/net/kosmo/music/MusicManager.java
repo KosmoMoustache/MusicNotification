@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.kosmo.music.toast.MusicToast;
 import net.minecraft.util.JsonHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -12,16 +13,18 @@ import java.util.Map;
 public class MusicManager {
     public Map<String, Entry> music = Maps.newHashMap();
 
-    public MusicManager(JsonObject json) {
-        if (json != null) {
-            for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
-                music.put(entry.getKey(), new Entry((JsonObject) entry.getValue()));
-            }
-        }
+    public MusicManager(@NotNull  JsonObject json) {
+        setMusicEntries(json);
     }
 
     public Map<String, Entry> getEntries() {
         return music;
+    }
+
+    public void setMusicEntries(JsonObject json) {
+            for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+                music.put(entry.getKey(), new Entry((JsonObject) entry.getValue()));
+            }
     }
 
     public Entry getEntry(String name) {

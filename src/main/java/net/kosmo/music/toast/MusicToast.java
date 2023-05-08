@@ -13,8 +13,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
-import static net.kosmo.music.DataManager.getLastSegmentOfPath;
-
 public class MusicToast implements Toast {
     public static final Identifier TEXTURE = new Identifier(ClientMusic.MOD_ID, "textures/gui/toasts.png");
     private static final Type DEFAULT = Type.DEFAULT;
@@ -38,7 +36,7 @@ public class MusicToast implements Toast {
     }
 
     public static void show(SoundInstance soundInstance) {
-        String soundName = getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
+        String soundName = ClientMusic.getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
         MusicManager.Entry entry = ClientMusic.musicManager.getEntry(soundName.toLowerCase());
 
         if (entry != null) {
