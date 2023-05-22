@@ -45,8 +45,8 @@ jobs:
           modrinth-id: A4YQgwzz
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
-          github-tag: v${{env.VERSION}}
           github-token: ${{ secrets.P_GITHUB_TOKEN }}
+          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.RELEASE_VERSION }}
 
           game-versions: |
             1.19.4
