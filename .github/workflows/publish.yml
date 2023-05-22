@@ -51,7 +51,7 @@ jobs:
           game-versions: |
             1.19.4
           loaders: fabric
-          name: "v${{env.RELEASE_VERSION}}+${{MINECRAFT_VERSION}}"
+          name: "v${{env.RELEASE_VERSION}}+${{env.MINECRAFT_VERSION}}"
           version-type: release
           changelog-file: CHANGELOG.md
           files: build/libs/!(*-@(dev|sources|javadoc)).jar
