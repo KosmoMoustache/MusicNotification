@@ -16,7 +16,6 @@ import net.minecraft.util.math.MathHelper;
 public class MusicToast implements Toast {
     public static final Identifier TEXTURE = new Identifier(ClientMusic.MOD_ID, "textures/gui/toasts.png");
     private static final Type DEFAULT = Type.DEFAULT;
-    private final long displayDuration;
     private AlbumCover albumCover;
     private final Type type;
     private long startTime;
@@ -30,7 +29,6 @@ public class MusicToast implements Toast {
         this.title = title;
         this.author = author;
         this.soundtrack = soundtrack;
-        this.displayDuration = ClientMusic.config.displayDuration;
         this.type = type;
         this.albumCover = albumCover;
     }
@@ -96,7 +94,7 @@ public class MusicToast implements Toast {
             manager.getClient().textRenderer.draw(matrices, this.soundtrack, 30.0f, 29.0f, -16777216);
         }
 
-        return startTime - this.startTime < this.displayDuration ? Toast.Visibility.SHOW : Toast.Visibility.HIDE;
+        return (double)(startTime - this.startTime) >= 5000.0 * manager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
     }
 
     public void setContent(Text title, Text author, Text soundtrack, AlbumCover albumCover) {
