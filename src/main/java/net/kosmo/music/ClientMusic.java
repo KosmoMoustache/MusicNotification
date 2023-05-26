@@ -35,19 +35,14 @@ public class ClientMusic implements ClientModInitializer {
 
     public static SoundManager soundManager;
     public static ResourceManager resourceManager;
-    public static ModConfig config;
     public static MinecraftClient client;
     public static MusicManager musicManager;
-
+    public static ModConfig config;
 
     @Override
     public void onInitializeClient() {
         LOGGER.info("Music Notification initialized");
         client = MinecraftClient.getInstance();
-
-        // Config
-        AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
-        config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
         // Resource Loader
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
@@ -61,6 +56,11 @@ public class ClientMusic implements ClientModInitializer {
                 musicManager.setMusicEntries(resourceLoader(manager));
             }
         });
+
+        // Config
+        AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
+        config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+
     }
 
     public static void onClientInit() {
@@ -89,7 +89,9 @@ public class ClientMusic implements ClientModInitializer {
                     MusicToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), MusicToast.AlbumCover.MODDED_CD);
                 }
             }
+            LOGGER.info("Playing music disc: {}", song.getId());
         }
+
     }
 
     public static SoundInstanceListener SoundListener = (soundInstance, soundSet) -> {
@@ -112,7 +114,7 @@ public class ClientMusic implements ClientModInitializer {
     public static JsonObject resourceLoader(ResourceManager manager) {
         Optional<Resource> resource = manager.getResource(new Identifier(MOD_ID, "musics.json"));
         if (resource.isPresent()) {
-            Resource  resource1 = resource.get();
+            Resource resource1 = resource.get();
             try (BufferedReader reader = resource1.getReader()) {
                 return JsonHelper.deserialize(reader);
             } catch (IOException e) {
