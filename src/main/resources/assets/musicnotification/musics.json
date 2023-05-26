@@ -308,5 +308,30 @@
     "title": "Pigstep",
     "author": "Lena Raine",
     "soundtrack": "Nether Update No. 4"
+  },
+  "echo_in_the_wind": {
+    "title": "Echo in the Wind",
+    "author": "Aaron Cherof",
+    "soundtrack": "Trails & Tailes Update No.1"
+  },
+  "a_familiar_room": {
+    "title": "A Familiar Room",
+    "author": "Aaron Cherof",
+    "soundtrack": "Trails & Tailes Update No.2"
+  },
+  "bromeliad": {
+    "title": "Bromeliad",
+    "author": "Aaron Cherof",
+    "soundtrack": "Trails & Tailes Update No.3"
+  },
+  "crescent_dunes": {
+    "title": "Crescent Dunes",
+    "author": "Aaron Cherof",
+    "soundtrack": "Trails & Tailes Update No.4"
+  },
+  "relic": {
+    "title": "Relic",
+    "author": "Aaron Cherof",
+    "soundtrack": "Trails & Tailes Update No.5"
   }
 }

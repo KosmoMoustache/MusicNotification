@@ -48,6 +48,7 @@ public class MusicManager {
         }
 
         private MusicToast.AlbumCover parseAlbumCover() {
+            // TODO: Add key for album cover in json
             if (this.soundtrack == null) return MusicToast.AlbumCover.CD;
             if (this.soundtrack.contains("Alpha")) return MusicToast.AlbumCover.ALPHA;
             if (this.soundtrack.contains("Beta")) return MusicToast.AlbumCover.BETA;
@@ -57,6 +58,7 @@ public class MusicManager {
             if (this.soundtrack.contains("Nether"))  return MusicToast.AlbumCover.NETHER;
             if (this.soundtrack.contains("Wild")) return MusicToast.AlbumCover.WILD;
             if (this.soundtrack.contains("Caves")) return MusicToast.AlbumCover.CAVES;
+            if (this.soundtrack.contains("Trails")) return MusicToast.AlbumCover.TRAILSANDTALES;
             return MusicToast.AlbumCover.CD;
         }
 

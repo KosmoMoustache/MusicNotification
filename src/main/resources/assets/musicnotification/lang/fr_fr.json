@@ -4,6 +4,5 @@
   "text.autoconfig.musicnotification.option.showSoundtrackName": "Afficher le nom de la soundtrack",
   "text.autoconfig.musicnotification.option.disableToastSound": "Gérer le son des toasts",
   "text.autoconfig.musicnotification.option.disableToastSound.@Tooltip": "Supprime le son quand un toast apparaît et disparaît.\nENABLED_ALL = Vanilla\nDISABLED_MUSIC = Désactivé pour les toasts du mod\nDISABLED_ALL = Désactivé pour tout les toasts",
-  "modmenu.descriptionTranslation.musicnotification": "Ajoute une notification toast quand une musique est jouée, avec le nom, l'auteur, et la soundtrack."
-
+  "text.autoconfig.musicnotification.option.rotate_album_cover": "Rotation de la pochette d'album"
 }
