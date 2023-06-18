@@ -1,10 +1,10 @@
 package net.kosmo.music.toast;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.kosmo.music.ClientMusic;
 import net.kosmo.music.MusicManager;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
@@ -12,25 +12,27 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import org.joml.Quaternionf;
+
+import static net.kosmo.music.ClientMusic.LOGGER;
 
 public class MusicToast implements Toast {
     public static final Identifier TEXTURE = new Identifier(ClientMusic.MOD_ID, "textures/gui/toasts.png");
     private static final Type DEFAULT = Type.DEFAULT;
-    private final long displayDuration;
-    private AlbumCover albumCover;
     private final Type type;
+    private AlbumCover albumCover;
     private long startTime;
     private boolean justUpdated;
     private Text title;
     private Text author;
     private Text soundtrack;
+    private int rotation;
 
     public MusicToast(Type type, AlbumCover albumCover, Text title, Text author, Text soundtrack) {
-        ClientMusic.LOGGER.info("Now playing: {} by {} ({})", title.getString(), author.getString(), soundtrack.getString());
+        LOGGER.info("Now playing: {} by {} ({})", title.getString(), author.getString(), soundtrack.getString());
         this.title = title;
         this.author = author;
         this.soundtrack = soundtrack;
-        this.displayDuration = ClientMusic.config.displayDuration;
         this.type = type;
         this.albumCover = albumCover;
     }
@@ -70,36 +72,57 @@ public class MusicToast implements Toast {
 
     @Override
     public int getRequiredSpaceCount() {
-        return MathHelper.ceilDiv(this.getHeight(), ClientMusic.config.showSoundtrackName ? 44 : 32);
+        return MathHelper.ceilDiv(this.getHeight(), ClientMusic.config.SHOW_SOUNDTRACK_NAME ? 44 : 32);
     }
 
     /**
-     * When {@link net.kosmo.music.ModConfig#showSoundtrackName} is false, when another toast is shown, the soundtrack
+     * When {@link net.kosmo.music.ModConfig#SHOW_SOUNDTRACK_NAME} is false, when another toast is shown, the soundtrack
      * is hided by the new toast
      */
     @Override
-    public Toast.Visibility draw(MatrixStack matrices, ToastManager manager, long startTime) {
+    public Toast.Visibility draw(DrawContext context, ToastManager manager, long startTime) {
+        MatrixStack matrices = context.getMatrices();
+
+
+        if (rotation >= 360) rotation = 0;
+        rotation += 1;
+        TextRenderer textRenderer = manager.getClient().textRenderer;
         if (this.justUpdated) {
             this.startTime = startTime;
             this.justUpdated = false;
         }
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        DrawableHelper.drawTexture(matrices, 0, 0, 0, ClientMusic.config.showSoundtrackName ? 32 : 0, this.getWidth(), this.getHeight());
-        this.albumCover.drawIcon(matrices, 6, 6);
+        context.drawTexture(TEXTURE, 0, 0, 0, ClientMusic.config.SHOW_SOUNDTRACK_NAME ? 32 : 0, this.getWidth(), this.getHeight());
 
-        manager.getClient().textRenderer.draw(matrices, this.title, 30.0f, 7.0f, -11534256);
-        if (!ClientMusic.config.hideAuthor) {
-            manager.getClient().textRenderer.draw(matrices, this.author, 30.0f, 18.0f, -16777216);
+        context.getMatrices().push();
+        // Make the icon rotate
+        if (ClientMusic.config.ROTATE_ALBUM_COVER) {
+            matrices.translate(0, 0, 0);
+            matrices.translate((float) AlbumCover.getWidth() / 2, (float) AlbumCover.getHeight() / 2, 0);
+            matrices.multiply(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
+            matrices.translate(-(float) AlbumCover.getWidth() / 2, -(float) AlbumCover.getHeight() / 2, 0);
+            matrices.translate(-0, -0, 0);
         }
-        if (ClientMusic.config.showSoundtrackName) {
+
+        this.albumCover.drawIcon(context, 6, 6);
+        context.getMatrices().pop();
+
+
+        context.drawText(textRenderer, this.title, 30, 7, -11534256, false);
+
+        if (!ClientMusic.config.HIDE_AUTHOR) {
+            context.drawText(textRenderer, this.author, 30, 18, -16777216, false);
+        }
+
+        if (ClientMusic.config.SHOW_SOUNDTRACK_NAME) {
             // max length 23 chars
-            manager.getClient().textRenderer.draw(matrices, this.soundtrack, 30.0f, 29.0f, -16777216);
+            context.drawText(textRenderer, this.soundtrack, 30, 29, -16777216, false);
         }
 
-        return startTime - this.startTime < this.displayDuration ? Toast.Visibility.SHOW : Toast.Visibility.HIDE;
+        return (double) (startTime - this.startTime) >= 5000.0 * manager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
     }
 
     public void setContent(Text title, Text author, Text soundtrack, AlbumCover albumCover) {
+        LOGGER.info("setContent: {} by {} ({})", title.getString(), author.getString(), soundtrack.getString());
         this.title = title;
         this.author = author;
         this.soundtrack = soundtrack;
@@ -109,7 +132,7 @@ public class MusicToast implements Toast {
 
     @Override
     public int getHeight() {
-        if (ClientMusic.config.showSoundtrackName) {
+        if (ClientMusic.config.SHOW_SOUNDTRACK_NAME) {
             return 44;
         }
         return 32;
@@ -131,7 +154,8 @@ public class MusicToast implements Toast {
         SHUNIJI(0, 2),
         NETHER(1, 2),
         CAVES(2, 2),
-        WILD(3, 2);
+        WILD(3, 2),
+        TRAILSANDTALES(0, 3);
 
         private final int textureSlotY;
         private final int textureSlotX;
@@ -141,10 +165,16 @@ public class MusicToast implements Toast {
             this.textureSlotY = textureSlotY;
         }
 
-        public void drawIcon(MatrixStack matrices, int x, int y) {
-            RenderSystem.enableBlend();
-            DrawableHelper.drawTexture(matrices, x, y, 176 + this.textureSlotX * 20, this.textureSlotY * 20, 20, 20);
-            RenderSystem.enableBlend();
+        static int getWidth() {
+            return 32;
+        }
+
+        static int getHeight() {
+            return 32;
+        }
+
+        public void drawIcon(DrawContext context, int x, int y) {
+            context.drawTexture(TEXTURE, x, y, 176 + this.textureSlotX * 20, this.textureSlotY * 20, 20, 20);
         }
     }
 }
