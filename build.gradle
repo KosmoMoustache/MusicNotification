@@ -1,15 +1,15 @@
 plugins {
-    id 'fabric-loom' version '1.0-SNAPSHOT'
+    id 'fabric-loom' version '1.2-SNAPSHOT'
     id 'maven-publish'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
-
-archivesBaseName = "${project.archives_base_name}-mc${project.minecraft_version}"
 version = project.mod_version
 group = project.maven_group
+minecraft_version = project.minecraft_version
+
 
 loom {
     accessWidenerPath = file('src/main/resources/clientmusic.accesswidener')
@@ -21,11 +21,6 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
-
-    maven {
-        name = "CottonMC"
-        url = "https://server.bbkr.space/artifactory/libs-release"
-    }
     // Cloth config
     maven {
         name = "Cloth Config"
@@ -48,14 +43,11 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+    modImplementation("com.terraformersmc:modmenu:${project.mod_menu_version}")
 
     modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    modApi ("com.terraformersmc:modmenu:${project.mod_menu_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-
 }
 
 processResources {
@@ -64,6 +56,7 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
+
 }
 
 tasks.withType(JavaCompile).configureEach {

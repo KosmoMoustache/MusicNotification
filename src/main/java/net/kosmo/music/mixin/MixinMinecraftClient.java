@@ -13,6 +13,6 @@ public abstract  class MixinMinecraftClient {
 
     @Inject(method = "<init>", at = @At(value="TAIL", target = "Lnet/minecraft/client/MinecraftClient;<init>(Lnet/minecraft/client/RunArgs;)V"))
     private void onInit(RunArgs args, CallbackInfo info) {
-ClientMusic.onClientInit();
+        ClientMusic.onClientInit();
     }
 }

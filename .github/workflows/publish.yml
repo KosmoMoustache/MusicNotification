@@ -3,10 +3,10 @@ name: Publish on Curseforge & Modrinth
 on: [ workflow_dispatch ]
 
 env:
-  MINECRAFT_VERSION: 1.19.4
+  MINECRAFT_VERSION: 1.20.1
   JAVA_VERSION: 17
   RELEASE_NAME: MusicNotification
-  RELEASE_VERSION: 1.2
+  RELEASE_VERSION: 1.4
 
 permissions:
   contents: write
@@ -47,11 +47,12 @@ jobs:
 
           github-token: ${{ secrets.P_GITHUB_TOKEN }}
           github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.RELEASE_VERSION }}
+          github-generate-changelog: true
 
           game-versions: |
-            1.19.4
+            ${minecraft_version}
           loaders: fabric
-          name: "${{env.RELEASE_NAME}} ${{env.RELEASE_VERSION}}+${{ env.MINECRAFT_VERSION }}"
+          name: "v${{env.RELEASE_VERSION}}+${{MINECRAFT_VERSION}}"
           version-type: release
           changelog-file: CHANGELOG.md
           files: build/libs/!(*-@(dev|sources|javadoc)).jar

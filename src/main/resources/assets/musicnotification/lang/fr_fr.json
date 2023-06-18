@@ -1,19 +1,8 @@
 {
-  "key.musicnotification.openGui": "Show history & library screen",
-  "key.musicnotification.category": "Music Client",
-
-  "gui.musicnotification.library": "Librairie",
-  "gui.musicnotification.history": "Historique",
-
-  "text.autoconfig.musicnotification.title": "Client music config",
-  "text.autoconfig.musicnotification.option.hideAuthor": "Cache le compositeur",
-  "text.autoconfig.musicnotification.option.showSoundtrackName": "Affiche le nom de la soundtrack",
-  "text.autoconfig.musicnotification.option.enableBetaGui": "Activer le GUI beta",
-  "text.autoconfig.musicnotification.option.enableBetaGui.@Tooltip": "Raccourci clavier par défaut: ,",
-  "text.autoconfig.musicnotification.option.disableToastSound": "Désactiver le son des toasts",
-  "text.autoconfig.musicnotification.option.disableToastSound.@Tooltip": "Désactive le son quand un toast apparaît et disparaît.\nENABLED_ALL = Vanilla\nDISABLED_MUSIC = Désactive pour les toasts du mod\nDISABLED_ALL = Désactive pour tout les toasts",
-  "text.autoconfig.musicnotification.option.displayDuration": "Durée d'affichage des toasts en ms",
-
-  "modmenu.descriptionTranslation.musicnotification": "Client music mod"
-
+  "text.autoconfig.musicnotification.title": "Music Notification - Config",
+  "text.autoconfig.musicnotification.option.HIDE_AUTHOR": "Cacher le compositeur",
+  "text.autoconfig.musicnotification.option.SHOW_SOUNDTRACK_NAME": "Afficher le nom de la soundtrack",
+  "text.autoconfig.musicnotification.option.DISABLE_TOAST_SOUND": "Configurer le son des toasts",
+  "text.autoconfig.musicnotification.option.DISABLE_TOAST_SOUND.@Tooltip": "Supprime le son quand un toast apparaît et disparaît.\nENABLED_ALL = Vanilla\nDISABLED_MUSIC = Désactivé pour les toasts du mod\nDISABLED_ALL = Désactivé pour tout les toasts",
+  "text.autoconfig.musicnotification.option.ROTATE_ALBUM_COVER": "Animation de la pochette"
 }
