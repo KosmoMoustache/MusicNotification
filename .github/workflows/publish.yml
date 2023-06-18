@@ -47,6 +47,7 @@ jobs:
 
           github-token: ${{ secrets.P_GITHUB_TOKEN }}
           github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.RELEASE_VERSION }}
+          github-generate-changelog: true
 
           game-versions: |
             ${minecraft_version}
