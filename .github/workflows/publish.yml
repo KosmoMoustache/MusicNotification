@@ -3,7 +3,7 @@ name: Publish on Curseforge & Modrinth
 on: [ workflow_dispatch ]
 
 env:
-  MINECRAFT_VERSION: 1.20
+  MINECRAFT_VERSION: 1.20.1
   JAVA_VERSION: 17
   RELEASE_NAME: MusicNotification
   RELEASE_VERSION: 1.4
