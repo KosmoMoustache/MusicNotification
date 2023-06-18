@@ -47,10 +47,9 @@ jobs:
 
           github-token: ${{ secrets.P_GITHUB_TOKEN }}
           github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.RELEASE_VERSION }}
-          github-generate-changelog: true
 
           game-versions: |
-            ${minecraft_version}
+            ${{env.MINECRAFT_VERSION}}
           loaders: fabric
           name: "v${{env.RELEASE_VERSION}}+${{env.MINECRAFT_VERSION}}"
           version-type: release
