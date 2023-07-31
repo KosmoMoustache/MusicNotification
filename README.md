@@ -2,6 +2,8 @@
 
 Add toast notification when music is played in game with the name, author and soundtrack of it.
 
+### **Require**: [Cloth Config API](https://modrinth.com/mod/cloth-config)
+
 # 📷 In game screenshots
 <div>
     <table>
