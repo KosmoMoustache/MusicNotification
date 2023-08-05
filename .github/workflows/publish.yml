@@ -5,8 +5,8 @@ on: [ workflow_dispatch ]
 env:
   MINECRAFT_VERSION: 1.20.1
   JAVA_VERSION: 17
-  RELEASE_NAME: MusicNotification
-  RELEASE_VERSION: 1.4
+  RELEASE_NAME: NowPlaying
+  RELEASE_VERSION: 2.0
 
 permissions:
   contents: write

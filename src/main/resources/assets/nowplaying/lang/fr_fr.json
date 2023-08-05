@@ -1,0 +1,18 @@
+{
+  "gui.nowplaying.playsound.title": "Play Music",
+  "gui.nowplaying.playsound.title_screen": "Now Playing - Play Sound",
+  "gui.nowplaying.playsound.tab_home": "Home",
+  "gui.nowplaying.playsound.tab_history": "History",
+  "gui.nowplaying.playsound.play": "Play",
+  "gui.nowplaying.playsound.search_hint": "sarch_hint",
+  "gui.nowplaying.playsound.reset_music_tracker": "Random",
+
+  "text.autoconfig.nowplaying.title": "Now Playing - Config",
+  "text.autoconfig.nowplaying.option.DISABLE_MOD": "Désactiver le mod",
+  "text.autoconfig.nowplaying.option.HIDE_AUTHOR": "Cacher le compositeur",
+  "text.autoconfig.nowplaying.option.SHOW_SOUNDTRACK_NAME": "Afficher le nom de la soundtrack",
+  "text.autoconfig.nowplaying.option.SHOULD_SHOW_JUKEBOX": "Doit afficher une notification pour les jukebox",
+  "text.autoconfig.nowplaying.option.DISABLE_TOAST_SOUND": "Configurer le son des toasts",
+  "text.autoconfig.nowplaying.option.DISABLE_TOAST_SOUND.@Tooltip": "Choisir si les notification doivent émettre un son.\nENABLED_ALL = Vanilla, Woosh pour tout les toats\nDISABLED_MUSIC = Mute seulement les notifications 'Now Playing'\nDISABLED_ALL = Mute tout les notifications",
+  "text.autoconfig.nowplaying.option.ROTATE_ALBUM_COVER": "Animation de la pochette"
+}

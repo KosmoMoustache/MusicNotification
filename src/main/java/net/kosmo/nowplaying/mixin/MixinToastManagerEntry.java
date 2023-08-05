@@ -1,7 +1,7 @@
-package net.kosmo.music.mixin;
+package net.kosmo.nowplaying.mixin;
 
-import net.kosmo.music.ClientMusic;
-import net.kosmo.music.toast.MusicToast;
+import net.kosmo.nowplaying.NowPlaying;
+import net.kosmo.nowplaying.toast.NowPlayingToast;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
 import org.spongepowered.asm.mixin.Final;
@@ -23,11 +23,11 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
     /**
      * This method is called when a toast is drawn to the screen
      * This mixins modify the argument `y` of MatrixStack.translate(x, y, z) to return the correct y position when drawing a MusicToast
-     *  TODO: Other toast can overlap the {@link MusicToast} toast when showing soundtrack
+     *  TODO: Other toast can overlap the {@link NowPlayingToast} toast when showing soundtrack
      */
     @ModifyArg(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V"), index = 1)
     public float modifyY(float y) {
-        if (this.instance instanceof MusicToast && ClientMusic.config.SHOW_SOUNDTRACK_NAME) {
+        if (this.instance instanceof NowPlayingToast && NowPlaying.config.SHOW_SOUNDTRACK_NAME) {
             return this.topIndex * this.instance.getHeight();
         }
         return this.topIndex * 32;
@@ -35,11 +35,11 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
 
     @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/Toast$Visibility;playSound(Lnet/minecraft/client/sound/SoundManager;)V"))
     public void playSound(Toast.Visibility visibility, net.minecraft.client.sound.SoundManager soundManager) {
-        switch (ClientMusic.config.DISABLE_TOAST_SOUND) {
+        switch (NowPlaying.config.DISABLE_TOAST_SOUND) {
             case DISABLE_ALL:
                 break;
             case DISABLE_THIS:
-                if (this.instance instanceof MusicToast) {
+                if (this.instance instanceof NowPlayingToast) {
                     break;
                 }
             case VANILLA:

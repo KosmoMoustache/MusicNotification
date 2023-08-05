@@ -1,6 +1,6 @@
-package net.kosmo.music.mixin;
+package net.kosmo.nowplaying.mixin;
 
-import net.kosmo.music.ClientMusic;
+import net.kosmo.nowplaying.NowPlaying;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -18,6 +18,6 @@ public abstract class MixinWorldRenderer {
      */
     @Inject(method = "playSong", at = @At("HEAD"))
     private void onPlaySong(SoundEvent song, BlockPos songPosition, CallbackInfo ci) {
-        ClientMusic.onDiscPlay(song);
+        NowPlaying.onDiscPlay(song);
     }
 }

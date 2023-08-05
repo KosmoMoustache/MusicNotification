@@ -1,7 +1,8 @@
-package net.kosmo.music.toast;
+package net.kosmo.nowplaying.toast;
 
-import net.kosmo.music.ClientMusic;
-import net.kosmo.music.MusicManager;
+import net.kosmo.nowplaying.NowPlaying;
+import net.kosmo.nowplaying.NowPlayingConfig;
+import net.kosmo.nowplaying.music.MusicManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -14,10 +15,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.joml.Quaternionf;
 
-import static net.kosmo.music.ClientMusic.LOGGER;
+import static net.kosmo.nowplaying.NowPlaying.LOGGER;
 
-public class MusicToast implements Toast {
-    public static final Identifier TEXTURE = new Identifier(ClientMusic.MOD_ID, "textures/gui/toasts.png");
+public class NowPlayingToast implements Toast {
+    public static final Identifier TEXTURE = new Identifier(NowPlaying.MOD_ID, "textures/gui/toasts.png");
     private static final Type DEFAULT = Type.DEFAULT;
     private final Type type;
     private AlbumCover albumCover;
@@ -28,7 +29,7 @@ public class MusicToast implements Toast {
     private Text soundtrack;
     private int rotation;
 
-    public MusicToast(Type type, AlbumCover albumCover, Text title, Text author, Text soundtrack) {
+    public NowPlayingToast(Type type, AlbumCover albumCover, Text title, Text author, Text soundtrack) {
         LOGGER.info("Now playing: {} by {} ({})", title.getString(), author.getString(), soundtrack.getString());
         this.title = title;
         this.author = author;
@@ -38,9 +39,9 @@ public class MusicToast implements Toast {
     }
 
     public static void show(SoundInstance soundInstance, Type type) {
-        ClientMusic.LOGGER.info("Now playing: {}", soundInstance.getSound().getIdentifier());
-        String soundName = ClientMusic.getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
-        MusicManager.Entry entry = ClientMusic.musicManager.getEntry(soundName.toLowerCase());
+        NowPlaying.LOGGER.info("Now playing: {}", soundInstance.getSound().getIdentifier());
+        String soundName = NowPlaying.getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
+        MusicManager.Entry entry = NowPlaying.musicManager.getEntry(soundName.toLowerCase());
 
         if (entry != null) {
             show(MinecraftClient.getInstance().getToastManager(), entry, type);
@@ -54,7 +55,7 @@ public class MusicToast implements Toast {
     }
 
     public static void show(ToastManager manager, Text title, Text author, Text soundtrack, AlbumCover albumCover, Type type) {
-        MusicToast musicToast = manager.getToast(MusicToast.class, DEFAULT);
+        NowPlayingToast musicToast = manager.getToast(NowPlayingToast.class, DEFAULT);
 
         if (musicToast == null) {
             add(manager, albumCover, title, author, soundtrack);
@@ -64,7 +65,7 @@ public class MusicToast implements Toast {
     }
 
     public static void add(ToastManager manager, AlbumCover albumCover, Text title, Text author, Text soundtrack) {
-        manager.add(new MusicToast(DEFAULT, albumCover, title, author, soundtrack));
+        manager.add(new NowPlayingToast(DEFAULT, albumCover, title, author, soundtrack));
     }
 
     public Type getType() {
@@ -73,11 +74,11 @@ public class MusicToast implements Toast {
 
     @Override
     public int getRequiredSpaceCount() {
-        return MathHelper.ceilDiv(this.getHeight(), ClientMusic.config.SHOW_SOUNDTRACK_NAME ? 44 : 32);
+        return MathHelper.ceilDiv(this.getHeight(), NowPlaying.config.SHOW_SOUNDTRACK_NAME ? 44 : 32);
     }
 
     /**
-     * When {@link net.kosmo.music.ModConfig#SHOW_SOUNDTRACK_NAME} is false, when another toast is shown, the soundtrack
+     * When {@link NowPlayingConfig#SHOW_SOUNDTRACK_NAME} is false, when another toast is shown, the soundtrack
      * is hided by the new toast
      */
     @Override
@@ -92,11 +93,11 @@ public class MusicToast implements Toast {
             this.startTime = startTime;
             this.justUpdated = false;
         }
-        context.drawTexture(TEXTURE, 0, 0, 0, ClientMusic.config.SHOW_SOUNDTRACK_NAME ? 32 : 0, this.getWidth(), this.getHeight());
+        context.drawTexture(TEXTURE, 0, 0, 0, NowPlaying.config.SHOW_SOUNDTRACK_NAME ? 32 : 0, this.getWidth(), this.getHeight());
 
         context.getMatrices().push();
         // Make the icon rotate
-        if (ClientMusic.config.ROTATE_ALBUM_COVER) {
+        if (NowPlaying.config.ROTATE_ALBUM_COVER) {
             matrices.translate(0, 0, 0);
             matrices.translate((float) AlbumCover.getWidth() / 2, (float) AlbumCover.getHeight() / 2, 0);
             matrices.multiply(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
@@ -110,11 +111,11 @@ public class MusicToast implements Toast {
 
         context.drawText(textRenderer, this.title, 30, 7, -11534256, false);
 
-        if (!ClientMusic.config.HIDE_AUTHOR) {
+        if (!NowPlaying.config.HIDE_AUTHOR) {
             context.drawText(textRenderer, this.author, 30, 18, -16777216, false);
         }
 
-        if (ClientMusic.config.SHOW_SOUNDTRACK_NAME) {
+        if (NowPlaying.config.SHOW_SOUNDTRACK_NAME) {
             // max length 23 chars
             context.drawText(textRenderer, this.soundtrack, 30, 29, -16777216, false);
         }
@@ -133,7 +134,7 @@ public class MusicToast implements Toast {
 
     @Override
     public int getHeight() {
-        if (ClientMusic.config.SHOW_SOUNDTRACK_NAME) {
+        if (NowPlaying.config.SHOW_SOUNDTRACK_NAME) {
             return 44;
         }
         return 32;

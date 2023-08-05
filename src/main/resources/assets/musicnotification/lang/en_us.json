@@ -1,8 +1,0 @@
-{
-  "text.autoconfig.musicnotification.title": "Music Notification - Config",
-  "text.autoconfig.musicnotification.option.HIDE_AUTHOR": "Hide author",
-  "text.autoconfig.musicnotification.option.SHOW_SOUNDTRACK_NAME": "Show soundtrack name",
-  "text.autoconfig.musicnotification.option.DISABLE_TOAST_SOUND": "Configure toast sound",
-  "text.autoconfig.musicnotification.option.DISABLE_TOAST_SOUND.@Tooltip": "Remove the sound when a toast appears and disappears.\nENABLED_ALL = Vanilla\nDISABLED_MUSIC = Mute the sound for the Music Toast\nDISABLE_ALL = Mute for every Toasts",
-  "text.autoconfig.musicnotification.option.ROTATE_ALBUM_COVER": "Animate album cover"
-}

@@ -1,0 +1,18 @@
+{
+  "gui.nowplaying.playsound.title": "Play Music",
+  "gui.nowplaying.playsound.title_screen": "Now Playing - Play Sound",
+  "gui.nowplaying.playsound.tab_home": "Home",
+  "gui.nowplaying.playsound.tab_history": "History",
+  "gui.nowplaying.playsound.play": "Play",
+  "gui.nowplaying.playsound.search_hint": "Search...",
+  "gui.nowplaying.playsound.reset_music_tracker": "Random",
+
+  "text.autoconfig.nowplaying.title": "Now Playing - Config",
+  "text.autoconfig.nowplaying.option.DISABLE_MOD": "Disable every features",
+  "text.autoconfig.nowplaying.option.HIDE_AUTHOR": "Hide author",
+  "text.autoconfig.nowplaying.option.SHOW_SOUNDTRACK_NAME": "Show soundtrack name",
+  "text.autoconfig.nowplaying.option.SHOULD_SHOW_JUKEBOX": "Whether Jukebox music should be shown",
+  "text.autoconfig.nowplaying.option.DISABLE_TOAST_SOUND": "Silence toast notifications",
+  "text.autoconfig.nowplaying.option.DISABLE_TOAST_SOUND.@Tooltip": "Choose when notification should make sound.\nENABLED_ALL = Vanilla, Woosh on every toast\nDISABLED_MUSIC = Silence only for 'Now Playing' notifications\nDISABLE_ALL = Silence every notifications",
+  "text.autoconfig.nowplaying.option.ROTATE_ALBUM_COVER": "Animate album cover"
+}

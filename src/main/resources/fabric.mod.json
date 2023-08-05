@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "musicnotification",
+  "id": "nowplaying",
   "version": "${version}",
-  "name": "Music Notification",
-  "description": "Add toast notification when music is played in game with the name.",
+  "name": "Now Playing",
+  "description": "Add toast notification when music is played in game.",
   "authors": [
     "KosmoMoustache"
   ],
@@ -14,23 +14,23 @@
   ],
   "contact": {
     "homepage": "https://mod.kosmo.ovh/",
-    "sources": "https://github.com/KosmoMoustache/MusicNotification"
+    "sources": "https://github.com/KosmoMoustache/NowPlaying"
   },
   "license": "LGPL-3.0-only",
-  "icon": "assets/musicnotification/icon.png",
+  "icon": "assets/nowplaying/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "net.kosmo.music.ClientMusic"
+      "net.kosmo.nowplaying.NowPlaying"
     ],
     "modmenu": [
-      "net.kosmo.music.ModMenuCompatibility"
+      "net.kosmo.nowplaying.ModMenuCompatibility"
     ]
   },
   "mixins": [
-    "mixins.clientmusic.json"
+    "mixins.nowplaying.json"
   ],
-  "accessWidener": "clientmusic.accesswidener",
+  "accessWidener": "nowplaying.accesswidener",
   "depends": {
     "minecraft": "1.20.1",
     "fabricloader": ">=0.14.11",
