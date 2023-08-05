@@ -37,22 +37,23 @@ public class MusicToast implements Toast {
         this.albumCover = albumCover;
     }
 
-    public static void show(SoundInstance soundInstance) {
+    public static void show(SoundInstance soundInstance, Type type) {
+        ClientMusic.LOGGER.info("Now playing: {}", soundInstance.getSound().getIdentifier());
         String soundName = ClientMusic.getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
         MusicManager.Entry entry = ClientMusic.musicManager.getEntry(soundName.toLowerCase());
 
         if (entry != null) {
-            show(MinecraftClient.getInstance().getToastManager(), entry);
+            show(MinecraftClient.getInstance().getToastManager(), entry, type);
         } else {
-            show(MinecraftClient.getInstance().getToastManager(), Text.literal(soundName), Text.literal(soundInstance.getSound().getIdentifier().getNamespace()), Text.literal(""), AlbumCover.CD);
+            show(MinecraftClient.getInstance().getToastManager(), Text.literal(soundName), Text.literal(soundInstance.getSound().getIdentifier().getNamespace()), Text.literal(""), AlbumCover.CD, type);
         }
     }
 
-    public static void show(ToastManager manager, MusicManager.Entry entry) {
-        show(manager, Text.literal(entry.getTitle()), Text.literal(entry.getAuthor()), Text.literal(entry.getSoundtrack()), entry.getAlbumCover());
+    public static void show(ToastManager manager, MusicManager.Entry entry, Type type) {
+        show(manager, Text.literal(entry.getTitle()), Text.literal(entry.getAuthor()), Text.literal(entry.getSoundtrack()), entry.getAlbumCover(), type);
     }
 
-    public static void show(ToastManager manager, Text title, Text author, Text soundtrack, AlbumCover albumCover) {
+    public static void show(ToastManager manager, Text title, Text author, Text soundtrack, AlbumCover albumCover, Type type) {
         MusicToast musicToast = manager.getToast(MusicToast.class, DEFAULT);
 
         if (musicToast == null) {
@@ -140,7 +141,8 @@ public class MusicToast implements Toast {
 
 
     public enum Type {
-        DEFAULT
+        DEFAULT,
+        DISC,
     }
 
     public enum AlbumCover {

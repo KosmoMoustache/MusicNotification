@@ -19,8 +19,6 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
     @Shadow
     @Final
     private T instance;
-    @Shadow
-    private Toast.Visibility visibility;
 
     /**
      * This method is called when a toast is drawn to the screen
@@ -48,17 +46,4 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
                 visibility.playSound(soundManager);
         }
     }
-//    @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/Toast$Visibility;playSound(Lnet/minecraft/client/sound/SoundManager;)V"))
-//    public void playSound(SoundManager soundManager) {
-//        switch (ModMenuConfig.DISABLE_TOAST_SOUND.getValue()) {
-//            case DISABLE_ALL:
-//                break;
-//            case DISABLE_THIS:
-//                if (this.instance instanceof MusicToast) {
-//                    break;
-//                }
-//            case VANILLA:
-//                this.visibility.playSound(soundManager);
-//        }
-//    }
 }

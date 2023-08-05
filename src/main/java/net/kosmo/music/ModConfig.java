@@ -6,6 +6,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = ClientMusic.MOD_ID)
 public class ModConfig implements ConfigData {
+    public boolean ENABLE_MOD = true;
     public boolean HIDE_AUTHOR = false;
     public boolean SHOW_SOUNDTRACK_NAME = false;
 
