@@ -14,5 +14,8 @@
   "text.autoconfig.nowplaying.option.SHOULD_SHOW_JUKEBOX": "Doit afficher une notification pour les jukebox",
   "text.autoconfig.nowplaying.option.DISABLE_TOAST_SOUND": "Configurer le son des toasts",
   "text.autoconfig.nowplaying.option.DISABLE_TOAST_SOUND.@Tooltip": "Choisir si les notification doivent émettre un son.\nENABLED_ALL = Vanilla, Woosh pour tout les toats\nDISABLED_MUSIC = Mute seulement les notifications 'Now Playing'\nDISABLED_ALL = Mute tout les notifications",
-  "text.autoconfig.nowplaying.option.ROTATE_ALBUM_COVER": "Animation de la pochette"
+  "text.autoconfig.nowplaying.option.ROTATE_ALBUM_COVER": "Animation de la pochette",
+  "gui.nowplaying.playsound.now_playing": "%s is now playing",
+  "nowplaying.key.category": "Now Playing",
+  "key.nowplaying.open_screen": "Open Now Playing Screen"
 }

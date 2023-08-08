@@ -4,8 +4,13 @@
   "gui.nowplaying.playsound.tab_home": "Home",
   "gui.nowplaying.playsound.tab_history": "History",
   "gui.nowplaying.playsound.play": "Play",
+  "gui.nowplaying.playsound.now_playing": "%s is now playing",
   "gui.nowplaying.playsound.search_hint": "Search...",
   "gui.nowplaying.playsound.reset_music_tracker": "Random",
+
+  "nowplaying.key.category": "Now Playing",
+
+  "key.nowplaying.open_screen": "Open Now Playing Screen",
 
   "text.autoconfig.nowplaying.title": "Now Playing - Config",
   "text.autoconfig.nowplaying.option.DISABLE_MOD": "Disable every features",

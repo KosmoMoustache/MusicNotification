@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.kosmo.nowplaying.toast.NowPlayingToast;
-import net.minecraft.resource.ResourceFinder;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +14,7 @@ public class MusicManager {
     private Map<String, Entry> music_list = Maps.newHashMap();
 
     public MusicManager(JsonObject json) {
-       this.setEntries(parseJson(json));
+        this.setEntries(parseJson(json));
     }
 
     public static Map<String, Entry> parseJson(JsonObject json) {
@@ -26,12 +25,12 @@ public class MusicManager {
         return map;
     }
 
-    public void setEntries(Map<String, Entry> map) {
-        this.music_list = map;
-    }
-
     public Map<String, Entry> getEntries() {
         return music_list;
+    }
+
+    public void setEntries(Map<String, Entry> map) {
+        this.music_list = map;
     }
 
     public Entry getEntry(String name) {
@@ -48,6 +47,8 @@ public class MusicManager {
         private final String soundtrack;
         @Nullable
         private final NowPlayingToast.AlbumCover albumCover;
+        @Nullable
+        private final Identifier identifier;
 
         public Entry(String key, JsonObject json) {
             this.key = key;
@@ -55,6 +56,7 @@ public class MusicManager {
             this.author = JsonHelper.getString(json, "author", null);
             this.soundtrack = JsonHelper.getString(json, "soundtrack", null);
             this.albumCover = parseAlbumCover();
+            this.identifier = JsonHelper.getString(json, "identifier", null) == null ? null : new Identifier(JsonHelper.getString(json, "identifier"));
         }
 
         private NowPlayingToast.AlbumCover parseAlbumCover() {
@@ -88,9 +90,8 @@ public class MusicManager {
             return albumCover;
         }
 
-        public Identifier getIdentifier() {
-            ResourceFinder FINDER = new ResourceFinder("sounds", ".ogg");
-            return FINDER.toResourcePath(new Identifier(this.key));
+        public @Nullable Identifier getIdentifier() {
+            return identifier;
         }
 
         public String toString() {

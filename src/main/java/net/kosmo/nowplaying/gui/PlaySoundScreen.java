@@ -6,11 +6,15 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -23,7 +27,6 @@ public class PlaySoundScreen extends Screen {
     private static final Text SELECTED_HOME_TAB_TITLE = HOME_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
     private static final Text SELECTED_HISTORY_TAB_TITLE = HISTORY_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
 
-    private static final Text NOW_PLAYING_TEXT = Text.translatable("gui.nowplaying.playsound.play", NowPlaying.nowPlaying);
     private static final Text RESET_MUSIC_TRACKER = Text.translatable("gui.nowplaying.playsound.reset_music_tracker", NowPlaying.nowPlaying);
 
     private static final Text SEARCH_TEXT = Text.translatable("gui.nowplaying.playsound.search_hint").formatted(Formatting.ITALIC).formatted(Formatting.GRAY);
@@ -40,10 +43,26 @@ public class PlaySoundScreen extends Screen {
     private ButtonWidget resetMusicTrackerTimerButton;
 
 
-    private boolean initialized = false;
+    private boolean initialized;
 
     public PlaySoundScreen() {
         super(TITLE);
+    }
+
+    @NotNull
+    private static List<Identifier> getIdentifiers() {
+        List<Identifier> collection1 = new ArrayList<>();
+
+        collection1.addAll(NowPlaying.musicController.getEntries());
+
+        NowPlaying.musicManager.getEntries().forEach((key, value) -> {
+            Identifier identifier = value.getIdentifier();
+            if (identifier == null) return;
+            RegistryEntry<SoundEvent> registryEntry = RegistryEntry.of(SoundEvent.of(identifier));
+            collection1.add(registryEntry.value().getId());
+        });
+
+        return collection1;
     }
 
     private int getSearchBoxX() {
@@ -63,7 +82,7 @@ public class PlaySoundScreen extends Screen {
     @Override
     public void init() {
         if (this.initialized) {
-            this.soundList.updateSize(this.width, this.height, 64 + this.getScreenHeight(), this.getEntryListBottom() - 64 - 4);
+            this.soundList.updateSize(this.width, this.height, 88, this.getEntryListBottom());
         } else {
             this.soundList = new SoundListWidget(this, this.client, this.width, this.height, 88, this.getEntryListBottom(), 36);
         }
@@ -78,7 +97,7 @@ public class PlaySoundScreen extends Screen {
         this.homeTabButton = this.addDrawableChild(ButtonWidget.builder(HOME_TAB_TITLE, button -> this.setCurrentTab(Tab.HOME)).dimensions(j + 2, 45, i, 20).build());
         this.historyTabButton = this.addDrawableChild(ButtonWidget.builder(HISTORY_TAB_TITLE, button -> this.setCurrentTab(Tab.HISTORY)).dimensions(k - i + 2, 45, i, 20).build());
 
-        this.currentPlaying = this.addDrawableChild(ButtonWidget.builder(NOW_PLAYING_TEXT, button -> this.client.getSoundManager().stop(NowPlaying.nowPlaying)).dimensions(n, m, l, 20).build());
+        this.currentPlaying = this.addDrawableChild(ButtonWidget.builder(Text.translatable("gui.nowplaying.playsound.now_playing", NowPlaying.nowPlaying), button -> this.client.getSoundManager().stop(NowPlaying.nowPlaying)).dimensions(n, m, l, 20).build());
         this.resetMusicTrackerTimerButton = this.addDrawableChild(ButtonWidget.builder(RESET_MUSIC_TRACKER, button -> {
             this.client.getSoundManager().stopAll();
             ((IMixinMusicTracker) this.client.getMusicTracker()).setTimeUntilNextSong(0);
@@ -117,6 +136,11 @@ public class PlaySoundScreen extends Screen {
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context);
 
+        String nowplayingtext = NowPlaying.nowPlaying != null ? NowPlaying.nowPlaying.getId().toString() : "Nothing";
+        this.currentPlaying.setMessage(Text.translatable("gui.nowplaying.playsound.now_playing", nowplayingtext));
+
+        // TODO: Afficher si MASTER/MUSIC volume is 0
+
         context.drawTextWithShadow(this.client.textRenderer, this.currentTab.name(), this.getSearchBoxX() + 8, 35, -1);
 
         if (!this.soundList.isEmpty()) {
@@ -136,8 +160,7 @@ public class PlaySoundScreen extends Screen {
         switch (this.currentTab) {
             case HOME:
                 this.homeTabButton.setMessage(SELECTED_HOME_TAB_TITLE);
-                Collection<Identifier> collection = NowPlaying.musicController.getEntries().keySet();
-                this.soundList.update(collection, this.soundList.getScrollAmount());
+                this.soundList.update(getIdentifiers(), this.soundList.getScrollAmount());
                 break;
             case HISTORY:
                 this.historyTabButton.setMessage(SELECTED_HISTORY_TAB_TITLE);

@@ -2,107 +2,128 @@
   "calm1": {
     "title": "Minecraft",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 8"
+    "soundtrack": "Volume Alpha No. 8",
+    "identifier": "nowplaying:music.minecraft"
   },
   "calm2": {
     "title": "Clark",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 14"
+    "soundtrack": "Volume Alpha No. 14",
+    "identifier": "nowplaying:music.clark"
   },
   "calm3": {
     "title": "Sweden",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 18"
+    "soundtrack": "Volume Alpha No. 18",
+    "identifier": "nowplaying:music.sweden"
   },
   "creative1": {
     "title": "Biome Fest",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 8"
+    "soundtrack": "Volume Beta No. 8",
+    "identifier": "nowplaying:music.biome_fest"
   },
   "creative2": {
     "title": "Blind Spots",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 4"
+    "soundtrack": "Volume Beta No. 4",
+    "identifier": "nowplaying:music.blind_spots"
   },
   "creative3": {
     "title": "Haunt Muskie",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 10"
+    "soundtrack": "Volume Beta No. 10",
+    "identifier": "nowplaying:music.haunt_muskie"
   },
   "creative4": {
     "title": "Aria Math",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 13"
+    "soundtrack": "Volume Beta No. 13",
+    "identifier": "nowplaying:music.aria_math"
   },
   "creative5": {
     "title": "Dreiton",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 18"
+    "soundtrack": "Volume Beta No. 18",
+    "identifier": "nowplaying:music.dreiton"
   },
   "creative6": {
     "title": "Taswell",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 16"
+    "soundtrack": "Volume Beta No. 16",
+    "identifier": "nowplaying:music.taswell"
   },
   "hal1": {
     "title": "Subwoofer Lullaby",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 3"
+    "soundtrack": "Volume Alpha No. 3",
+    "identifier": "nowplaying:subwoofer_lullaby"
   },
   "hal2": {
     "title": "Living Mice",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 5"
+    "soundtrack": "Volume Alpha No. 5",
+    "identifier": "nowplaying:music.living_mice"
   },
   "hal3": {
     "title": "Haggstrom",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 7"
+    "soundtrack": "Volume Alpha No. 7",
+    "identifier": "nowplaying:music.haggstrom"
   },
   "hal4": {
     "title": "Danny",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 21"
+    "soundtrack": "Volume Alpha No. 21",
+    "identifier": "nowplaying:music.danny"
   },
   "nuance1": {
     "title": "Key",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 1"
+    "soundtrack": "Volume Alpha No. 1",
+    "identifier": "nowplaying:music.key"
   },
   "nuance2": {
     "title": "Oxygène",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 9"
+    "soundtrack": "Volume Alpha No. 9",
+    "identifier": "nowplaying:music.oxygene"
   },
   "piano1": {
     "title": "Dry Hands",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 12"
+    "soundtrack": "Volume Alpha No. 12",
+    "identifier": "nowplaying:music.dru_hands"
   },
   "piano2": {
     "title": "Wet Hands",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 13"
+    "soundtrack": "Volume Alpha No. 13",
+    "identifier": "nowplaying:music.wet_hands"
   },
   "piano3": {
     "title": "Mice on Venus",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 11"
+    "soundtrack": "Volume Alpha No. 11",
+    "identifier": "nowplaying:music.mice_on_venus"
   },
   "aerie": {
     "title": "Aerie",
     "author": "Lena Raine",
-    "soundtrack": "The Wild Update No.2"
+    "soundtrack": "The Wild Update No.2",
+    "identifier": "nowplaying:music.aerie"
   },
   "ancestry": {
     "title": "Ancestry",
     "author": "Lena Raine",
-    "soundtrack": "The Wild Update No.3"
+    "soundtrack": "The Wild Update No.3",
+    "identifier": "nowplaying:music.ancestry"
   },
   "an_ordinary_day": {
     "title": "An Ordinary Day",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 10"
+    "soundtrack": "Caves & Cliffs No. 10",
+    "identifier": "nowplaying:music.an_ordinary_day"
   },
   "comforting_memories": {
     "title": "Comforting Memories",
@@ -112,127 +133,152 @@
   "firebugs": {
     "title": "Firebugs",
     "author": "Lena Raine",
-    "soundtrack": "The Wild Update No. 1"
+    "soundtrack": "The Wild Update No. 1",
+    "identifier": "nowplaying:music.firebugs"
   },
   "floating_dream": {
     "title": "Floating Dream",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 8"
+    "soundtrack": "Caves & Cliffs No. 8",
+    "identifier": "nowplaying:music.floating_dream"
   },
   "infinite_amethyst": {
     "title": "Infinite Amethyst",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 5"
+    "soundtrack": "Caves & Cliffs No. 5",
+    "identifier": "nowplaying:music.infinite_amethyst"
   },
   "labyrinthine": {
     "title": "Labyrinthine",
     "author": "Lena Raine",
-    "soundtrack": "The Wild Update No. 3"
+    "soundtrack": "The Wild Update No. 3",
+    "identifier": "nowplaying:music.labyrinthine"
   },
   "left_to_bloom": {
     "title": "Left to Bloom",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 2"
+    "soundtrack": "Caves & Cliffs No. 2",
+    "identifier": "nowplaying:music.left_to_bloom"
   },
   "one_more_day": {
     "title": "One More Day",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 6"
+    "soundtrack": "Caves & Cliffs No. 6",
+    "identifier": "nowplaying:music.one_more_day"
   },
   "stand_tall": {
     "title": "Stand Tall",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 8"
+    "soundtrack": "Caves & Cliffs No. 8",
+    "identifier": "nowplaying:music.stand_tall"
   },
   "wending": {
     "title": "Wending",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 4"
+    "soundtrack": "Caves & Cliffs No. 4",
+    "identifier": "nowplaying:music.wending"
   },
   "axolotl": {
     "title": "Axolotl",
     "author": "C418",
-    "soundtrack": "Axolotl"
+    "soundtrack": "Axolotl",
+    "identifier": "nowplaying:music.axolotl"
   },
   "dragon_fish": {
     "title": "Dragon Fish",
     "author": "C418",
-    "soundtrack": "Dragon Fish"
+    "soundtrack": "Dragon Fish",
+    "identifier": "nowplaying:music.dragon_fish"
   },
   "shuniji": {
     "title": "Shuniji",
     "author": "C418",
-    "soundtrack": "Shuniji"
+    "soundtrack": "Shuniji",
+    "identifier": "nowplaying:music.shuniji"
   },
   "nether1": {
     "title": "Concrete Halls",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 7"
+    "soundtrack": "Volume Beta No. 7",
+    "identifier": "nowplaying:music.concrete_halls"
   },
   "nether2": {
     "title": "Dead Voxel",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 3"
+    "soundtrack": "Volume Beta No. 3",
+    "identifier": "nowplaying:music.dead_voxel"
   },
   "nether3": {
     "title": "Warmth",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 11"
+    "soundtrack": "Volume Beta No. 11",
+    "identifier": "nowplaying:music.warmth"
   },
   "nether4": {
     "title": "Ballad of the Cats",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 15"
+    "soundtrack": "Volume Beta No. 15",
+    "identifier": "nowplaying:music.ballad_of_the_cats"
   },
   "chrysopoeia": {
     "title": "Chrysopoeia",
     "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 1"
+    "soundtrack": "Nether Update No. 1",
+    "identifier": "nowplaying:music.chrysopoeia"
   },
   "rubedo": {
     "title": "Rubedo",
     "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 2"
+    "soundtrack": "Nether Update No. 2",
+    "identifier": "nowplaying:music.rubedo"
   },
   "so_below": {
     "title": "So Below",
     "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 3"
+    "soundtrack": "Nether Update No. 3",
+    "identifier": "nowplaying:music.so_below"
   },
   "boss": {
     "title": "Boss",
     "author": "C148",
-    "soundtrack": ""
+    "soundtrack": "",
+    "identifier": "nowplaying:music.boss"
   },
   "end": {
     "title": "The End",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 19"
+    "soundtrack": "Volume Beta No. 19",
+    "identifier": "nowplaying:music..end"
   },
   "menu1": {
     "title": "Mutation",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 9"
+    "soundtrack": "Volume Beta No. 9",
+    "identifier": "nowplaying:music.mutation"
   },
   "menu2": {
     "title": "Moog City 2",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 6"
+    "soundtrack": "Volume Beta No. 6",
+    "identifier": "nowplaying:music.moog_city_2"
   },
   "menu3": {
     "title": "Beginning 2",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 17"
+    "soundtrack": "Volume Beta No. 17",
+    "identifier": "nowplaying:music.beginning_2"
   },
   "menu4": {
     "title": "Floating Trees",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 12"
+    "soundtrack": "Volume Beta No. 12",
+    "identifier": "nowplaying:music.floating_trees"
   },
   "credits": {
     "title": "Alpha",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 2"
+    "soundtrack": "Volume Beta No. 2",
+    "identifier": "nowplaying:music.credits"
   },
   "13": {
     "title": "Thirteen",
@@ -312,22 +358,26 @@
   "echo_in_the_wind": {
     "title": "Echo in the Wind",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.1"
+    "soundtrack": "Trails & Tailes Update No.1",
+    "identifier": "nowplaying:music.game.echo_in_the_wind"
   },
   "a_familiar_room": {
     "title": "A Familiar Room",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.2"
+    "soundtrack": "Trails & Tailes Update No.2",
+    "identifier": "nowplaying:music.game.a_familiar_room"
   },
   "bromeliad": {
     "title": "Bromeliad",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.3"
+    "soundtrack": "Trails & Tailes Update No.3",
+    "identifier": "nowplaying:music.game.bromeliad"
   },
   "crescent_dunes": {
     "title": "Crescent Dunes",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.4"
+    "soundtrack": "Trails & Tailes Update No.4",
+    "identifier": "nowplaying:music.game.crescent_dunes"
   },
   "relic": {
     "title": "Relic",

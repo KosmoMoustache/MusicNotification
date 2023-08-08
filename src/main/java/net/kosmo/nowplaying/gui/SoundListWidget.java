@@ -6,10 +6,7 @@ import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class SoundListWidget extends ElementListWidget<SoundListEntry> {
     private final PlaySoundScreen parent;
@@ -26,17 +23,16 @@ public class SoundListWidget extends ElementListWidget<SoundListEntry> {
         this.setRenderHorizontalShadows(false);
     }
 
-    public void update(Collection<Identifier> identifiers, double scrollAmount) {
+    public void update(List<Identifier> identifiers, double scrollAmount) {
         HashMap<Identifier, SoundListEntry> map = new HashMap<Identifier, SoundListEntry>();
         this.setIdentifier(identifiers, map);
         this.refresh(map.values(), scrollAmount);
     }
 
     private void refresh(Collection<SoundListEntry> values, double scrollAmount) {
-
         this.sounds.clear();
         this.sounds.addAll(values);
-        this.filterPlayers();
+        this.filterSounds();
         this.replaceEntries(this.sounds);
         this.setScrollAmount(scrollAmount);
     }
@@ -45,7 +41,7 @@ public class SoundListWidget extends ElementListWidget<SoundListEntry> {
         this.currentSearch = currentSearch;
     }
 
-    private void filterPlayers() {
+    private void filterSounds() {
         if (this.currentSearch != null) {
             this.sounds.removeIf(sound -> !sound.getName().toLowerCase(Locale.ROOT).contains(this.currentSearch));
             this.replaceEntries(this.sounds);

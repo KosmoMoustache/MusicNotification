@@ -45,6 +45,7 @@ public class NowPlaying implements ClientModInitializer {
 
     public static MusicController musicController;
 
+    @Nullable
     public static SoundInstance nowPlaying;
 
     public static void onClientInit() {
@@ -70,10 +71,10 @@ public class NowPlaying implements ClientModInitializer {
         // TODO: Move to ModConfig ?
         // Key Binding
         keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.musicnotification.open_screen",
+                "key.nowplaying.open_screen",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_M,
-                "kosmo.musicnotification.key"
+                GLFW.GLFW_KEY_UNKNOWN,
+                "nowplaying.key.category"
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

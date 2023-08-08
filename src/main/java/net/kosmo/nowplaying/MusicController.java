@@ -6,28 +6,31 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class MusicController {
-    private final HashMap<Identifier, SoundEvent> discEntriesByIdentifier = new HashMap<>();
-    private final HashMap<Identifier, String> referenceEntriesBySoundEvent = new HashMap<>();
+    private final ArrayList<Identifier> discEntriesByIdentifier = new ArrayList<>();
+    private final ArrayList<Identifier> referenceEntriesBySoundEvent = new ArrayList<>();
 
     public MusicController() {
         this.getFieldFromSoundSoundEvents();
     }
 
-    public HashMap<Identifier, SoundEvent> getDiscs() {
+    public List<Identifier> getDiscs() {
         return this.discEntriesByIdentifier;
     }
 
-    public HashMap<Identifier, String> getReferences() {
+    public List<Identifier> getReferences() {
         return this.referenceEntriesBySoundEvent;
     }
 
-    public HashMap<Identifier, SoundEvent> getEntries() {
-        HashMap<Identifier, SoundEvent> entries = new HashMap<>();
-        entries.putAll(this.discEntriesByIdentifier);
+    public List<Identifier> getEntries() {
+        List<Identifier> entries = new ArrayList<>();
+        entries.addAll(this.discEntriesByIdentifier);
+        entries.addAll(this.referenceEntriesBySoundEvent);
 
         return entries;
     }
@@ -37,14 +40,15 @@ public class MusicController {
             try {
                 if (field.getType().equals(SoundEvent.class)) {
                     SoundEvent soundEvent = (SoundEvent) field.get(null);
-                    this.discEntriesByIdentifier.put(soundEvent.getId(), soundEvent);
+//                    if (soundEvent == null) return;
+                    this.discEntriesByIdentifier.add(soundEvent.getId());
                 }
 
                 if (field.getType().equals(RegistryEntry.Reference.class)) {
                     RegistryEntry.Reference<SoundEvent> reference = NowPlaying.castRegistryReference(field.get(null));
+//                    if (reference == null) return;
                     MusicSound a = new MusicSound(reference, 0,0, true);
-                    NowPlaying.LOGGER.info("{}", a.getSound().value().getId());
-                    this.referenceEntriesBySoundEvent.put(reference.registryKey().getRegistry(), "?");
+                    this.referenceEntriesBySoundEvent.add(a.getSound().value().getId());
                 }
             } catch (IllegalAccessException e) {
                 NowPlaying.LOGGER.info("Error when getting fields from SoundEvents: {}", e.getMessage());

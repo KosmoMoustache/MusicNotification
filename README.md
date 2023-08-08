@@ -1,10 +1,12 @@
-# Music Notification
+# Now Playing
 
-Add toast notification when music is played in game with the name, author and soundtrack of it.
+Adds toast notifications when music is played in-game and play in-game music whenever you want.
 
-### **Require**: [Cloth Config API](https://modrinth.com/mod/cloth-config)
+### **Require**: 
+- [Cloth Config API](https://modrinth.com/mod/cloth-config) 
+- [Fabric API](https://modrinth.com/mod/fabric-api)
 
-# 📷 In game screenshots
+# 📷 Screenshots
 <div>
     <table>
         <tr>
@@ -35,9 +37,11 @@ Add toast notification when music is played in game with the name, author and so
 https://youtu.be/HK2swFtPanA
 
 # Customization
-You can customize the music name, author and soundtrack by creating a file called `nowplaying_music_list.json` under `./assets/musicnotification/nowplaying_music_list.json` of your ressource pack.
+You can customize the music name, author and soundtrack by creating a file called `nowplaying_music_list.json` under `./assets/musicnotification/nowplaying_music_list.json` of your resource pack.
 
-See [nowplaying_music_list](https://github.com/KosmoMoustache/MusicNotification/blob/main/src/main/resources/assets/musicnotification/nowplaying_music_list.json) for the default file.
+(`musics.json` for versions <2.0)
+
+See [nowplaying_music_list](https://github.com/KosmoMoustache/MusicNotification/blob/main/src/main/resources/assets/musicnotification/nowplaying_music_list.json).
 
 # Contributor
 Discs icon are made by [YaCCBoy](https://github.com/YaCCBoy)

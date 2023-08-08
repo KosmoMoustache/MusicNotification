@@ -24,7 +24,6 @@ public class ResourceLoader {
         Optional<Resource> resource2 = manager.getResource(new Identifier(MOD_ID, "music_list.json"));
         Resource resource = resource2.orElse(null);
 
-        // TODO
           if (resource1.isPresent() && resource2.isPresent()) {
             NowPlaying.LOGGER.warn("Both musics.json and music_list.json are present in resourcepack: '{}', loading music_list.json", resource1.get().getResourcePackName());
         } else if (resource1.isPresent()) {

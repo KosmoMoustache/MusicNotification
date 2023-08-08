@@ -12,7 +12,7 @@ minecraft_version = project.minecraft_version
 
 
 loom {
-    accessWidenerPath = file('src/main/resources/clientmusic.accesswidener')
+    accessWidenerPath = file('src/main/resources/nowplaying.accesswidener')
 }
 
 repositories {

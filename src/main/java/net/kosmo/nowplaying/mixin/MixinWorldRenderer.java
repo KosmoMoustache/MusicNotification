@@ -18,6 +18,8 @@ public abstract class MixinWorldRenderer {
      */
     @Inject(method = "playSong", at = @At("HEAD"))
     private void onPlaySong(SoundEvent song, BlockPos songPosition, CallbackInfo ci) {
-        NowPlaying.onDiscPlay(song);
+        if (NowPlaying.config.SHOULD_SHOW_JUKEBOX) {
+            NowPlaying.onDiscPlay(song);
+        }
     }
 }
