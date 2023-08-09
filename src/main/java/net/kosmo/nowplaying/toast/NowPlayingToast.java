@@ -39,7 +39,6 @@ public class NowPlayingToast implements Toast {
     }
 
     public static void show(SoundInstance soundInstance, Type type) {
-        NowPlaying.LOGGER.info("Now playing: {}", soundInstance.getSound().getIdentifier());
         String soundName = NowPlaying.getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
         MusicManager.Entry entry = NowPlaying.musicManager.getEntry(soundName.toLowerCase());
 

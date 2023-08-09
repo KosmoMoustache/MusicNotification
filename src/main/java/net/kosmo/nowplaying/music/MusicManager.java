@@ -56,7 +56,8 @@ public class MusicManager {
             this.author = JsonHelper.getString(json, "author", null);
             this.soundtrack = JsonHelper.getString(json, "soundtrack", null);
             this.albumCover = parseAlbumCover();
-            this.identifier = JsonHelper.getString(json, "identifier", null) == null ? null : new Identifier(JsonHelper.getString(json, "identifier"));
+            String s = JsonHelper.getString(json, "identifier", null);
+            this.identifier = s == null ? null : new Identifier(s);
         }
 
         private NowPlayingToast.AlbumCover parseAlbumCover() {
@@ -72,6 +73,10 @@ public class MusicManager {
             if (this.soundtrack.contains("Caves")) return NowPlayingToast.AlbumCover.CAVES;
             if (this.soundtrack.contains("Trails")) return NowPlayingToast.AlbumCover.TRAILSANDTALES;
             return NowPlayingToast.AlbumCover.CD;
+        }
+
+        public String getKey() {
+            return key;
         }
 
         public String getTitle() {

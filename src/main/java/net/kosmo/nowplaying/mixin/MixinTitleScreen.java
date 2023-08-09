@@ -1,5 +1,6 @@
 package net.kosmo.nowplaying.mixin;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import net.kosmo.nowplaying.NowPlaying;
 import net.kosmo.nowplaying.gui.PlaySoundScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -24,7 +25,7 @@ public class MixinTitleScreen extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
         if (NowPlaying.config.SHOW_TITLE_SCREEN_BUTTON) {
-            this.addDrawableChild(ButtonWidget.builder(TITLE_SCREEN_BUTTON, (button) -> this.client.setScreen(new PlaySoundScreen())).dimensions(10, 10, NowPlaying.client.textRenderer.getWidth(TITLE_SCREEN_BUTTON), 20).build());
+            this.addDrawableChild(ButtonWidget.builder(TITLE_SCREEN_BUTTON, (button) -> this.client.setScreen(new PlaySoundScreen())).dimensions(10, 10, this.textRenderer.getWidth(TITLE_SCREEN_BUTTON), 20).build());
         }
     }
 }

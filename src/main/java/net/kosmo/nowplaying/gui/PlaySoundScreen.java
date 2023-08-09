@@ -27,7 +27,7 @@ public class PlaySoundScreen extends Screen {
     private static final Text SELECTED_HOME_TAB_TITLE = HOME_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
     private static final Text SELECTED_HISTORY_TAB_TITLE = HISTORY_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
 
-    private static final Text RESET_MUSIC_TRACKER = Text.translatable("gui.nowplaying.playsound.reset_music_tracker", NowPlaying.nowPlaying);
+    private static final Text RESET_MUSIC_TRACKER = Text.translatable("gui.nowplaying.playsound.reset_music_tracker");
 
     private static final Text SEARCH_TEXT = Text.translatable("gui.nowplaying.playsound.search_hint").formatted(Formatting.ITALIC).formatted(Formatting.GRAY);
 
@@ -97,7 +97,10 @@ public class PlaySoundScreen extends Screen {
         this.homeTabButton = this.addDrawableChild(ButtonWidget.builder(HOME_TAB_TITLE, button -> this.setCurrentTab(Tab.HOME)).dimensions(j + 2, 45, i, 20).build());
         this.historyTabButton = this.addDrawableChild(ButtonWidget.builder(HISTORY_TAB_TITLE, button -> this.setCurrentTab(Tab.HISTORY)).dimensions(k - i + 2, 45, i, 20).build());
 
-        this.currentPlaying = this.addDrawableChild(ButtonWidget.builder(Text.translatable("gui.nowplaying.playsound.now_playing", NowPlaying.nowPlaying), button -> this.client.getSoundManager().stop(NowPlaying.nowPlaying)).dimensions(n, m, l, 20).build());
+        this.currentPlaying = this.addDrawableChild(ButtonWidget.builder(Text.translatable("gui.nowplaying.playsound.now_playing", "PROUT" /*NowPlaying.tracker.getNowPlaying()*/), button -> {
+            if (NowPlaying.tracker.getNowPlaying().isPlaying())
+                this.client.getSoundManager().stop(NowPlaying.tracker.getNowPlaying().getSound());
+        }).dimensions(n, m, l, 20).build());
         this.resetMusicTrackerTimerButton = this.addDrawableChild(ButtonWidget.builder(RESET_MUSIC_TRACKER, button -> {
             this.client.getSoundManager().stopAll();
             ((IMixinMusicTracker) this.client.getMusicTracker()).setTimeUntilNextSong(0);
@@ -136,12 +139,12 @@ public class PlaySoundScreen extends Screen {
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context);
 
-        String nowplayingtext = NowPlaying.nowPlaying != null ? NowPlaying.nowPlaying.getId().toString() : "Nothing";
+        String nowplayingtext = /*NowPlaying.tracker.getNowPlaying().toString() : */"Nothing";
         this.currentPlaying.setMessage(Text.translatable("gui.nowplaying.playsound.now_playing", nowplayingtext));
 
         // TODO: Afficher si MASTER/MUSIC volume is 0
 
-        context.drawTextWithShadow(this.client.textRenderer, this.currentTab.name(), this.getSearchBoxX() + 8, 35, -1);
+        context.drawTextWithShadow(this.textRenderer, this.currentTab.name(), this.getSearchBoxX() + 8, 35, -1);
 
         if (!this.soundList.isEmpty()) {
             this.soundList.render(context, mouseX, mouseY, delta);
@@ -163,7 +166,9 @@ public class PlaySoundScreen extends Screen {
                 this.soundList.update(getIdentifiers(), this.soundList.getScrollAmount());
                 break;
             case HISTORY:
+                NowPlaying.LOGGER.info("History: " + NowPlaying.tracker.getHistory().getEntries());
                 this.historyTabButton.setMessage(SELECTED_HISTORY_TAB_TITLE);
+                this.soundList.update(NowPlaying.tracker.getHistory().getEntries(), this.soundList.getScrollAmount());
                 break;
         }
     }

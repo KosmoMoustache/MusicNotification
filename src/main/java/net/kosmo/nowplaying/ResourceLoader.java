@@ -28,7 +28,7 @@ public class ResourceLoader {
             NowPlaying.LOGGER.warn("Both musics.json and music_list.json are present in resourcepack: '{}', loading music_list.json", resource1.get().getResourcePackName());
         } else if (resource1.isPresent()) {
             resource = resource1.get();
-            NowPlaying.LOGGER.warn("musics.json is deprecated, please rename it to music_list.json in resourcepack: '{}'", resource1.get().getResourcePackName());
+            NowPlaying.LOGGER.warn("musics.json is deprecated, please use music_list.json instead. '{}'", resource1.get().getResourcePackName());
         }
 
         if (resource != null) {

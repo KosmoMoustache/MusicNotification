@@ -38,7 +38,7 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
 
         this.playButton = new TexturedButtonWidget(0, 0, 20, 20, 0, 38, 20, PlaySoundScreen.TEXTURE, 256, 256, button -> {
             this.onButtonClick();
-        }, Text.translatable("gui.nowplaying.playsound.play", NowPlaying.nowPlaying));
+        }, Text.translatable("gui.nowplaying.playsound.play"));
         this.stopButton = new TexturedButtonWidget(0, 0, 20, 20, 20, 38, 20, PlaySoundScreen.TEXTURE, 256, 256, button -> {
             this.onButtonClick();
         }, Text.translatable("gui.nowplaying.playsound.stop"));
@@ -60,7 +60,7 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
         this.playButton.setX(x + (entryWidth - this.playButton.getWidth() - 4) - 20 - 4);
         this.playButton.setY(y + (entryHeight - this.playButton.getHeight()) / 2);
 
-        if (NowPlaying.nowPlaying != null && NowPlaying.nowPlaying.getId() == this.identifier) {
+        if (NowPlaying.tracker.getNowPlaying().isPlaying() && NowPlaying.tracker.getNowPlaying().getSound().getId() == this.identifier) {
             this.stopButton.render(context, mouseX, mouseY, tickDelta);
         } else {
             this.playButton.render(context, mouseX, mouseY, tickDelta);
@@ -80,9 +80,9 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
     private void onButtonClick() {
         PositionedSoundInstance soundInstance = PositionedSoundInstance.music(SoundEvent.of(this.identifier));
         this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
-        this.client.getSoundManager().stop(NowPlaying.nowPlaying);
+        this.client.getSoundManager().stop(NowPlaying.tracker.getNowPlaying().getSound());
         this.client.getSoundManager().play(soundInstance);
-        NowPlaying.nowPlaying = soundInstance;
+        NowPlaying.tracker.getNowPlaying().setSound(soundInstance);
     }
 
     @Override
