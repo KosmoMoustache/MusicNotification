@@ -13,6 +13,8 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 public class NowPlayingSoundListener implements SoundInstanceListener {
 
     public NowPlayingSoundListener(SoundManager soundManager) {
@@ -28,8 +30,8 @@ public class NowPlayingSoundListener implements SoundInstanceListener {
                 String[] string = description.split(" - ");
                 if (namespace.equals("minecraft")) {
                     // use music_list.json to get the author and soundtrack
-                    // string[0] = title / string[1] = author | Now playing: Lena Raine - Pigstep
-                    MusicManager.Entry entry = NowPlaying.musicManager.getEntry(string[1].toLowerCase());
+                    // string[0] = title / string[1] = author // -> Now playing: Lena Raine - Pigstep
+                    MusicEntry entry = NowPlaying.musicManager.getByKey(string[1].toLowerCase());
                     NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), entry, NowPlayingToast.Type.DISC);
                 } else {
                     NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), NowPlayingToast.AlbumCover.MODDED_CD, NowPlayingToast.Type.DISC);

@@ -9,12 +9,10 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.kosmo.nowplaying.gui.PlaySoundScreen;
-import net.kosmo.nowplaying.mixin.IMixinMusicTracker;
 import net.kosmo.nowplaying.music.*;
 import net.kosmo.nowplaying.toast.NowPlayingToast;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -22,7 +20,6 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,14 +69,9 @@ public class NowPlaying implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
-                client.setScreen(new PlaySoundScreen());
+                client.setScreen(new PlaySoundScreen(client.currentScreen));
             }
         });
-    }
-
-    @Nullable
-    public static SoundInstance getMusicTrackerCurrent(MinecraftClient client) {
-        return ((IMixinMusicTracker) client.getMusicTracker()).getCurrent();
     }
 
     /**

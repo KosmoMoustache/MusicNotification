@@ -2,7 +2,7 @@ package net.kosmo.nowplaying.toast;
 
 import net.kosmo.nowplaying.NowPlaying;
 import net.kosmo.nowplaying.NowPlayingConfig;
-import net.kosmo.nowplaying.music.MusicManager;
+import net.kosmo.nowplaying.music.MusicEntry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -39,18 +39,18 @@ public class NowPlayingToast implements Toast {
     }
 
     public static void show(SoundInstance soundInstance, Type type) {
-        String soundName = NowPlaying.getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
-        MusicManager.Entry entry = NowPlaying.musicManager.getEntry(soundName.toLowerCase());
+        String key = NowPlaying.getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
+        MusicEntry entry = NowPlaying.musicManager.getByKey(key);
 
         if (entry != null) {
             show(MinecraftClient.getInstance().getToastManager(), entry, type);
         } else {
-            show(MinecraftClient.getInstance().getToastManager(), Text.literal(soundName), Text.literal(soundInstance.getSound().getIdentifier().getNamespace()), Text.literal(""), AlbumCover.CD, type);
+            show(MinecraftClient.getInstance().getToastManager(), Text.literal(key), Text.literal(soundInstance.getSound().getIdentifier().getNamespace()), Text.literal(""), AlbumCover.CD, type);
         }
     }
 
-    public static void show(ToastManager manager, MusicManager.Entry entry, Type type) {
-        show(manager, Text.literal(entry.getTitle()), Text.literal(entry.getAuthor()), Text.literal(entry.getSoundtrack()), entry.getAlbumCover(), type);
+    public static void show(ToastManager manager, MusicEntry entry, Type type) {
+        show(manager, Text.literal(entry.title), Text.literal(entry.author), Text.literal(entry.soundtrack), entry.albumCover, type);
     }
 
     public static void show(ToastManager manager, Text title, Text author, Text soundtrack, AlbumCover albumCover, Type type) {
@@ -85,18 +85,19 @@ public class NowPlayingToast implements Toast {
         MatrixStack matrices = context.getMatrices();
 
 
-        if (rotation >= 360) rotation = 0;
-        rotation += 1;
         TextRenderer textRenderer = manager.getClient().textRenderer;
         if (this.justUpdated) {
             this.startTime = startTime;
             this.justUpdated = false;
         }
         context.drawTexture(TEXTURE, 0, 0, 0, NowPlaying.config.SHOW_SOUNDTRACK_NAME ? 32 : 0, this.getWidth(), this.getHeight());
-
         context.getMatrices().push();
+
         // Make the icon rotate
         if (NowPlaying.config.ROTATE_ALBUM_COVER) {
+            if (rotation >= 360) rotation = 0;
+            rotation += 1;
+
             matrices.translate(0, 0, 0);
             matrices.translate((float) AlbumCover.getWidth() / 2, (float) AlbumCover.getHeight() / 2, 0);
             matrices.multiply(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
@@ -167,11 +168,11 @@ public class NowPlayingToast implements Toast {
             this.textureSlotY = textureSlotY;
         }
 
-        static int getWidth() {
+        static public int getWidth() {
             return 32;
         }
 
-        static int getHeight() {
+        static public int getHeight() {
             return 32;
         }
 

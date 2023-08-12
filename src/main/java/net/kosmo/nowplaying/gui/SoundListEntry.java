@@ -1,19 +1,24 @@
 package net.kosmo.nowplaying.gui;
 
 import net.kosmo.nowplaying.NowPlaying;
+import net.kosmo.nowplaying.music.MusicEntry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.Selectable;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
+import net.minecraft.client.gui.screen.narration.NarrationPart;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,28 +26,32 @@ import java.util.List;
 public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
     public static final int GRAY_COLOR = ColorHelper.Argb.getArgb(255, 74, 74, 74);
     public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
-
+    public static final int WHITE_COLO1 = ColorHelper.Argb.getArgb(155, 255, 255, 255);
+    public static final int LIGHT_GRAY_COLOR = ColorHelper.Argb.getArgb(140, 255, 255, 255);
     private final MinecraftClient client;
-    private final PlaySoundScreen parent;
-    private final Identifier identifier;
-
+    private final SoundListWidget parent;
+    private final MusicEntry entry;
     private final TexturedButtonWidget playButton;
     private final TexturedButtonWidget stopButton;
     private final List<ClickableWidget> buttons;
 
-
-    public SoundListEntry(MinecraftClient client, PlaySoundScreen parent, Identifier identifier) {
+    public SoundListEntry(MinecraftClient client, SoundListWidget parent, MusicEntry entry) {
         this.client = client;
         this.parent = parent;
-        this.identifier = identifier;
+        this.entry = entry;
 
         this.playButton = new TexturedButtonWidget(0, 0, 20, 20, 0, 38, 20, PlaySoundScreen.TEXTURE, 256, 256, button -> {
             this.onButtonClick();
-        }, Text.translatable("gui.nowplaying.playsound.play"));
+        }, Text.translatable("gui.nowplaying.playsound.play")) {
+            @Override
+            protected MutableText getNarrationMessage() {
+                return SoundListEntry.this.getNarrationMessage(super.getNarrationMessage());
+            }
+        };
         this.stopButton = new TexturedButtonWidget(0, 0, 20, 20, 20, 38, 20, PlaySoundScreen.TEXTURE, 256, 256, button -> {
             this.onButtonClick();
         }, Text.translatable("gui.nowplaying.playsound.stop"));
-        this.buttons = new ArrayList<ClickableWidget>();
+        this.buttons = new ArrayList<>();
         this.buttons.add(this.playButton);
     }
 
@@ -50,35 +59,35 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
     public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
         int l;
         int i = x + 4;
-        int j = y + (entryHeight - 24) / 2;
         int k = i + 24 + 4;
-        context.fill(x, y, x + entryWidth, y + entryHeight, GRAY_COLOR);
-        l = y + (entryHeight - this.client.textRenderer.fontHeight) / 2;
-        context.drawText(this.client.textRenderer, this.identifier.toString(), k, l, WHITE_COLOR, false);
-        this.stopButton.setX(x + (entryWidth - this.stopButton.getWidth() - 4) - 20 - 4);
-        this.stopButton.setY(y + (entryHeight - this.stopButton.getHeight()) / 2);
-        this.playButton.setX(x + (entryWidth - this.playButton.getWidth() - 4) - 20 - 4);
-        this.playButton.setY(y + (entryHeight - this.playButton.getHeight()) / 2);
 
-        if (NowPlaying.tracker.getNowPlaying().isPlaying() && NowPlaying.tracker.getNowPlaying().getSound().getId() == this.identifier) {
+
+        context.fill(x, y, x + entryWidth, y + entryHeight, GRAY_COLOR);
+        if (hovered) {
+            context.drawBorder(x, y, entryWidth - 1, entryHeight, LIGHT_GRAY_COLOR);
+        }
+
+        int fontHeight = this.client.textRenderer.fontHeight;
+        l = y + (entryHeight - (fontHeight + fontHeight)) / 2;
+
+        context.drawText(this.client.textRenderer, String.format("%s - %s", this.entry.title, this.entry.author), k, l, WHITE_COLOR, false);
+        context.drawText(this.client.textRenderer, this.entry.soundtrack, k, l + 12, WHITE_COLO1, false);
+
+        this.stopButton.setPosition(x + (entryWidth - this.stopButton.getWidth() - 4) - 10 - 4, y + (entryHeight - this.stopButton.getHeight()) / 2);
+        this.playButton.setPosition(x + (entryWidth - this.playButton.getWidth() - 4) - 10 - 4, y + (entryHeight - this.playButton.getHeight()) / 2);
+
+        if (NowPlaying.tracker.getNowPlaying().isPlaying() && NowPlaying.tracker.getNowPlaying().getSound().getId() == this.entry.identifier) {
             this.stopButton.render(context, mouseX, mouseY, tickDelta);
         } else {
             this.playButton.render(context, mouseX, mouseY, tickDelta);
         }
 
-        float u = 0f;
-        float v = 78f;
-        if (this.identifier.getNamespace().contains("nowplaying")) u = 0f;
-
-        if (this.identifier.getNamespace().contains("minecraft")) u = 20f;
-
-        if (this.identifier.getPath().contains("music_disc")) u = 40f;
-
-        context.drawTexture(PlaySoundScreen.TEXTURE, x + 20 / 2, this.playButton.getY(), u, v, 20, 20, 256, 256);
+        // TODO: icon rotation
+        this.entry.albumCover.drawIcon(context, x + 4, y + 4);
     }
 
     private void onButtonClick() {
-        PositionedSoundInstance soundInstance = PositionedSoundInstance.music(SoundEvent.of(this.identifier));
+        PositionedSoundInstance soundInstance = PositionedSoundInstance.music(SoundEvent.of(this.entry.identifier));
         this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
         this.client.getSoundManager().stop(NowPlaying.tracker.getNowPlaying().getSound());
         this.client.getSoundManager().play(soundInstance);
@@ -86,16 +95,20 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
     }
 
     @Override
-    public List<? extends Selectable> selectableChildren() {
+    public List<ClickableWidget> selectableChildren() {
         return this.buttons;
     }
 
     @Override
-    public List<? extends Element> children() {
+    public List<ClickableWidget> children() {
         return this.buttons;
     }
 
-    public String getName() {
-        return this.identifier.toString();
+    public String getIdentifier() {
+        return this.entry.identifier.toString();
+    }
+
+    MutableText getNarrationMessage(MutableText text) {
+        return Text.literal(this.entry.title).append(", ").append(this.entry.author).append(", ").append(text);
     }
 }

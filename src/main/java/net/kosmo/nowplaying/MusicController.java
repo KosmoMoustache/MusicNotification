@@ -8,9 +8,9 @@ import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
+@Deprecated
 public class MusicController {
     private final ArrayList<Identifier> discEntriesByIdentifier = new ArrayList<>();
     private final ArrayList<Identifier> referenceEntriesBySoundEvent = new ArrayList<>();
@@ -36,18 +36,20 @@ public class MusicController {
     }
 
     private void getFieldFromSoundSoundEvents() {
-        Arrays.stream(SoundEvents.class.getFields()).filter(field -> (field.getName().contains("MUSIC"))).forEach(field -> {
+        this.getFieldFromSoundSoundEvents(false);
+    }
+
+    private void getFieldFromSoundSoundEvents(boolean findAll) {
+        Arrays.stream(SoundEvents.class.getFields()).filter(field -> findAll || field.getName().contains("MUSIC")).forEach(field -> {
             try {
                 if (field.getType().equals(SoundEvent.class)) {
-                    SoundEvent soundEvent = (SoundEvent) field.get(null);
-//                    if (soundEvent == null) return;
+                    SoundEvent soundEvent = (SoundEvent) field.get(field);
                     this.discEntriesByIdentifier.add(soundEvent.getId());
                 }
 
                 if (field.getType().equals(RegistryEntry.Reference.class)) {
-                    RegistryEntry.Reference<SoundEvent> reference = NowPlaying.castRegistryReference(field.get(null));
-//                    if (reference == null) return;
-                    MusicSound a = new MusicSound(reference, 0,0, true);
+                    RegistryEntry.Reference<SoundEvent> reference = NowPlaying.castRegistryReference(field.get(field));
+                    MusicSound a = new MusicSound(reference, 0, 0, true);
                     this.referenceEntriesBySoundEvent.add(a.getSound().value().getId());
                 }
             } catch (IllegalAccessException e) {

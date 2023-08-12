@@ -1,12 +1,16 @@
 package net.kosmo.nowplaying.gui;
 
 import com.google.common.collect.Lists;
+import net.kosmo.nowplaying.music.MusicEntry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 public class SoundListWidget extends ElementListWidget<SoundListEntry> {
     private final PlaySoundScreen parent;
@@ -23,9 +27,9 @@ public class SoundListWidget extends ElementListWidget<SoundListEntry> {
         this.setRenderHorizontalShadows(false);
     }
 
-    public void update(List<Identifier> identifiers, double scrollAmount) {
+    public void update(List<MusicEntry> entries, double scrollAmount) {
         HashMap<Identifier, SoundListEntry> map = new HashMap<Identifier, SoundListEntry>();
-        this.setIdentifier(identifiers, map);
+        this.setIdentifier(entries, map);
         this.refresh(map.values(), scrollAmount);
     }
 
@@ -43,19 +47,18 @@ public class SoundListWidget extends ElementListWidget<SoundListEntry> {
 
     private void filterSounds() {
         if (this.currentSearch != null) {
-            this.sounds.removeIf(sound -> !sound.getName().toLowerCase(Locale.ROOT).contains(this.currentSearch));
+            this.sounds.removeIf(sound -> !sound.getIdentifier().toLowerCase(Locale.ROOT).contains(this.currentSearch));
             this.replaceEntries(this.sounds);
         }
     }
 
-    private void setIdentifier(Collection<Identifier> identifiers, HashMap<Identifier, SoundListEntry> map) {
-        for (Identifier identifier : identifiers) {
-            map.put(identifier, new SoundListEntry(this.client, this.parent, identifier));
+    private void setIdentifier(Collection<MusicEntry> entries, HashMap<Identifier, SoundListEntry> map) {
+        for (MusicEntry entry : entries) {
+            map.put(entry.identifier, new SoundListEntry(this.client, this, entry));
         }
     }
 
     public boolean isEmpty() {
         return this.sounds.isEmpty();
     }
-
 }

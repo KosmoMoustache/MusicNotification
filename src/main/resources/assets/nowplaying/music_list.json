@@ -128,7 +128,8 @@
   "comforting_memories": {
     "title": "Comforting Memories",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 9"
+    "soundtrack": "Caves & Cliffs No. 9",
+    "identifier": "minecraft:music_disc.comforting_memories"
   },
   "firebugs": {
     "title": "Firebugs",
@@ -283,77 +284,92 @@
   "13": {
     "title": "Thirteen",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 16"
+    "soundtrack": "Volume Alpha No. 16",
+    "identifier": "minecraft:music_disc.13"
   },
   "cat": {
     "title": "Cat",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 19"
+    "soundtrack": "Volume Alpha No. 19",
+    "identifier": "minecraft:music_disc.cat"
   },
   "blocks": {
     "title": "Blocks",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 28"
+    "soundtrack": "Volume Beta No. 28",
+    "identifier": "minecraft:music_disc.blocks"
   },
   "chirp": {
     "title": "Chirp",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 20"
+    "soundtrack": "Volume Beta No. 20",
+    "identifier": "minecraft:music_disc.chirp"
   },
   "far": {
     "title": "Far",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 29"
+    "soundtrack": "Volume Beta No. 29",
+    "identifier": "minecraft:music_disc.far"
   },
   "mall": {
     "title": "Mall",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 27"
+    "soundtrack": "Volume Beta No. 27",
+    "identifier": "minecraft:music_disc.mall"
   },
   "mellohi": {
     "title": "Mellohi",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 22"
+    "soundtrack": "Volume Beta No. 22",
+    "identifier": "minecraft:music_disc.mellohi"
   },
   "stal": {
     "title": "Stal",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 23"
+    "soundtrack": "Volume Beta No. 23",
+    "identifier": "minecraft:music_disc.stal"
   },
   "strad": {
     "title": "Strad",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 24"
+    "soundtrack": "Volume Beta No. 24",
+    "identifier": "minecraft:music_disc.strad"
   },
   "ward": {
     "title": "Ward",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 26"
+    "soundtrack": "Volume Beta No. 26",
+    "identifier": "minecraft:music.ward"
   },
   "11": {
     "title": "11",
     "author": "C418",
-    "soundtrack": "null"
+    "soundtrack": "",
+    "identifier": "minecraft:music_disc.11"
   },
   "wait": {
     "title": "Wait",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 21"
+    "soundtrack": "Volume Beta No. 21",
+    "identifier": "minecraft:music.wait"
   },
   "otherside": {
     "title": "Otherside",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 7"
+    "soundtrack": "Caves & Cliffs No. 7",
+    "identifier": "minecraft:music_disc.otherside"
   },
   "5": {
     "title": "Five",
     "author": "Samuel Åberg",
-    "soundtrack": "The Wild Update No.4"
+    "soundtrack": "The Wild Update No.4",
+    "identifier": "minecraft:music.game.5"
   },
   "pigstep": {
     "title": "Pigstep",
     "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 4"
+    "soundtrack": "Nether Update No. 4",
+    "identifier": "minecraft:music_disc.pigstep"
   },
   "echo_in_the_wind": {
     "title": "Echo in the Wind",
@@ -382,6 +398,7 @@
   "relic": {
     "title": "Relic",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.5"
+    "soundtrack": "Trails & Tailes Update No.5",
+    "identifier": "minecraft:music_disc.relic"
   }
 }

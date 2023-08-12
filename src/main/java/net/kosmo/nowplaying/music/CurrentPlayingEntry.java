@@ -8,9 +8,9 @@ public class CurrentPlayingEntry {
 
 
     @Nullable private SoundInstance soundInstance;
-    @Nullable private MusicManager.Entry entry;
+    @Nullable private Old_MusicManager.Entry entry;
 
-    public CurrentPlayingEntry(@Nullable SoundInstance soundInstance, @Nullable MusicManager.Entry entry) {
+    public CurrentPlayingEntry(@Nullable SoundInstance soundInstance, @Nullable Old_MusicManager.Entry entry) {
         this.soundInstance = soundInstance;
         this.entry = entry;
     }
@@ -32,7 +32,7 @@ public class CurrentPlayingEntry {
     }
 
 
-    public MusicManager.@Nullable Entry getEntry() {
+    public Old_MusicManager.@Nullable Entry getEntry() {
         return entry;
     }
 
