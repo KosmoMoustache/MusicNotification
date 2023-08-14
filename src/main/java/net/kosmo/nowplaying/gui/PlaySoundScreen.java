@@ -5,24 +5,23 @@ import net.kosmo.nowplaying.mixin.IMixinMusicTracker;
 import net.kosmo.nowplaying.music.MusicEntry;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.multiplayer.SocialInteractionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.util.NarratorManager;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.text.MutableText;
+import net.minecraft.client.gui.widget.TexturedButtonWidget;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
 public class PlaySoundScreen extends Screen {
     protected static final Identifier TEXTURE = new Identifier(NowPlaying.MOD_ID, "textures/gui/play_sound.png");
+    public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
 
     private static final Text TITLE = Text.translatable("gui.nowplaying.playsound.title");
     private static final Text HOME_TAB_TITLE = Text.translatable("gui.nowplaying.playsound.tab_home");
@@ -41,6 +40,8 @@ public class PlaySoundScreen extends Screen {
     private String currentSearch = "";
 
     private ButtonWidget currentPlaying;
+
+    private TexturedButtonWidget sortByDisc;
 
     private ButtonWidget homeTabButton;
     private ButtonWidget historyTabButton;
@@ -108,6 +109,16 @@ public class PlaySoundScreen extends Screen {
             ((IMixinMusicTracker) this.client.getMusicTracker()).setTimeUntilNextSong(0);
         }).dimensions(n1, m + 20, l1, 20).build());
 
+        // Create a sort widget
+        // Sort button
+//        this.sortByDisc = this.addDrawableChild(ButtonWidget.builder(NOW_PLAYING_TEXT, button -> {
+//            this.sortBy(SortBy.DISC);
+//        }).dimensions(j - 20, 45, 20, 20).build());
+//        this.sortByDisc = this.addDrawableChild(new TexturedButtonWidget(0, 0, 20, 20, 0, 38, 20, PlaySoundScreen.TEXTURE, 256, 256, button -> {
+//            this.sortBy(SortBy.DISC);
+//            this.sortByDisc.setFocused(false);
+//        }, Text.translatable("gui.nowplaying.playsound.play")));
+
         String search = this.searchBox != null ? this.searchBox.getText() : "";
         this.searchBox = new TextFieldWidget(this.textRenderer, this.getSearchBoxX() + 29, 75, 198, 13, SEARCH_TEXT);
         this.searchBox.setMaxLength(16);
@@ -123,6 +134,10 @@ public class PlaySoundScreen extends Screen {
 
         this.setCurrentTab(this.currentTab);
         this.initialized = true;
+    }
+
+    private void sortBy(SortBy sortBy) {
+        NowPlaying.LOGGER.info("Sorting by " + sortBy.name());
     }
 
     private int getEntryListBottom() {
@@ -143,12 +158,18 @@ public class PlaySoundScreen extends Screen {
 
         this.renderNowPlayingButton();
 
-        // TODO: Afficher si MASTER/MUSIC volume is 0
 
         context.drawTextWithShadow(this.textRenderer, this.currentTab.name(), this.getSearchBoxX() + 8, 35, -1);
 
         if (!this.soundList.isEmpty()) {
             this.soundList.render(context, mouseX, mouseY, delta);
+        }
+
+
+        if (client.options.getSoundVolume(SoundCategory.MUSIC) == 0f) {
+            context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("gui.nowplaying.playsound.volume.master"), this.width / 2, 20, WHITE_COLOR);
+        } else if (client.options.getSoundVolume(SoundCategory.MASTER) == 0f) {
+            context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("gui.nowplaying.playsound.volume.music"), this.width / 2, 20, WHITE_COLOR);
         }
 
         this.searchBox.render(context, mouseX, mouseY, delta);
@@ -202,6 +223,14 @@ public class PlaySoundScreen extends Screen {
             this.currentSearch = text;
             this.setCurrentTab(this.currentTab);
         }
+    }
+
+    public static enum SortBy {
+        DISC,
+        NAME,
+        AUTHOR,
+        CATEGORY,
+        DATE;
     }
 
     public static enum Tab {

@@ -4,11 +4,6 @@ import net.kosmo.nowplaying.NowPlaying;
 import net.kosmo.nowplaying.music.MusicEntry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Element;
-import net.minecraft.client.gui.Selectable;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
-import net.minecraft.client.gui.screen.narration.NarrationPart;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -18,7 +13,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.ColorHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +20,7 @@ import java.util.List;
 public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
     public static final int GRAY_COLOR = ColorHelper.Argb.getArgb(255, 74, 74, 74);
     public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
-    public static final int WHITE_COLO1 = ColorHelper.Argb.getArgb(155, 255, 255, 255);
+    public static final int DARK_LIGHT_GRAY_COLOR = ColorHelper.Argb.getArgb(155, 255, 255, 255);
     public static final int LIGHT_GRAY_COLOR = ColorHelper.Argb.getArgb(140, 255, 255, 255);
     private final MinecraftClient client;
     private final SoundListWidget parent;
@@ -71,7 +65,7 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
         l = y + (entryHeight - (fontHeight + fontHeight)) / 2;
 
         context.drawText(this.client.textRenderer, String.format("%s - %s", this.entry.title, this.entry.author), k, l, WHITE_COLOR, false);
-        context.drawText(this.client.textRenderer, this.entry.soundtrack, k, l + 12, WHITE_COLO1, false);
+        context.drawText(this.client.textRenderer, this.entry.soundtrack, k, l + 12, DARK_LIGHT_GRAY_COLOR, false);
 
         this.stopButton.setPosition(x + (entryWidth - this.stopButton.getWidth() - 4) - 10 - 4, y + (entryHeight - this.stopButton.getHeight()) / 2);
         this.playButton.setPosition(x + (entryWidth - this.playButton.getWidth() - 4) - 10 - 4, y + (entryHeight - this.playButton.getHeight()) / 2);

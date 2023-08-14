@@ -2,7 +2,6 @@ package net.kosmo.nowplaying;
 
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.kosmo.nowplaying.music.Old_MusicManager;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;

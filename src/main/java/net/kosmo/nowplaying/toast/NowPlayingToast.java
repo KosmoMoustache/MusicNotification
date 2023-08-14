@@ -15,6 +15,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.joml.Quaternionf;
 
+import java.util.Optional;
+
 import static net.kosmo.nowplaying.NowPlaying.LOGGER;
 
 public class NowPlayingToast implements Toast {
@@ -40,10 +42,10 @@ public class NowPlayingToast implements Toast {
 
     public static void show(SoundInstance soundInstance, Type type) {
         String key = NowPlaying.getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
-        MusicEntry entry = NowPlaying.musicManager.getByKey(key);
+        Optional<MusicEntry> entry = NowPlaying.musicManager.getByKey(key);
 
-        if (entry != null) {
-            show(MinecraftClient.getInstance().getToastManager(), entry, type);
+        if (entry.isPresent()) {
+            show(MinecraftClient.getInstance().getToastManager(), entry.get(), type);
         } else {
             show(MinecraftClient.getInstance().getToastManager(), Text.literal(key), Text.literal(soundInstance.getSound().getIdentifier().getNamespace()), Text.literal(""), AlbumCover.CD, type);
         }

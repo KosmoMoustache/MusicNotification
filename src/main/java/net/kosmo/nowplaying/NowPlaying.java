@@ -34,7 +34,6 @@ public class NowPlaying implements ClientModInitializer {
     public static ResourceManager resourceManager;
     public static MusicManager musicManager;
     public static NowPlayingConfig config;
-    public static MusicController musicController;
     public static Tracker tracker = new Tracker();
     private static MinecraftClient client;
 
@@ -43,7 +42,6 @@ public class NowPlaying implements ClientModInitializer {
         soundManager = client.getSoundManager();
         new NowPlayingSoundListener(soundManager);
         musicManager = new MusicManager(ResourceLoader.loader(resourceManager));
-        musicController = new MusicController();
     }
 
     @Override

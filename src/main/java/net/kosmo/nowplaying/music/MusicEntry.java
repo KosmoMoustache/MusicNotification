@@ -13,23 +13,31 @@ public class MusicEntry {
     public final @Nullable String author;
     public final @Nullable String soundtrack;
     public final NowPlayingToast.AlbumCover albumCover;
+    public final boolean isRandom;
 
     public MusicEntry(String key, JsonObject json) {
         this(
                 key,
                 new Identifier(JsonHelper.getString(json, "identifier", "nowplaying:missing")),
-                JsonHelper.getString(json, "title"), JsonHelper.getString(json, "author", null),
-                JsonHelper.getString(json, "soundtrack", null)
+                JsonHelper.getString(json, "title"),
+                JsonHelper.getString(json, "author", null),
+                JsonHelper.getString(json, "soundtrack", null),
+                JsonHelper.getBoolean(json, "isRandom", false)
         );
     }
 
-    public MusicEntry(String key, Identifier identifier, @Nullable String title, @Nullable String author, @Nullable String soundtrack) {
+    public MusicEntry(String key, MusicEntry entry) {
+        this(key, entry.identifier, entry.title, entry.author, entry.soundtrack, entry.isRandom);
+    }
+
+    public MusicEntry(String key, Identifier identifier, @Nullable String title, @Nullable String author, @Nullable String soundtrack, boolean isRandom) {
         this.key = key;
         this.identifier = identifier;
         this.title = title;
         this.author = author;
         this.soundtrack = soundtrack;
         this.albumCover = parseAlbumCover();
+        this.isRandom = isRandom;
     }
 
     private NowPlayingToast.AlbumCover parseAlbumCover() {
