@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-# [1.5] - 2023-11-18
+## [1.5] - 2023-11-18
 
 ### Added
 
@@ -35,13 +35,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update translations
 
-# [1.4] - 2023-06-18
+## [1.4] - 2023-06-18
 
 ### Added
 
-- Support to  1.20.1
+- Support to 1.20.1
 
-# [1.3] - 2023-05-09
+## [1.3] - 2023-05-09
 
 ### Added
 
@@ -56,13 +56,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Translation update
 
-# [1.2] - 2023-05-08
+## [1.2] - 2023-05-08
 
 - Change to how musics.json is loaded. Ressource pack can now replace the default musics.json
 - Bumped Cloth config and Mod Menu version
 
-# [1.1] - 2023-01-23
-### Added 
+## [1.1] - 2023-01-23
+
+### Added
 
 - Support to 1.19.4
 - Removed LibGui dependency and gui code
