@@ -67,3 +67,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support to 1.19.4
 - Removed LibGui dependency and gui code
+
+## [1.0] - 2023-01-23
