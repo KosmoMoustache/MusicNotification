@@ -1,8 +1,0 @@
-- build.properties
-- fabric.mod.json
-    - minecraft version
-- publish.yml
-  - Minecraft version
-  - release name
-  - mod version
-- CHANGELOG.md

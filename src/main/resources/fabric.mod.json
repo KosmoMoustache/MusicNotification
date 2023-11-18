@@ -32,7 +32,7 @@
   ],
   "accessWidener": "clientmusic.accesswidener",
   "depends": {
-    "minecraft": "1.20.1",
+    "minecraft": "${minecraft_version}",
     "fabricloader": ">=0.14.11"
   }
 }
