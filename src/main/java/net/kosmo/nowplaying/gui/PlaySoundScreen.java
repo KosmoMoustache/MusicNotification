@@ -5,9 +5,7 @@ import net.kosmo.nowplaying.mixin.IMixinMusicTracker;
 import net.kosmo.nowplaying.music.MusicEntry;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.TexturedButtonWidget;
+import net.minecraft.client.gui.widget.*;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -20,9 +18,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class PlaySoundScreen extends Screen {
-    protected static final Identifier TEXTURE = new Identifier(NowPlaying.MOD_ID, "textures/gui/play_sound.png");
     public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
-
+    protected static final Identifier TEXTURE = new Identifier(NowPlaying.MOD_ID, "textures/gui/play_sound.png");
     private static final Text TITLE = Text.translatable("gui.nowplaying.playsound.title");
     private static final Text HOME_TAB_TITLE = Text.translatable("gui.nowplaying.playsound.tab_home");
     private static final Text HISTORY_TAB_TITLE = Text.translatable("gui.nowplaying.playsound.tab_history");
@@ -109,7 +106,27 @@ public class PlaySoundScreen extends Screen {
             ((IMixinMusicTracker) this.client.getMusicTracker()).setTimeUntilNextSong(0);
         }).dimensions(n1, m + 20, l1, 20).build());
 
-        // Create a sort widget
+        // Sort grid widget
+        GridWidget gridWidget = new GridWidget();
+        gridWidget.getMainPositioner().marginX(5).marginBottom(4).alignHorizontalCenter();
+        GridWidget.Adder adder = gridWidget.createAdder(2);
+        adder.add(EmptyWidget.ofHeight(26), 2);
+        adder.add(ButtonWidget.builder(Text.literal("DISC"), button -> {
+            NowPlaying.LOGGER.info("Button 1 pressed");
+        }).build());
+        adder.add(ButtonWidget.builder(Text.translatable("DISC"), button -> {
+            NowPlaying.LOGGER.info("Button 1 pressed");
+        }).build());
+        adder.add(ButtonWidget.builder(Text.translatable("DISC"), button -> {
+            NowPlaying.LOGGER.info("Button 1 pressed");
+        }).build());
+        adder.add(ButtonWidget.builder(Text.translatable("DISC"), button -> {
+            NowPlaying.LOGGER.info("Button 1 pressed");
+        }).build());
+        gridWidget.refreshPositions();
+//        SimplePositioningWidget.setPos(gridWidget, i-gridWidget.getWidth(), this.height / 6 - 12, this.width, this.height, 0.5f, 0.0f);
+        gridWidget.forEachChild(this::addDrawableChild);
+
         // Sort button
 //        this.sortByDisc = this.addDrawableChild(ButtonWidget.builder(NOW_PLAYING_TEXT, button -> {
 //            this.sortBy(SortBy.DISC);
@@ -225,7 +242,7 @@ public class PlaySoundScreen extends Screen {
         }
     }
 
-    public static enum SortBy {
+    public enum SortBy {
         DISC,
         NAME,
         AUTHOR,
@@ -233,7 +250,7 @@ public class PlaySoundScreen extends Screen {
         DATE;
     }
 
-    public static enum Tab {
+    public enum Tab {
         HOME,
         HISTORY;
     }
