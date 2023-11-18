@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Update to 1.20.2
+- Support to 1.20.2
 
 ### Changed
 
@@ -37,7 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [1.4] - 2023-06-18
 
-- Update to 1.20.1
+### Added
+
+- Support to  1.20.1
 
 # [1.3] - 2023-05-09
 
@@ -60,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bumped Cloth config and Mod Menu version
 
 # [1.1] - 2023-01-23
+### Added 
 
-- Update to 1.19.4
+- Support to 1.19.4
 - Removed LibGui dependency and gui code
