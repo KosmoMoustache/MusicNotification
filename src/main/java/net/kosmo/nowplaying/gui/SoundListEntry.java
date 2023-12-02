@@ -2,6 +2,7 @@ package net.kosmo.nowplaying.gui;
 
 import net.kosmo.nowplaying.NowPlaying;
 import net.kosmo.nowplaying.music.MusicEntry;
+import net.kosmo.nowplaying.toast.NowPlayingToast;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ClickableWidget;
@@ -13,6 +14,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.ColorHelper;
+import org.joml.Quaternionf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +25,12 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
     public static final int DARK_LIGHT_GRAY_COLOR = ColorHelper.Argb.getArgb(155, 255, 255, 255);
     public static final int LIGHT_GRAY_COLOR = ColorHelper.Argb.getArgb(140, 255, 255, 255);
     private final MinecraftClient client;
-    private final SoundListWidget parent;
     private final MusicEntry entry;
     private final TexturedButtonWidget playButton;
     private final TexturedButtonWidget stopButton;
     private final List<ClickableWidget> buttons;
+    private final SoundListWidget parent;
+    private int rotation;
 
     public SoundListEntry(MinecraftClient client, SoundListWidget parent, MusicEntry entry) {
         this.client = client;
@@ -55,7 +58,6 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
         int i = x + 4;
         int k = i + 24 + 4;
 
-
         context.fill(x, y, x + entryWidth, y + entryHeight, GRAY_COLOR);
         if (hovered) {
             context.drawBorder(x, y, entryWidth - 1, entryHeight, LIGHT_GRAY_COLOR);
@@ -76,12 +78,13 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
             this.playButton.render(context, mouseX, mouseY, tickDelta);
         }
 
-        // TODO: icon rotation
+        // TODO: icon rotation when playing
         this.entry.albumCover.drawIcon(context, x + 4, y + 4);
     }
 
     private void onButtonClick() {
         PositionedSoundInstance soundInstance = PositionedSoundInstance.music(SoundEvent.of(this.entry.identifier));
+        NowPlaying.LOGGER.info(soundInstance.toString());
         this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
         this.client.getSoundManager().stop(NowPlaying.tracker.getNowPlaying().getSound());
         this.client.getSoundManager().play(soundInstance);

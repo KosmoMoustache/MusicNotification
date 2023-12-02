@@ -21,7 +21,7 @@ public class MusicManager {
 
     public MusicManager(JsonObject json) {
         this.update(json);
-        this.getDisc();
+        this.getDiscs();
         this.getMusicFromRegistry();
     }
 
@@ -76,7 +76,6 @@ public class MusicManager {
         return Optional.ofNullable(this.MUSIC_LIST.get(string));
     }
 
-
     private @NotNull Map<String, MusicEntry> parseJson(@NotNull JsonObject json) {
         Map<String, MusicEntry> map = new HashMap<>();
         for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
@@ -86,9 +85,9 @@ public class MusicManager {
     }
 
     /**
-     * get the list of all music disc item found in the registry (work with modded music disc)
+     * Get the list of all music discs item found in the registry (work with modded music discs)
      */
-    private void getDisc() {
+    private void getDiscs() {
         Set<Map.Entry<RegistryKey<Item>, Item>> set = Registries.ITEM.getEntrySet();
         for (Map.Entry<RegistryKey<Item>, Item> entry : set) {
             if (entry.getValue() instanceof MusicDiscItem) {
@@ -97,6 +96,9 @@ public class MusicManager {
         }
     }
 
+    /**
+     * Get the list of all music events found in the registry
+     */
     public void getMusicFromRegistry() {
         Set<Map.Entry<RegistryKey<SoundEvent>, SoundEvent>> set = Registries.SOUND_EVENT.getEntrySet();
         for (Map.Entry<RegistryKey<SoundEvent>, SoundEvent> entry : set) {

@@ -28,7 +28,7 @@ public class SoundListWidget extends ElementListWidget<SoundListEntry> {
     }
 
     public void update(List<MusicEntry> entries, double scrollAmount) {
-        HashMap<Identifier, SoundListEntry> map = new HashMap<Identifier, SoundListEntry>();
+        HashMap<Identifier, SoundListEntry> map = new HashMap<>();
         this.setIdentifier(entries, map);
         this.refresh(map.values(), scrollAmount);
     }
@@ -41,7 +41,7 @@ public class SoundListWidget extends ElementListWidget<SoundListEntry> {
         this.setScrollAmount(scrollAmount);
     }
 
-    public void setCurrentSearch(String currentSearch) {
+    public void setCurrentSearch(@Nullable String currentSearch) {
         this.currentSearch = currentSearch;
     }
 

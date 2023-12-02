@@ -26,10 +26,6 @@ public class MusicEntry {
         );
     }
 
-    public MusicEntry(String key, MusicEntry entry) {
-        this(key, entry.identifier, entry.title, entry.author, entry.soundtrack, entry.isRandom);
-    }
-
     public MusicEntry(String key, Identifier identifier, @Nullable String title, @Nullable String author, @Nullable String soundtrack, boolean isRandom) {
         this.key = key;
         this.identifier = identifier;

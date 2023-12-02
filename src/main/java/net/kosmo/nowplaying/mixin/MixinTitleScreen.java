@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(TitleScreen.class)
 public class MixinTitleScreen extends Screen {
     @Unique
-    private final Text TITLE_SCREEN_BUTTON = Text.translatable("gui.mn.gui.title_screen");
+    private final Text TITLE_SCREEN_BUTTON = Text.translatable("gui.nowplaying.playsound.title_screen");
 
     protected MixinTitleScreen(Text title) {
         super(title);
