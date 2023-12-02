@@ -5,7 +5,9 @@ import net.kosmo.nowplaying.mixin.IMixinMusicTracker;
 import net.kosmo.nowplaying.music.MusicEntry;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.*;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -18,8 +20,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class PlaySoundScreen extends Screen {
-    public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
     protected static final Identifier TEXTURE = new Identifier(NowPlaying.MOD_ID, "textures/gui/play_sound.png");
+    public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
+
     private static final Text TITLE = Text.translatable("gui.nowplaying.playsound.title");
     private static final Text HOME_TAB_TITLE = Text.translatable("gui.nowplaying.playsound.tab_home");
     private static final Text HISTORY_TAB_TITLE = Text.translatable("gui.nowplaying.playsound.tab_history");
@@ -29,21 +32,15 @@ public class PlaySoundScreen extends Screen {
     private static final Text RESET_MUSIC_TRACKER = Text.translatable("gui.nowplaying.playsound.reset_music_tracker");
 
     private static final Text SEARCH_TEXT = Text.translatable("gui.nowplaying.playsound.search_hint").formatted(Formatting.ITALIC).formatted(Formatting.GRAY);
-    private final Screen parent;
 
-    SoundListWidget soundList;
-    TextFieldWidget searchBox;
+    private final Screen parent;
     private Tab currentTab = Tab.HOME;
     private String currentSearch = "";
+    SoundListWidget soundList;
+    TextFieldWidget searchBox;
 
     private ButtonWidget currentPlaying;
-
-    private TexturedButtonWidget sortByDisc;
-
     private ButtonWidget homeTabButton;
-    private ButtonWidget historyTabButton;
-    private ButtonWidget resetMusicTrackerTimerButton;
-
 
     private boolean initialized;
 
@@ -54,11 +51,7 @@ public class PlaySoundScreen extends Screen {
 
     @NotNull
     private static List<MusicEntry> getEntries() {
-        List<MusicEntry> collection1 = new ArrayList<>();
-
-        collection1.addAll(NowPlaying.musicManager.getEntriesValue());
-
-        return collection1;
+        return new ArrayList<>(NowPlaying.musicManager.getEntriesValue());
     }
 
     private int getSearchBoxX() {
@@ -101,7 +94,7 @@ public class PlaySoundScreen extends Screen {
             if (NowPlaying.tracker.getNowPlaying().isPlaying())
                 this.client.getSoundManager().stop(NowPlaying.tracker.getNowPlaying().getSound());
         }).dimensions(n, m, l, 20).build());
-        this.resetMusicTrackerTimerButton = this.addDrawableChild(ButtonWidget.builder(RESET_MUSIC_TRACKER, button -> {
+        this.addDrawableChild(ButtonWidget.builder(RESET_MUSIC_TRACKER, button -> {
             this.client.getSoundManager().stopAll();
             ((IMixinMusicTracker) this.client.getMusicTracker()).setTimeUntilNextSong(0);
         }).dimensions(n1, m + 20, l1, 20).build());
@@ -172,9 +165,7 @@ public class PlaySoundScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context);
-
         this.renderNowPlayingButton();
-
 
         context.drawTextWithShadow(this.textRenderer, this.currentTab.name(), this.getSearchBoxX() + 8, 35, -1);
 
@@ -182,7 +173,7 @@ public class PlaySoundScreen extends Screen {
             this.soundList.render(context, mouseX, mouseY, delta);
         }
 
-
+        assert client != null;
         if (client.options.getSoundVolume(SoundCategory.MUSIC) == 0f) {
             context.drawCenteredTextWithShadow(this.textRenderer, Text.translatable("gui.nowplaying.playsound.volume.master"), this.width / 2, 20, WHITE_COLOR);
         } else if (client.options.getSoundVolume(SoundCategory.MASTER) == 0f) {
@@ -240,14 +231,6 @@ public class PlaySoundScreen extends Screen {
             this.currentSearch = text;
             this.setCurrentTab(this.currentTab);
         }
-    }
-
-    public enum SortBy {
-        DISC,
-        NAME,
-        AUTHOR,
-        CATEGORY,
-        DATE;
     }
 
     public enum Tab {
