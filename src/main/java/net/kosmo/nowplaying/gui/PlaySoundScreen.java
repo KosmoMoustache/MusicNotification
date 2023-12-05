@@ -25,10 +25,10 @@ public class PlaySoundScreen extends Screen {
 
     private static final Text TITLE = Text.translatable("gui.nowplaying.playsound.title");
     private static final Text HOME_TAB_TITLE = Text.translatable("gui.nowplaying.playsound.tab_home");
-    private static final Text HISTORY_TAB_TITLE = Text.translatable("gui.nowplaying.playsound.tab_history");
     private static final Text SELECTED_HOME_TAB_TITLE = HOME_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
-    private static final Text SELECTED_HISTORY_TAB_TITLE = HISTORY_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
-
+    // TODO History tab
+//    private static final Text HISTORY_TAB_TITLE = Text.translatable("gui.nowplaying.playsound.tab_history");
+//    private static final Text SELECTED_HISTORY_TAB_TITLE = HISTORY_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
     private static final Text RESET_MUSIC_TRACKER = Text.translatable("gui.nowplaying.playsound.reset_music_tracker");
 
     private static final Text SEARCH_TEXT = Text.translatable("gui.nowplaying.playsound.search_hint").formatted(Formatting.ITALIC).formatted(Formatting.GRAY);
@@ -188,18 +188,18 @@ public class PlaySoundScreen extends Screen {
     private void setCurrentTab(Tab tab) {
         this.currentTab = tab;
         this.homeTabButton.setMessage(HOME_TAB_TITLE);
-        this.historyTabButton.setMessage(HISTORY_TAB_TITLE);
+//        this.historyTabButton.setMessage(HISTORY_TAB_TITLE);
 
         switch (this.currentTab) {
             case HOME:
                 this.homeTabButton.setMessage(SELECTED_HOME_TAB_TITLE);
                 this.soundList.update(getEntries(), this.soundList.getScrollAmount());
                 break;
-            case HISTORY:
-                NowPlaying.LOGGER.info("History: " + NowPlaying.tracker.getHistory().getEntries());
-                this.historyTabButton.setMessage(SELECTED_HISTORY_TAB_TITLE);
+//            case HISTORY:
+//                NowPlaying.LOGGER.info("History: " + NowPlaying.tracker.getHistory().getEntries());
+//                this.historyTabButton.setMessage(SELECTED_HISTORY_TAB_TITLE);
 //                this.soundList.update(NowPlaying.tracker.getHistory().getEntries(), this.soundList.getScrollAmount());
-                break;
+//                break;
         }
     }
 
@@ -235,6 +235,6 @@ public class PlaySoundScreen extends Screen {
 
     public enum Tab {
         HOME,
-        HISTORY;
+//        HISTORY;
     }
 }
