@@ -205,7 +205,7 @@ public class PlaySoundScreen extends Screen {
             entry = NowPlaying.musicManager.getByKey(NowPlaying.getLastSegmentOfPath(sound.getId()));
         }
         return entry.isPresent() && NowPlaying.tracker.getNowPlaying().isPlaying() ?
-                Text.translatable("gui.nowplaying.playsound.now_playing", entry.get().title) :
+                Text.translatable("gui.nowplaying.playsound.now_playing", entry.get().title, entry.get().author, entry.get().soundtrack) :
                 Text.translatable("gui.nowplaying.playsound.now_playing_none");
     }
 
