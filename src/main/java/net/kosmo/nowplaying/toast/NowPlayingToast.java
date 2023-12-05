@@ -178,6 +178,14 @@ public class NowPlayingToast implements Toast {
             return 32;
         }
 
+        public int getTextureSlotX() {
+            return 176 + this.textureSlotX * 20;
+        }
+
+        public int getTextureSlotY() {
+            return this.textureSlotY * 20;
+        }
+
         public void drawIcon(DrawContext context, int x, int y) {
             context.drawTexture(TEXTURE, x, y, 176 + this.textureSlotX * 20, this.textureSlotY * 20, 20, 20);
         }

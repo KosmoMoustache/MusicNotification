@@ -13,11 +13,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 public class PlaySoundScreen extends Screen {
     protected static final Identifier TEXTURE = new Identifier(NowPlaying.MOD_ID, "textures/gui/play_sound.png");
@@ -30,7 +30,6 @@ public class PlaySoundScreen extends Screen {
 //    private static final Text HISTORY_TAB_TITLE = Text.translatable("gui.nowplaying.playsound.tab_history");
 //    private static final Text SELECTED_HISTORY_TAB_TITLE = HISTORY_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
     private static final Text RESET_MUSIC_TRACKER = Text.translatable("gui.nowplaying.playsound.reset_music_tracker");
-
     private static final Text SEARCH_TEXT = Text.translatable("gui.nowplaying.playsound.search_hint").formatted(Formatting.ITALIC).formatted(Formatting.GRAY);
 
     private final Screen parent;
@@ -49,7 +48,6 @@ public class PlaySoundScreen extends Screen {
         this.parent = parent;
     }
 
-    @NotNull
     private static List<MusicEntry> getEntries() {
         return new ArrayList<>(NowPlaying.musicManager.getEntriesValue());
     }
@@ -60,6 +58,10 @@ public class PlaySoundScreen extends Screen {
 
     private int getScreenHeight() {
         return Math.max(52, this.height - 128 - 16);
+    }
+
+    private int getEntryListBottom() {
+        return 80 + this.getScreenHeight() - 8;
     }
 
     @Override
@@ -88,7 +90,7 @@ public class PlaySoundScreen extends Screen {
         int n1 = (this.width - l1) / 2 + 3;
 
         this.homeTabButton = this.addDrawableChild(ButtonWidget.builder(HOME_TAB_TITLE, button -> this.setCurrentTab(Tab.HOME)).dimensions(j + 2, 45, i, 20).build());
-        this.historyTabButton = this.addDrawableChild(ButtonWidget.builder(HISTORY_TAB_TITLE, button -> this.setCurrentTab(Tab.HISTORY)).dimensions(k - i + 2, 45, i, 20).build());
+//        this.historyTabButton = this.addDrawableChild(ButtonWidget.builder(HISTORY_TAB_TITLE, button -> this.setCurrentTab(Tab.HISTORY)).dimensions(k - i + 2, 45, i, 20).build());
 
         this.currentPlaying = this.addDrawableChild(ButtonWidget.builder(NOW_PLAYING_TEXT, button -> {
             if (NowPlaying.tracker.getNowPlaying().isPlaying())
@@ -99,35 +101,21 @@ public class PlaySoundScreen extends Screen {
             ((IMixinMusicTracker) this.client.getMusicTracker()).setTimeUntilNextSong(0);
         }).dimensions(n1, m + 20, l1, 20).build());
 
-        // Sort grid widget
-        GridWidget gridWidget = new GridWidget();
-        gridWidget.getMainPositioner().marginX(5).marginBottom(4).alignHorizontalCenter();
-        GridWidget.Adder adder = gridWidget.createAdder(2);
-        adder.add(EmptyWidget.ofHeight(26), 2);
-        adder.add(ButtonWidget.builder(Text.literal("DISC"), button -> {
-            NowPlaying.LOGGER.info("Button 1 pressed");
-        }).build());
-        adder.add(ButtonWidget.builder(Text.translatable("DISC"), button -> {
-            NowPlaying.LOGGER.info("Button 1 pressed");
-        }).build());
-        adder.add(ButtonWidget.builder(Text.translatable("DISC"), button -> {
-            NowPlaying.LOGGER.info("Button 1 pressed");
-        }).build());
-        adder.add(ButtonWidget.builder(Text.translatable("DISC"), button -> {
-            NowPlaying.LOGGER.info("Button 1 pressed");
-        }).build());
-        gridWidget.refreshPositions();
-//        SimplePositioningWidget.setPos(gridWidget, i-gridWidget.getWidth(), this.height / 6 - 12, this.width, this.height, 0.5f, 0.0f);
-        gridWidget.forEachChild(this::addDrawableChild);
-
-        // Sort button
-//        this.sortByDisc = this.addDrawableChild(ButtonWidget.builder(NOW_PLAYING_TEXT, button -> {
-//            this.sortBy(SortBy.DISC);
-//        }).dimensions(j - 20, 45, 20, 20).build());
-//        this.sortByDisc = this.addDrawableChild(new TexturedButtonWidget(0, 0, 20, 20, 0, 38, 20, PlaySoundScreen.TEXTURE, 256, 256, button -> {
-//            this.sortBy(SortBy.DISC);
-//            this.sortByDisc.setFocused(false);
-//        }, Text.translatable("gui.nowplaying.playsound.play")));
+        // TODO sort by album (? artist)
+        // Album cover list
+//        GridWidget gridWidget = new GridWidget();
+//        gridWidget.getMainPositioner().marginX(1).marginBottom(1).alignHorizontalCenter();
+//        GridWidget.Adder adder = gridWidget.createAdder(1);
+//        adder.add(EmptyWidget.ofHeight(26), 1);
+//
+//        NowPlayingToast.AlbumCover.values();
+//        for (NowPlayingToast.AlbumCover albumCover : NowPlayingToast.AlbumCover.values()) {
+//            adder.add(new TexturedButtonWidget(this.width / 2 - 124, l + 72 + 12, 20, 20, albumCover.getTextureSlotX(), albumCover.getTextureSlotY(), 0, NowPlayingToast.TEXTURE, 256, 256, (button) -> {
+//                NowPlaying.LOGGER.info("Button pressed");
+//            }, Text.translatable(albumCover.name())));
+//        }
+//        gridWidget.refreshPositions();
+//        gridWidget.forEachChild(this::addDrawableChild);
 
         String search = this.searchBox != null ? this.searchBox.getText() : "";
         this.searchBox = new TextFieldWidget(this.textRenderer, this.getSearchBoxX() + 29, 75, 198, 13, SEARCH_TEXT);
@@ -138,20 +126,11 @@ public class PlaySoundScreen extends Screen {
         this.searchBox.setPlaceholder(SEARCH_TEXT);
         this.searchBox.setChangedListener(this::onSearchChange);
 
-
         this.addSelectableChild(this.searchBox);
         this.addSelectableChild(this.soundList);
 
         this.setCurrentTab(this.currentTab);
         this.initialized = true;
-    }
-
-    private void sortBy(SortBy sortBy) {
-        NowPlaying.LOGGER.info("Sorting by " + sortBy.name());
-    }
-
-    private int getEntryListBottom() {
-        return 80 + this.getScreenHeight() - 8;
     }
 
     @Override
@@ -208,15 +187,25 @@ public class PlaySoundScreen extends Screen {
         int m = 64 + this.getScreenHeight();
         int n = (this.width - l) / 2 + 3;
 
-        this.currentPlaying.setMessage(getNowPlayingText());
+        if (NowPlaying.tracker.getNowPlaying().isPlaying()) {
+            this.currentPlaying.setMessage(getNowPlayingText());
+        } else {
+            this.currentPlaying.setMessage(Text.translatable("gui.nowplaying.playsound.now_playing_none"));
+        }
         this.currentPlaying.setWidth(this.textRenderer.getWidth(this.currentPlaying.getMessage()) + 40);
         this.currentPlaying.setPosition(n, m);
 
     }
 
+    // TODO store in class variable
     public Text getNowPlayingText() {
-        return NowPlaying.tracker.getNowPlaying().isPlaying() ?
-                Text.translatable("gui.nowplaying.playsound.now_playing", NowPlaying.tracker.getNowPlaying().getSound().getId().toString()) :
+        SoundInstance sound = NowPlaying.tracker.getNowPlaying().getSound();
+        Optional<MusicEntry> entry = Optional.empty();
+        if (sound != null) {
+            entry = NowPlaying.musicManager.getByKey(NowPlaying.getLastSegmentOfPath(sound.getId()));
+        }
+        return entry.isPresent() && NowPlaying.tracker.getNowPlaying().isPlaying() ?
+                Text.translatable("gui.nowplaying.playsound.now_playing", entry.get().title) :
                 Text.translatable("gui.nowplaying.playsound.now_playing_none");
     }
 

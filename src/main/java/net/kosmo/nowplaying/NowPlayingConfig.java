@@ -10,7 +10,7 @@ public class NowPlayingConfig implements ConfigData {
     public boolean HIDE_AUTHOR = false;
     public boolean SHOW_SOUNDTRACK_NAME = false;
     public boolean SHOULD_SHOW_JUKEBOX = true;
-    public boolean SHOW_TITLE_SCREEN_BUTTON = true;
+    public boolean SHOW_TITLE_SCREEN_BUTTON = false;
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
