@@ -94,7 +94,7 @@ public class ClientMusic implements ClientModInitializer {
 
     }
 
-    public static SoundInstanceListener SoundListener = (soundInstance, soundSet) -> {
+    public static SoundInstanceListener SoundListener = (soundInstance, soundSet, range) -> {
         if (soundInstance.getCategory() == SoundCategory.MUSIC) {
             MusicToast.show(soundInstance);
         }
