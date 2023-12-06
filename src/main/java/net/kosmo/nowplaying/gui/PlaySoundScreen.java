@@ -19,7 +19,6 @@ import java.util.Locale;
 
 public class PlaySoundScreen extends Screen {
     private static final Identifier BACKGROUND_TEXTURE = new Identifier("nowplaying/background");
-    protected static final Identifier TEXTURE = new Identifier(NowPlaying.MOD_ID, "textures/gui/play_sound.png");
     private static final Identifier SEARCH_ICON_TEXTURE = new Identifier("icon/search");
     public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
 
@@ -37,7 +36,7 @@ public class PlaySoundScreen extends Screen {
     SoundListWidget soundList;
     TextFieldWidget searchBox;
 
-    private ButtonWidget currentPlaying;
+//    private ButtonWidget currentPlaying;
     private ButtonWidget homeTabButton;
 
     private boolean initialized;
@@ -89,7 +88,7 @@ public class PlaySoundScreen extends Screen {
 //            if (NowPlaying.tracker.getNowPlaying().isPlaying())
 //                this.client.getSoundManager().stop(NowPlaying.tracker.getNowPlaying().getSound());
 //        }).dimensions(n, m, l, 20).build());
-        this.currentPlaying = this.addDrawableChild(ButtonWidget.builder(STOP_SOUND_TEXT, button -> {
+        /*this.currentPlaying = */this.addDrawableChild(ButtonWidget.builder(STOP_SOUND_TEXT, button -> {
             this.client.getSoundManager().stopAll();
         }).dimensions(n, m, l, 20).build());
 
@@ -136,9 +135,8 @@ public class PlaySoundScreen extends Screen {
         super.renderBackground(context, mouseX, mouseY, delta);
 
         // TODO: change to the new gui texture system
-//        context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
         context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16, 8, 236, 34, 1, 1);
-        context.drawTexture(BACKGROUND_TEXTURE, i + 10, 76, 243, 1, 12, 12);
+        context.drawGuiTexture(SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
     }
 
     @Override

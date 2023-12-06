@@ -2,11 +2,9 @@ package net.kosmo.nowplaying.gui;
 
 import net.kosmo.nowplaying.NowPlaying;
 import net.kosmo.nowplaying.music.MusicEntry;
-import net.kosmo.nowplaying.toast.NowPlayingToast;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ButtonTextures;
-import net.minecraft.client.gui.screen.multiplayer.SocialInteractionsPlayerListEntry;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -17,7 +15,6 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
-import org.joml.Quaternionf;
 
 import java.util.ArrayList;
 import java.util.List;

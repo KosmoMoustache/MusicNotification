@@ -47,17 +47,17 @@ public class NowPlayingToast implements Toast {
         Optional<MusicEntry> entry = NowPlaying.musicManager.getByKey(key);
 
         if (entry.isPresent()) {
-            show(MinecraftClient.getInstance().getToastManager(), entry.get(), type);
+            show(MinecraftClient.getInstance().getToastManager(), entry.get());
         } else {
-            show(MinecraftClient.getInstance().getToastManager(), Text.literal(key), Text.literal(soundInstance.getSound().getIdentifier().getNamespace()), Text.literal(""), AlbumCover.CD, type);
+            show(MinecraftClient.getInstance().getToastManager(), Text.literal(key), Text.literal(soundInstance.getSound().getIdentifier().getNamespace()), Text.literal(""), AlbumCover.CD);
         }
     }
 
-    public static void show(ToastManager manager, MusicEntry entry, Type type) {
-        show(manager, Text.literal(entry.title), Text.literal(entry.author), Text.literal(entry.soundtrack), entry.albumCover, type);
+    public static void show(ToastManager manager, MusicEntry entry) {
+        show(manager, Text.literal(entry.title), Text.literal(entry.author), Text.literal(entry.soundtrack), entry.albumCover);
     }
 
-    public static void show(ToastManager manager, Text title, Text author, Text soundtrack, AlbumCover albumCover, Type type) {
+    public static void show(ToastManager manager, Text title, Text author, Text soundtrack, AlbumCover albumCover) {
         NowPlayingToast musicToast = manager.getToast(NowPlayingToast.class, DEFAULT);
 
         if (musicToast == null) {

@@ -33,12 +33,12 @@ public class NowPlayingSoundListener implements SoundInstanceListener {
                     // string[0] = title / string[1] = author // -> Now playing: Lena Raine - Pigstep
                     Optional<MusicEntry> entry = NowPlaying.musicManager.getByKey(string[1].toLowerCase());
                     if (entry.isPresent()) {
-                        NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), entry.get(), NowPlayingToast.Type.DISC);
+                        NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), entry.get());
                     } else {
-                        NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), NowPlayingToast.AlbumCover.CD, NowPlayingToast.Type.DISC);
+                        NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), NowPlayingToast.AlbumCover.CD);
                     }
                 } else {
-                    NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), NowPlayingToast.AlbumCover.MODDED_CD, NowPlayingToast.Type.DISC);
+                    NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), NowPlayingToast.AlbumCover.MODDED_CD);
                 }
             }
             NowPlaying.LOGGER.info("Playing music disc: {}", sound.getId());
