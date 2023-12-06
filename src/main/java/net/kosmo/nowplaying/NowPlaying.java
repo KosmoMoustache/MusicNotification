@@ -56,14 +56,8 @@ public class NowPlaying implements ClientModInitializer {
         // Resource Loader
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new ResourceLoader.ResourceReloadListener());
 
-        // TODO: Move to ModConfig ?
         // Key Binding
-        keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.nowplaying.open_screen",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_UNKNOWN,
-                "key.nowplaying.categories"
-        ));
+        keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.nowplaying.open_screen", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.nowplaying.categories"));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
@@ -78,11 +72,8 @@ public class NowPlaying implements ClientModInitializer {
     public static boolean shouldShowToast(NowPlayingToast.Type type) {
         if (!config.ENABLE_MOD) return false;
         if (client.options.getSoundVolume(SoundCategory.MASTER) == 0) return false;
-
-        if (type == NowPlayingToast.Type.DISC && client.options.getSoundVolume(SoundCategory.RECORDS) == 0)
-            return false;
-        if (type == NowPlayingToast.Type.DEFAULT && client.options.getSoundVolume(SoundCategory.MUSIC) == 0)
-            return false;
+        if (client.options.getSoundVolume(SoundCategory.RECORDS) == 0) return false;
+        if (client.options.getSoundVolume(SoundCategory.MUSIC) == 0) return false;
 
         return true;
     }

@@ -22,7 +22,7 @@ public class NowPlayingSoundListener implements SoundInstanceListener {
     }
 
     public static void onDiscPlay(@Nullable SoundEvent sound) {
-        if (sound != null && NowPlaying.config.SHOULD_SHOW_JUKEBOX && NowPlaying.shouldShowToast(NowPlayingToast.Type.DISC)) {
+        if (sound != null && NowPlaying.config.SHOULD_SHOW_JUKEBOX && NowPlaying.shouldShowToast(NowPlayingToast.Type.DEFAULT)) {
             MusicDiscItem musicDiscItem = MusicDiscItem.bySound(sound);
             if (musicDiscItem != null) {
                 String namespace = musicDiscItem.getSound().getId().getNamespace();
@@ -35,10 +35,10 @@ public class NowPlayingSoundListener implements SoundInstanceListener {
                     if (entry.isPresent()) {
                         NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), entry.get());
                     } else {
-                        NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), NowPlayingToast.AlbumCover.CD);
+                        NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), NowPlayingToast.AlbumCover.VANILLA);
                     }
                 } else {
-                    NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), NowPlayingToast.AlbumCover.MODDED_CD);
+                    NowPlayingToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), NowPlayingToast.AlbumCover.MODDED);
                 }
             }
             NowPlaying.LOGGER.info("Playing music disc: {}", sound.getId());
@@ -50,7 +50,7 @@ public class NowPlayingSoundListener implements SoundInstanceListener {
         if (sound.getCategory() == SoundCategory.MUSIC && NowPlaying.shouldShowToast(NowPlayingToast.Type.DEFAULT)) {
 //            NowPlaying.tracker.getHistory().add(sound);
             NowPlaying.LOGGER.info("Now playing: {}", sound.getSound().getIdentifier());
-            NowPlayingToast.show(sound, NowPlayingToast.Type.DEFAULT);
+            NowPlayingToast.show(sound);
         }
     }
 }

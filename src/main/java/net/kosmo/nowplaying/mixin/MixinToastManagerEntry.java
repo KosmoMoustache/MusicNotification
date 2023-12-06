@@ -1,7 +1,6 @@
 package net.kosmo.nowplaying.mixin;
 
 import net.kosmo.nowplaying.NowPlaying;
-import net.kosmo.nowplaying.NowPlayingConfig;
 import net.kosmo.nowplaying.toast.NowPlayingToast;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
@@ -28,7 +27,7 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
      */
     @ModifyArg(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V"), index = 1)
     public float modifyY(float y) {
-        if (this.instance instanceof NowPlayingToast && NowPlaying.config.SHOW_SOUNDTRACK_NAME) {
+        if (this.instance instanceof NowPlayingToast && NowPlaying.config.SHOW_SOUNDTRACK) {
             return this.topIndex * this.instance.getHeight();
         }
         return this.topIndex * 32;
@@ -36,14 +35,11 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
 
     @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/Toast$Visibility;playSound(Lnet/minecraft/client/sound/SoundManager;)V"))
     public void playSound(Toast.Visibility visibility, net.minecraft.client.sound.SoundManager soundManager) {
-        if(NowPlaying.config.DISABLE_TOAST_SOUND == null) NowPlaying.config.DISABLE_TOAST_SOUND = NowPlayingConfig.DisableToastSound.MUTE_MOD;
         switch (NowPlaying.config.DISABLE_TOAST_SOUND) {
             case MUTE_ALL:
                 break;
             case MUTE_MOD:
-                if (this.instance instanceof NowPlayingToast) {
-                    break;
-                }
+                if (this.instance instanceof NowPlayingToast) break;
             case VANILLA:
                 visibility.playSound(soundManager);
         }

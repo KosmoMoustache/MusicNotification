@@ -53,7 +53,7 @@
     "soundtrack": "Volume Beta No. 16",
     "identifier": "nowplaying:music.taswell"
   },
-  "subwoofer_lullalby": {
+  "subwoofer_lullaby": {
     "title": "Subwoofer Lullaby",
     "author": "C418",
     "soundtrack": "Volume Alpha No. 3",
@@ -257,13 +257,13 @@
     "soundtrack": "Volume Beta No. 9",
     "identifier": "nowplaying:music.mutation"
   },
-  "mooog_city_2": {
+  "moog_city_2": {
     "title": "Moog City 2",
     "author": "C418",
     "soundtrack": "Volume Beta No. 6",
     "identifier": "nowplaying:music.moog_city_2"
   },
-  "begginning_2": {
+  "beginning_2": {
     "title": "Beginning 2",
     "author": "C418",
     "soundtrack": "Volume Beta No. 17",

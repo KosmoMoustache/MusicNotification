@@ -1,5 +1,6 @@
 package net.kosmo.nowplaying.toast;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.kosmo.nowplaying.NowPlaying;
 import net.kosmo.nowplaying.NowPlayingConfig;
 import net.kosmo.nowplaying.music.MusicEntry;
@@ -20,12 +21,10 @@ import java.util.Optional;
 import static net.kosmo.nowplaying.NowPlaying.LOGGER;
 
 public class NowPlayingToast implements Toast {
-    public static final Identifier TEXTURE_NORMAL = new Identifier(NowPlaying.MOD_ID, "toasts/nowplaying");
-    public static final Identifier TEXTURE_EXTENDED = new Identifier(NowPlaying.MOD_ID, "toast/nowplaying_extended");
-    public static final Identifier DISC_ICON = new Identifier(NowPlaying.MOD_ID, "toast/discs");
-    private static final Type DEFAULT = Type.DEFAULT;
-    private final Type type;
+    public static final Identifier TEXTURE_NORMAL = new Identifier(NowPlaying.MOD_ID, "toast/normal");
+    public static final Identifier TEXTURE_EXTENDED = new Identifier(NowPlaying.MOD_ID, "toast/extended");
     private AlbumCover albumCover;
+    private final Type type;
     private long startTime;
     private boolean justUpdated;
     private Text title;
@@ -33,23 +32,23 @@ public class NowPlayingToast implements Toast {
     private Text soundtrack;
     private int rotation;
 
-    public NowPlayingToast(Type type, AlbumCover albumCover, Text title, Text author, Text soundtrack) {
+    public NowPlayingToast(AlbumCover albumCover, Text title, Text author, Text soundtrack) {
         LOGGER.info("Now playing: {} by {} ({})", title.getString(), author.getString(), soundtrack.getString());
         this.title = title;
         this.author = author;
         this.soundtrack = soundtrack;
-        this.type = type;
         this.albumCover = albumCover;
+        this.type = Type.DEFAULT;
     }
 
-    public static void show(SoundInstance soundInstance, Type type) {
+    public static void show(SoundInstance soundInstance) {
         String key = NowPlaying.getLastSegmentOfPath(soundInstance.getSound().getIdentifier());
         Optional<MusicEntry> entry = NowPlaying.musicManager.getByKey(key);
 
         if (entry.isPresent()) {
             show(MinecraftClient.getInstance().getToastManager(), entry.get());
         } else {
-            show(MinecraftClient.getInstance().getToastManager(), Text.literal(key), Text.literal(soundInstance.getSound().getIdentifier().getNamespace()), Text.literal(""), AlbumCover.CD);
+            show(MinecraftClient.getInstance().getToastManager(), Text.literal(key), Text.literal(soundInstance.getSound().getIdentifier().getNamespace()), Text.literal(""), AlbumCover.VANILLA);
         }
     }
 
@@ -58,7 +57,7 @@ public class NowPlayingToast implements Toast {
     }
 
     public static void show(ToastManager manager, Text title, Text author, Text soundtrack, AlbumCover albumCover) {
-        NowPlayingToast musicToast = manager.getToast(NowPlayingToast.class, DEFAULT);
+        NowPlayingToast musicToast = manager.getToast(NowPlayingToast.class, Type.DEFAULT);
 
         if (musicToast == null) {
             add(manager, albumCover, title, author, soundtrack);
@@ -68,133 +67,112 @@ public class NowPlayingToast implements Toast {
     }
 
     public static void add(ToastManager manager, AlbumCover albumCover, Text title, Text author, Text soundtrack) {
-        manager.add(new NowPlayingToast(DEFAULT, albumCover, title, author, soundtrack));
-    }
-
-    public Type getType() {
-        return this.type;
-    }
-
-    @Override
-    public int getRequiredSpaceCount() {
-        return MathHelper.ceilDiv(this.getHeight(), NowPlaying.config.SHOW_SOUNDTRACK_NAME ? 44 : 32);
+        manager.add(new NowPlayingToast(albumCover, title, author, soundtrack));
     }
 
     /**
-     * When {@link NowPlayingConfig#SHOW_SOUNDTRACK_NAME} is false, when another toast is shown, the soundtrack
+     * When {@link NowPlayingConfig#SHOW_SOUNDTRACK} is false, when another toast is shown, the soundtrack
      * is hided by the new toast
      */
     @Override
     public Toast.Visibility draw(DrawContext context, ToastManager manager, long startTime) {
         MatrixStack matrices = context.getMatrices();
-
-
         TextRenderer textRenderer = manager.getClient().textRenderer;
+
         if (this.justUpdated) {
             this.startTime = startTime;
             this.justUpdated = false;
         }
 
-        if (NowPlaying.config.SHOW_SOUNDTRACK_NAME) {
-            context.drawTexture(TEXTURE_EXTENDED, 0, 0, 0, 0, this.getWidth(), this.getHeight());
+        if (NowPlaying.config.SHOW_SOUNDTRACK) {
+            context.drawGuiTexture(TEXTURE_EXTENDED, 0, 0, this.getWidth(), this.getHeight());
         } else {
-            context.drawTexture(TEXTURE_NORMAL, 0, 0, 0, 0, this.getWidth(), this.getHeight());
+            context.drawGuiTexture(TEXTURE_NORMAL, 0, 0, this.getWidth(), this.getHeight());
         }
         context.getMatrices().push();
 
-        // Make the icon rotate
+        // rotate disc icon
         if (NowPlaying.config.ROTATE_ALBUM_COVER) {
             if (rotation >= 360) rotation = 0;
             rotation += 1;
 
             matrices.translate(0, 0, 0);
-            matrices.translate((float) AlbumCover.getWidth() / 2, (float) AlbumCover.getHeight() / 2, 0);
+            matrices.translate((float) 32 / 2, (float) 32 / 2, 0);
             matrices.multiply(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
-            matrices.translate(-(float) AlbumCover.getWidth() / 2, -(float) AlbumCover.getHeight() / 2, 0);
+            matrices.translate(-(float) 32 / 2, -(float) 32 / 2, 0);
             matrices.translate(-0, -0, 0);
         }
-
         this.albumCover.drawIcon(context, 6, 6);
         context.getMatrices().pop();
 
-
         context.drawText(textRenderer, this.title, 30, 7, -11534256, false);
 
-        if (!NowPlaying.config.HIDE_AUTHOR) {
+        if (NowPlaying.config.SHOW_AUTHOR) {
             context.drawText(textRenderer, this.author, 30, 18, -16777216, false);
         }
-
-        if (NowPlaying.config.SHOW_SOUNDTRACK_NAME) {
-            // max length 23 chars
+        if (NowPlaying.config.SHOW_SOUNDTRACK) {
             context.drawText(textRenderer, this.soundtrack, 30, 29, -16777216, false);
         }
 
         return (double) (startTime - this.startTime) >= 5000.0 * manager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
     }
 
-    public void setContent(Text title, Text author, Text soundtrack, AlbumCover albumCover) {
-        LOGGER.info("setContent: {} by {} ({})", title.getString(), author.getString(), soundtrack.getString());
+    public void setContent(Text title, Text author, Text soundtrack, AlbumCover type) {
+        LOGGER.debug("setContent: {} by {} ({})", title.getString(), author.getString(), soundtrack.getString());
         this.title = title;
         this.author = author;
         this.soundtrack = soundtrack;
-        this.albumCover = albumCover;
+        this.albumCover = type;
         this.justUpdated = true;
     }
 
     @Override
+    public Type getType() {
+        return this.type;
+    }
+
+    @Override
+    public int getRequiredSpaceCount() {
+        return MathHelper.ceilDiv(this.getHeight(), NowPlaying.config.SHOW_SOUNDTRACK ? 44 : 32);
+    }
+
+    @Override
     public int getHeight() {
-        if (NowPlaying.config.SHOW_SOUNDTRACK_NAME) {
+        if (NowPlaying.config.SHOW_SOUNDTRACK) {
             return 44;
         }
         return 32;
     }
 
-
     public enum Type {
-        DEFAULT,
-        DISC,
+        DEFAULT;
+
+        Type() {
+        }
     }
 
     public enum AlbumCover {
-        CD(0, 0),
-        MODDED_CD(1, 0),
-        // Cover art
-        ALPHA(0, 1),
-        BETA(1, 1),
-        AXOLOTL(2, 1),
-        DRAGON_FISH(3, 1),
-        SHUNIJI(0, 2),
-        NETHER(1, 2),
-        CAVES(2, 2),
-        WILD(3, 2),
-        TRAILSANDTALES(0, 3);
+        VANILLA(new Identifier(NowPlaying.MOD_ID, "toast/vanilla")),
+        MODDED(new Identifier(NowPlaying.MOD_ID, "toast/modded")),
+        ALPHA(new Identifier(NowPlaying.MOD_ID, "toast/alpha")),
+        BETA(new Identifier(NowPlaying.MOD_ID, "toast/beta")),
+        AXOLOTL(new Identifier(NowPlaying.MOD_ID, "toast/axolotl")),
+        DRAGON_FISH(new Identifier(NowPlaying.MOD_ID, "toast/dragon_fish")),
+        SHUNIJI(new Identifier(NowPlaying.MOD_ID, "toast/shuniji")),
+        NETHER(new Identifier(NowPlaying.MOD_ID, "toast/nether")),
+        CAVES(new Identifier(NowPlaying.MOD_ID, "toast/caves")),
+        WILD(new Identifier(NowPlaying.MOD_ID, "toast/wild")),
+        TRAILSANDTALES(new Identifier(NowPlaying.MOD_ID, "toast/trailsandtales"));
 
-        private final int textureSlotY;
-        private final int textureSlotX;
+        private final Identifier texture;
 
-        AlbumCover(int textureSlotX, int textureSlotY) {
-            this.textureSlotX = textureSlotX;
-            this.textureSlotY = textureSlotY;
-        }
-
-        static public int getWidth() {
-            return 32;
-        }
-
-        static public int getHeight() {
-            return 32;
-        }
-
-        public int getTextureSlotX() {
-            return this.textureSlotX * 20;
-        }
-
-        public int getTextureSlotY() {
-            return this.textureSlotY * 20;
+        AlbumCover(Identifier texture) {
+            this.texture = texture;
         }
 
         public void drawIcon(DrawContext context, int x, int y) {
-            context.drawTexture(DISC_ICON, x, y, this.textureSlotX * 20, this.textureSlotY * 20, 20, 20);
+            RenderSystem.enableBlend();
+            context.drawGuiTexture(this.texture, x, y, 20, 20);
         }
     }
 }

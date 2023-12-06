@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class PlaySoundScreen extends Screen {
-    private static final Identifier BACKGROUND_TEXTURE = new Identifier("nowplaying/background");
+    private static final Identifier BACKGROUND_TEXTURE = new Identifier(NowPlaying.MOD_ID, "play_sound/background");
     private static final Identifier SEARCH_ICON_TEXTURE = new Identifier("icon/search");
     public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
 
@@ -133,9 +133,7 @@ public class PlaySoundScreen extends Screen {
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
         int i = this.getSearchBoxX() + 3;
         super.renderBackground(context, mouseX, mouseY, delta);
-
-        // TODO: change to the new gui texture system
-        context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16, 8, 236, 34, 1, 1);
+        context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 238, this.getScreenHeight() + 16);
         context.drawGuiTexture(SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
     }
 

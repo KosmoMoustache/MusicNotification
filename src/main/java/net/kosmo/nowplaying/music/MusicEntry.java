@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class MusicEntry {
     public final String key;
     public final Identifier identifier;
-    public final @Nullable String title;
+    public final String title;
     public final @Nullable String author;
     public final @Nullable String soundtrack;
     public final NowPlayingToast.AlbumCover albumCover;
@@ -18,15 +18,15 @@ public class MusicEntry {
     public MusicEntry(String key, JsonObject json) {
         this(
                 key,
-                new Identifier(JsonHelper.getString(json, "identifier", "nowplaying:missing")),
+                new Identifier(JsonHelper.getString(json, "identifier")),
                 JsonHelper.getString(json, "title"),
-                JsonHelper.getString(json, "author", null),
-                JsonHelper.getString(json, "soundtrack", null),
+                JsonHelper.getString(json, "author", ""),
+                JsonHelper.getString(json, "soundtrack", ""),
                 JsonHelper.getBoolean(json, "isRandom", false)
         );
     }
 
-    public MusicEntry(String key, Identifier identifier, @Nullable String title, @Nullable String author, @Nullable String soundtrack, boolean isRandom) {
+    public MusicEntry(String key, Identifier identifier, String title, @Nullable String author, @Nullable String soundtrack, boolean isRandom) {
         this.key = key;
         this.identifier = identifier;
         this.title = title;
@@ -38,7 +38,7 @@ public class MusicEntry {
 
     private NowPlayingToast.AlbumCover parseAlbumCover() {
         // TODO: Add key for album cover in json
-        if (this.soundtrack == null) return NowPlayingToast.AlbumCover.CD;
+        if (this.soundtrack == null) return NowPlayingToast.AlbumCover.VANILLA;
         if (this.soundtrack.contains("Alpha")) return NowPlayingToast.AlbumCover.ALPHA;
         if (this.soundtrack.contains("Beta")) return NowPlayingToast.AlbumCover.BETA;
         if (this.soundtrack.contains("Axolotl")) return NowPlayingToast.AlbumCover.AXOLOTL;
@@ -48,10 +48,10 @@ public class MusicEntry {
         if (this.soundtrack.contains("Wild")) return NowPlayingToast.AlbumCover.WILD;
         if (this.soundtrack.contains("Caves")) return NowPlayingToast.AlbumCover.CAVES;
         if (this.soundtrack.contains("Trails")) return NowPlayingToast.AlbumCover.TRAILSANDTALES;
-        return NowPlayingToast.AlbumCover.CD;
+        return NowPlayingToast.AlbumCover.VANILLA;
     }
 
     public String toString() {
-        return String.format("title: %s, author: %s, soundtrack: %s", title, author, soundtrack);
+        return String.format("title: %s, author: %s, soundtrack: %s, albumCover: %s", title, author, soundtrack, albumCover);
     }
 }

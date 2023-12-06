@@ -19,16 +19,8 @@ public class ResourceLoader {
      * Load music_list.json from resource pack
      */
     public static JsonObject loader(ResourceManager manager) {
-        Optional<Resource> resource1 = manager.getResource(new Identifier(MOD_ID, "musics.json"));
-        Optional<Resource> resource2 = manager.getResource(new Identifier(MOD_ID, "music_list.json"));
-        Resource resource = resource2.orElse(null);
-
-          if (resource1.isPresent() && resource2.isPresent()) {
-            NowPlaying.LOGGER.warn("Both musics.json and music_list.json are present in resourcepack: '{}', loading music_list.json", resource1.get().getResourcePackName());
-        } else if (resource1.isPresent()) {
-            resource = resource1.get();
-            NowPlaying.LOGGER.warn("musics.json is deprecated, please use music_list.json instead. '{}'", resource1.get().getResourcePackName());
-        }
+        Optional<Resource> resource1 = manager.getResource(new Identifier(MOD_ID, "music_list.json"));
+        Resource resource = resource1.orElse(null);
 
         if (resource != null) {
             try (BufferedReader reader = resource.getReader()) {

@@ -7,10 +7,10 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @Config(name = NowPlaying.MOD_ID)
 public class NowPlayingConfig implements ConfigData {
     public boolean ENABLE_MOD = true;
-    public boolean HIDE_AUTHOR = false;
-    public boolean SHOW_SOUNDTRACK_NAME = false;
+    public boolean SHOW_AUTHOR = true;
+    public boolean SHOW_SOUNDTRACK = false;
     public boolean SHOULD_SHOW_JUKEBOX = true;
-    public boolean SHOW_TITLE_SCREEN_BUTTON = false;
+    public boolean SHOW_TITLE_SCREEN_BUTTON = true;
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
