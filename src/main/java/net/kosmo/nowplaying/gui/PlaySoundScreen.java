@@ -7,7 +7,6 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -17,10 +16,11 @@ import net.minecraft.util.math.ColorHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 public class PlaySoundScreen extends Screen {
+    private static final Identifier BACKGROUND_TEXTURE = new Identifier("nowplaying/background");
     protected static final Identifier TEXTURE = new Identifier(NowPlaying.MOD_ID, "textures/gui/play_sound.png");
+    private static final Identifier SEARCH_ICON_TEXTURE = new Identifier("icon/search");
     public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
 
     private static final Text TITLE = Text.translatable("gui.nowplaying.playsound.title");
@@ -32,7 +32,6 @@ public class PlaySoundScreen extends Screen {
     private static final Text RESET_MUSIC_TRACKER = Text.translatable("gui.nowplaying.playsound.reset_music_tracker");
     private static final Text SEARCH_TEXT = Text.translatable("gui.nowplaying.playsound.search_hint").formatted(Formatting.ITALIC).formatted(Formatting.GRAY);
 
-    private final Screen parent;
     private Tab currentTab = Tab.HOME;
     private String currentSearch = "";
     SoundListWidget soundList;
@@ -45,7 +44,6 @@ public class PlaySoundScreen extends Screen {
 
     public PlaySoundScreen(Screen parent) {
         super(TITLE);
-        this.parent = parent;
     }
 
     private static List<MusicEntry> getEntries() {
@@ -65,15 +63,9 @@ public class PlaySoundScreen extends Screen {
     }
 
     @Override
-    public void tick() {
-        this.searchBox.tick();
-        super.tick();
-    }
-
-    @Override
     public void init() {
         if (this.initialized) {
-            this.soundList.updateSize(this.width, this.height, 88, this.getEntryListBottom());
+//            this.soundList.updateSize(this.width, this.height, 88, this.getEntryListBottom());
         } else {
             this.soundList = new SoundListWidget(this, this.client, this.width, this.height, 88, this.getEntryListBottom(), 36);
         }
@@ -139,18 +131,18 @@ public class PlaySoundScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext context) {
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
         int i = this.getSearchBoxX() + 3;
-        super.renderBackground(context);
-        context.drawNineSlicedTexture(TEXTURE, i, 64, 236, this.getScreenHeight() + 16, 8, 236, 34, 1, 1);
-        context.drawTexture(TEXTURE, i + 10, 76, 243, 1, 12, 12);
+        super.renderBackground(context, mouseX, mouseY, delta);
+
+        // TODO: change to the new gui texture system
+//        context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
+        context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16, 8, 236, 34, 1, 1);
+        context.drawTexture(BACKGROUND_TEXTURE, i + 10, 76, 243, 1, 12, 12);
     }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context);
-//        this.renderNowPlayingButton();
-
         context.drawTextWithShadow(this.textRenderer, this.currentTab.name(), this.getSearchBoxX() + 8, 35, -1);
 
         if (!this.soundList.isEmpty()) {

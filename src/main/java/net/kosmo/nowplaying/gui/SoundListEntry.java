@@ -5,6 +5,8 @@ import net.kosmo.nowplaying.music.MusicEntry;
 import net.kosmo.nowplaying.toast.NowPlayingToast;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ButtonTextures;
+import net.minecraft.client.gui.screen.multiplayer.SocialInteractionsPlayerListEntry;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -13,6 +15,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import org.joml.Quaternionf;
 
@@ -20,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
+    private static final ButtonTextures PLAY_BUTTON_TEXTURE = new ButtonTextures(new Identifier("nowplaying/play_button"), new Identifier("nowplaying/play_button_highlighted"));
+    private static final ButtonTextures STOP_BUTTON_TEXTURE = new ButtonTextures(new Identifier("nowplaying/play_button"), new Identifier("nowplaying/stop_button_highlighted"));
     public static final int GRAY_COLOR = ColorHelper.Argb.getArgb(255, 74, 74, 74);
     public static final int WHITE_COLOR = ColorHelper.Argb.getArgb(255, 255, 255, 255);
     public static final int DARK_LIGHT_GRAY_COLOR = ColorHelper.Argb.getArgb(155, 255, 255, 255);
@@ -29,25 +34,24 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
     private final TexturedButtonWidget playButton;
     private final TexturedButtonWidget stopButton;
     private final List<ClickableWidget> buttons;
-    private final SoundListWidget parent;
-    private int rotation;
 
     public SoundListEntry(MinecraftClient client, SoundListWidget parent, MusicEntry entry) {
         this.client = client;
-        this.parent = parent;
         this.entry = entry;
 
-        this.playButton = new TexturedButtonWidget(0, 0, 20, 20, 0, 38, 20, PlaySoundScreen.TEXTURE, 256, 256, button -> {
+        this.playButton = new TexturedButtonWidget(0, 0, 20, 20, PLAY_BUTTON_TEXTURE, button -> {
             this.onButtonClick();
-        }, Text.translatable("gui.nowplaying.playsound.play")) {
+        }, Text.translatable("gui.nowplaying.playsound.play_sound")) {
+
             @Override
             protected MutableText getNarrationMessage() {
                 return SoundListEntry.this.getNarrationMessage(super.getNarrationMessage());
             }
         };
-        this.stopButton = new TexturedButtonWidget(0, 0, 20, 20, 20, 38, 20, PlaySoundScreen.TEXTURE, 256, 256, button -> {
+
+        this.stopButton = new TexturedButtonWidget(0, 0, 20, 20, STOP_BUTTON_TEXTURE, button -> {
             this.onButtonClick();
-        }, Text.translatable("gui.nowplaying.playsound.stop"));
+        }, Text.translatable("gui.nowplaying.playsound.stop_sound"));
         this.buttons = new ArrayList<>();
         this.buttons.add(this.playButton);
     }

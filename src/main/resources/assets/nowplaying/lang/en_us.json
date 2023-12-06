@@ -1,7 +1,7 @@
 {
   "gui.nowplaying.playsound.now_playing": "%s by %s (%s) is now playing",
   "gui.nowplaying.playsound.now_playing_none": "-",
-  "gui.nowplaying.playsound.play": "Play",
+  "gui.nowplaying.playsound.play_sound": "Play",
   "gui.nowplaying.playsound.reset_music_tracker": "Random",
   "gui.nowplaying.playsound.search_hint": "Search...",
   "gui.nowplaying.playsound.stop_sound": "Stop",

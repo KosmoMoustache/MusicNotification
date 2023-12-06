@@ -20,7 +20,9 @@ import java.util.Optional;
 import static net.kosmo.nowplaying.NowPlaying.LOGGER;
 
 public class NowPlayingToast implements Toast {
-    public static final Identifier TEXTURE = new Identifier(NowPlaying.MOD_ID, "textures/gui/toasts.png");
+    public static final Identifier TEXTURE_NORMAL = new Identifier(NowPlaying.MOD_ID, "toasts/nowplaying");
+    public static final Identifier TEXTURE_EXTENDED = new Identifier(NowPlaying.MOD_ID, "toast/nowplaying_extended");
+    public static final Identifier DISC_ICON = new Identifier(NowPlaying.MOD_ID, "toast/discs");
     private static final Type DEFAULT = Type.DEFAULT;
     private final Type type;
     private AlbumCover albumCover;
@@ -92,7 +94,12 @@ public class NowPlayingToast implements Toast {
             this.startTime = startTime;
             this.justUpdated = false;
         }
-        context.drawTexture(TEXTURE, 0, 0, 0, NowPlaying.config.SHOW_SOUNDTRACK_NAME ? 32 : 0, this.getWidth(), this.getHeight());
+
+        if (NowPlaying.config.SHOW_SOUNDTRACK_NAME) {
+            context.drawTexture(TEXTURE_EXTENDED, 0, 0, 0, 0, this.getWidth(), this.getHeight());
+        } else {
+            context.drawTexture(TEXTURE_NORMAL, 0, 0, 0, 0, this.getWidth(), this.getHeight());
+        }
         context.getMatrices().push();
 
         // Make the icon rotate
@@ -179,7 +186,7 @@ public class NowPlayingToast implements Toast {
         }
 
         public int getTextureSlotX() {
-            return 176 + this.textureSlotX * 20;
+            return this.textureSlotX * 20;
         }
 
         public int getTextureSlotY() {
@@ -187,7 +194,7 @@ public class NowPlayingToast implements Toast {
         }
 
         public void drawIcon(DrawContext context, int x, int y) {
-            context.drawTexture(TEXTURE, x, y, 176 + this.textureSlotX * 20, this.textureSlotY * 20, 20, 20);
+            context.drawTexture(DISC_ICON, x, y, this.textureSlotX * 20, this.textureSlotY * 20, 20, 20);
         }
     }
 }

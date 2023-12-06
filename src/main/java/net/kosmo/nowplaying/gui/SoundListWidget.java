@@ -13,18 +13,14 @@ import java.util.List;
 import java.util.Locale;
 
 public class SoundListWidget extends ElementListWidget<SoundListEntry> {
-    private final PlaySoundScreen parent;
     private final List<SoundListEntry> sounds = Lists.newArrayList();
     @Nullable
     private String currentSearch;
 
 
     public SoundListWidget(PlaySoundScreen parent, MinecraftClient minecraftClient, int i, int j, int k, int l, int m) {
-        super(minecraftClient, i, j, k, l, m);
-
-        this.parent = parent;
+        super(minecraftClient, i, j, k, l);
         this.setRenderBackground(false);
-        this.setRenderHorizontalShadows(false);
     }
 
     public void update(List<MusicEntry> entries, double scrollAmount) {
