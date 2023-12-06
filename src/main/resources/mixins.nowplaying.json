@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "net.kosmo.nowplaying.mixin",
   "compatibilityLevel": "JAVA_17",
+  "refmap": "musicnotification-refmap.json",
   "client": [
     "IMixinMusicTracker",
     "MixinMinecraftClient",

@@ -1,7 +1,8 @@
-package net.kosmo.nowplaying.mixin;
+package net.kosmo.music.mixin;
 
+import net.kosmo.music.ClientMusic;
+import net.kosmo.music.toast.MusicToast;
 import net.kosmo.nowplaying.NowPlaying;
-import net.kosmo.nowplaying.toast.NowPlayingToast;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
 import org.spongepowered.asm.mixin.Final;
@@ -35,11 +36,12 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
 
     @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/Toast$Visibility;playSound(Lnet/minecraft/client/sound/SoundManager;)V"))
     public void playSound(Toast.Visibility visibility, net.minecraft.client.sound.SoundManager soundManager) {
+        if(NowPlaying.config.DISABLE_TOAST_SOUND == null) NowPlaying.config.DISABLE_TOAST_SOUND = ModConfig.DisableToastSound.MUTE_MOD;
         switch (NowPlaying.config.DISABLE_TOAST_SOUND) {
-            case DISABLE_ALL:
+            case MUTE_ALL:
                 break;
-            case DISABLE_THIS:
-                if (this.instance instanceof NowPlayingToast) {
+            case MUTE_MOD:
+                if (this.instance instanceof MusicToast) {
                     break;
                 }
             case VANILLA:

@@ -14,7 +14,7 @@ public class NowPlayingConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-    public DisableToastSound DISABLE_TOAST_SOUND = DisableToastSound.DISABLE_THIS;
+    public DisableToastSound DISABLE_TOAST_SOUND = DisableToastSound.MUTE_MOD;
     public boolean ROTATE_ALBUM_COVER = true;
 
     @Override
@@ -24,7 +24,7 @@ public class NowPlayingConfig implements ConfigData {
 
     public enum DisableToastSound {
         VANILLA(),
-        DISABLE_THIS(),
-        DISABLE_ALL(),
+        MUTE_MOD(),
+        MUTE_ALL(),
     }
 }

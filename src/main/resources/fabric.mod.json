@@ -14,7 +14,7 @@
   ],
   "contact": {
     "homepage": "https://mod.kosmo.ovh/",
-    "sources": "https://github.com/KosmoMoustache/NowPlaying"
+    "sources": "https://github.com/KosmoMoustache/MusicNotification"
   },
   "license": "LGPL-3.0-only",
   "icon": "assets/nowplaying/icon.png",
@@ -32,7 +32,7 @@
   ],
   "accessWidener": "nowplaying.accesswidener",
   "depends": {
-    "minecraft": "1.20.1",
+    "minecraft": "${minecraft_version}",
     "fabricloader": ">=0.14.11",
     "cloth-config": ">=11.1.106"
   }
