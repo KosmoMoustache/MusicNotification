@@ -78,12 +78,13 @@ public class PlaySoundScreen extends Screen {
             this.soundList = new SoundListWidget(this, this.client, this.width, this.height, 88, this.getEntryListBottom(), 36);
         }
 
-        Text NOW_PLAYING_TEXT = getNowPlayingText();
+//        Text NOW_PLAYING_TEXT = getNowPlayingText();
+        Text STOP_SOUND_TEXT = Text.translatable("gui.nowplaying.playsound.stop_sound");
 
         int i = this.soundList.getRowWidth() / 2;
         int j = this.soundList.getRowLeft();
         int k = this.soundList.getRowRight();
-        int l = this.textRenderer.getWidth(NOW_PLAYING_TEXT) + 40;
+        int l = this.textRenderer.getWidth(STOP_SOUND_TEXT) + 40;
         int l1 = this.textRenderer.getWidth(RESET_MUSIC_TRACKER) + 40;
         int m = 64 + this.getScreenHeight();
         int n = (this.width - l) / 2 + 3;
@@ -92,10 +93,14 @@ public class PlaySoundScreen extends Screen {
         this.homeTabButton = this.addDrawableChild(ButtonWidget.builder(HOME_TAB_TITLE, button -> this.setCurrentTab(Tab.HOME)).dimensions(j + 2, 45, i, 20).build());
 //        this.historyTabButton = this.addDrawableChild(ButtonWidget.builder(HISTORY_TAB_TITLE, button -> this.setCurrentTab(Tab.HISTORY)).dimensions(k - i + 2, 45, i, 20).build());
 
-        this.currentPlaying = this.addDrawableChild(ButtonWidget.builder(NOW_PLAYING_TEXT, button -> {
-            if (NowPlaying.tracker.getNowPlaying().isPlaying())
-                this.client.getSoundManager().stop(NowPlaying.tracker.getNowPlaying().getSound());
+//        this.currentPlaying = this.addDrawableChild(ButtonWidget.builder(NOW_PLAYING_TEXT, button -> {
+//            if (NowPlaying.tracker.getNowPlaying().isPlaying())
+//                this.client.getSoundManager().stop(NowPlaying.tracker.getNowPlaying().getSound());
+//        }).dimensions(n, m, l, 20).build());
+        this.currentPlaying = this.addDrawableChild(ButtonWidget.builder(STOP_SOUND_TEXT, button -> {
+            this.client.getSoundManager().stopAll();
         }).dimensions(n, m, l, 20).build());
+
         this.addDrawableChild(ButtonWidget.builder(RESET_MUSIC_TRACKER, button -> {
             this.client.getSoundManager().stopAll();
             ((IMixinMusicTracker) this.client.getMusicTracker()).setTimeUntilNextSong(0);
@@ -144,7 +149,7 @@ public class PlaySoundScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         this.renderBackground(context);
-        this.renderNowPlayingButton();
+//        this.renderNowPlayingButton();
 
         context.drawTextWithShadow(this.textRenderer, this.currentTab.name(), this.getSearchBoxX() + 8, 35, -1);
 
@@ -182,32 +187,33 @@ public class PlaySoundScreen extends Screen {
         }
     }
 
-    public void renderNowPlayingButton() {
-        int l = this.textRenderer.getWidth(getNowPlayingText()) + 40;
-        int m = 64 + this.getScreenHeight();
-        int n = (this.width - l) / 2 + 3;
-
-        if (NowPlaying.tracker.getNowPlaying().isPlaying()) {
-            this.currentPlaying.setMessage(getNowPlayingText());
-        } else {
-            this.currentPlaying.setMessage(Text.translatable("gui.nowplaying.playsound.now_playing_none"));
-        }
-        this.currentPlaying.setWidth(this.textRenderer.getWidth(this.currentPlaying.getMessage()) + 40);
-        this.currentPlaying.setPosition(n, m);
-
-    }
+//    public void renderNowPlayingButton() {
+//        int l = this.textRenderer.getWidth(getNowPlayingText()) + 40;
+//        int m = 64 + this.getScreenHeight();
+//        int n = (this.width - l) / 2 + 3;
+//
+//        if (NowPlaying.tracker.getNowPlaying().isPlaying()) {
+//            this.currentPlaying.setMessage(getNowPlayingText());
+//        } else {
+//            this.currentPlaying.setMessage(Text.translatable("gui.nowplaying.playsound.now_playing_none"));
+//        }
+//        this.currentPlaying.setWidth(this.textRenderer.getWidth(this.currentPlaying.getMessage()) + 40);
+//        this.currentPlaying.setPosition(n, m);
+//    }
 
     // TODO store in class variable
-    public Text getNowPlayingText() {
-        SoundInstance sound = NowPlaying.tracker.getNowPlaying().getSound();
-        Optional<MusicEntry> entry = Optional.empty();
-        if (sound != null) {
-            entry = NowPlaying.musicManager.getByKey(NowPlaying.getLastSegmentOfPath(sound.getId()));
-        }
-        return entry.isPresent() && NowPlaying.tracker.getNowPlaying().isPlaying() ?
-                Text.translatable("gui.nowplaying.playsound.now_playing", entry.get().title, entry.get().author, entry.get().soundtrack) :
-                Text.translatable("gui.nowplaying.playsound.now_playing_none");
-    }
+//    public Text getNowPlayingText() {
+//        SoundInstance sound = NowPlaying.tracker.getNowPlaying().getSound();
+//        Optional<MusicEntry> entry = Optional.empty();
+//        if (sound != null) {
+//            entry = NowPlaying.musicManager.getByKey(NowPlaying.getLastSegmentOfPath(sound.getId()));
+//        }
+//        NowPlaying.LOGGER.info("{} {}", sound, entry);
+//        if (entry.isPresent()) {
+//            return Text.translatable("gui.nowplaying.playsound.now_playing", entry.get().title, entry.get().author, entry.get().soundtrack);
+//        }
+//        return Text.translatable("gui.nowplaying.playsound.now_playing_none");
+//    }
 
     @Override
     public boolean shouldPause() {

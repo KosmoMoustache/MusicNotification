@@ -22,5 +22,5 @@
   "text.autoconfig.nowplaying.option.SHOW_SOUNDTRACK_NAME": "Afficher le nom de la soundtrack",
   "text.autoconfig.nowplaying.option.SHOW_TITLE_SCREEN_BUTTON": "Affiche le bouton 'Now Playing' sur l'écran titre",
   "text.autoconfig.nowplaying.title": "Now Playing - Config",
-  "gui.nowplaying.playsound.stop": "Stop"
+  "gui.nowplaying.playsound.stop_sound": "Stop"
 }
