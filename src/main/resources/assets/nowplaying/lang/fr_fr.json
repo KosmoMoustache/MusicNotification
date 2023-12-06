@@ -4,6 +4,7 @@
   "gui.nowplaying.playsound.play": "Play",
   "gui.nowplaying.playsound.reset_music_tracker": "Aléatoire",
   "gui.nowplaying.playsound.search_hint": "Recherche",
+  "gui.nowplaying.playsound.stop_sound": "Stop",
   "gui.nowplaying.playsound.tab_history": "Historique",
   "gui.nowplaying.playsound.tab_home": "Accueil",
   "gui.nowplaying.playsound.title": "Now Playing",
@@ -21,6 +22,5 @@
   "text.autoconfig.nowplaying.option.SHOULD_SHOW_JUKEBOX": "Doit afficher une notification pour les jukebox",
   "text.autoconfig.nowplaying.option.SHOW_SOUNDTRACK_NAME": "Afficher le nom de la soundtrack",
   "text.autoconfig.nowplaying.option.SHOW_TITLE_SCREEN_BUTTON": "Affiche le bouton 'Now Playing' sur l'écran titre",
-  "text.autoconfig.nowplaying.title": "Now Playing - Config",
-  "gui.nowplaying.playsound.stop_sound": "Stop"
+  "text.autoconfig.nowplaying.title": "Now Playing - Config"
 }
