@@ -66,7 +66,11 @@ public class SoundListEntry extends ElementListWidget.Entry<SoundListEntry> {
         int fontHeight = this.client.textRenderer.fontHeight;
         l = y + (entryHeight - (fontHeight + fontHeight)) / 2;
 
-        context.drawText(this.client.textRenderer, String.format("%s - %s", this.entry.title, this.entry.author), k, l, WHITE_COLOR, false);
+        if (this.entry.author != null) {
+            context.drawText(this.client.textRenderer, String.format("%s - %s", this.entry.title, this.entry.author), k, l, WHITE_COLOR, false);
+        } else {
+            context.drawText(this.client.textRenderer, String.format("%s", this.entry.title), k, l, WHITE_COLOR, false);
+        }
         context.drawText(this.client.textRenderer, this.entry.soundtrack, k, l + 12, DARK_LIGHT_GRAY_COLOR, false);
 
         this.stopButton.setPosition(x + (entryWidth - this.stopButton.getWidth() - 4) - 10 - 4, y + (entryHeight - this.stopButton.getHeight()) / 2);
