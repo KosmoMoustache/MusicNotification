@@ -52,6 +52,6 @@ jobs:
             ${{env.MINECRAFT_VERSION}}
           loaders: fabric
           name: "v${{env.RELEASE_VERSION}}+${{env.MINECRAFT_VERSION}}"
-          version-type: release
+          version-type: beta
           changelog-file: CHANGELOG.md
           files: build/libs/!(*-@(dev|sources|javadoc)).jar
