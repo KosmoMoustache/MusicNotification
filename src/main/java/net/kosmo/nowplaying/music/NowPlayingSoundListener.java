@@ -48,7 +48,7 @@ public class NowPlayingSoundListener implements SoundInstanceListener {
     @Override
     public void onSoundPlayed(SoundInstance sound, WeightedSoundSet soundSet) {
         if (sound.getCategory() == SoundCategory.MUSIC && NowPlaying.shouldShowToast(NowPlayingToast.Type.DEFAULT)) {
-            NowPlaying.tracker.getHistory().add(sound);
+//            NowPlaying.tracker.getHistory().add(sound);
             NowPlaying.LOGGER.info("Now playing: {}", sound.getSound().getIdentifier());
             NowPlayingToast.show(sound, NowPlayingToast.Type.DEFAULT);
         }
