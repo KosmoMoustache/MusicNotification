@@ -2,11 +2,13 @@ package net.kosmo.nowplaying.mixin;
 
 import net.kosmo.nowplaying.NowPlaying;
 import net.kosmo.nowplaying.toast.NowPlayingToast;
+import net.minecraft.client.sound.SoundManager;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -34,14 +36,16 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
     }
 
     @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/Toast$Visibility;playSound(Lnet/minecraft/client/sound/SoundManager;)V"))
-    public void playSound(Toast.Visibility visibility, net.minecraft.client.sound.SoundManager soundManager) {
-        switch (NowPlaying.config.DISABLE_TOAST_SOUND) {
-            case MUTE_ALL:
-                break;
-            case MUTE_MOD:
-                if (this.instance instanceof NowPlayingToast) break;
-            case VANILLA:
-                visibility.playSound(soundManager);
-        }
+    public void playSound(Toast.Visibility visibility, SoundManager soundManager) {
+        // TODO: uncomment when ModMenu and cloth config are updated
+        // Make game crash when hot swapping
+//        switch (NowPlaying.config.DISABLE_TOAST_SOUND) {
+//            case MUTE_ALL:
+//                break;
+//            case MUTE_MOD:
+//                if (this.instance instanceof NowPlayingToast) break;
+//            case VANILLA:
+//                visibility.playSound(soundManager);
+//        }
     }
 }
