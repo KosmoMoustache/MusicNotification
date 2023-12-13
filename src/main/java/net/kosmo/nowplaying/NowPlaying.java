@@ -61,7 +61,7 @@ public class NowPlaying implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
-                client.setScreen(new PlaySoundScreen(client.currentScreen));
+                client.setScreen(new PlaySoundScreen());
             }
         });
     }
