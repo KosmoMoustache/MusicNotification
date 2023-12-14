@@ -32,7 +32,8 @@
   ],
   "accessWidener": "clientmusic.accesswidener",
   "depends": {
-    "minecraft": "1.20.1",
-    "fabricloader": ">=0.14.11"
+    "minecraft": "${minecraft_version}",
+    "fabricloader": ">=0.14.11",
+    "cloth-config": ">=${cloth_config_version}"
   }
 }

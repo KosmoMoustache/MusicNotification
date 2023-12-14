@@ -1,337 +1,559 @@
 {
-  "calm1": {
+  "minecraft": {
     "title": "Minecraft",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 8"
+    "soundtrack": "Volume Alpha No. 8",
+    "identifier": "nowplaying:music.minecraft"
   },
-  "calm2": {
+  "clark": {
     "title": "Clark",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 14"
+    "soundtrack": "Volume Alpha No. 14",
+    "identifier": "nowplaying:music.clark"
   },
-  "calm3": {
+  "sweden": {
     "title": "Sweden",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 18"
+    "soundtrack": "Volume Alpha No. 18",
+    "identifier": "nowplaying:music.sweden"
   },
-  "creative1": {
+  "biome_fest": {
     "title": "Biome Fest",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 8"
+    "soundtrack": "Volume Beta No. 8",
+    "identifier": "nowplaying:music.biome_fest"
   },
-  "creative2": {
+  "blind_spots": {
     "title": "Blind Spots",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 4"
+    "soundtrack": "Volume Beta No. 4",
+    "identifier": "nowplaying:music.blind_spots"
   },
-  "creative3": {
+  "haunt_muskie": {
     "title": "Haunt Muskie",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 10"
+    "soundtrack": "Volume Beta No. 10",
+    "identifier": "nowplaying:music.haunt_muskie"
   },
-  "creative4": {
+  "aria_math": {
     "title": "Aria Math",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 13"
+    "soundtrack": "Volume Beta No. 13",
+    "identifier": "nowplaying:music.aria_math"
   },
-  "creative5": {
+  "dreiton": {
     "title": "Dreiton",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 18"
+    "soundtrack": "Volume Beta No. 18",
+    "identifier": "nowplaying:music.dreiton"
   },
-  "creative6": {
+  "taswell": {
     "title": "Taswell",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 16"
+    "soundtrack": "Volume Beta No. 16",
+    "identifier": "nowplaying:music.taswell"
   },
-  "hal1": {
+  "subwoofer_lullaby": {
     "title": "Subwoofer Lullaby",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 3"
+    "soundtrack": "Volume Alpha No. 3",
+    "identifier": "nowplaying:subwoofer_lullaby"
   },
-  "hal2": {
+  "living_mice": {
     "title": "Living Mice",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 5"
+    "soundtrack": "Volume Alpha No. 5",
+    "identifier": "nowplaying:music.living_mice"
   },
-  "hal3": {
+  "haggstrom": {
     "title": "Haggstrom",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 7"
+    "soundtrack": "Volume Alpha No. 7",
+    "identifier": "nowplaying:music.haggstrom"
   },
-  "hal4": {
+  "danny": {
     "title": "Danny",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 21"
+    "soundtrack": "Volume Alpha No. 21",
+    "identifier": "nowplaying:music.danny"
   },
-  "nuance1": {
+  "key": {
     "title": "Key",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 1"
+    "soundtrack": "Volume Alpha No. 1",
+    "identifier": "nowplaying:music.key"
   },
-  "nuance2": {
+  "oxygene": {
     "title": "Oxygène",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 9"
+    "soundtrack": "Volume Alpha No. 9",
+    "identifier": "nowplaying:music.oxygene"
   },
-  "piano1": {
+  "dry_hands": {
     "title": "Dry Hands",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 12"
+    "soundtrack": "Volume Alpha No. 12",
+    "identifier": "nowplaying:music.dru_hands"
   },
-  "piano2": {
+  "wet_hands": {
     "title": "Wet Hands",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 13"
+    "soundtrack": "Volume Alpha No. 13",
+    "identifier": "nowplaying:music.wet_hands"
   },
-  "piano3": {
+  "mice_on_venus": {
     "title": "Mice on Venus",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 11"
+    "soundtrack": "Volume Alpha No. 11",
+    "identifier": "nowplaying:music.mice_on_venus"
   },
   "aerie": {
     "title": "Aerie",
     "author": "Lena Raine",
-    "soundtrack": "The Wild Update No.2"
+    "soundtrack": "The Wild Update No.2",
+    "identifier": "nowplaying:music.aerie"
   },
   "ancestry": {
     "title": "Ancestry",
     "author": "Lena Raine",
-    "soundtrack": "The Wild Update No.3"
+    "soundtrack": "The Wild Update No.3",
+    "identifier": "nowplaying:music.ancestry"
   },
   "an_ordinary_day": {
     "title": "An Ordinary Day",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 10"
+    "soundtrack": "Caves & Cliffs No. 10",
+    "identifier": "nowplaying:music.an_ordinary_day"
   },
   "comforting_memories": {
     "title": "Comforting Memories",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 9"
+    "soundtrack": "Caves & Cliffs No. 9",
+    "identifier": "minecraft:music_disc.comforting_memories"
   },
   "firebugs": {
     "title": "Firebugs",
     "author": "Lena Raine",
-    "soundtrack": "The Wild Update No. 1"
+    "soundtrack": "The Wild Update No. 1",
+    "identifier": "nowplaying:music.firebugs"
   },
   "floating_dream": {
     "title": "Floating Dream",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 8"
+    "soundtrack": "Caves & Cliffs No. 8",
+    "identifier": "nowplaying:music.floating_dream"
   },
   "infinite_amethyst": {
     "title": "Infinite Amethyst",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 5"
+    "soundtrack": "Caves & Cliffs No. 5",
+    "identifier": "nowplaying:music.infinite_amethyst"
   },
   "labyrinthine": {
     "title": "Labyrinthine",
     "author": "Lena Raine",
-    "soundtrack": "The Wild Update No. 3"
+    "soundtrack": "The Wild Update No. 3",
+    "identifier": "nowplaying:music.labyrinthine"
   },
   "left_to_bloom": {
     "title": "Left to Bloom",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 2"
+    "soundtrack": "Caves & Cliffs No. 2",
+    "identifier": "nowplaying:music.left_to_bloom"
   },
   "one_more_day": {
     "title": "One More Day",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 6"
+    "soundtrack": "Caves & Cliffs No. 6",
+    "identifier": "nowplaying:music.one_more_day"
   },
   "stand_tall": {
     "title": "Stand Tall",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 8"
+    "soundtrack": "Caves & Cliffs No. 8",
+    "identifier": "nowplaying:music.stand_tall"
   },
   "wending": {
     "title": "Wending",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 4"
+    "soundtrack": "Caves & Cliffs No. 4",
+    "identifier": "nowplaying:music.wending"
   },
   "axolotl": {
     "title": "Axolotl",
     "author": "C418",
-    "soundtrack": "Axolotl"
+    "soundtrack": "Axolotl",
+    "identifier": "nowplaying:music.axolotl"
   },
   "dragon_fish": {
     "title": "Dragon Fish",
     "author": "C418",
-    "soundtrack": "Dragon Fish"
+    "soundtrack": "Dragon Fish",
+    "identifier": "nowplaying:music.dragon_fish"
   },
   "shuniji": {
     "title": "Shuniji",
     "author": "C418",
-    "soundtrack": "Shuniji"
+    "soundtrack": "Shuniji",
+    "identifier": "nowplaying:music.shuniji"
   },
-  "nether1": {
+  "concret_halls": {
     "title": "Concrete Halls",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 7"
+    "soundtrack": "Volume Beta No. 7",
+    "identifier": "nowplaying:music.concrete_halls"
   },
-  "nether2": {
+  "dead_voxel": {
     "title": "Dead Voxel",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 3"
+    "soundtrack": "Volume Beta No. 3",
+    "identifier": "nowplaying:music.dead_voxel"
   },
-  "nether3": {
+  "warmth": {
     "title": "Warmth",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 11"
+    "soundtrack": "Volume Beta No. 11",
+    "identifier": "nowplaying:music.warmth"
   },
-  "nether4": {
+  "ballad_of_the_cats": {
     "title": "Ballad of the Cats",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 15"
+    "soundtrack": "Volume Beta No. 15",
+    "identifier": "nowplaying:music.ballad_of_the_cats"
   },
   "chrysopoeia": {
     "title": "Chrysopoeia",
     "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 1"
+    "soundtrack": "Nether Update No. 1",
+    "identifier": "nowplaying:music.chrysopoeia"
   },
   "rubedo": {
     "title": "Rubedo",
     "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 2"
+    "soundtrack": "Nether Update No. 2",
+    "identifier": "nowplaying:music.rubedo"
   },
   "so_below": {
     "title": "So Below",
     "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 3"
+    "soundtrack": "Nether Update No. 3",
+    "identifier": "nowplaying:music.so_below"
   },
   "boss": {
     "title": "Boss",
     "author": "C148",
-    "soundtrack": ""
+    "soundtrack": "",
+    "identifier": "nowplaying:music.boss"
   },
   "end": {
     "title": "The End",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 19"
+    "soundtrack": "Volume Beta No. 19",
+    "identifier": "nowplaying:music..end"
   },
-  "menu1": {
+  "mutation": {
     "title": "Mutation",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 9"
+    "soundtrack": "Volume Beta No. 9",
+    "identifier": "nowplaying:music.mutation"
   },
-  "menu2": {
+  "moog_city_2": {
     "title": "Moog City 2",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 6"
+    "soundtrack": "Volume Beta No. 6",
+    "identifier": "nowplaying:music.moog_city_2"
   },
-  "menu3": {
+  "beginning_2": {
     "title": "Beginning 2",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 17"
+    "soundtrack": "Volume Beta No. 17",
+    "identifier": "nowplaying:music.beginning_2"
   },
-  "menu4": {
+  "floating_trees": {
     "title": "Floating Trees",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 12"
+    "soundtrack": "Volume Beta No. 12",
+    "identifier": "nowplaying:music.floating_trees"
   },
-  "credits": {
+  "alpha": {
     "title": "Alpha",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 2"
+    "soundtrack": "Volume Beta No. 2",
+    "identifier": "nowplaying:music.credits"
   },
   "13": {
     "title": "Thirteen",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 16"
+    "soundtrack": "Volume Alpha No. 16",
+    "identifier": "minecraft:music_disc.13"
   },
   "cat": {
     "title": "Cat",
     "author": "C418",
-    "soundtrack": "Volume Alpha No. 19"
+    "soundtrack": "Volume Alpha No. 19",
+    "identifier": "minecraft:music_disc.cat"
   },
   "blocks": {
     "title": "Blocks",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 28"
+    "soundtrack": "Volume Beta No. 28",
+    "identifier": "minecraft:music_disc.blocks"
   },
   "chirp": {
     "title": "Chirp",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 20"
+    "soundtrack": "Volume Beta No. 20",
+    "identifier": "minecraft:music_disc.chirp"
   },
   "far": {
     "title": "Far",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 29"
+    "soundtrack": "Volume Beta No. 29",
+    "identifier": "minecraft:music_disc.far"
   },
   "mall": {
     "title": "Mall",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 27"
+    "soundtrack": "Volume Beta No. 27",
+    "identifier": "minecraft:music_disc.mall"
   },
   "mellohi": {
     "title": "Mellohi",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 22"
+    "soundtrack": "Volume Beta No. 22",
+    "identifier": "minecraft:music_disc.mellohi"
   },
   "stal": {
     "title": "Stal",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 23"
+    "soundtrack": "Volume Beta No. 23",
+    "identifier": "minecraft:music_disc.stal"
   },
   "strad": {
     "title": "Strad",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 24"
+    "soundtrack": "Volume Beta No. 24",
+    "identifier": "minecraft:music_disc.strad"
   },
   "ward": {
     "title": "Ward",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 26"
+    "soundtrack": "Volume Beta No. 26",
+    "identifier": "minecraft:music.ward"
   },
   "11": {
     "title": "11",
     "author": "C418",
-    "soundtrack": "null"
+    "soundtrack": "",
+    "identifier": "minecraft:music_disc.11"
   },
   "wait": {
     "title": "Wait",
     "author": "C418",
-    "soundtrack": "Volume Beta No. 21"
+    "soundtrack": "Volume Beta No. 21",
+    "identifier": "minecraft:music.wait"
   },
   "otherside": {
     "title": "Otherside",
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 7"
+    "soundtrack": "Caves & Cliffs No. 7",
+    "identifier": "minecraft:music_disc.otherside"
   },
   "5": {
     "title": "Five",
     "author": "Samuel Åberg",
-    "soundtrack": "The Wild Update No.4"
+    "soundtrack": "The Wild Update No.4",
+    "identifier": "minecraft:music.game.5"
   },
   "pigstep": {
     "title": "Pigstep",
     "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 4"
+    "soundtrack": "Nether Update No. 4",
+    "identifier": "minecraft:music_disc.pigstep"
   },
   "echo_in_the_wind": {
     "title": "Echo in the Wind",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.1"
+    "soundtrack": "Trails & Tailes Update No.1",
+    "identifier": "nowplaying:music.game.echo_in_the_wind"
   },
   "a_familiar_room": {
     "title": "A Familiar Room",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.2"
+    "soundtrack": "Trails & Tailes Update No.2",
+    "identifier": "nowplaying:music.game.a_familiar_room"
   },
   "bromeliad": {
     "title": "Bromeliad",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.3"
+    "soundtrack": "Trails & Tailes Update No.3",
+    "identifier": "nowplaying:music.game.bromeliad"
   },
   "crescent_dunes": {
     "title": "Crescent Dunes",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.4"
+    "soundtrack": "Trails & Tailes Update No.4",
+    "identifier": "nowplaying:music.game.crescent_dunes"
   },
   "relic": {
     "title": "Relic",
     "author": "Aaron Cherof",
-    "soundtrack": "Trails & Tailes Update No.5"
+    "soundtrack": "Trails & Tailes Update No.5",
+    "identifier": "minecraft:music_disc.relic"
+  },
+  "music.end": {
+    "isRandom": true,
+    "title": "End",
+    "identifier": "minecraft:music.end"
+  },
+  "music.overworld.grove": {
+    "isRandom": true,
+    "title": "Grove",
+    "identifier": "minecraft:music.overworld.grove"
+  },
+  "music.overworld.forest": {
+    "isRandom": true,
+    "title": "Forest",
+    "identifier": "minecraft:music.overworld.forest"
+  },
+  "music.nether.crimson_forest": {
+    "isRandom": true,
+    "title": "Crimson Forest",
+    "identifier": "minecraft:music.nether.crimson_forest"
+  },
+  "music.nether.basalt_deltas": {
+    "isRandom": true,
+    "title": "Basalt Deltas",
+    "identifier": "minecraft:music.nether.basalt_deltas"
+  },
+  "music.overworld.old_growth_taiga": {
+    "isRandom": true,
+    "title": "Old Growth Taiga",
+    "identifier": "minecraft:music.overworld.old_growth_taiga"
+  },
+  "music.overworld.dripstone_caves": {
+    "isRandom": true,
+    "title": "Dripsone Caves",
+    "identifier": "minecraft:music.overworld.dripstone_caves"
+  },
+  "music.overworld.lush_caves": {
+    "isRandom": true,
+    "title": "Lush Caves",
+    "identifier": "minecraft:music.overworld.lush_caves"
+  },
+  "music.overworld.jagged_peaks": {
+    "isRandom": true,
+    "title": "Jagged Peaks",
+    "identifier": "minecraft:music.overworld.jagged_peaks"
+  },
+  "music.overworld.snowy_slopes": {
+    "isRandom": true,
+    "title": "Snowy Slopes",
+    "identifier": "minecraft:music.overworld.snowy_slopes"
+  },
+  "music.game": {
+    "isRandom": true,
+    "title": "Game",
+    "identifier": "minecraft:music.game"
+  },
+  "music.overworld.flower_forest": {
+    "isRandom": true,
+    "title": "Flower Forest",
+    "identifier": "minecraft:music.overworld.flower_forest"
+  },
+  "music.overworld.desert": {
+    "isRandom": true,
+    "title": "Desert",
+    "identifier": "minecraft:music.overworld.desert"
+  },
+  "music.overworld.deep_dark": {
+    "isRandom": true,
+    "title": "Deep Dark",
+    "identifier": "minecraft:music.overworld.deep_dark"
+  },
+  "music.nether.soul_sand_valley": {
+    "isRandom": true,
+    "title": "Soulsand Valley",
+    "identifier": "minecraft:music.nether.soul_sand_valley"
+  },
+  "music.overworld.jungle": {
+    "isRandom": true,
+    "title": "Jungle",
+    "identifier": "minecraft:music.overworld.jungle"
+  },
+  "music.overworld.frozen_peaks": {
+    "isRandom": true,
+    "title": "Frozen Peaks",
+    "identifier": "minecraft:music.overworld.frozen_peaks"
+  },
+  "music.overworld.meadow": {
+    "isRandom": true,
+    "title": "Meadow",
+    "identifier": "minecraft:music.overworld.meadow"
+  },
+  "music.menu": {
+    "isRandom": true,
+    "title": "Menu",
+    "identifier": "minecraft:music.menu"
+  },
+  "music.credits": {
+    "isRandom": true,
+    "title": "Credits",
+    "identifier": "minecraft:music.credits"
+  },
+  "music.nether.warped_forest": {
+    "isRandom": true,
+    "title": "Warped Forest",
+    "identifier": "minecraft:music.nether.warped_forest"
+  },
+  "music.under_water": {
+    "isRandom": true,
+    "title": "Under Water",
+    "identifier": "minecraft:music.under_water"
+  },
+  "music.overworld.sparse_jungle": {
+    "isRandom": true,
+    "title": "Sparse Jungle",
+    "identifier": "minecraft:music.overworld.sparse_jungle"
+  },
+  "music.overworld.badlands": {
+    "isRandom": true,
+    "title": "Badlands",
+    "identifier": "minecraft:music.overworld.badlands"
+  },
+  "music.overworld.swamp": {
+    "isRandom": true,
+    "title": "Swamp",
+    "identifier": "minecraft:music.overworld.swamp"
+  },
+  "music.overworld.cherry_grove": {
+    "isRandom": true,
+    "title": "Cherry Grove",
+    "identifier": "minecraft:music.overworld.cherry_grove"
+  },
+  "music.overworld.stony_peaks": {
+    "isRandom": true,
+    "title": "Stone Peaks",
+    "identifier": "minecraft:music.overworld.stony_peaks"
+  },
+  "music.nether.nether_wastes": {
+    "isRandom": true,
+    "title": "Nether Wastes",
+    "identifier": "minecraft:music.nether.nether_wastes"
+  },
+  "music.dragon": {
+    "isRandom": true,
+    "title": "Dragon Fight",
+    "identifier": "minecraft:music.dragon"
+  },
+  "music.creative": {
+    "isRandom": true,
+    "title": "Crative",
+    "identifier": "minecraft:music.creative"
+  },
+  "music.overworld.bamboo_jungle": {
+    "isRandom": true,
+    "title": "Bamboo Jungle",
+    "identifier": "minecraft:music.overworld.bamboo_jungle"
   }
 }

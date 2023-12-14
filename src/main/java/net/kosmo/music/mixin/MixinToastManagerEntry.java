@@ -1,6 +1,7 @@
 package net.kosmo.music.mixin;
 
 import net.kosmo.music.ClientMusic;
+import net.kosmo.music.ModConfig;
 import net.kosmo.music.toast.MusicToast;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
@@ -37,10 +38,11 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
 
     @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/Toast$Visibility;playSound(Lnet/minecraft/client/sound/SoundManager;)V"))
     public void playSound(Toast.Visibility visibility, net.minecraft.client.sound.SoundManager soundManager) {
+        if(ClientMusic.config.DISABLE_TOAST_SOUND == null) ClientMusic.config.DISABLE_TOAST_SOUND = ModConfig.DisableToastSound.MUTE_MOD;
         switch (ClientMusic.config.DISABLE_TOAST_SOUND) {
-            case DISABLE_ALL:
+            case MUTE_ALL:
                 break;
-            case DISABLE_THIS:
+            case MUTE_MOD:
                 if (this.instance instanceof MusicToast) {
                     break;
                 }
@@ -48,17 +50,4 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
                 visibility.playSound(soundManager);
         }
     }
-//    @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/Toast$Visibility;playSound(Lnet/minecraft/client/sound/SoundManager;)V"))
-//    public void playSound(SoundManager soundManager) {
-//        switch (ModMenuConfig.DISABLE_TOAST_SOUND.getValue()) {
-//            case DISABLE_ALL:
-//                break;
-//            case DISABLE_THIS:
-//                if (this.instance instanceof MusicToast) {
-//                    break;
-//                }
-//            case VANILLA:
-//                this.visibility.playSound(soundManager);
-//        }
-//    }
 }
