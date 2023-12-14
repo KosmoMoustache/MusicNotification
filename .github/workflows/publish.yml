@@ -1,40 +1,39 @@
-name: Publish on Curseforge & Modrinth
+name: Publish on Modrinth, Github & CurseForge
 
 on: [ workflow_dispatch ]
-
-env:
-  MINECRAFT_VERSION: 1.20.1
-  JAVA_VERSION: 17
-  RELEASE_NAME: MusicNotification
-  RELEASE_VERSION: 1.4
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  upload:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Environment Variables
-        run: env
-
       - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          submodules: true
+        uses: actions/checkout@v2
 
-      - name: Setup Java
-        uses: actions/setup-java@v2
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
         with:
           distribution: "temurin"
           java-version: 17
 
-      - name: Make Gradle Wrapper Executable
-        if: ${{ runner.os != 'Windows' }}
-        run: chmod +x ./gradlew
+      - name: Grand execute permission to gradlew
+        run: chmod +x gradlew
 
-      - name: Build
-        run: ./gradlew clean build
+      - name: build
+        run: ./gradlew build
+
+      - name: Set up Environment Variables
+        run: |
+          echo "MINECRAFT_VERSION="$(grep 'minecraft_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
+          echo "MOD_VERSION="$(grep 'mod_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
+
+      - name: Install changelog parser
+        uses: taiki-e/install-action@parse-changelog
+
+      - name: Parse changelog
+        run: parse-changelog CHANGELOG.md ${{ env.MOD_VERSION }} > changes.md
 
       - name: Publish (CurseForge/Modrinth)
         uses: Kir-Antipov/mc-publish@v3.3
@@ -46,13 +45,12 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
           github-token: ${{ secrets.P_GITHUB_TOKEN }}
-          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.RELEASE_VERSION }}
-          github-generate-changelog: true
+          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
 
           game-versions: |
-            ${minecraft_version}
+            ${{env.MINECRAFT_VERSION}}
           loaders: fabric
-          name: "v${{env.RELEASE_VERSION}}+${{MINECRAFT_VERSION}}"
+          name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
-          changelog-file: CHANGELOG.md
+          changelog-file: changes.md
           files: build/libs/!(*-@(dev|sources|javadoc)).jar
