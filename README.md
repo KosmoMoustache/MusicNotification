@@ -37,5 +37,9 @@ You can customize the music name, author and soundtrack by creating a file calle
 
 See [musics.json](https://github.com/KosmoMoustache/MusicNotification/blob/main/src/main/resources/assets/musicnotification/musics.json) for the default file.
 
+# Compatibility issues
+- Better Recipe Mod
+  - You will not be able to configure the toast sound mute setting
+
 # Contributor
 Discs icon are made by [YaCCBoy](https://github.com/YaCCBoy)
