@@ -21,6 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.5.1] - 2023-12-14
+
+### Fixed
+
+- Compatibility with mod that change toast sound (Better Recipe Book), if a similar mod is installed, you will not be able to configure the mute setting
+
 ## [1.5.0] - 2023-11-18
 
 ### Added
