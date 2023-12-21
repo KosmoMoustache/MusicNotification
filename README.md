@@ -1,9 +1,5 @@
 # Music Notification
 
-
-<img alt="bisecthosting parnet banner, get 25% off your first month with the code kosmo" src="https://www.bisecthosting.com/partners/custom-banners/99f4f2b2-b137-4382-b009-71e61b710ab5.webp">
-Use my code **kosmo** to get 25% off your first month and enjoy playing with your friends
-
 Add toast notification when music is played in game with the name, author and soundtrack of it.
 
 # 📷 In game screenshots
