@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Tracks "Comforting Memories", "Floating Dream", and "An Ordinary Day" were credited to Lena Raine instead of Kumi Tanioka (tanks @BeeTeeKay64)
+- Tracks "Comforting Memories", "Floating Dream", and "An Ordinary Day" were credited to Lena Raine instead of Kumi Tanioka (thanks @BeeTeeKay64)
 
 
 ## [1.5.1] - 2023-12-14
