@@ -78,15 +78,15 @@ public class ClientMusic implements ClientModInitializer {
         if (song != null) {
             MusicDiscItem musicDiscItem = MusicDiscItem.bySound(song);
             if (musicDiscItem != null) {
-                String namespace = musicDiscItem.getSound().getId().getNamespace();
-                Text text = musicDiscItem.getDescription();
-                String[] string = text.getString().split(" - ");
-                if (namespace.equals("minecraft")) { // use musics.json to get the author and soundtrack
-                    MusicManager.Entry entry = musicManager.getEntry(string[1].toLowerCase());
-                    // string[0] = title / string[1] = author | Now playing: Lena Raine - Pigstep
+                String[] disc_name = musicDiscItem.getSound().getId().toString().split("\\.");
+                MusicManager.Entry entry = musicManager.getEntry(disc_name[disc_name.length - 1].toLowerCase());
+                if (entry != null) {
                     MusicToast.show(MinecraftClient.getInstance().getToastManager(), entry);
                 } else {
-                    MusicToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(namespace), MusicToast.AlbumCover.MODDED_CD);
+                    LOGGER.info("Disc not found in musics.json, showing default generic information for {}", musicDiscItem.getSound().getId());
+                    String[] string = musicDiscItem.getDescription().getString().split(" - ");
+                    // string[0] = title / string[1] = author | Now playing: Lena Raine - Pigstep
+                    MusicToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(musicDiscItem.getSound().getId().getNamespace()), MusicToast.AlbumCover.MODDED_CD);
                 }
             }
             LOGGER.info("Playing music disc: {}", song.getId());
