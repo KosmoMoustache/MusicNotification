@@ -38,11 +38,11 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
 
     @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/Toast$Visibility;playSound(Lnet/minecraft/client/sound/SoundManager;)V"), require = 0)
     public void playSound(Toast.Visibility visibility, net.minecraft.client.sound.SoundManager soundManager) {
-        if(ClientMusic.config.DISABLE_TOAST_SOUND == null) ClientMusic.config.DISABLE_TOAST_SOUND = ModConfig.DisableToastSound.MUTE_MOD;
+        if(ClientMusic.config.DISABLE_TOAST_SOUND == null) ClientMusic.config.DISABLE_TOAST_SOUND = ModConfig.DisableToastSound.MUTE_SELF;
         switch (ClientMusic.config.DISABLE_TOAST_SOUND) {
             case MUTE_ALL:
                 break;
-            case MUTE_MOD:
+            case MUTE_SELF:
                 if (this.instance instanceof MusicToast) {
                     break;
                 }

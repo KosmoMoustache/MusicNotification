@@ -8,11 +8,11 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class ModConfig implements ConfigData {
     public boolean HIDE_AUTHOR = false;
     public boolean SHOW_SOUNDTRACK_NAME = false;
+    public boolean ROTATE_ALBUM_COVER = true;
 
     @ConfigEntry.Gui.Tooltip
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-    public DisableToastSound DISABLE_TOAST_SOUND = DisableToastSound.MUTE_MOD;
-    public boolean ROTATE_ALBUM_COVER = true;
+    public DisableToastSound DISABLE_TOAST_SOUND = DisableToastSound.MUTE_SELF;
 
     @Override
     public void validatePostLoad() throws ValidationException {
@@ -21,7 +21,7 @@ public class ModConfig implements ConfigData {
 
     public enum DisableToastSound {
         VANILLA(),
-        MUTE_MOD(),
+        MUTE_SELF(),
         MUTE_ALL(),
     }
 }
