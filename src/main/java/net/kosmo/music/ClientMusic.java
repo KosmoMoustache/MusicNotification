@@ -32,6 +32,7 @@ import java.util.Optional;
 public class ClientMusic implements ClientModInitializer {
     public static final String MOD_ID = "musicnotification";
     public static final Logger LOGGER = LoggerFactory.getLogger("MusicNotification");
+    public static final Identifier MUSICS_JSON_ID = new Identifier(MOD_ID, "musics.json");
 
     public static SoundManager soundManager;
     public static ResourceManager resourceManager;
@@ -48,12 +49,13 @@ public class ClientMusic implements ClientModInitializer {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             @Override
             public Identifier getFabricId() {
-                return new Identifier(MOD_ID, "musics.json");
+                return MUSICS_JSON_ID;
             }
 
             @Override
             public void reload(ResourceManager manager) {
-                musicManager.setMusicEntries(resourceLoader(manager));
+                musicManager.clear();
+                getAllResources();
             }
         });
 
@@ -67,7 +69,8 @@ public class ClientMusic implements ClientModInitializer {
         resourceManager = client.getResourceManager();
         soundManager = client.getSoundManager();
         soundManager.registerListener(SoundListener);
-        musicManager = new MusicManager(resourceLoader(resourceManager));
+        musicManager = new MusicManager();
+        getAllResources();
     }
 
 
@@ -101,25 +104,23 @@ public class ClientMusic implements ClientModInitializer {
     };
 
     /**
-     * Get the last segment of an Identifier path
+     * Get all resources from ressource packs
      */
-    public static String getLastSegmentOfPath(Identifier identifier) {
-        String[] path = identifier.getPath().split("/");
-        return path[path.length - 1];
+    public static void getAllResources() {
+        List<Resource> resources = resourceManager.getAllResources(MUSICS_JSON_ID);
+        for (Resource resource : resources) {
+            musicManager.addFromJson(parseJSONResource(resource, MUSICS_JSON_ID));
+        }
     }
 
     /**
-     * Load musics.json from resource pack
+     * Parse a JSON resource
      */
-    public static JsonObject resourceLoader(ResourceManager manager) {
-        Optional<Resource> resource = manager.getResource(new Identifier(MOD_ID, "musics.json"));
-        if (resource.isPresent()) {
-            Resource resource1 = resource.get();
-            try (BufferedReader reader = resource1.getReader()) {
-                return JsonHelper.deserialize(reader);
-            } catch (IOException e) {
-                ClientMusic.LOGGER.warn("Invalid musics.json in resourcepack: '{}'", resource1.getResourcePackName());
-            }
+    public static JsonObject parseJSONResource(Resource resource, Identifier identifier) {
+        try (BufferedReader reader = resource.getReader()) {
+            return JsonHelper.deserialize(reader);
+        } catch (IOException e) {
+            ClientMusic.LOGGER.warn("Invalid {} in resourcepack: '{}'", identifier, resource.getResourcePackName());
         }
         return new JsonObject();
     }
