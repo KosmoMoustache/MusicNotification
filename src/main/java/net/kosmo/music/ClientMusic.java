@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class ClientMusic implements ClientModInitializer {
@@ -95,7 +95,7 @@ public class ClientMusic implements ClientModInitializer {
 
     public static SoundInstanceListener SoundListener = (soundInstance, soundSet, range) -> {
         if (soundInstance.getCategory() == SoundCategory.MUSIC) {
-            MusicToast.show(soundInstance);
+            MusicToast.show(soundInstance.getSound());
         }
     };
 
@@ -119,5 +119,14 @@ public class ClientMusic implements ClientModInitializer {
             ClientMusic.LOGGER.warn("Invalid {} in resourcepack: '{}'", identifier, resource.getResourcePackName());
         }
         return new JsonObject();
+    }
+
+    /**
+     * Check if the toast should be shown
+     */
+    public static boolean canShowToast() {
+        if (MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MUSIC) == 0f) return false;
+        if (MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MASTER) == 0f) return false;
+        return true;
     }
 }
