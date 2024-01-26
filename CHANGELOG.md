@@ -21,6 +21,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.6.0] - 2024-01-27
+
+### Added
+
+- Allow mods/resource pack to provide their own musics.json #21
+- Album Cover are now retrieve from musics.json
+
+### Changed
+- Use the new sprite system
+- Renamed settings MUTE_MOD to MUTE_SELF
+
 ## [1.5.2] - 2024-01-10
 
 ### Fixed
