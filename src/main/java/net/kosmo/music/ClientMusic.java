@@ -62,7 +62,6 @@ public class ClientMusic implements ClientModInitializer {
         // Config
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-
     }
 
     public static void onClientInit() {
@@ -73,28 +72,25 @@ public class ClientMusic implements ClientModInitializer {
         getAllResources();
     }
 
-
     /**
-     * Used to music discs
+     * When music disc is played
      */
     public static void onDiscPlay(SoundEvent song) {
         if (song != null) {
             MusicDiscItem musicDiscItem = MusicDiscItem.bySound(song);
             if (musicDiscItem != null) {
-                String[] disc_name = musicDiscItem.getSound().getId().toString().split("\\.");
-                MusicManager.Entry entry = musicManager.getEntry(disc_name[disc_name.length - 1].toLowerCase());
+                MusicManager.Entry entry = musicManager.get(musicDiscItem.getSound().getId());
                 if (entry != null) {
                     MusicToast.show(MinecraftClient.getInstance().getToastManager(), entry);
                 } else {
-                    LOGGER.info("Disc not found in musics.json, showing default generic information for {}", musicDiscItem.getSound().getId());
+                    LOGGER.warn("Unknown {} music disc in musics.json", musicDiscItem.getSound().getId());
                     String[] string = musicDiscItem.getDescription().getString().split(" - ");
                     // string[0] = title / string[1] = author | Now playing: Lena Raine - Pigstep
-                    MusicToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(musicDiscItem.getSound().getId().getNamespace()), MusicToast.AlbumCover.MODDED_CD);
+                    MusicToast.show(MinecraftClient.getInstance().getToastManager(), Text.literal(string[1]), Text.literal(string[0]), Text.literal(musicDiscItem.getSound().getId().getNamespace()), AlbumCover.GENERIC);
                 }
             }
             LOGGER.info("Playing music disc: {}", song.getId());
         }
-
     }
 
     public static SoundInstanceListener SoundListener = (soundInstance, soundSet, range) -> {
