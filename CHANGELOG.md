@@ -21,6 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.6.1] - 2024-01-29
+
+### Fixed
+
+- Typo in path to Trails and tales album cover
+
+
 ## [1.6.0] - 2024-01-27
 
 ### Added
