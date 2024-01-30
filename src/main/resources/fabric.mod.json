@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "musicnotification",
-  "version": "${version}",
+  "version": "${mod_version}",
   "name": "Music Notification",
   "description": "Add toast notification when music is played in game with the name.",
   "authors": [
@@ -33,7 +33,7 @@
   "accessWidener": "clientmusic.accesswidener",
   "depends": {
     "minecraft": "${minecraft_version}",
-    "fabricloader": ">=0.14.11",
+    "fabricloader": ">=${fabricloader_version}",
     "cloth-config": ">=${cloth_config_version}"
   }
 }
