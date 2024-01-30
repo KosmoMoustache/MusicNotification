@@ -15,7 +15,7 @@ public class AlbumCover {
     public static final AlbumCover NETHER = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/nether"));
     public static final AlbumCover WILD = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/wild"));
     public static final AlbumCover CAVES = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/caves"));
-    public static final AlbumCover TRAILS_AND_TALES = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "tost/trails_and_tales"));
+    public static final AlbumCover TRAILS_AND_TALES = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/trails_and_tales"));
 
     public final Identifier textureId;
 
