@@ -59,7 +59,7 @@ processResources {
         expand "mod_version": project.mod_version,
                 "minecraft_version": project.minecraft_version,
                 "fabricloader_vesrion": project.loader_version,
-                "cloth_config_version": project.cloth_config_version,
+                "cloth_config_version": project.cloth_config_version
     }
 
 }
