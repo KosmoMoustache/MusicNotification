@@ -1,9 +1,7 @@
 {
   "text.autoconfig.musicnotification.title": "Music Notification - Config",
-  "text.autoconfig.musicnotification.option.hideAuthor": "Cacher le compositeur",
-  "text.autoconfig.musicnotification.option.showSoundtrackName": "Afficher le nom de la soundtrack",
-  "text.autoconfig.musicnotification.option.disableToastSound": "Gérer le son des toasts",
-  "text.autoconfig.musicnotification.option.disableToastSound.@Tooltip": "Supprime le son quand un toast apparaît et disparaît.\nENABLED_ALL = Vanilla\nDISABLED_MUSIC = Désactivé pour les toasts du mod\nDISABLED_ALL = Désactivé pour tout les toasts",
-  "modmenu.descriptionTranslation.musicnotification": "Ajoute une notification toast quand une musique est jouée, avec le nom, l'auteur, et la soundtrack."
-
+  "text.autoconfig.musicnotification.option.HIDE_AUTHOR": "Cacher le compositeur",
+  "text.autoconfig.musicnotification.option.SHOW_SOUNDTRACK_NAME": "Afficher la soundtrack",
+  "text.autoconfig.musicnotification.option.DISABLE_TOAST_SOUND": "Configurer le son des toasts",
+  "text.autoconfig.musicnotification.option.DISABLE_TOAST_SOUND.@Tooltip": "Mute le son que fait un toast lorsqu'il apparaît et disparaît.\nENABLED_ALL = Vanilla (tous les toast feront du son)\nMUTE_SELF = Mute les toasts de ce mod\nMUTE_ALL = Mute tout les toasts"
 }

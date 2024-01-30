@@ -1,312 +1,402 @@
 {
-  "calm1": {
-    "title": "Minecraft",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 8"
+  "minecraft:music/game/a_familiar_room": {
+    "author": "Aaron Cherof",
+    "cover": "trails_and_tales",
+    "soundtrack": "Trails & Tailes Update No.2",
+    "title": "A Familiar Room"
   },
-  "calm2": {
-    "title": "Clark",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 14"
+  "minecraft:music/game/an_ordinary_day": {
+    "author": "Kumi Tanioka",
+    "cover": "caves",
+    "soundtrack": "Caves & Cliffs No. 10",
+    "title": "An Ordinary Day"
   },
-  "calm3": {
-    "title": "Sweden",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 18"
-  },
-  "creative1": {
-    "title": "Biome Fest",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 8"
-  },
-  "creative2": {
-    "title": "Blind Spots",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 4"
-  },
-  "creative3": {
-    "title": "Haunt Muskie",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 10"
-  },
-  "creative4": {
-    "title": "Aria Math",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 13"
-  },
-  "creative5": {
-    "title": "Dreiton",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 18"
-  },
-  "creative6": {
-    "title": "Taswell",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 16"
-  },
-  "hal1": {
-    "title": "Subwoofer Lullaby",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 3"
-  },
-  "hal2": {
-    "title": "Living Mice",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 5"
-  },
-  "hal3": {
-    "title": "Haggstrom",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 7"
-  },
-  "hal4": {
-    "title": "Danny",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 21"
-  },
-  "nuance1": {
-    "title": "Key",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 1"
-  },
-  "nuance2": {
-    "title": "Oxygène",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 9"
-  },
-  "piano1": {
-    "title": "Dry Hands",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 12"
-  },
-  "piano2": {
-    "title": "Wet Hands",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 13"
-  },
-  "piano3": {
-    "title": "Mice on Venus",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 11"
-  },
-  "aerie": {
-    "title": "Aerie",
+  "minecraft:music/game/ancestry": {
     "author": "Lena Raine",
-    "soundtrack": "The Wild Update No.2"
+    "cover": "wild",
+    "soundtrack": "The Wild Update No.3",
+    "title": "Ancestry"
   },
-  "ancestry": {
-    "title": "Ancestry",
-    "author": "Lena Raine",
-    "soundtrack": "The Wild Update No.3"
+  "minecraft:music/game/bromeliad": {
+    "author": "Aaron Cherof",
+    "cover": "trails_and_tales",
+    "soundtrack": "Trails & Tailes Update No.3",
+    "title": "Bromeliad"
   },
-  "an_ordinary_day": {
-    "title": "An Ordinary Day",
-    "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 10"
-  },
-  "comforting_memories": {
-    "title": "Comforting Memories",
-    "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 9"
-  },
-  "firebugs": {
-    "title": "Firebugs",
-    "author": "Lena Raine",
-    "soundtrack": "The Wild Update No. 1"
-  },
-  "floating_dream": {
-    "title": "Floating Dream",
-    "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 8"
-  },
-  "infinite_amethyst": {
-    "title": "Infinite Amethyst",
-    "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 5"
-  },
-  "labyrinthine": {
-    "title": "Labyrinthine",
-    "author": "Lena Raine",
-    "soundtrack": "The Wild Update No. 3"
-  },
-  "left_to_bloom": {
-    "title": "Left to Bloom",
-    "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 2"
-  },
-  "one_more_day": {
-    "title": "One More Day",
-    "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 6"
-  },
-  "stand_tall": {
-    "title": "Stand Tall",
-    "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 8"
-  },
-  "wending": {
-    "title": "Wending",
-    "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 4"
-  },
-  "axolotl": {
-    "title": "Axolotl",
+  "minecraft:music/game/calm1": {
     "author": "C418",
-    "soundtrack": "Axolotl"
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 8",
+    "title": "Minecraft"
   },
-  "dragon_fish": {
-    "title": "Dragon Fish",
+  "minecraft:music/game/calm2": {
     "author": "C418",
-    "soundtrack": "Dragon Fish"
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 14",
+    "title": "Clark"
   },
-  "shuniji": {
-    "title": "Shuniji",
+  "minecraft:music/game/calm3": {
     "author": "C418",
-    "soundtrack": "Shuniji"
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 18",
+    "title": "Sweden"
   },
-  "nether1": {
-    "title": "Concrete Halls",
+  "minecraft:music/game/comforting_memories": {
+    "author": "Kumi Tanioka",
+    "cover": "caves",
+    "soundtrack": "Caves & Cliffs No. 9",
+    "title": "Comforting Memories"
+  },
+  "minecraft:music/game/creative/creative1": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 7"
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 8",
+    "title": "Biome Fest"
   },
-  "nether2": {
-    "title": "Dead Voxel",
+  "minecraft:music/game/creative/creative2": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 3"
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 4",
+    "title": "Blind Spots"
   },
-  "nether3": {
-    "title": "Warmth",
+  "minecraft:music/game/creative/creative3": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 11"
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 10",
+    "title": "Haunt Muskie"
   },
-  "nether4": {
-    "title": "Ballad of the Cats",
+  "minecraft:music/game/creative/creative4": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 15"
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 13",
+    "title": "Aria Math"
   },
-  "chrysopoeia": {
-    "title": "Chrysopoeia",
-    "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 1"
+  "minecraft:music/game/creative/creative5": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 18",
+    "title": "Dreiton"
   },
-  "rubedo": {
-    "title": "Rubedo",
-    "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 2"
+  "minecraft:music/game/creative/creative6": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 16",
+    "title": "Taswell"
   },
-  "so_below": {
-    "title": "So Below",
-    "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 3"
+  "minecraft:music/game/crescent_dunes": {
+    "author": "Aaron Cherof",
+    "cover": "trails_and_tales",
+    "soundtrack": "Trails & Tailes Update No.4",
+    "title": "Crescent Dunes"
   },
-  "boss": {
-    "title": "Boss",
+  "minecraft:music/game/echo_in_the_wind": {
+    "author": "Aaron Cherof",
+    "cover": "trails_and_tales",
+    "soundtrack": "Trails & Tailes Update No.1",
+    "title": "Echo in the Wind"
+  },
+  "minecraft:music/game/end/boss": {
     "author": "C148",
-    "soundtrack": ""
+    "soundtrack": "",
+    "title": "Boss"
   },
-  "end": {
-    "title": "The End",
+  "minecraft:music/game/end/credits": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 19"
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 2",
+    "title": "Alpha"
   },
-  "menu1": {
-    "title": "Mutation",
+  "minecraft:music/game/end/end": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 9"
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 19",
+    "title": "The End"
   },
-  "menu2": {
-    "title": "Moog City 2",
+  "minecraft:music/game/floating_dream": {
+    "author": "Kumi Tanioka",
+    "cover": "caves",
+    "soundtrack": "Caves & Cliffs No. 8",
+    "title": "Floating Dream"
+  },
+  "minecraft:music/game/hal1": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 6"
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 3",
+    "title": "Subwoofer Lullaby"
   },
-  "menu3": {
-    "title": "Beginning 2",
+  "minecraft:music/game/hal2": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 17"
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 5",
+    "title": "Living Mice"
   },
-  "menu4": {
-    "title": "Floating Trees",
+  "minecraft:music/game/hal3": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 12"
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 7",
+    "title": "Haggstrom"
   },
-  "credits": {
-    "title": "Alpha",
+  "minecraft:music/game/hal4": {
     "author": "C418",
-    "soundtrack": "Volume Beta No. 2"
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 21",
+    "title": "Danny"
   },
-  "13": {
-    "title": "Thirteen",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 16"
-  },
-  "cat": {
-    "title": "Cat",
-    "author": "C418",
-    "soundtrack": "Volume Alpha No. 19"
-  },
-  "blocks": {
-    "title": "Blocks",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 28"
-  },
-  "chirp": {
-    "title": "Chirp",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 20"
-  },
-  "far": {
-    "title": "Far",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 29"
-  },
-  "mall": {
-    "title": "Mall",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 27"
-  },
-  "mellohi": {
-    "title": "Mellohi",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 22"
-  },
-  "stal": {
-    "title": "Stal",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 23"
-  },
-  "strad": {
-    "title": "Strad",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 24"
-  },
-  "ward": {
-    "title": "Ward",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 26"
-  },
-  "11": {
-    "title": "11",
-    "author": "C418",
-    "soundtrack": "null"
-  },
-  "wait": {
-    "title": "Wait",
-    "author": "C418",
-    "soundtrack": "Volume Beta No. 21"
-  },
-  "otherside": {
-    "title": "Otherside",
+  "minecraft:music/game/infinite_amethyst": {
     "author": "Lena Raine",
-    "soundtrack": "Caves & Cliffs No. 7"
+    "cover": "caves",
+    "soundtrack": "Caves & Cliffs No. 5",
+    "title": "Infinite Amethyst"
   },
-  "5": {
-    "title": "Five",
+  "minecraft:music/game/left_to_bloom": {
+    "author": "Lena Raine",
+    "cover": "caves",
+    "soundtrack": "Caves & Cliffs No. 2",
+    "title": "Left to Bloom"
+  },
+  "minecraft:music/game/nether/crimson_forest/chrysopoeia": {
+    "author": "Lena Raine",
+    "cover": "nether",
+    "soundtrack": "Nether Update No. 1",
+    "title": "Chrysopoeia"
+  },
+  "minecraft:music/game/nether/nether1": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 7",
+    "title": "Concrete Halls"
+  },
+  "minecraft:music/game/nether/nether2": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 3",
+    "title": "Dead Voxel"
+  },
+  "minecraft:music/game/nether/nether3": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 11",
+    "title": "Warmth"
+  },
+  "minecraft:music/game/nether/nether4": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 15",
+    "title": "Ballad of the Cats"
+  },
+  "minecraft:music/game/nether/nether_wastes/rubedo": {
+    "author": "Lena Raine",
+    "cover": "nether",
+    "soundtrack": "Nether Update No. 2",
+    "title": "Rubedo"
+  },
+  "minecraft:music/game/nether/soulsand_valley/so_below": {
+    "author": "Lena Raine",
+    "cover": "nether",
+    "soundtrack": "Nether Update No. 3",
+    "title": "So Below"
+  },
+  "minecraft:music/game/nuance1": {
+    "author": "C418",
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 1",
+    "title": "Key"
+  },
+  "minecraft:music/game/nuance2": {
+    "author": "C418",
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 9",
+    "title": "Oxygène"
+  },
+  "minecraft:music/game/one_more_day": {
+    "author": "Lena Raine",
+    "cover": "caves",
+    "soundtrack": "Caves & Cliffs No. 6",
+    "title": "One More Day"
+  },
+  "minecraft:music/game/piano1": {
+    "author": "C418",
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 12",
+    "title": "Dry Hands"
+  },
+  "minecraft:music/game/piano2": {
+    "author": "C418",
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 13",
+    "title": "Wet Hands"
+  },
+  "minecraft:music/game/piano3": {
+    "author": "C418",
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 11",
+    "title": "Mice on Venus"
+  },
+  "minecraft:music/game/stand_tall": {
+    "author": "Lena Raine",
+    "cover": "caves",
+    "soundtrack": "Caves & Cliffs No. 8",
+    "title": "Stand Tall"
+  },
+  "minecraft:music/game/swamp/aerie": {
+    "author": "Lena Raine",
+    "cover": "wild",
+    "soundtrack": "The Wild Update No.2",
+    "title": "Aerie"
+  },
+  "minecraft:music/game/swamp/firebugs": {
+    "author": "Lena Raine",
+    "cover": "wild",
+    "soundtrack": "The Wild Update No. 1",
+    "title": "Firebugs"
+  },
+  "minecraft:music/game/swamp/labyrinthine": {
+    "author": "Lena Raine",
+    "cover": "wild",
+    "soundtrack": "The Wild Update No. 3",
+    "title": "Labyrinthine"
+  },
+  "minecraft:music/game/water/axolotl": {
+    "author": "C418",
+    "cover": "axolotl",
+    "soundtrack": "Axolotl",
+    "title": "Axolotl"
+  },
+  "minecraft:music/game/water/dragon_fish": {
+    "author": "C418",
+    "cover": "dragon_fish",
+    "soundtrack": "Dragon Fish",
+    "title": "Dragon Fish"
+  },
+  "minecraft:music/game/water/shuniji": {
+    "author": "C418",
+    "cover": "shuniji",
+    "soundtrack": "Shuniji",
+    "title": "Shuniji"
+  },
+  "minecraft:music/game/wending": {
+    "author": "Lena Raine",
+    "cover": "caves",
+    "soundtrack": "Caves & Cliffs No. 4",
+    "title": "Wending"
+  },
+  "minecraft:music/menu/menu1": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 9",
+    "title": "Mutation"
+  },
+  "minecraft:music/menu/menu2": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 6",
+    "title": "Moog City 2"
+  },
+  "minecraft:music/menu/menu3": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 17",
+    "title": "Beginning 2"
+  },
+  "minecraft:music/menu/menu4": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 12",
+    "title": "Floating Trees"
+  },
+  "minecraft:music_disc.11": {
+    "author": "C418",
+    "soundtrack": "",
+    "title": "11"
+  },
+  "minecraft:music_disc.13": {
+    "author": "C418",
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 16",
+    "title": "Thirteen"
+  },
+  "minecraft:music_disc.5": {
     "author": "Samuel Åberg",
-    "soundtrack": "The Wild Update No.4"
+    "cover": "wild",
+    "soundtrack": "The Wild Update No.4",
+    "title": "Five"
   },
-  "pigstep": {
-    "title": "Pigstep",
+  "minecraft:music_disc.blocks": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 28",
+    "title": "Blocks"
+  },
+  "minecraft:music_disc.cat": {
+    "author": "C418",
+    "cover": "alpha",
+    "soundtrack": "Volume Alpha No. 19",
+    "title": "Cat"
+  },
+  "minecraft:music_disc.chirp": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 20",
+    "title": "Chirp"
+  },
+  "minecraft:music_disc.far": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 29",
+    "title": "Far"
+  },
+  "minecraft:music_disc.mall": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 27",
+    "title": "Mall"
+  },
+  "minecraft:music_disc.mellohi": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 22",
+    "title": "Mellohi"
+  },
+  "minecraft:music_disc.otherside": {
     "author": "Lena Raine",
-    "soundtrack": "Nether Update No. 4"
+    "cover": "caves",
+    "soundtrack": "Caves & Cliffs No. 7",
+    "title": "Otherside"
+  },
+  "minecraft:music_disc.pigstep": {
+    "author": "Lena Raine",
+    "cover": "nether",
+    "soundtrack": "Nether Update No. 4",
+    "title": "Pigstep"
+  },
+  "minecraft:music_disc.relic": {
+    "author": "Aaron Cherof",
+    "cover": "trails_and_tales",
+    "soundtrack": "Trails & Tailes Update No.5",
+    "title": "Relic"
+  },
+  "minecraft:music_disc.stal": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 23",
+    "title": "Stal"
+  },
+  "minecraft:music_disc.strad": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 24",
+    "title": "Strad"
+  },
+  "minecraft:music_disc.wait": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 21",
+    "title": "Wait"
+  },
+  "minecraft:music_disc.ward": {
+    "author": "C418",
+    "cover": "beta",
+    "soundtrack": "Volume Beta No. 26",
+    "title": "Ward"
   }
 }
