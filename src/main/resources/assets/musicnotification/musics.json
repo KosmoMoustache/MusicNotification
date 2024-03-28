@@ -122,7 +122,7 @@
   "minecraft:music/game/end/the_end": {
     "author": "C418",
     "cover": "beta",
-    "identifier": "nowplaying:music..end",
+    "identifier": "nowplaying:music.end",
     "soundtrack": "Volume Beta No. 19",
     "title": "The End"
   },
