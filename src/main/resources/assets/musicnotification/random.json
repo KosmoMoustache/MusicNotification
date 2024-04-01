@@ -1,0 +1,126 @@
+{
+  "music.creative": {
+    "identifier": "minecraft:music.creative",
+    "title": "Crative"
+  },
+  "music.credits": {
+    "identifier": "minecraft:music.credits",
+    "title": "Credits"
+  },
+  "music.dragon": {
+    "identifier": "minecraft:music.dragon",
+    "title": "Dragon Fight"
+  },
+  "music.end": {
+    "identifier": "minecraft:music.end",
+    "title": "End"
+  },
+  "music.game": {
+    "identifier": "minecraft:music.game",
+    "title": "Game"
+  },
+  "music.menu": {
+    "identifier": "minecraft:music.menu",
+    "title": "Menu"
+  },
+  "music.nether.basalt_deltas": {
+    "identifier": "minecraft:music.nether.basalt_deltas",
+    "title": "Basalt Deltas"
+  },
+  "music.nether.crimson_forest": {
+    "identifier": "minecraft:music.nether.crimson_forest",
+    "title": "Crimson Forest"
+  },
+  "music.nether.nether_wastes": {
+    "identifier": "minecraft:music.nether.nether_wastes",
+    "title": "Nether Wastes"
+  },
+  "music.nether.soul_sand_valley": {
+    "identifier": "minecraft:music.nether.soul_sand_valley",
+    "title": "Soulsand Valley"
+  },
+  "music.nether.warped_forest": {
+    "identifier": "minecraft:music.nether.warped_forest",
+    "title": "Warped Forest"
+  },
+  "music.overworld.badlands": {
+    "identifier": "minecraft:music.overworld.badlands",
+    "title": "Badlands"
+  },
+  "music.overworld.bamboo_jungle": {
+    "identifier": "minecraft:music.overworld.bamboo_jungle",
+    "title": "Bamboo Jungle"
+  },
+  "music.overworld.cherry_grove": {
+    "identifier": "minecraft:music.overworld.cherry_grove",
+    "title": "Cherry Grove"
+  },
+  "music.overworld.deep_dark": {
+    "identifier": "minecraft:music.overworld.deep_dark",
+    "title": "Deep Dark"
+  },
+  "music.overworld.desert": {
+    "identifier": "minecraft:music.overworld.desert",
+    "title": "Desert"
+  },
+  "music.overworld.dripstone_caves": {
+    "identifier": "minecraft:music.overworld.dripstone_caves",
+    "title": "Dripsone Caves"
+  },
+  "music.overworld.flower_forest": {
+    "identifier": "minecraft:music.overworld.flower_forest",
+    "title": "Flower Forest"
+  },
+  "music.overworld.forest": {
+    "identifier": "minecraft:music.overworld.forest",
+    "title": "Forest"
+  },
+  "music.overworld.frozen_peaks": {
+    "identifier": "minecraft:music.overworld.frozen_peaks",
+    "title": "Frozen Peaks"
+  },
+  "music.overworld.grove": {
+    "identifier": "minecraft:music.overworld.grove",
+    "title": "Grove"
+  },
+  "music.overworld.jagged_peaks": {
+    "identifier": "minecraft:music.overworld.jagged_peaks",
+    "title": "Jagged Peaks"
+  },
+  "music.overworld.jungle": {
+    "identifier": "minecraft:music.overworld.jungle",
+    "title": "Jungle"
+  },
+  "music.overworld.lush_caves": {
+    "identifier": "minecraft:music.overworld.lush_caves",
+    "title": "Lush Caves"
+  },
+  "music.overworld.meadow": {
+    "identifier": "minecraft:music.overworld.meadow",
+    "title": "Meadow"
+  },
+  "music.overworld.old_growth_taiga": {
+    "identifier": "minecraft:music.overworld.old_growth_taiga",
+    "title": "Old Growth Taiga"
+  },
+  "music.overworld.snowy_slopes": {
+    "identifier": "minecraft:music.overworld.snowy_slopes",
+    "title": "Snowy Slopes"
+  },
+  "music.overworld.sparse_jungle": {
+    "identifier": "minecraft:music.overworld.sparse_jungle",
+    "title": "Sparse Jungle"
+  },
+  "music.overworld.stony_peaks": {
+    "identifier": "minecraft:music.overworld.stony_peaks",
+    "title": "Stone Peaks"
+  },
+  "music.overworld.swamp": {
+    "identifier": "minecraft:music.overworld.swamp",
+    "title": "Swamp"
+  },
+  "music.under_water": {
+    "identifier": "minecraft:music.under_water",
+    "title": "Under Water"
+  }
+}
