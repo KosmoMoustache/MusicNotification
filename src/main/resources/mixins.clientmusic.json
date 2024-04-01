@@ -7,7 +7,8 @@
   "client": [
     "MixinMinecraftClient",
     "MixinToastManagerEntry",
-    "MixinWorldRenderer"
+    "MixinWorldRenderer",
+    "MixinTitleScreen"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -28,13 +28,10 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
+import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.util.List;
+import net.minecraft.client.option.KeyBinding;
 
 @Environment(EnvType.CLIENT)
 public class ClientMusic implements ClientModInitializer {
@@ -69,6 +66,15 @@ public class ClientMusic implements ClientModInitializer {
         // Config
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+
+        // Key Binding
+        keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.musicnotification.open_screen", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.musicnotification.categories"));
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (keyBinding.wasPressed()) {
+                client.setScreen(new PlaySoundScreen());
+            }
+        });
     }
 
     public static void onClientInit() {
