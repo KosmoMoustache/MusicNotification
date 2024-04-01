@@ -1,6 +1,5 @@
 package net.kosmo.music;
 
-import com.google.gson.JsonObject;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
@@ -12,16 +11,16 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.kosmo.music.gui.PlaySoundScreen;
 import net.kosmo.music.toast.MusicToast;
-import net.kosmo.music.utils.resource.AlbumCover;
 import net.kosmo.music.utils.ModConfig;
+import net.kosmo.music.utils.resource.AlbumCover;
 import net.kosmo.music.utils.resource.KResourceManager;
 import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.sound.SoundInstanceListener;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.MusicDiscItem;
-import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.sound.SoundCategory;
@@ -31,7 +30,6 @@ import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.minecraft.client.option.KeyBinding;
 
 @Environment(EnvType.CLIENT)
 public class ClientMusic implements ClientModInitializer {
