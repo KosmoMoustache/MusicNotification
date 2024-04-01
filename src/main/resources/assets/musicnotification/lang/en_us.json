@@ -4,5 +4,11 @@
   "text.autoconfig.musicnotification.option.SHOW_SOUNDTRACK_NAME": "Show soundtrack",
   "text.autoconfig.musicnotification.option.DISABLE_TOAST_SOUND": "Configure toast sound",
   "text.autoconfig.musicnotification.option.DISABLE_TOAST_SOUND.@Tooltip": "Mute the sound a toast make when it appears and disappears.\nENABLED_ALL = Vanilla (every toast will make sound)\nMUTE_SELF = Mute toast of this mod\nMUTE_ALL = Mute every toast",
-  "text.autoconfig.musicnotification.option.ROTATE_ALBUM_COVER": "Animate album cover"
+  "text.autoconfig.musicnotification.option.ROTATE_ALBUM_COVER": "Animate album cover",
+  "gui.musicnotification.playsound.title_screen": "DEBUG",
+  "gui.musicnotification.playsound.title": "PlaySoundScreen",
+  "gui.musicnotification.playsound.tab_home": "Home",
+  "gui.musicnotification.playsound.tab_music": "Music",
+  "gui.musicnotification.playsound.tab_history": "History",
+  "gui.musicnotification.playsound.search_hint": "Recherche..."
 }
