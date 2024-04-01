@@ -3,6 +3,7 @@ package net.kosmo.music.utils.resource;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import net.kosmo.music.ClientMusic;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
@@ -43,7 +44,6 @@ public class MusicManager {
         public final Identifier identifier;
         public final String title;
         public final String author;
-        ;
         public final String album;
         public final AlbumCover albumCover;
         public final boolean isRandom;
@@ -57,7 +57,7 @@ public class MusicManager {
             this.isRandom = isRandom;
         }
 
-        public static Music parseJsonObject(JsonObject json) throws Exception {
+        public static Music parseJsonObject(JsonObject json) throws JsonSyntaxException {
             String strId = JsonHelper.getString(json, "identifier", null);
             Identifier identifier = strId != null ? new Identifier(strId) : null;
             String title = JsonHelper.getString(json, "title");
