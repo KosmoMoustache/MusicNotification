@@ -27,7 +27,7 @@
       "net.kosmo.music.ClientMusic"
     ],
     "modmenu": [
-      "net.kosmo.music.ModMenuCompatibility"
+      "net.kosmo.music.utils.ModMenuCompatibility"
     ]
   },
   "mixins": [
