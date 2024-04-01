@@ -1,8 +1,9 @@
 package net.kosmo.music.toast;
 
-import net.kosmo.music.AlbumCover;
+import net.kosmo.music.utils.resource.AlbumCover;
 import net.kosmo.music.ClientMusic;
-import net.kosmo.music.MusicManager;
+import net.kosmo.music.utils.ModConfig;
+import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.sound.Sound;
@@ -40,16 +41,16 @@ public class MusicToast implements Toast {
         Identifier identifier = sound.getIdentifier();
         MusicManager.Entry entry = ClientMusic.musicManager.get(identifier);
 
-        if (entry != null) {
-            show(MinecraftClient.getInstance().getToastManager(), entry);
+        if (music != null) {
+            show(MinecraftClient.getInstance().getToastManager(), music);
         } else {
             String[] lastPartId = identifier.getPath().split("/");
             show(MinecraftClient.getInstance().getToastManager(), Text.literal(lastPartId[lastPartId.length - 1]), Text.literal(identifier.getNamespace()), Text.literal("Unknown"), AlbumCover.MODDED);
         }
     }
 
-    public static void show(ToastManager manager, MusicManager.Entry entry) {
-        show(manager, Text.literal(entry.getTitle()), Text.literal(entry.getAuthor()), Text.literal(entry.getSoundtrack()), new AlbumCover(entry.getAlbumCover()));
+    public static void show(ToastManager manager, MusicManager.Music music) {
+        show(manager, Text.literal(music.getTitle()), Text.literal(music.getAuthor()), Text.literal(music.getAlbumName()), new AlbumCover(music.getAlbumCover()));
     }
 
     public static void show(ToastManager manager, Text title, Text author, Text soundtrack, AlbumCover albumCover) {
@@ -78,7 +79,7 @@ public class MusicToast implements Toast {
     }
 
     /**
-     * When {@link net.kosmo.music.ModConfig#SHOW_SOUNDTRACK_NAME} is false, when another toast is shown, the soundtrack
+     * When {@link ModConfig#SHOW_SOUNDTRACK_NAME} is false, when another toast is shown, the soundtrack
      * is hided by the new toast
      */
     @Override

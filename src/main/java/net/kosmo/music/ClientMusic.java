@@ -6,12 +6,20 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.kosmo.music.gui.PlaySoundScreen;
 import net.kosmo.music.toast.MusicToast;
+import net.kosmo.music.utils.resource.AlbumCover;
+import net.kosmo.music.utils.ModConfig;
+import net.kosmo.music.utils.resource.KResourceManager;
+import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.SoundInstanceListener;
 import net.minecraft.client.sound.SoundManager;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.MusicDiscItem;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
@@ -34,10 +42,10 @@ public class ClientMusic implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("MusicNotification");
     public static final Identifier MUSICS_JSON_ID = new Identifier(MOD_ID, "musics.json");
 
+    public static KeyBinding keyBinding;
     public static SoundManager soundManager;
-    public static ResourceManager resourceManager;
     public static MinecraftClient client;
-    public static MusicManager musicManager;
+    public static KResourceManager kResourceManager;
     public static ModConfig config;
 
     @Override
@@ -54,8 +62,7 @@ public class ClientMusic implements ClientModInitializer {
 
             @Override
             public void reload(ResourceManager manager) {
-                musicManager.clear();
-                getAllResources();
+               kResourceManager.reload();
             }
         });
 
@@ -65,11 +72,10 @@ public class ClientMusic implements ClientModInitializer {
     }
 
     public static void onClientInit() {
-        resourceManager = client.getResourceManager();
         soundManager = client.getSoundManager();
         soundManager.registerListener(SoundListener);
-        musicManager = new MusicManager();
-        getAllResources();
+        kResourceManager = new KResourceManager(client.getResourceManager());
+        kResourceManager.reload();
     }
 
     /**
@@ -79,9 +85,9 @@ public class ClientMusic implements ClientModInitializer {
         if (song != null) {
             MusicDiscItem musicDiscItem = MusicDiscItem.bySound(song);
             if (musicDiscItem != null) {
-                MusicManager.Entry entry = musicManager.get(musicDiscItem.getSound().getId());
-                if (entry != null) {
-                    MusicToast.show(MinecraftClient.getInstance().getToastManager(), entry);
+                MusicManager.Music music = kResourceManager.musicManager.get(musicDiscItem.getSound().getId());
+                if (music != null) {
+                    MusicToast.show(MinecraftClient.getInstance().getToastManager(), music);
                 } else {
                     LOGGER.warn("Unknown {} music disc in musics.json", musicDiscItem.getSound().getId());
                     String[] string = musicDiscItem.getDescription().getString().split(" - ");
@@ -98,28 +104,6 @@ public class ClientMusic implements ClientModInitializer {
             MusicToast.show(soundInstance.getSound());
         }
     };
-
-    /**
-     * Get all resources from ressource packs
-     */
-    public static void getAllResources() {
-        List<Resource> resources = resourceManager.getAllResources(MUSICS_JSON_ID);
-        for (Resource resource : resources) {
-            musicManager.addFromJson(parseJSONResource(resource, MUSICS_JSON_ID));
-        }
-    }
-
-    /**
-     * Parse a JSON resource
-     */
-    public static JsonObject parseJSONResource(Resource resource, Identifier identifier) {
-        try (BufferedReader reader = resource.getReader()) {
-            return JsonHelper.deserialize(reader);
-        } catch (IOException e) {
-            ClientMusic.LOGGER.warn("Invalid {} in resourcepack: '{}'", identifier, resource.getResourcePackName());
-        }
-        return new JsonObject();
-    }
 
     /**
      * Check if the toast should be shown
