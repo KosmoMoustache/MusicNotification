@@ -1,8 +1,10 @@
-package net.kosmo.music;
+package net.kosmo.music.utils.resource;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.kosmo.music.ClientMusic;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 public class AlbumCover {
     public static final AlbumCover GENERIC = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/generic"));
@@ -36,19 +38,19 @@ public class AlbumCover {
         context.drawGuiTexture(this.textureId, x, y, 20, 20);
     }
 
-    public static AlbumCover parseAlbumCover(String cover, String soundtrack) {
+    public static AlbumCover parseAlbumCover(@Nullable String cover, String album) {
         if (cover != null) return new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/" + cover));
-        // Try to guess the album cover based on the soundtrack name
-        if (soundtrack == null) return GENERIC;
-        if (soundtrack.contains("Alpha")) return ALPHA;
-        if (soundtrack.contains("Beta")) return BETA;
-        if (soundtrack.contains("Axolotl")) return AXOLOTL;
-        if (soundtrack.contains("Dragon Fish")) return DRAGON_FISH;
-        if (soundtrack.contains("Shuniji")) return SHUNIJI;
-        if (soundtrack.contains("Nether")) return NETHER;
-        if (soundtrack.contains("Wild")) return WILD;
-        if (soundtrack.contains("Caves")) return CAVES;
-        if (soundtrack.contains("Trails")) return TRAILS_AND_TALES;
+        // Try to guess the album cover based on the album name
+        if (album == null) return GENERIC;
+        if (album.contains("Alpha")) return ALPHA;
+        if (album.contains("Beta")) return BETA;
+        if (album.contains("Axolotl")) return AXOLOTL;
+        if (album.contains("Dragon Fish")) return DRAGON_FISH;
+        if (album.contains("Shuniji")) return SHUNIJI;
+        if (album.contains("Nether")) return NETHER;
+        if (album.contains("Wild")) return WILD;
+        if (album.contains("Caves")) return CAVES;
+        if (album.contains("Trails")) return TRAILS_AND_TALES;
         return GENERIC;
     }
 }

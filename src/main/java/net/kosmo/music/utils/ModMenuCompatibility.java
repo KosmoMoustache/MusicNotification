@@ -1,4 +1,4 @@
-package net.kosmo.music;
+package net.kosmo.music.utils;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
