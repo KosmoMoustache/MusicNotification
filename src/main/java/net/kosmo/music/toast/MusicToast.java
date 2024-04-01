@@ -39,7 +39,7 @@ public class MusicToast implements Toast {
 
     public static void show(Sound sound) {
         Identifier identifier = sound.getIdentifier();
-        MusicManager.Entry entry = ClientMusic.musicManager.get(identifier);
+        MusicManager.Music music = ClientMusic.kResourceManager.musicManager.get(identifier);
 
         if (music != null) {
             show(MinecraftClient.getInstance().getToastManager(), music);
