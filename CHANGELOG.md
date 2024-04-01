@@ -21,12 +21,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.6.2] - TBD
+
+### Added
+
+- Simplified Chinese translation tanks to [Chiloven945](https://github.com/Chiloven945)
+- New icon thanks to [akairoo](https://dribbble.com/akairoo)
+- Documentation on custom resource packs
+- GUI to play musics and sounds on demands
+
+### Changed
+
+- Changed key 'soundtrack' to 'album' in musics.json (soundtrack key is still supported for compatibility)
+
 ## [1.6.1] - 2024-01-29
 
 ### Fixed
 
 - Typo in path to Trails and tales album cover
-
 
 ## [1.6.0] - 2024-01-27
 
@@ -36,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Album Cover are now retrieve from musics.json
 
 ### Changed
+
 - Use the new sprite system
 - Renamed settings MUTE_MOD to MUTE_SELF
 
@@ -43,14 +56,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Tracks "Comforting Memories", "Floating Dream", and "An Ordinary Day" were credited to Lena Raine instead of Kumi Tanioka (thanks @BeeTeeKay64)
-
+- Tracks "Comforting Memories", "Floating Dream", and "An Ordinary Day" were credited to Lena Raine instead of Kumi
+  Tanioka (thanks @BeeTeeKay64)
 
 ## [1.5.1] - 2023-12-14
 
 ### Fixed
 
-- Compatibility with mod that change toast sound (Better Recipe Book), if a similar mod is installed, you will not be able to configure the mute setting
+- Compatibility with mod that change toast sound (Better Recipe Book), if a similar mod is installed, you will not be
+  able to configure the mute setting
 
 ## [1.5.0] - 2023-11-18
 
