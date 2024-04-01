@@ -1,7 +1,7 @@
 package net.kosmo.music.mixin;
 
 import net.kosmo.music.ClientMusic;
-import net.kosmo.music.ModConfig;
+import net.kosmo.music.utils.ModConfig;
 import net.kosmo.music.toast.MusicToast;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
