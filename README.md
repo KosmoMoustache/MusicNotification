@@ -2,6 +2,8 @@
 
 Adds a toast notification when music is played in the game with the track’s name, author, and album name.
 
+### **Require**: [Cloth Config API](https://modrinth.com/mod/cloth-config)
+
 # 📷 Gallery
 <div>
     <table>
