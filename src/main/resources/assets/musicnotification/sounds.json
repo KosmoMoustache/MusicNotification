@@ -279,7 +279,7 @@
       }
     ]
   },
-  "mn.minecraft.music.game.swamp/labyrinthine": {
+  "mn.minecraft.music.game.swamp.labyrinthine": {
     "sounds": [
       {
         "name": "music/game/swamp/labyrinthine"
@@ -293,63 +293,63 @@
       }
     ]
   },
-  "mn.minecraft.music.game/water/axolotl": {
+  "mn.minecraft.music.game.water.axolotl": {
     "sounds": [
       {
         "name": "music/game/water/axolotl"
       }
     ]
   },
-  "mn.minecraft.music.game/water/dragon_fish": {
+  "mn.minecraft.music.game.water.dragon_fish": {
     "sounds": [
       {
         "name": "music/game/water/dragon_fish"
       }
     ]
   },
-  "mn.minecraft.music.game/water/shuniji": {
+  "mn.minecraft.music.game.water.shuniji": {
     "sounds": [
       {
         "name": "music/game/water/shuniji"
       }
     ]
   },
-  "mn.minecraft.music.game/wending": {
+  "mn.minecraft.music.game.wending": {
     "sounds": [
       {
         "name": "music/game/wending"
       }
     ]
   },
-  "mn.minecraft.music.game/wet_hands": {
+  "mn.minecraft.music.game.wet_hands": {
     "sounds": [
       {
         "name": "music/game/wet_hands"
       }
     ]
   },
-  "mn.minecraft.music.menu/beginning_2": {
+  "mn.minecraft.music.menu.beginning_2": {
     "sounds": [
       {
         "name": "music/menu/beginning_2"
       }
     ]
   },
-  "mn.minecraft.music.menu/floating_trees": {
+  "mn.minecraft.music.menu.floating_trees": {
     "sounds": [
       {
         "name": "music/menu/floating_trees"
       }
     ]
   },
-  "mn.minecraft.music.menu/moog_city_2": {
+  "mn.minecraft.music.menu.moog_city_2": {
     "sounds": [
       {
         "name": "music/menu/moog_city_2"
       }
     ]
   },
-  "mn.minecraft.music.menu/mutation": {
+  "mn.minecraft.music.menu.mutation": {
     "sounds": [
       {
         "name": "music/menu/mutation"
