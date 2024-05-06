@@ -20,7 +20,7 @@ Adds a toast notification when music is played in the game with the track’s na
         <tr>
             <td align="middle">
                 <img alt="" src="./img/modded1.png"/>
-                <figcaption align="middle">Work with modded cds</figcaption> 
+                <figcaption align="middle">Works with modded cds</figcaption> 
             </td>
         </tr> 
         <tr>
