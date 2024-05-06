@@ -35,8 +35,8 @@
   ],
   "accessWidener": "musicnotification.accesswidener",
   "depends": {
-    "minecraft": "${minecraft_version}",
-    "fabricloader": ">=${fabricloader_version}",
-    "cloth-config": ">=${cloth_config_version}"
+    "minecraft": "1.20.4",
+    "fabricloader": ">=0.15.11",
+    "cloth-config": ">=13.0.121"
   }
 }
