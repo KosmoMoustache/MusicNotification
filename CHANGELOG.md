@@ -21,14 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [1.6.2] - TBD
+## [2.0.0] - TBD
 
 ### Added
 
-- Simplified Chinese translation tanks to [Chiloven945](https://github.com/Chiloven945)
-- New icon thanks to [akairoo](https://dribbble.com/akairoo)
-- Documentation on custom resource packs
-- GUI to play musics and sounds on demands
+- New mod logo thanks to [akairoo](https://dribbble.com/akairoo)
+- GUI to play musics on demands
 
 ### Changed
 
