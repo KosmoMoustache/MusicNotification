@@ -5,10 +5,12 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "musicnotification-refmap.json",
   "client": [
+    "IMixinMusicTracker",
     "MixinMinecraftClient",
+    "MixinMusicTracker",
+    "MixinTitleScreen",
     "MixinToastManagerEntry",
-    "MixinWorldRenderer",
-    "MixinTitleScreen"
+    "MixinWorldRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

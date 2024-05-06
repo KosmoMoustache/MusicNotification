@@ -33,7 +33,7 @@
   "mixins": [
     "mixins.clientmusic.json"
   ],
-  "accessWidener": "clientmusic.accesswidener",
+  "accessWidener": "musicnotification.accesswidener",
   "depends": {
     "minecraft": "${minecraft_version}",
     "fabricloader": ">=${fabricloader_version}",
