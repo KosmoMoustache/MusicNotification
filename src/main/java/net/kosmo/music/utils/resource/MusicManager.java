@@ -4,52 +4,73 @@ import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.JsonParseException;
 import net.kosmo.music.ClientMusic;
+import net.minecraft.client.sound.SoundManager;
+import net.minecraft.resource.Resource;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class MusicManager {
+    private final ResourceManager resourceManager;
     public Map<Identifier, MusicManager.Music> musics;
 
-    public MusicManager() {
+    public MusicManager(ResourceManager resourceManager) {
         this.musics = Maps.newHashMap();
+        this.resourceManager = resourceManager;
     }
 
-    public void parseJsonObject(JsonObject json) {
-        this.musics.clear();
-        for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+    public void reload() {
+        musics.clear();
+
+        List<Resource> resources = resourceManager.getAllResources(ClientMusic.MUSICS_JSON_ID);
+        for (Resource resource : resources) {
             try {
-                Music m = Music.parseJsonObject(entry.getValue().getAsJsonObject());
-                this.musics.put(m.identifier, m);
-            } catch (Exception e) {
-                ClientMusic.LOGGER.warn("Failed to parse music entry: " + entry.getKey());
+                for (Map.Entry<String, JsonElement> entry : ClientMusic.parseJSONResource(resource).entrySet()) {
+                    try {
+                        Music m = Music.parseJsonObject(entry);
+                        this.musics.put(m.identifier, m);
+                    } catch (Exception e) {
+                        ClientMusic.LOGGER.error("Failed to parse music entry: {}\nMessage: {}", entry.getKey(), e.getMessage());
+                    }
+                }
+            } catch (IOException | JsonParseException e) {
+                ClientMusic.LOGGER.error("Error when reading {} in resourcepack: '{}'\nMessage: {}", ClientMusic.MUSICS_JSON_ID, resource.getResourcePackName(), e.getMessage());
             }
         }
     }
 
-    public void clear() {
-        this.musics.clear();
-    }
-
-    public Music get(Identifier id) {
-        return this.musics.get(id);
+    public @Nullable Music get(Identifier id) {
+        Music m = this.musics.get(id);
+        // When a disc is played using playsound command identifier is <namespace>:records/<disc_name>
+        if (m == null) {
+            m = this.musics.get(new Identifier(id.getNamespace(), id.getPath().replace("records/", "music_disc.")));
+        }
+        return m;
     }
 
     public static class Music {
-        @Nullable
         public final Identifier identifier;
+        @Nullable
+        public final Identifier customId;
         public final String title;
         public final String author;
+        @Nullable
         public final String album;
         public final AlbumCover albumCover;
         public final boolean isRandom;
 
-        public Music(@Nullable Identifier identifier, String title, String author, String album, AlbumCover albumCover, boolean isRandom) {
+        public Music(Identifier identifier, @Nullable Identifier customId, String title, String author, @Nullable String album, AlbumCover albumCover, boolean isRandom) {
             this.identifier = identifier;
+            this.customId = customId;
             this.title = title;
             this.author = author;
             this.album = album;
@@ -57,21 +78,24 @@ public class MusicManager {
             this.isRandom = isRandom;
         }
 
-        public static Music parseJsonObject(JsonObject json) throws JsonSyntaxException {
-            String strId = JsonHelper.getString(json, "identifier", null);
-            Identifier identifier = strId != null ? new Identifier(strId) : null;
-            String title = JsonHelper.getString(json, "title");
-            String author = JsonHelper.getString(json, "author");
-            String album = JsonHelper.getString(json, "album", null);
+        public static Music parseJsonObject(Map.Entry<String, JsonElement> json) throws JsonSyntaxException {
+            JsonObject jsonObject = json.getValue().getAsJsonObject();
+            Identifier identifier = new Identifier(json.getKey());
+            String rawCustomId = JsonHelper.getString(jsonObject, "customId", null);
+            Identifier customId = rawCustomId == null ? null : new Identifier(rawCustomId);
+            String title = JsonHelper.getString(jsonObject, "title");
+            String author = JsonHelper.getString(jsonObject, "author");
+            String album = JsonHelper.getString(jsonObject, "album", null);
             if (album == null) {
-                album = JsonHelper.getString(json, "soundtrack");
-                ClientMusic.LOGGER.warn("{} is using the old 'soundtrack' key, please update it use 'album'", title);
+                album = JsonHelper.getString(jsonObject, "soundtrack");
+                ClientMusic.LOGGER.error("Key 'soundtrack' of '{}' is deprecated, use 'album' instead", title);
             }
-            AlbumCover cover = AlbumCover.parseAlbumCover(JsonHelper.getString(json, "cover", null), album);
-            boolean isRandom = JsonHelper.getBoolean(json, "isRandom", false);
+            AlbumCover cover = AlbumCover.parseAlbumCover(JsonHelper.getString(jsonObject, "cover", null), album);
+            boolean isRandom = JsonHelper.getBoolean(jsonObject, "isRandom", false);
 
             return new Music(
                     identifier,
+                    customId,
                     title,
                     author,
                     album,
@@ -81,7 +105,7 @@ public class MusicManager {
         }
 
         public String toString() {
-            return String.format("title: %s, author: %s, album: %s, cover: %s, identifier: %s, isRandom: %s", title, author, album, albumCover, identifier, isRandom);
+            return String.format("title: %s, author: %s, album: %s, cover: %s, identifier: %s, customId: %s, isRandom: %s", title, author, album, albumCover.textureId, identifier, customId, isRandom);
         }
 
         public String getTitle() {
@@ -96,12 +120,37 @@ public class MusicManager {
             return album == null ? "Unknown" : album;
         }
 
-        public Identifier getAlbumCover() {
+        public Identifier getAlbumCoverTextureId() {
             if (albumCover.textureId != null) return albumCover.textureId;
             if (this.identifier != null && !Objects.equals(this.identifier.getNamespace(), "minecraft")) {
                 return AlbumCover.MODDED.textureId;
             }
             return AlbumCover.GENERIC.textureId;
+        }
+
+        public @Nullable SoundEvent getSoundEvent(SoundManager soundManager) {
+            Identifier id = this.customId == null ? this.identifier : this.customId;
+            if (soundManager.get(id) != null) {
+                return SoundEvent.of(id);
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public static class Sound {
+        public final Identifier identifier;
+
+        public Sound(Identifier identifier) {
+            this.identifier = identifier;
+        }
+
+        public @Nullable SoundEvent getSoundEvent(SoundManager soundManager) {
+            if (soundManager.get(this.identifier) != null) {
+                return SoundEvent.of(identifier);
+            } else {
+                return null;
+            }
         }
     }
 }
