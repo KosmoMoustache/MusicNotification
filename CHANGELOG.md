@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Simplified Chinese translation thanks to [Chiloven945](https://github.com/Chiloven945)
 - New mod logo thanks to [akairoo](https://dribbble.com/akairoo)
 - GUI to play musics on demands
 
