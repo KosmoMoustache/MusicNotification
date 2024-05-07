@@ -38,11 +38,11 @@
   ],
   "accessWidener": "musicnotification.accesswidener",
   "depends": {
-    "minecraft": "1.20.2",
+    "minecraft": "1.20.3",
     "fabricloader": ">=0.15.11",
-    "cloth-config": ">=12.0.119"
+    "cloth-config": ">=13.0.121"
   },
   "suggests": {
-    "modmenu": ">=8.0.1"
+    "modmenu": ">=9.0.0"
   }
 }
