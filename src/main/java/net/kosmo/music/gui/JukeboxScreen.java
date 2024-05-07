@@ -86,8 +86,14 @@ public class JukeboxScreen extends Screen {
             this.addDrawableChild(this.soundTabButton);
         }
 
-        this.stopSoundButton = this.addDrawableChild(ButtonWidget.builder(STOP_SOUND_BUTTON, button -> this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC)).dimensions(this.soundList.getRowLeft() + 5, this.getSoundListBottom() + 10, this.soundList.getRowWidth() - 10, 20).build());
-        this.clearHistoryButton = this.addDrawableChild(ButtonWidget.builder(CLEAR_HISTORY, button -> ClientMusic.musicHistory.clear()).dimensions(10, 10, this.textRenderer.getWidth(CLEAR_HISTORY) + 8, 20).build());
+        this.stopSoundButton = this.addDrawableChild(ButtonWidget.builder(STOP_SOUND_BUTTON, button -> {
+            this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
+        }).dimensions(this.soundList.getRowLeft() + 5, this.getSoundListBottom() + 10, this.soundList.getRowWidth() - 10, 20).build());
+
+        this.clearHistoryButton = this.addDrawableChild(ButtonWidget.builder(CLEAR_HISTORY, button -> {
+            ClientMusic.musicHistory.clear();
+            this.setCurrentTab(Tab.HISTORY);
+        }).dimensions(10, 10, this.textRenderer.getWidth(CLEAR_HISTORY) + 8, 20).build());
         this.clearHistoryButton.visible = false;
 
         String string = this.searchBox != null ? this.searchBox.getText() : "";
