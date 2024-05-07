@@ -1,7 +1,6 @@
 package net.kosmo.music.gui;
 
 import com.google.common.collect.Lists;
-import net.kosmo.music.ClientMusic;
 import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
