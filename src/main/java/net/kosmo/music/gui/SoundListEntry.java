@@ -6,7 +6,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.Selectable;
-import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -15,14 +14,12 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Colors;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SoundListEntry extends ListEntry {
-    private static final ButtonTextures PLAY_BUTTON_TEXTURE = new ButtonTextures(new Identifier("musicnotification", "jukebox/play_button"), new Identifier("musicnotification", "jukebox/play_button_disabled"), new Identifier("musicnotification", "jukebox/play_button_focused"));
     public static final int GRAY_COLOR = ColorHelper.Argb.getArgb(255, 74, 74, 74);
 
     public final MinecraftClient client;
@@ -36,9 +33,7 @@ public class SoundListEntry extends ListEntry {
         this.parent = parent;
         this.entry = sound;
 
-        this.playButton = new TexturedButtonWidget(0, 0, 20, 20, PLAY_BUTTON_TEXTURE, button -> {
-            this.onButtonClick(this.entry);
-        }, Text.translatable("gui.musicnotification.jukebox.play_sound"));
+        this.playButton = new TexturedButtonWidget(0, 0, 20, 20, 0 ,0, 20, JukeboxScreen.JUKEBOX_PLAY_TEXTURE, 64, 64, button -> this.onButtonClick(this.entry), Text.translatable("gui.musicnotification.jukebox.play_sound"));
 
         this.buttons = new ArrayList<>();
         this.buttons.add(this.playButton);

@@ -23,8 +23,10 @@ import java.util.Locale;
 
 
 public class JukeboxScreen extends Screen {
-    private static final Identifier BACKGROUND_TEXTURE = new Identifier(ClientMusic.MOD_ID, "jukebox/background");
-    private static final Identifier SEARCH_ICON_TEXTURE = new Identifier("minecraft", "icon/search");
+    public static final Identifier JUKEBOX_ICON_TEXTURE = new Identifier(ClientMusic.MOD_ID, "textures/gui/jukebox_icon_button.png");
+    public static final Identifier JUKEBOX_PLAY_TEXTURE = new Identifier(ClientMusic.MOD_ID, "textures/gui/jukebox_play_button.png");
+    public static final Identifier JUKEBOX_STOP_TEXTURE = new Identifier(ClientMusic.MOD_ID, "textures/gui/jukebox_stop_button.png");
+    public static final Identifier JUKEBOX_TEXTURE = new Identifier(ClientMusic.MOD_ID, "textures/gui/jukebox.png");
 
     private static final Text TITLE = Text.translatable("gui.musicnotification.jukebox.title");
     private static final Text HOME_TAB_TITLE = Text.translatable("gui.musicnotification.jukebox.tab_home");
@@ -44,7 +46,7 @@ public class JukeboxScreen extends Screen {
     private static final Text EMPTY_HISTORY_TEXT = Text.translatable("gui.musicnotification.jukebox.history_empty").formatted(Formatting.GRAY);
 
     private final MutableText header;
-    private final Screen parent;
+    public final Screen parent;
     public Tab currentTab;
     private TextFieldWidget searchBox;
     private PlaySoundListWidget soundList;
@@ -66,9 +68,9 @@ public class JukeboxScreen extends Screen {
 
     protected void init() {
         if (this.initialized) {
-            this.soundList.setDimensionsAndPosition(this.width, this.getSoundListBottom() - 88, 0, 88);
+            this.soundList.updateSize(this.width, this.getSoundListBottom() - 88, 0, 88);
         } else {
-            this.soundList = new PlaySoundListWidget(this, this.client, this.width, this.getSoundListBottom() - 88, 88, 36);
+            this.soundList = new PlaySoundListWidget(this, this.client, this.width, this.height, 88, this.getSoundListBottom() /* - 88*/, 36);
         }
 
         int middle = this.soundList.getRowWidth() / 2;
@@ -84,13 +86,8 @@ public class JukeboxScreen extends Screen {
             this.addDrawableChild(this.soundTabButton);
         }
 
-        this.stopSoundButton = this.addDrawableChild(ButtonWidget.builder(STOP_SOUND_BUTTON, button -> {
-            this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
-        }).dimensions(this.soundList.getRowLeft() + 5, this.getSoundListBottom() + 10, this.soundList.getRowWidth() - 10, 20).build());
-
-        this.clearHistoryButton = this.addDrawableChild(ButtonWidget.builder(CLEAR_HISTORY, button -> {
-            ClientMusic.musicHistory.clear();
-        }).dimensions(10, 10, this.textRenderer.getWidth(CLEAR_HISTORY) + 8, 20).build());
+        this.stopSoundButton = this.addDrawableChild(ButtonWidget.builder(STOP_SOUND_BUTTON, button -> this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC)).dimensions(this.soundList.getRowLeft() + 5, this.getSoundListBottom() + 10, this.soundList.getRowWidth() - 10, 20).build());
+        this.clearHistoryButton = this.addDrawableChild(ButtonWidget.builder(CLEAR_HISTORY, button -> ClientMusic.musicHistory.clear()).dimensions(10, 10, this.textRenderer.getWidth(CLEAR_HISTORY) + 8, 20).build());
         this.clearHistoryButton.visible = false;
 
         String string = this.searchBox != null ? this.searchBox.getText() : "";
@@ -117,16 +114,17 @@ public class JukeboxScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.renderBackground(context, mouseX, mouseY, delta);
+    public void renderBackground(DrawContext context) {
         int i = this.getSearchBoxX() + 3;
-        context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
-        context.drawGuiTexture(SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
+        super.renderBackground(context);
+        context.drawNineSlicedTexture(JUKEBOX_TEXTURE, i, 64, 236, this.getScreenHeight() + 16, 8, 236, 34, 1, 1);
+        context.drawTexture(JUKEBOX_TEXTURE, i + 10, 76, 243, 1, 12, 12);
+
     }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
+        this.renderBackground(context);
 
         context.drawTextWithShadow(this.textRenderer, this.header, this.getSearchBoxX() + 8, 30, -1);
 
@@ -145,11 +143,12 @@ public class JukeboxScreen extends Screen {
         }
 
         this.searchBox.render(context, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        this.searchBox.setCursorToEnd(false);
+        this.searchBox.setCursorToEnd();
         this.searchBox.setSelectionEnd(0);
         return super.mouseClicked(mouseX, mouseY, button);
     }

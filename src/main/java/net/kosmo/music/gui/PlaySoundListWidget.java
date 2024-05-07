@@ -1,9 +1,9 @@
 package net.kosmo.music.gui;
 
 import com.google.common.collect.Lists;
-import net.kosmo.music.ClientMusic;
 import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -18,10 +18,16 @@ public class PlaySoundListWidget extends ElementListWidget<ListEntry> {
     @Nullable
     private String currentSearch;
 
-    public PlaySoundListWidget(JukeboxScreen parent, MinecraftClient client, int width, int height, int y, int itemHeight) {
-        super(client, width, height, y, itemHeight);
+    public PlaySoundListWidget(JukeboxScreen parent, MinecraftClient client, int width, int height, int top, int bottom, int itemHeight) {
+        super(client, width, height, top, bottom, itemHeight);
         this.parent = parent;
         this.setRenderBackground(false);
+        this.setRenderHorizontalShadows(false);
+    }
+
+    @Override
+    protected void enableScissor(DrawContext context) {
+        context.enableScissor(this.left, this.top + 4, this.right, this.bottom);
     }
 
     private void refresh(Collection<ListEntry> values, double scrollAmount) {

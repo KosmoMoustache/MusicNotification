@@ -13,8 +13,7 @@ import net.minecraft.util.Identifier;
 import org.joml.Quaternionf;
 
 public class MusicToast implements Toast {
-    private static final Identifier TEXTURE = new Identifier(ClientMusic.MOD_ID, "toast/background");
-    private static final Identifier TEXTURE_EXTENDED = new Identifier(ClientMusic.MOD_ID, "toast/background_extended");
+    private static final Identifier TEXTURE = new Identifier(ClientMusic.MOD_ID, "textures/gui/toasts.png");
     private final Type type = Type.DEFAULT;
 
     private boolean justUpdated;
@@ -68,9 +67,9 @@ public class MusicToast implements Toast {
         }
 
         if (ClientMusic.config.TOAST_CONFIG.SHOW_ALBUM_NAME) {
-            context.drawGuiTexture(TEXTURE_EXTENDED, 0, 0, this.getWidth(), this.getHeight());
+            context.drawTexture(TEXTURE, 0, 0, 0,32, this.getWidth(), this.getHeight());
         } else {
-            context.drawGuiTexture(TEXTURE, 0, 0, this.getWidth(), this.getHeight());
+            context.drawTexture(TEXTURE, 0, 0, 0,0, this.getWidth(), this.getHeight());
         }
 
         // Make the icon rotate

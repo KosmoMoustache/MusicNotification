@@ -64,7 +64,7 @@ public class ClientMusic implements ClientModInitializer {
     @Nullable
     public static SoundInstance currentlyPlaying;
 
-    public static SoundInstanceListener SoundListener = (soundInstance, soundSet, range) -> {
+    public static SoundInstanceListener SoundListener = (soundInstance, weightedSoundSet) -> {
         if (soundInstance.getCategory() != SoundCategory.MUSIC) return;
 
         Sound sound = soundInstance.getSound();
@@ -191,7 +191,7 @@ public class ClientMusic implements ClientModInitializer {
         if (soundEvent == null) {
             ClientMusic.LOGGER.warn("Unable to play unknown sound with id: {}", music.customId == null ? music.identifier : music.customId);
             return;
-        };
+        }
 
         PositionedSoundInstance soundInstance = PositionedSoundInstance.music(soundEvent);
         client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
@@ -220,7 +220,7 @@ public class ClientMusic implements ClientModInitializer {
             double d = (double) Util.getMeasuringTimeMs() / 1000.0;
             double e = Math.max((double) l * 0.5, 3.0);
             double f = Math.sin(1.5707963267948966 * Math.cos(Math.PI * 2 * d / e)) / 2.0 + 0.5;
-            double g = MathHelper.lerp(f, 0.0, (double) l);
+            double g = MathHelper.lerp(f, 0.0, l);
 
             context.enableScissor(clipAreaX1, clipAreaY1, clipAreaX2, clipAreaY2);
 //            context.fill(clipAreaX1,clipAreaY1,clipAreaX2,clipAreaY2, Colors.RED);

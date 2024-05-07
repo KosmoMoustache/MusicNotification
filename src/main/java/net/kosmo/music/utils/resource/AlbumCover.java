@@ -7,22 +7,24 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 public class AlbumCover {
-    public static final AlbumCover GENERIC = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/generic"));
-    public static final AlbumCover MODDED = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/modded"));
-    public static final AlbumCover ALPHA = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/alpha"));
-    public static final AlbumCover BETA = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/beta"));
-    public static final AlbumCover AXOLOTL = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/axolotl"));
-    public static final AlbumCover DRAGON_FISH = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/dragon_fish"));
-    public static final AlbumCover SHUNIJI = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/shuniji"));
-    public static final AlbumCover NETHER = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/nether"));
-    public static final AlbumCover WILD = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/wild"));
-    public static final AlbumCover CAVES = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/caves"));
-    public static final AlbumCover TRAILS_AND_TALES = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/trails_and_tales"));
+    public static final AlbumCover GENERIC = new AlbumCover(0, 0);
+    public static final AlbumCover MODDED = new AlbumCover(1, 0);
+    public static final AlbumCover ALPHA = new AlbumCover(2, 0);
+    public static final AlbumCover BETA = new AlbumCover(3, 0);
+    public static final AlbumCover AXOLOTL = new AlbumCover(1, 1);
+    public static final AlbumCover DRAGON_FISH = new AlbumCover(0, 1);
+    public static final AlbumCover SHUNIJI = new AlbumCover(1, 1);
+    public static final AlbumCover NETHER = new AlbumCover(2, 1);
+    public static final AlbumCover WILD = new AlbumCover(0, 2);
+    public static final AlbumCover CAVES = new AlbumCover(1, 2);
+    public static final AlbumCover TRAILS_AND_TALES = new AlbumCover(3, 1);
 
-    public final Identifier textureId;
+    public final int textureSlotX;
+    public final int textureSlotY;
 
-    public AlbumCover(Identifier texture) {
-        this.textureId = texture;
+    public AlbumCover(int textureSlotX, int textureSlotY) {
+        this.textureSlotX = textureSlotX;
+        this.textureSlotY = textureSlotY;
     }
 
     public static int getWidth() {
@@ -33,24 +35,28 @@ public class AlbumCover {
         return 20;
     }
 
-    public void drawAlbumCover(DrawContext context, int x, int y) {
-        RenderSystem.enableBlend();
-        context.drawGuiTexture(this.textureId, x, y, getWidth(), getHeight());
+    public static AlbumCover parseAlbumCover(@Nullable String cover, int textureSlotX, int textureSlotY) {
+        if (cover == null) {
+            return new AlbumCover(textureSlotX, textureSlotY);
+        }
+        return switch (cover) {
+            case "generic" -> GENERIC;
+            case "modded" -> MODDED;
+            case "alpha" -> ALPHA;
+            case "beta" -> BETA;
+            case "axolotl" -> AXOLOTL;
+            case "dragon_fish" -> DRAGON_FISH;
+            case "shuniji" -> SHUNIJI;
+            case "nether" -> NETHER;
+            case "wild" -> WILD;
+            case "caves" -> CAVES;
+            case "trails_and_tales" -> TRAILS_AND_TALES;
+            default -> GENERIC;
+        };
     }
 
-    public static AlbumCover parseAlbumCover(@Nullable String cover, String album) {
-        if (cover != null) return new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/" + cover));
-        // Try to guess the album cover based on the album name
-        if (album == null) return GENERIC;
-        if (album.contains("Alpha")) return ALPHA;
-        if (album.contains("Beta")) return BETA;
-        if (album.contains("Axolotl")) return AXOLOTL;
-        if (album.contains("Dragon Fish")) return DRAGON_FISH;
-        if (album.contains("Shuniji")) return SHUNIJI;
-        if (album.contains("Nether")) return NETHER;
-        if (album.contains("Wild")) return WILD;
-        if (album.contains("Caves")) return CAVES;
-        if (album.contains("Trails")) return TRAILS_AND_TALES;
-        return GENERIC;
+    public void drawAlbumCover(DrawContext context, int x, int y) {
+        RenderSystem.enableBlend();
+        context.drawTexture(new Identifier(ClientMusic.MOD_ID, "textures/gui/toasts.png"), x, y, 176 + this.textureSlotX * 20, this.textureSlotY * 20, getWidth(), getHeight());
     }
 }

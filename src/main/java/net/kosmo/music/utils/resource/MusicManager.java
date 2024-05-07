@@ -3,8 +3,8 @@ package net.kosmo.music.utils.resource;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 import net.kosmo.music.ClientMusic;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.resource.Resource;
@@ -17,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class MusicManager {
     private final ResourceManager resourceManager;
@@ -90,7 +89,11 @@ public class MusicManager {
                 album = JsonHelper.getString(jsonObject, "soundtrack");
                 ClientMusic.LOGGER.error("Key 'soundtrack' of '{}' is deprecated, use 'album' instead", title);
             }
-            AlbumCover cover = AlbumCover.parseAlbumCover(JsonHelper.getString(jsonObject, "cover", null), album);
+
+            int coverTextureSlotX = JsonHelper.getInt(jsonObject, "coverTextureSlotX", 0);
+            int coverTextureSlotY = JsonHelper.getInt(jsonObject, "coverTextureSlotY", 0);
+            AlbumCover cover = AlbumCover.parseAlbumCover(JsonHelper.getString(jsonObject, "cover", null), coverTextureSlotX, coverTextureSlotY);
+
             boolean isRandom = JsonHelper.getBoolean(jsonObject, "isRandom", false);
 
             return new Music(
@@ -105,7 +108,7 @@ public class MusicManager {
         }
 
         public String toString() {
-            return String.format("title: %s, author: %s, album: %s, cover: %s, identifier: %s, customId: %s, isRandom: %s", title, author, album, albumCover.textureId, identifier, customId, isRandom);
+            return String.format("title: %s, author: %s, albumX: %s, albumY: %s, cover: %s, identifier: %s, customId: %s, isRandom: %s", title, author, album, albumCover.textureSlotX, albumCover.textureSlotY, identifier, customId, isRandom);
         }
 
         public String getTitle() {
@@ -118,14 +121,6 @@ public class MusicManager {
 
         public String getAlbumName() {
             return album == null ? "Unknown" : album;
-        }
-
-        public Identifier getAlbumCoverTextureId() {
-            if (albumCover.textureId != null) return albumCover.textureId;
-            if (this.identifier != null && !Objects.equals(this.identifier.getNamespace(), "minecraft")) {
-                return AlbumCover.MODDED.textureId;
-            }
-            return AlbumCover.GENERIC.textureId;
         }
 
         public @Nullable SoundEvent getSoundEvent(SoundManager soundManager) {
