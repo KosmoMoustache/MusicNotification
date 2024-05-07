@@ -90,6 +90,7 @@ public class JukeboxScreen extends Screen {
 
         this.clearHistoryButton = this.addDrawableChild(ButtonWidget.builder(CLEAR_HISTORY, button -> {
             ClientMusic.musicHistory.clear();
+            this.setCurrentTab(Tab.HISTORY);
         }).dimensions(10, 10, this.textRenderer.getWidth(CLEAR_HISTORY) + 8, 20).build());
         this.clearHistoryButton.visible = false;
 
