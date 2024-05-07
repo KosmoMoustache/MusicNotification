@@ -43,7 +43,7 @@ public class MusicManager {
                     }
                 }
             } catch (IOException | JsonParseException e) {
-                ClientMusic.LOGGER.error("Error when reading {} in resourcepack: '{}'\nMessage: {}", ClientMusic.MUSICS_JSON_ID, resource.getResourcePackName(), e.getMessage());
+                ClientMusic.LOGGER.error("Error when reading {} in resourcepack: '{}'\nMessage: {}", ClientMusic.MUSICS_JSON_ID, resource.getPackId(), e.getMessage());
             }
         }
     }
