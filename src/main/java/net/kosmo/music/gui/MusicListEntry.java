@@ -13,6 +13,7 @@ import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class MusicListEntry extends ListEntry {
     public static final int GRAY_COLOR = ColorHelper.Argb.getArgb(255, 74, 74, 74);
+    public static final int LIGHT_GRAY = -6250336;
     private static final ButtonTextures PLAY_BUTTON_TEXTURE = new ButtonTextures(new Identifier("musicnotification", "jukebox/play_button"), new Identifier("musicnotification", "jukebox/play_button_disabled"), new Identifier("musicnotification", "jukebox/play_button_focused"));
     private static final ButtonTextures STOP_BUTTON_TEXTURE = new ButtonTextures(new Identifier("musicnotification", "jukebox/stop_button"), new Identifier("musicnotification", "jukebox/stop_button_focused"));
     public final ArrayList<ClickableWidget> buttons;
@@ -58,7 +60,7 @@ public class MusicListEntry extends ListEntry {
 
         context.fill(x, y, x + entryWidth, y + entryHeight, GRAY_COLOR);
 
-        MutableText text = Text.literal(entry.getTitle()).append(" - ").withColor(Colors.WHITE).append(Text.literal(entry.getAuthor()).withColor(Colors.LIGHT_GRAY));
+        MutableText text = Text.literal(entry.getTitle()).append(" - ").setStyle(Style.EMPTY.withColor(Colors.WHITE)).append(Text.literal(entry.getAuthor()).setStyle(Style.EMPTY.withColor(LIGHT_GRAY)));
         ClientMusic.drawScrollableText(context, this.client.textRenderer, text, xMargeCover, xMargeCover, y1, this.playButton.getX() - 4, y1 + this.client.textRenderer.fontHeight, Colors.WHITE, true);
         context.drawText(this.client.textRenderer, entry.getAlbumName(), xMargeCover, y2, Colors.LIGHT_GRAY, false);
 

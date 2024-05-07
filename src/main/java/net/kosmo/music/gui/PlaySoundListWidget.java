@@ -18,8 +18,8 @@ public class PlaySoundListWidget extends ElementListWidget<ListEntry> {
     @Nullable
     private String currentSearch;
 
-    public PlaySoundListWidget(JukeboxScreen parent, MinecraftClient client, int width, int height, int y, int itemHeight) {
-        super(client, width, height, y, itemHeight);
+    public PlaySoundListWidget(JukeboxScreen parent, MinecraftClient client, int width, int height, int top, int bottom, int itemHeight) {
+        super(client, width, height, top, bottom, itemHeight);
         this.parent = parent;
         this.setRenderBackground(false);
     }

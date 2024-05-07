@@ -64,7 +64,7 @@ public class ClientMusic implements ClientModInitializer {
     @Nullable
     public static SoundInstance currentlyPlaying;
 
-    public static SoundInstanceListener SoundListener = (soundInstance, soundSet, range) -> {
+    public static SoundInstanceListener SoundListener = (soundInstance, weightedSoundSet) -> {
         if (soundInstance.getCategory() != SoundCategory.MUSIC) return;
 
         Sound sound = soundInstance.getSound();

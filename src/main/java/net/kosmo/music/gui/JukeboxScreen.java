@@ -66,9 +66,9 @@ public class JukeboxScreen extends Screen {
 
     protected void init() {
         if (this.initialized) {
-            this.soundList.setDimensionsAndPosition(this.width, this.getSoundListBottom() - 88, 0, 88);
+            this.soundList.updateSize(this.width, this.getSoundListBottom() - 88, 0, 88);
         } else {
-            this.soundList = new PlaySoundListWidget(this, this.client, this.width, this.getSoundListBottom() - 88, 88, 36);
+            this.soundList = new PlaySoundListWidget(this, this.client, this.width, this.height, this.getSoundListBottom() - 88, 88, 36);
         }
 
         int middle = this.soundList.getRowWidth() / 2;
