@@ -27,7 +27,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.bromeliad",
     "title": "Bromeliad"
   },
-  "minecraft:music/game/clark": {
+  "minecraft:music/game/calm2": {
     "album": "Volume Alpha No. 14",
     "author": "C418",
     "cover": "alpha",
@@ -41,42 +41,42 @@
     "customId": "musicnotification:mn.minecraft.music.game.comforting_memories",
     "title": "Comforting Memories"
   },
-  "minecraft:music/game/creative/aria_math": {
+  "minecraft:music/game/creative/creative4": {
     "album": "Volume Beta No. 13",
     "author": "C418",
     "cover": "beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.aria_math",
     "title": "Aria Math"
   },
-  "minecraft:music/game/creative/biome_fest": {
+  "minecraft:music/game/creative/creative1": {
     "album": "Volume Beta No. 8",
     "author": "C418",
     "cover": "beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.biome_fest",
     "title": "Biome Fest"
   },
-  "minecraft:music/game/creative/blind_spots": {
+  "minecraft:music/game/creative/creative2": {
     "album": "Volume Beta No. 4",
     "author": "C418",
     "cover": "beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.blind_spots",
     "title": "Blind Spots"
   },
-  "minecraft:music/game/creative/dreiton": {
+  "minecraft:music/game/creative/creative5": {
     "album": "Volume Beta No. 18",
     "author": "C418",
     "cover": "beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.dreiton",
     "title": "Dreiton"
   },
-  "minecraft:music/game/creative/haunt_muskie": {
+  "minecraft:music/game/creative/creative3": {
     "album": "Volume Beta No. 10",
     "author": "C418",
     "cover": "beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.haunt_muskie",
     "title": "Haunt Muskie"
   },
-  "minecraft:music/game/creative/taswell": {
+  "minecraft:music/game/creative/creative6": {
     "album": "Volume Beta No. 16",
     "author": "C418",
     "cover": "beta",
@@ -90,14 +90,14 @@
     "customId": "musicnotification:mn.minecraft.music.game.crescent_dunes",
     "title": "Crescent Dunes"
   },
-  "minecraft:music/game/danny": {
+  "minecraft:music/game/hal4": {
     "album": "Volume Alpha No. 21",
     "author": "C418",
     "cover": "alpha",
     "customId": "musicnotification:mn.minecraft.music.game.danny",
     "title": "Danny"
   },
-  "minecraft:music/game/dry_hands": {
+  "minecraft:music/game/piano1": {
     "album": "Volume Alpha No. 12",
     "author": "C418",
     "cover": "alpha",
@@ -111,7 +111,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.echo_in_the_wind",
     "title": "Echo in the Wind"
   },
-  "minecraft:music/game/end/alpha": {
+  "minecraft:music/game/end/credits": {
     "album": "Volume Beta No. 2",
     "author": "C418",
     "cover": "beta",
@@ -124,7 +124,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.end.boss",
     "title": "Boss"
   },
-  "minecraft:music/game/end/the_end": {
+  "minecraft:music/game/end/end": {
     "album": "Volume Beta No. 19",
     "author": "C418",
     "cover": "beta",
@@ -138,7 +138,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.floating_dream",
     "title": "Floating Dream"
   },
-  "minecraft:music/game/haggstrom": {
+  "minecraft:music/game/hal3": {
     "album": "Volume Alpha No. 7",
     "author": "C418",
     "cover": "alpha",
@@ -152,7 +152,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.infinite_amethyst",
     "title": "Infinite Amethyst"
   },
-  "minecraft:music/game/key": {
+  "minecraft:music/game/nuance1": {
     "album": "Volume Alpha No. 1",
     "author": "C418",
     "cover": "alpha",
@@ -166,35 +166,35 @@
     "customId": "musicnotification:mn.minecraft.music.game.left_to_bloom",
     "title": "Left to Bloom"
   },
-  "minecraft:music/game/living_mice": {
+  "minecraft:music/game/hal2": {
     "album": "Volume Alpha No. 5",
     "author": "C418",
     "cover": "alpha",
     "customId": "musicnotification:mn.minecraft.music.game.living_mice",
     "title": "Living Mice"
   },
-  "minecraft:music/game/mice_on_venus": {
+  "minecraft:music/game/piano3": {
     "album": "Volume Alpha No. 11",
     "author": "C418",
     "cover": "alpha",
     "customId": "musicnotification:mn.minecraft.music.game.mice_on_venus",
     "title": "Mice on Venus"
   },
-  "minecraft:music/game/minecraft": {
+  "minecraft:music/game/calm1": {
     "album": "Volume Alpha No. 8",
     "author": "C418",
     "cover": "alpha",
     "customId": "musicnotification:mn.minecraft.music.game.minecraft",
     "title": "Minecraft"
   },
-  "minecraft:music/game/nether/ballad_of_the_cats": {
+  "minecraft:music/game/nether/nether4": {
     "album": "Volume Beta No. 15",
     "author": "C418",
     "cover": "beta",
     "customId": "musicnotification:mn.minecraft.music.game.nether.ballad_of_the_cats",
     "title": "Ballad of the Cats"
   },
-  "minecraft:music/game/nether/concrete_halls": {
+  "minecraft:music/game/nether/nether1": {
     "album": "Volume Beta No. 7",
     "author": "C418",
     "cover": "beta",
@@ -208,7 +208,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.nether.crimson_forest.chrysopoeia",
     "title": "Chrysopoeia"
   },
-  "minecraft:music/game/nether/dead_voxel": {
+  "minecraft:music/game/nether/nether2": {
     "album": "Volume Beta No. 3",
     "author": "C418",
     "cover": "beta",
@@ -229,7 +229,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.nether.soulsand_valley.so_below",
     "title": "So Below"
   },
-  "minecraft:music/game/nether/warmth": {
+  "minecraft:music/game/nether/nether3": {
     "album": "Volume Beta No. 11",
     "author": "C418",
     "cover": "beta",
@@ -243,7 +243,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.one_more_day",
     "title": "One More Day"
   },
-  "minecraft:music/game/oxygene": {
+  "minecraft:music/game/nuance2": {
     "album": "Volume Alpha No. 9",
     "author": "C418",
     "cover": "alpha",
@@ -257,7 +257,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.stand_tall",
     "title": "Stand Tall"
   },
-  "minecraft:music/game/subwoofer_lullaby": {
+  "minecraft:music/game/hal1": {
     "album": "Volume Alpha No. 3",
     "author": "C418",
     "cover": "alpha",
@@ -285,7 +285,7 @@
     "customId": "musicnotification:mn.minecraft.music.game.swamp.labyrinthine",
     "title": "Labyrinthine"
   },
-  "minecraft:music/game/sweden": {
+  "minecraft:music/game/calm3": {
     "album": "Volume Alpha No. 18",
     "author": "C418",
     "cover": "alpha",
@@ -320,35 +320,35 @@
     "customId": "musicnotification:mn.minecraft.music.game.wending",
     "title": "Wending"
   },
-  "minecraft:music/game/wet_hands": {
+  "minecraft:music/game/piano2": {
     "album": "Volume Alpha No. 13",
     "author": "C418",
     "cover": "alpha",
     "customId": "musicnotification:mn.minecraft.music.game.wet_hands",
     "title": "Wet Hands"
   },
-  "minecraft:music/menu/beginning_2": {
+  "minecraft:music/menu/menu3": {
     "album": "Volume Beta No. 17",
     "author": "C418",
     "cover": "beta",
     "customId": "musicnotification:mn.minecraft.music.menu.beginning_2",
     "title": "Beginning 2"
   },
-  "minecraft:music/menu/floating_trees": {
+  "minecraft:music/menu/menu4": {
     "album": "Volume Beta No. 12",
     "author": "C418",
     "cover": "beta",
     "customId": "musicnotification:mn.minecraft.music.menu.floating_trees",
     "title": "Floating Trees"
   },
-  "minecraft:music/menu/moog_city_2": {
+  "minecraft:music/menu/menu2": {
     "album": "Volume Beta No. 6",
     "author": "C418",
     "cover": "beta",
     "customId": "musicnotification:mn.minecraft.music.menu.moog_city_2",
     "title": "Moog City 2"
   },
-  "minecraft:music/menu/mutation": {
+  "minecraft:music/menu/menu1": {
     "album": "Volume Beta No. 9",
     "author": "C418",
     "cover": "beta",

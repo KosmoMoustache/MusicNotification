@@ -66,9 +66,9 @@ public class JukeboxScreen extends Screen {
 
     protected void init() {
         if (this.initialized) {
-            this.soundList.updateSize(this.width, this.getSoundListBottom() - 88, 0, 88);
+            this.soundList.updateSize(this.width, this.height, 88, this.getSoundListBottom());
         } else {
-            this.soundList = new PlaySoundListWidget(this, this.client, this.width, this.height, this.getSoundListBottom() - 88, 88, 36);
+            this.soundList = new PlaySoundListWidget(this, this.client, this.width, this.height, 88, this.getSoundListBottom(), 36);
         }
 
         int middle = this.soundList.getRowWidth() / 2;
@@ -118,8 +118,8 @@ public class JukeboxScreen extends Screen {
 
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.renderBackground(context, mouseX, mouseY, delta);
         int i = this.getSearchBoxX() + 3;
+        super.renderBackground(context, mouseX, mouseY, delta);
         context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
         context.drawGuiTexture(SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
     }

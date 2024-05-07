@@ -30,7 +30,7 @@
   "mn.minecraft.music.game.clark": {
     "sounds": [
       {
-        "name": "music/game/clark"
+        "name": "music/game/calm2"
       }
     ]
   },
@@ -44,42 +44,42 @@
   "mn.minecraft.music.game.creative.aria_math": {
     "sounds": [
       {
-        "name": "music/game/creative/aria_math"
+        "name": "music/game/creative/creative4"
       }
     ]
   },
   "mn.minecraft.music.game.creative.biome_fest": {
     "sounds": [
       {
-        "name": "music/game/creative/biome_fest"
+        "name": "music/game/creative/creative1"
       }
     ]
   },
   "mn.minecraft.music.game.creative.blind_spots": {
     "sounds": [
       {
-        "name": "music/game/creative/blind_spots"
+        "name": "music/game/creative/creative2"
       }
     ]
   },
   "mn.minecraft.music.game.creative.dreiton": {
     "sounds": [
       {
-        "name": "music/game/creative/dreiton"
+        "name": "music/game/creative/creative5"
       }
     ]
   },
   "mn.minecraft.music.game.creative.haunt_muskie": {
     "sounds": [
       {
-        "name": "music/game/creative/haunt_muskie"
+        "name": "music/game/creative/creative3"
       }
     ]
   },
   "mn.minecraft.music.game.creative.taswell": {
     "sounds": [
       {
-        "name": "music/game/creative/taswell"
+        "name": "music/game/creative/creative6"
       }
     ]
   },
@@ -93,14 +93,14 @@
   "mn.minecraft.music.game.danny": {
     "sounds": [
       {
-        "name": "music/game/danny"
+        "name": "music/game/hal4"
       }
     ]
   },
   "mn.minecraft.music.game.dry_hands": {
     "sounds": [
       {
-        "name": "music/game/dry_hands"
+        "name": "music/game/piano1"
       }
     ]
   },
@@ -114,7 +114,7 @@
   "mn.minecraft.music.game.end.alpha": {
     "sounds": [
       {
-        "name": "music/game/end/alpha"
+        "name": "music/game/end/credits"
       }
     ]
   },
@@ -128,7 +128,7 @@
   "mn.minecraft.music.game.end.the_end": {
     "sounds": [
       {
-        "name": "music/game/end/the_end"
+        "name": "music/game/end/end"
       }
     ]
   },
@@ -142,7 +142,7 @@
   "mn.minecraft.music.game.haggstrom": {
     "sounds": [
       {
-        "name": "music/game/haggstrom"
+        "name": "music/game/hal3"
       }
     ]
   },
@@ -156,7 +156,7 @@
   "mn.minecraft.music.game.key": {
     "sounds": [
       {
-        "name": "music/game/key"
+        "name": "music/game/nuance1"
       }
     ]
   },
@@ -170,35 +170,35 @@
   "mn.minecraft.music.game.living_mice": {
     "sounds": [
       {
-        "name": "music/game/living_mice"
+        "name": "music/game/hal2"
       }
     ]
   },
   "mn.minecraft.music.game.mice_on_venus": {
     "sounds": [
       {
-        "name": "music/game/mice_on_venus"
+        "name": "music/game/piano3"
       }
     ]
   },
   "mn.minecraft.music.game.minecraft": {
     "sounds": [
       {
-        "name": "music/game/minecraft"
+        "name": "music/game/calm1"
       }
     ]
   },
   "mn.minecraft.music.game.nether.ballad_of_the_cats": {
     "sounds": [
       {
-        "name": "music/game/nether/ballad_of_the_cats"
+        "name": "music/game/nether/nether4"
       }
     ]
   },
   "mn.minecraft.music.game.nether.concrete_halls": {
     "sounds": [
       {
-        "name": "music/game/nether/concrete_halls"
+        "name": "music/game/nether/nether1"
       }
     ]
   },
@@ -212,7 +212,7 @@
   "mn.minecraft.music.game.nether.dead_voxel": {
     "sounds": [
       {
-        "name": "music/game/nether/dead_voxel"
+        "name": "music/game/nether/nether2"
       }
     ]
   },
@@ -233,7 +233,7 @@
   "mn.minecraft.music.game.nether.warmth": {
     "sounds": [
       {
-        "name": "music/game/nether/warmth"
+        "name": "music/game/nether/nether3"
       }
     ]
   },
@@ -247,7 +247,7 @@
   "mn.minecraft.music.game.oxygene": {
     "sounds": [
       {
-        "name": "music/game/oxygene"
+        "name": "music/game/nuance2"
       }
     ]
   },
@@ -261,7 +261,7 @@
   "mn.minecraft.music.game.subwoofer_lullaby": {
     "sounds": [
       {
-        "name": "music/game/subwoofer_lullaby"
+        "name": "music/game/hal1"
       }
     ]
   },
@@ -289,7 +289,7 @@
   "mn.minecraft.music.game.sweden": {
     "sounds": [
       {
-        "name": "music/game/sweden"
+        "name": "music/game/calm3"
       }
     ]
   },
@@ -324,35 +324,35 @@
   "mn.minecraft.music.game.wet_hands": {
     "sounds": [
       {
-        "name": "music/game/wet_hands"
+        "name": "music/game/piano2"
       }
     ]
   },
   "mn.minecraft.music.menu.beginning_2": {
     "sounds": [
       {
-        "name": "music/menu/beginning_2"
+        "name": "music/menu/menu3"
       }
     ]
   },
   "mn.minecraft.music.menu.floating_trees": {
     "sounds": [
       {
-        "name": "music/menu/floating_trees"
+        "name": "music/menu/menu4"
       }
     ]
   },
   "mn.minecraft.music.menu.moog_city_2": {
     "sounds": [
       {
-        "name": "music/menu/moog_city_2"
+        "name": "music/menu/menu2"
       }
     ]
   },
   "mn.minecraft.music.menu.mutation": {
     "sounds": [
       {
-        "name": "music/menu/mutation"
+        "name": "music/menu/menu1"
       }
     ]
   }

@@ -1,7 +1,6 @@
 package net.kosmo.music.gui;
 
 import com.google.common.collect.Lists;
-import net.kosmo.music.ClientMusic;
 import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.ElementListWidget;
@@ -10,7 +9,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-
 
 public class PlaySoundListWidget extends ElementListWidget<ListEntry> {
     public final JukeboxScreen parent;
