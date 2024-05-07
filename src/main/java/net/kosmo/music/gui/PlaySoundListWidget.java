@@ -1,9 +1,9 @@
 package net.kosmo.music.gui;
 
 import com.google.common.collect.Lists;
-import net.kosmo.music.ClientMusic;
 import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +21,14 @@ public class PlaySoundListWidget extends ElementListWidget<ListEntry> {
     public PlaySoundListWidget(JukeboxScreen parent, MinecraftClient client, int width, int height, int y, int itemHeight) {
         super(client, width, height, y, itemHeight);
         this.parent = parent;
-        this.setRenderBackground(false);
+    }
+
+    @Override
+    protected void drawMenuListBackground(DrawContext context) {
+    }
+
+    @Override
+    protected void drawHeaderAndFooterSeparators(DrawContext context) {
     }
 
     private void refresh(Collection<ListEntry> values, double scrollAmount) {
