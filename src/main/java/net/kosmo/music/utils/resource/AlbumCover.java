@@ -9,15 +9,6 @@ import org.jetbrains.annotations.Nullable;
 public class AlbumCover {
     public static final AlbumCover GENERIC = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/generic"));
     public static final AlbumCover MODDED = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/modded"));
-    public static final AlbumCover ALPHA = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/alpha"));
-    public static final AlbumCover BETA = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/beta"));
-    public static final AlbumCover AXOLOTL = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/axolotl"));
-    public static final AlbumCover DRAGON_FISH = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/dragon_fish"));
-    public static final AlbumCover SHUNIJI = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/shuniji"));
-    public static final AlbumCover NETHER = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/nether"));
-    public static final AlbumCover WILD = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/wild"));
-    public static final AlbumCover CAVES = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/caves"));
-    public static final AlbumCover TRAILS_AND_TALES = new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/trails_and_tales"));
 
     public final Identifier textureId;
 
@@ -38,19 +29,8 @@ public class AlbumCover {
         context.drawGuiTexture(this.textureId, x, y, getWidth(), getHeight());
     }
 
-    public static AlbumCover parseAlbumCover(@Nullable String cover, String album) {
+    public static AlbumCover parseAlbumCover(@Nullable String cover) {
         if (cover != null) return new AlbumCover(new Identifier(ClientMusic.MOD_ID, "toast/" + cover));
-        // Try to guess the album cover based on the album name
-        if (album == null) return GENERIC;
-        if (album.contains("Alpha")) return ALPHA;
-        if (album.contains("Beta")) return BETA;
-        if (album.contains("Axolotl")) return AXOLOTL;
-        if (album.contains("Dragon Fish")) return DRAGON_FISH;
-        if (album.contains("Shuniji")) return SHUNIJI;
-        if (album.contains("Nether")) return NETHER;
-        if (album.contains("Wild")) return WILD;
-        if (album.contains("Caves")) return CAVES;
-        if (album.contains("Trails")) return TRAILS_AND_TALES;
         return GENERIC;
     }
 }
