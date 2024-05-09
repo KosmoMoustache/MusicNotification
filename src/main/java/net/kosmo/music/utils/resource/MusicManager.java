@@ -90,7 +90,7 @@ public class MusicManager {
                 album = JsonHelper.getString(jsonObject, "soundtrack");
                 ClientMusic.LOGGER.error("Key 'soundtrack' of '{}' is deprecated, use 'album' instead", title);
             }
-            AlbumCover cover = AlbumCover.parseAlbumCover(JsonHelper.getString(jsonObject, "cover", null), album);
+            AlbumCover cover = AlbumCover.parseAlbumCover(JsonHelper.getString(jsonObject, "cover", null));
             boolean isRandom = JsonHelper.getBoolean(jsonObject, "isRandom", false);
 
             return new Music(
