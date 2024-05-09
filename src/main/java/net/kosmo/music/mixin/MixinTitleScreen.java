@@ -25,7 +25,7 @@ public class MixinTitleScreen extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
         if (ClientMusic.config.SHOW_TITLE_SCREEN_BUTTON) {
-            this.addDrawableChild(new TexturedButtonWidget(12, 12, 20, 20, new ButtonTextures(new Identifier(ClientMusic.MOD_ID, "jukebox/icon"), new Identifier(ClientMusic.MOD_ID, "jukebox/icon_focused")), (button) -> {
+            this.addDrawableChild(new TexturedButtonWidget(12, 0, 20, 20, new ButtonTextures(new Identifier(ClientMusic.MOD_ID, "jukebox/icon"), new Identifier(ClientMusic.MOD_ID, "jukebox/icon_focused")), (button) -> {
                 this.client.setScreen(new JukeboxScreen(this));
             }));
         }
