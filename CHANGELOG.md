@@ -21,7 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [2.0.0] - TBD
+## [2.0.1] - 2024-05-09
+
+### Added
+
+- New toast icon thanks to @carotteatomique #33
+
+## [2.0.0] - 2024-05-06
 
 ### Added
 
