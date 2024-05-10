@@ -295,21 +295,21 @@
   "minecraft:music/game/water/axolotl": {
     "album": "Axolotl",
     "author": "C418",
-    "cover": "update_aquatic_ost",
+    "cover": "aquatic_update_ost",
     "customId": "musicnotification:mn.minecraft.music.game.water.axolotl",
     "title": "Axolotl"
   },
   "minecraft:music/game/water/dragon_fish": {
     "album": "Dragon Fish",
     "author": "C418",
-    "cover": "update_aquatic_ost",
+    "cover": "aquatic_update_ost",
     "customId": "musicnotification:mn.minecraft.music.game.water.dragon_fish",
     "title": "Dragon Fish"
   },
   "minecraft:music/game/water/shuniji": {
     "album": "Shuniji",
     "author": "C418",
-    "cover": "update_aquatic_ost",
+    "cover": "aquatic_update_ost",
     "customId": "musicnotification:mn.minecraft.music.game.water.shuniji",
     "title": "Shuniji"
   },
