@@ -44,42 +44,42 @@
   "minecraft:music/game/creative/aria_math": {
     "album": "Volume Beta No. 13",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.aria_math",
     "title": "Aria Math"
   },
   "minecraft:music/game/creative/biome_fest": {
     "album": "Volume Beta No. 8",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.biome_fest",
     "title": "Biome Fest"
   },
   "minecraft:music/game/creative/blind_spots": {
     "album": "Volume Beta No. 4",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.blind_spots",
     "title": "Blind Spots"
   },
   "minecraft:music/game/creative/dreiton": {
     "album": "Volume Beta No. 18",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.dreiton",
     "title": "Dreiton"
   },
   "minecraft:music/game/creative/haunt_muskie": {
     "album": "Volume Beta No. 10",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.haunt_muskie",
     "title": "Haunt Muskie"
   },
   "minecraft:music/game/creative/taswell": {
     "album": "Volume Beta No. 16",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.creative.taswell",
     "title": "Taswell"
   },
@@ -114,7 +114,7 @@
   "minecraft:music/game/end/alpha": {
     "album": "Volume Beta No. 2",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.end.alpha",
     "title": "Alpha"
   },
@@ -127,7 +127,7 @@
   "minecraft:music/game/end/the_end": {
     "album": "Volume Beta No. 19",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.end.the_end",
     "title": "The End"
   },
@@ -190,14 +190,14 @@
   "minecraft:music/game/nether/ballad_of_the_cats": {
     "album": "Volume Beta No. 15",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.nether.ballad_of_the_cats",
     "title": "Ballad of the Cats"
   },
   "minecraft:music/game/nether/concrete_halls": {
     "album": "Volume Beta No. 7",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.nether.concrete_halls",
     "title": "Concrete Halls"
   },
@@ -211,7 +211,7 @@
   "minecraft:music/game/nether/dead_voxel": {
     "album": "Volume Beta No. 3",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.nether.dead_voxel",
     "title": "Dead Voxel"
   },
@@ -232,7 +232,7 @@
   "minecraft:music/game/nether/warmth": {
     "album": "Volume Beta No. 11",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.game.nether.warmth",
     "title": "Warmth"
   },
@@ -330,28 +330,28 @@
   "minecraft:music/menu/beginning_2": {
     "album": "Volume Beta No. 17",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.menu.beginning_2",
     "title": "Beginning 2"
   },
   "minecraft:music/menu/floating_trees": {
     "album": "Volume Beta No. 12",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.menu.floating_trees",
     "title": "Floating Trees"
   },
   "minecraft:music/menu/moog_city_2": {
     "album": "Volume Beta No. 6",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.menu.moog_city_2",
     "title": "Moog City 2"
   },
   "minecraft:music/menu/mutation": {
     "album": "Volume Beta No. 9",
     "author": "C418",
-    "cover": "vol_alpha",
+    "cover": "vol_beta",
     "customId": "musicnotification:mn.minecraft.music.menu.mutation",
     "title": "Mutation"
   },
