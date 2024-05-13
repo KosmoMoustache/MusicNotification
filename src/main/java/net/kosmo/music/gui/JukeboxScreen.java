@@ -9,6 +9,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.NarratorManager;
 import net.minecraft.registry.Registries;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -53,6 +54,7 @@ public class JukeboxScreen extends Screen {
     private ButtonWidget soundTabButton;
     private ButtonWidget stopSoundButton;
     private ButtonWidget clearHistoryButton;
+    private ButtonWidget backButton;
     private String currentSearch;
     private boolean initialized;
 
@@ -86,7 +88,11 @@ public class JukeboxScreen extends Screen {
 
         this.stopSoundButton = this.addDrawableChild(ButtonWidget.builder(STOP_SOUND_BUTTON, button -> {
             this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
-        }).dimensions(this.soundList.getRowLeft() + 5, this.getSoundListBottom() + 10, this.soundList.getRowWidth() - 10, 20).build());
+        }).dimensions(this.soundList.getRowLeft(), this.getSoundListBottom() + 10, this.soundList.getRowRight() - this.soundList.getRowLeft() - 1 - 50, 20).build());
+
+        this.backButton = this.addDrawableChild(ButtonWidget.builder(ScreenTexts.BACK, button -> {
+            this.close();
+        }).dimensions(this.soundList.getRowRight() - 50, this.getSoundListBottom() + 10, 50, 20).build());
 
         this.clearHistoryButton = this.addDrawableChild(ButtonWidget.builder(CLEAR_HISTORY, button -> {
             ClientMusic.musicHistory.clear();
