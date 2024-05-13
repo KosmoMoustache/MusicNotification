@@ -21,7 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [2.0.0] - TBD
+## [2.0.1] - 2024-05-09
+
+### Added
+
+- New toast icon thanks to @carotteatomique #33
+
+## [2.0.0] - 2024-05-06
 
 ### Added
 
@@ -102,7 +108,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.2.0] - 2023-05-08
 
-- Change to how musics.json is loaded. Ressource pack can now replace the default musics.json
+- Change to how musics.json is loaded. Resource pack can now replace the default musics.json
 - Bumped Cloth config and Mod Menu version
 
 ## [1.1.0] - 2023-01-23
