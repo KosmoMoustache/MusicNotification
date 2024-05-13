@@ -21,6 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [2.0.2] - TBD
+
+### Added
+
+- Back button in Jukebox Menu
+
 ## [2.0.1] - 2024-05-09
 
 ### Added
