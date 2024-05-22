@@ -2,33 +2,33 @@ package net.kosmo.music.gui;
 
 import com.google.common.collect.Lists;
 import net.kosmo.music.utils.resource.MusicManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.widget.ElementListWidget;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ContainerObjectSelectionList;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 
-public class PlaySoundListWidget extends ElementListWidget<ListEntry> {
+public class PlaySoundListWidget extends ContainerObjectSelectionList<ListEntry> {
     public final JukeboxScreen parent;
     private final List<ListEntry> entries = Lists.newArrayList();
     @Nullable
     private String currentSearch;
 
-    public PlaySoundListWidget(JukeboxScreen parent, MinecraftClient client, int width, int height, int y, int itemHeight) {
+    public PlaySoundListWidget(JukeboxScreen parent, Minecraft client, int width, int height, int y, int itemHeight) {
         super(client, width, height, y, itemHeight);
         this.parent = parent;
     }
 
     @Override
-    protected void drawMenuListBackground(DrawContext context) {
+    protected void renderListBackground(GuiGraphics context) {
     }
 
     @Override
-    protected void drawHeaderAndFooterSeparators(DrawContext context) {
+    protected void renderListSeparators(GuiGraphics context) {
     }
 
     private void refresh(Collection<ListEntry> values, double scrollAmount) {
@@ -40,13 +40,13 @@ public class PlaySoundListWidget extends ElementListWidget<ListEntry> {
     }
 
     public <T> void update(Collection<T> entries, double scrollAmount) {
-        HashMap<Identifier, ListEntry> map = new LinkedHashMap<>();
+        HashMap<ResourceLocation, ListEntry> map = new LinkedHashMap<>();
 
         for (T entry : entries) {
             if (entry instanceof MusicManager.Music music) {
-                map.put(music.identifier, new MusicListEntry(this.client, this, music));
+                map.put(music.identifier, new MusicListEntry(this.minecraft, this, music));
             } else if (entry instanceof MusicManager.Sound sound) {
-                map.put(sound.identifier, new SoundListEntry(this.client, this, sound));
+                map.put(sound.identifier, new SoundListEntry(this.minecraft, this, sound));
             }
         }
 

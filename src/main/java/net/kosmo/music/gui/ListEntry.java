@@ -1,6 +1,6 @@
 package net.kosmo.music.gui;
 
-import net.minecraft.client.gui.widget.ElementListWidget;
+import net.minecraft.client.gui.components.ContainerObjectSelectionList;
 
-public abstract class ListEntry extends  ElementListWidget.Entry<ListEntry>{
+public abstract class ListEntry extends  ContainerObjectSelectionList.Entry<ListEntry>{
 }

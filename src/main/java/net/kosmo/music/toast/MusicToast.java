@@ -1,39 +1,39 @@
 package net.kosmo.music.toast;
 
 import net.kosmo.music.utils.resource.AlbumCover;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.kosmo.music.ClientMusic;
 import net.kosmo.music.utils.resource.MusicManager;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.toast.Toast;
-import net.minecraft.client.toast.ToastManager;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.Colors;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.toasts.Toast;
+import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.CommonColors;
 import org.joml.Quaternionf;
 
 public class MusicToast implements Toast {
-    private static final Identifier TEXTURE = new Identifier(ClientMusic.MOD_ID, "toast/background");
-    private static final Identifier TEXTURE_EXTENDED = new Identifier(ClientMusic.MOD_ID, "toast/background_extended");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ClientMusic.MOD_ID, "toast/background");
+    private static final ResourceLocation TEXTURE_EXTENDED = new ResourceLocation(ClientMusic.MOD_ID, "toast/background_extended");
     private final Type type = Type.DEFAULT;
 
     private boolean justUpdated;
     private long startTime;
     private int rotation;
-    private Text title;
-    private Text author;
-    private Text albumName;
+    private Component title;
+    private Component author;
+    private Component albumName;
     private AlbumCover albumCover;
 
     public MusicToast(MusicManager.Music music) {
-        this.title = Text.literal(music.getTitle());
-        this.author = Text.literal(music.getAuthor());
-        this.albumName = Text.literal(music.getAlbumName());
+        this.title = Component.literal(music.getTitle());
+        this.author = Component.literal(music.getAuthor());
+        this.albumName = Component.literal(music.getAlbumName());
         this.albumCover = music.albumCover;
         this.justUpdated = true;
     }
 
-    public static void show(ToastManager manager, MusicManager.Music music) {
+    public static void show(ToastComponent manager, MusicManager.Music music) {
         if (!ClientMusic.isVolumeZero()) {
             return;
         }
@@ -41,7 +41,7 @@ public class MusicToast implements Toast {
         MusicToast musicToast = manager.getToast(MusicToast.class, Type.DEFAULT);
         if (musicToast == null) {
             ClientMusic.LOGGER.debug("Showing toast for {}", music.identifier);
-            manager.add(new MusicToast(music));
+            manager.addToast(new MusicToast(music));
         } else {
             ClientMusic.LOGGER.debug("Setting toast content: {} {}", music.identifier, musicToast);
             musicToast.setContent(music);
@@ -51,15 +51,15 @@ public class MusicToast implements Toast {
     }
 
     public void setContent(MusicManager.Music music) {
-        this.title = Text.literal(music.getTitle());
-        this.author = Text.literal(music.getAuthor());
-        this.albumName = Text.literal(music.getAlbumName());
+        this.title = Component.literal(music.getTitle());
+        this.author = Component.literal(music.getAuthor());
+        this.albumName = Component.literal(music.getAlbumName());
         this.albumCover = music.albumCover;
         this.justUpdated = true;
     }
 
     @Override
-    public Toast.Visibility draw(DrawContext context, ToastManager manager, long startTime) {
+    public Toast.Visibility render(GuiGraphics context, ToastComponent manager, long startTime) {
         if (rotation >= 360) rotation = 0;
         rotation += 1;
         if (this.justUpdated) {
@@ -68,45 +68,45 @@ public class MusicToast implements Toast {
         }
 
         if (ClientMusic.config.TOAST_CONFIG.SHOW_ALBUM_NAME) {
-            context.drawGuiTexture(TEXTURE_EXTENDED, 0, 0, this.getWidth(), this.getHeight());
+            context.blitSprite(TEXTURE_EXTENDED, 0, 0, this.width(), this.height());
         } else {
-            context.drawGuiTexture(TEXTURE, 0, 0, this.getWidth(), this.getHeight());
+            context.blitSprite(TEXTURE, 0, 0, this.width(), this.height());
         }
 
         // Make the icon rotate
-        context.getMatrices().push();
+        context.pose().pushPose();
         if (ClientMusic.config.TOAST_CONFIG.ROTATE_ALBUM_COVER) {
-            MatrixStack matrices = context.getMatrices();
+            PoseStack matrices = context.pose();
             matrices.translate(0, 0, 0);
             matrices.translate(16, 16, 0);
-            matrices.multiply(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
+            matrices.mulPose(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
             matrices.translate(-16, -16, 0);
             matrices.translate(-0, -0, 0);
         }
         this.albumCover.drawAlbumCover(context, 6, 6);
-        context.getMatrices().pop();
+        context.pose().popPose();
 
-        context.drawText(manager.getClient().textRenderer, this.title, 30, 7, -11534256, false);
+        context.drawString(manager.getMinecraft().font, this.title, 30, 7, -11534256, false);
 
         if (ClientMusic.config.TOAST_CONFIG.SHOW_AUTHOR) {
-            context.drawText(manager.getClient().textRenderer, this.author, 30, 18, -16777216, false);
+            context.drawString(manager.getMinecraft().font, this.author, 30, 18, -16777216, false);
         }
         if (ClientMusic.config.TOAST_CONFIG.SHOW_ALBUM_NAME) {
-            ClientMusic.drawScrollableText(context, manager.getClient().textRenderer, this.albumName, 30, 30, 29, this.getWidth() - 4, 29 + manager.getClient().textRenderer.fontHeight, Colors.BLACK, false, context.getScaledWindowWidth() - 160 + 30, 0, context.getScaledWindowWidth() - 4, 44);
+            ClientMusic.drawScrollableText(context, manager.getMinecraft().font, this.albumName, 30, 30, 29, this.width() - 4, 29 + manager.getMinecraft().font.lineHeight, CommonColors.BLACK, false, context.guiWidth() - 160 + 30, 0, context.guiWidth() - 4, 44);
         }
 
         return (double) (startTime - this.startTime) >= 5000.0 * manager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
     }
 
     @Override
-    public int getHeight() {
+    public int height() {
         if (ClientMusic.config.TOAST_CONFIG.SHOW_ALBUM_NAME) {
             return 44;
         }
         return 32;
     }
 
-    public Type getType() {
+    public Type getToken() {
         return this.type;
     }
 
