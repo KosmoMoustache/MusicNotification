@@ -22,8 +22,8 @@ import java.util.List;
 
 public class MusicListEntry extends ListEntry {
     public static final int GRAY_COLOR = FastColor.ARGB32.color(255, 74, 74, 74);
-    private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(new ResourceLocation("musicnotification", "jukebox/play_button"), new ResourceLocation("musicnotification", "jukebox/play_button_disabled"), new ResourceLocation("musicnotification", "jukebox/play_button_focused"));
-    private static final WidgetSprites STOP_BUTTON_TEXTURE = new WidgetSprites(new ResourceLocation("musicnotification", "jukebox/stop_button"), new ResourceLocation("musicnotification", "jukebox/stop_button_focused"));
+    private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
+    private static final WidgetSprites STOP_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/stop_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/stop_button_focused"));
     public final ArrayList<AbstractWidget> buttons;
     public final MusicManager.Music entry;
     private final Minecraft client;

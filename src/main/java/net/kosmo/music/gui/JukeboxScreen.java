@@ -24,8 +24,8 @@ import java.util.Locale;
 
 
 public class JukeboxScreen extends Screen {
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ClientMusic.MOD_ID, "jukebox/background");
-    private static final ResourceLocation SEARCH_ICON_TEXTURE = new ResourceLocation("minecraft", "icon/search");
+    private static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "jukebox/background");
+    private static final ResourceLocation SEARCH_ICON_TEXTURE = ResourceLocation.fromNamespaceAndPath("minecraft", "icon/search");
 
     private static final Component TITLE = Component.translatable("gui.musicnotification.jukebox.title");
     private static final Component HOME_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.tab_home");

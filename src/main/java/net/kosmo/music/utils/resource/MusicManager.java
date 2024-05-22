@@ -52,7 +52,7 @@ public class MusicManager {
         Music m = this.musics.get(id);
         // When a disc is played using playsound command identifier is <namespace>:records/<disc_name>
         if (m == null) {
-            m = this.musics.get(new ResourceLocation(id.getNamespace(), id.getPath().replace("records/", "music_disc.")));
+            m = this.musics.get(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath().replace("records/", "music_disc.")));
         }
         return m;
     }
@@ -80,9 +80,10 @@ public class MusicManager {
 
         public static Music parseJsonObject(Map.Entry<String, JsonElement> json) throws JsonSyntaxException {
             JsonObject jsonObject = json.getValue().getAsJsonObject();
-            ResourceLocation identifier = new ResourceLocation(json.getKey());
+            // TODO: check if the correct ResourceLocation method is being used
+            ResourceLocation identifier = ResourceLocation.parse(json.getKey());
             String rawCustomId = GsonHelper.getAsString(jsonObject, "customId", null);
-            ResourceLocation customId = rawCustomId == null ? null : new ResourceLocation(rawCustomId);
+            ResourceLocation customId = rawCustomId == null ? null : ResourceLocation.parse(rawCustomId);
             String title = GsonHelper.getAsString(jsonObject, "title");
             String author = GsonHelper.getAsString(jsonObject, "author");
             String album = GsonHelper.getAsString(jsonObject, "album", null);
