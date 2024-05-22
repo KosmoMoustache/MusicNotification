@@ -13,8 +13,8 @@ import net.minecraft.util.CommonColors;
 import org.joml.Quaternionf;
 
 public class MusicToast implements Toast {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(ClientMusic.MOD_ID, "toast/background");
-    private static final ResourceLocation TEXTURE_EXTENDED = new ResourceLocation(ClientMusic.MOD_ID, "toast/background_extended");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "toast/background");
+    private static final ResourceLocation TEXTURE_EXTENDED = ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "toast/background_extended");
     private final Type type = Type.DEFAULT;
 
     private boolean justUpdated;

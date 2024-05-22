@@ -23,7 +23,7 @@ public class MixinTitleScreen extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
         if (ClientMusic.config.SHOW_TITLE_SCREEN_BUTTON) {
-            this.addRenderableWidget(new ImageButton(12, 0, 20, 20, new WidgetSprites(new ResourceLocation(ClientMusic.MOD_ID, "jukebox/icon"), new ResourceLocation(ClientMusic.MOD_ID, "jukebox/icon_focused")), (button) -> {
+            this.addRenderableWidget(new ImageButton(12, 0, 20, 20, new WidgetSprites(ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "jukebox/icon"), ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "jukebox/icon_focused")), (button) -> {
                 this.minecraft.setScreen(new JukeboxScreen(this));
             }));
         }

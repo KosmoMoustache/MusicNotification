@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SoundListEntry extends ListEntry {
-    private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(new ResourceLocation("musicnotification", "jukebox/play_button"), new ResourceLocation("musicnotification", "jukebox/play_button_disabled"), new ResourceLocation("musicnotification", "jukebox/play_button_focused"));
+    private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
     public static final int GRAY_COLOR = FastColor.ARGB32.color(255, 74, 74, 74);
 
     public final Minecraft client;
