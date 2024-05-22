@@ -2,20 +2,20 @@ package net.kosmo.music.gui;
 
 import net.kosmo.music.ClientMusic;
 import net.kosmo.music.utils.resource.MusicManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.util.NarratorManager;
-import net.minecraft.registry.Registries;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Colors;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.GameNarrator;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.CommonColors;
 import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,37 +24,37 @@ import java.util.Locale;
 
 
 public class JukeboxScreen extends Screen {
-    private static final Identifier BACKGROUND_TEXTURE = new Identifier(ClientMusic.MOD_ID, "jukebox/background");
-    private static final Identifier SEARCH_ICON_TEXTURE = new Identifier("minecraft", "icon/search");
+    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ClientMusic.MOD_ID, "jukebox/background");
+    private static final ResourceLocation SEARCH_ICON_TEXTURE = new ResourceLocation("minecraft", "icon/search");
 
-    private static final Text TITLE = Text.translatable("gui.musicnotification.jukebox.title");
-    private static final Text HOME_TAB_TITLE = Text.translatable("gui.musicnotification.jukebox.tab_home");
-    private static final Text SOUND_TAB_TITLE = Text.translatable("gui.musicnotification.jukebox.tab_sound");
-    private static final Text HISTORY_TAB_TITLE = Text.translatable("gui.musicnotification.jukebox.tab_history");
-    private static final Text SELECTED_HOME_TAB_TITLE = HOME_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
-    private static final Text SELECTED_SOUND_TAB_TITLE = SOUND_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
-    private static final Text SELECTED_HISTORY_TAB_TITLE = HISTORY_TAB_TITLE.copyContentOnly().formatted(Formatting.UNDERLINE);
+    private static final Component TITLE = Component.translatable("gui.musicnotification.jukebox.title");
+    private static final Component HOME_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.tab_home");
+    private static final Component SOUND_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.tab_sound");
+    private static final Component HISTORY_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.tab_history");
+    private static final Component SELECTED_HOME_TAB_TITLE = HOME_TAB_TITLE.plainCopy().withStyle(ChatFormatting.UNDERLINE);
+    private static final Component SELECTED_SOUND_TAB_TITLE = SOUND_TAB_TITLE.plainCopy().withStyle(ChatFormatting.UNDERLINE);
+    private static final Component SELECTED_HISTORY_TAB_TITLE = HISTORY_TAB_TITLE.plainCopy().withStyle(ChatFormatting.UNDERLINE);
 
-    private static final Text STOP_SOUND_BUTTON = Text.translatable("gui.musicnotification.jukebox.stop_sound_button");
-    private static final Text MASTER_VOLUME_ZERO = Text.translatable("gui.musicnotification.jukebox.master_volume_zero");
-    private static final Text MUSIC_VOLUME_ZERO = Text.translatable("gui.musicnotification.jukebox.music_volume_zero");
-    private static final Text CLEAR_HISTORY = Text.translatable("gui.musicnotification.jukebox.clear_history");
+    private static final Component STOP_SOUND_BUTTON = Component.translatable("gui.musicnotification.jukebox.stop_sound_button");
+    private static final Component MASTER_VOLUME_ZERO = Component.translatable("gui.musicnotification.jukebox.master_volume_zero");
+    private static final Component MUSIC_VOLUME_ZERO = Component.translatable("gui.musicnotification.jukebox.music_volume_zero");
+    private static final Component CLEAR_HISTORY = Component.translatable("gui.musicnotification.jukebox.clear_history");
 
-    private static final Text SEARCH_TEXT = Text.translatable("gui.musicnotification.jukebox.search_hint").formatted(Formatting.ITALIC).formatted(Formatting.GRAY);
-    private static final Text EMPTY_SEARCH_TEXT = Text.translatable("gui.musicnotification.jukebox.search_empty").formatted(Formatting.GRAY);
-    private static final Text EMPTY_HISTORY_TEXT = Text.translatable("gui.musicnotification.jukebox.history_empty").formatted(Formatting.GRAY);
+    private static final Component SEARCH_TEXT = Component.translatable("gui.musicnotification.jukebox.search_hint").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
+    private static final Component EMPTY_SEARCH_TEXT = Component.translatable("gui.musicnotification.jukebox.search_empty").withStyle(ChatFormatting.GRAY);
+    private static final Component EMPTY_HISTORY_TEXT = Component.translatable("gui.musicnotification.jukebox.history_empty").withStyle(ChatFormatting.GRAY);
 
-    private final MutableText header;
+    private final MutableComponent header;
     private final Screen parent;
     public Tab currentTab;
-    private TextFieldWidget searchBox;
+    private EditBox searchBox;
     private PlaySoundListWidget soundList;
-    private ButtonWidget homeTabButton;
-    private ButtonWidget historyTabButton;
-    private ButtonWidget soundTabButton;
-    private ButtonWidget stopSoundButton;
-    private ButtonWidget clearHistoryButton;
-    private ButtonWidget backButton;
+    private Button homeTabButton;
+    private Button historyTabButton;
+    private Button soundTabButton;
+    private Button stopSoundButton;
+    private Button clearHistoryButton;
+    private Button backButton;
     private String currentSearch;
     private boolean initialized;
 
@@ -68,9 +68,9 @@ public class JukeboxScreen extends Screen {
 
     protected void init() {
         if (this.initialized) {
-            this.soundList.setDimensionsAndPosition(this.width, this.getSoundListBottom() - 88, 0, 88);
+            this.soundList.setRectangle(this.width, this.getSoundListBottom() - 88, 0, 88);
         } else {
-            this.soundList = new PlaySoundListWidget(this, this.client, this.width, this.getSoundListBottom() - 88, 88, 36);
+            this.soundList = new PlaySoundListWidget(this, this.minecraft, this.width, this.getSoundListBottom() - 88, 88, 36);
         }
 
         int middle = this.soundList.getRowWidth() / 2;
@@ -79,76 +79,76 @@ public class JukeboxScreen extends Screen {
 
         if (ClientMusic.config.JUKEBOX_CONFIG.DEBUG_MOD) middle = this.soundList.getRowWidth() / 3;
 
-        this.homeTabButton = this.addDrawableChild(ButtonWidget.builder(HOME_TAB_TITLE, button -> this.setCurrentTab(Tab.HOME)).dimensions(rowLeft, 43, middle, 20).build());
-        this.historyTabButton = this.addDrawableChild(ButtonWidget.builder(HISTORY_TAB_TITLE, button -> this.setCurrentTab(Tab.HISTORY)).dimensions(rowLeft + middle + 1, 43, middle, 20).build());
-        this.soundTabButton = ButtonWidget.builder(SOUND_TAB_TITLE, button -> this.setCurrentTab(Tab.SOUND)).dimensions(rowRigth - middle + 1, 43, middle, 20).build();
+        this.homeTabButton = this.addRenderableWidget(Button.builder(HOME_TAB_TITLE, button -> this.setCurrentTab(Tab.HOME)).bounds(rowLeft, 43, middle, 20).build());
+        this.historyTabButton = this.addRenderableWidget(Button.builder(HISTORY_TAB_TITLE, button -> this.setCurrentTab(Tab.HISTORY)).bounds(rowLeft + middle + 1, 43, middle, 20).build());
+        this.soundTabButton = Button.builder(SOUND_TAB_TITLE, button -> this.setCurrentTab(Tab.SOUND)).bounds(rowRigth - middle + 1, 43, middle, 20).build();
         if (ClientMusic.config.JUKEBOX_CONFIG.DEBUG_MOD) {
-            this.addDrawableChild(this.soundTabButton);
+            this.addRenderableWidget(this.soundTabButton);
         }
 
-        this.stopSoundButton = this.addDrawableChild(ButtonWidget.builder(STOP_SOUND_BUTTON, button -> {
-            this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
-        }).dimensions(this.soundList.getRowLeft(), this.getSoundListBottom() + 10, this.soundList.getRowRight() - this.soundList.getRowLeft() - 1 - 50, 20).build());
+        this.stopSoundButton = this.addRenderableWidget(Button.builder(STOP_SOUND_BUTTON, button -> {
+            this.minecraft.getSoundManager().stop(null, SoundSource.MUSIC);
+        }).bounds(this.soundList.getRowLeft(), this.getSoundListBottom() + 10, this.soundList.getRowRight() - this.soundList.getRowLeft() - 1 - 50, 20).build());
 
-        this.backButton = this.addDrawableChild(ButtonWidget.builder(ScreenTexts.BACK, button -> {
-            this.close();
-        }).dimensions(this.soundList.getRowRight() - 50, this.getSoundListBottom() + 10, 50, 20).build());
+        this.backButton = this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, button -> {
+            this.onClose();
+        }).bounds(this.soundList.getRowRight() - 50, this.getSoundListBottom() + 10, 50, 20).build());
 
-        this.clearHistoryButton = this.addDrawableChild(ButtonWidget.builder(CLEAR_HISTORY, button -> {
+        this.clearHistoryButton = this.addRenderableWidget(Button.builder(CLEAR_HISTORY, button -> {
             ClientMusic.musicHistory.clear();
             this.setCurrentTab(Tab.HISTORY);
-        }).dimensions(10, 10, this.textRenderer.getWidth(CLEAR_HISTORY) + 8, 20).build());
+        }).bounds(10, 10, this.font.width(CLEAR_HISTORY) + 8, 20).build());
         this.clearHistoryButton.visible = false;
 
-        String string = this.searchBox != null ? this.searchBox.getText() : "";
-        this.searchBox = new TextFieldWidget(this.textRenderer, this.getSearchBoxX() + 28, 74, 200, 15, SEARCH_TEXT) {
+        String string = this.searchBox != null ? this.searchBox.getValue() : "";
+        this.searchBox = new EditBox(this.font, this.getSearchBoxX() + 28, 74, 200, 15, SEARCH_TEXT) {
             @Override
-            protected MutableText getNarrationMessage() {
-                if (!JukeboxScreen.this.searchBox.getText().isEmpty() && JukeboxScreen.this.soundList.isEmpty()) {
-                    return super.getNarrationMessage().append(", ").append(EMPTY_SEARCH_TEXT);
+            protected MutableComponent createNarrationMessage() {
+                if (!JukeboxScreen.this.searchBox.getValue().isEmpty() && JukeboxScreen.this.soundList.isEmpty()) {
+                    return super.createNarrationMessage().append(", ").append(EMPTY_SEARCH_TEXT);
                 }
-                return super.getNarrationMessage();
+                return super.createNarrationMessage();
             }
         };
         this.searchBox.setMaxLength(255);
         this.searchBox.setVisible(true);
-        this.searchBox.setEditableColor(0xFFFFFF);
-        this.searchBox.setText(string);
-        this.searchBox.setPlaceholder(SEARCH_TEXT);
-        this.searchBox.setChangedListener(this::onSearchChange);
+        this.searchBox.setTextColor(0xFFFFFF);
+        this.searchBox.setValue(string);
+        this.searchBox.setHint(SEARCH_TEXT);
+        this.searchBox.setResponder(this::onSearchChange);
 
-        this.addSelectableChild(this.searchBox);
-        this.addSelectableChild(this.soundList);
+        this.addWidget(this.searchBox);
+        this.addWidget(this.soundList);
         this.initialized = true;
         this.setCurrentTab(this.currentTab);
     }
 
     @Override
-    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void renderBackground(GuiGraphics context, int mouseX, int mouseY, float delta) {
         super.renderBackground(context, mouseX, mouseY, delta);
         int i = this.getSearchBoxX() + 3;
-        context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
-        context.drawGuiTexture(SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
+        context.blitSprite(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
+        context.blitSprite(SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
 
-        context.drawTextWithShadow(this.textRenderer, this.header, this.getSearchBoxX() + 8, 30, -1);
+        context.drawString(this.font, this.header, this.getSearchBoxX() + 8, 30, -1);
 
-        if (MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MASTER) == 0f) {
+        if (Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.MASTER) == 0f) {
             this.stopSoundButton.setMessage(MASTER_VOLUME_ZERO);
-        } else if (MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MUSIC) == 0f) {
+        } else if (Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.MUSIC) == 0f) {
             this.stopSoundButton.setMessage(MUSIC_VOLUME_ZERO);
         }
 
         if (!this.soundList.isEmpty()) {
             this.soundList.render(context, mouseX, mouseY, delta);
-        } else if (!this.searchBox.getText().isEmpty()) {
-            context.drawCenteredTextWithShadow(this.client.textRenderer, EMPTY_SEARCH_TEXT, this.width / 2, (72 + this.getSoundListBottom()) / 2, Colors.WHITE);
+        } else if (!this.searchBox.getValue().isEmpty()) {
+            context.drawCenteredString(this.minecraft.font, EMPTY_SEARCH_TEXT, this.width / 2, (72 + this.getSoundListBottom()) / 2, CommonColors.WHITE);
         } else if (this.currentTab == Tab.HISTORY) {
-            context.drawCenteredTextWithShadow(this.client.textRenderer, EMPTY_HISTORY_TEXT, this.width / 2, (72 + this.getSoundListBottom()) / 2, Colors.WHITE);
+            context.drawCenteredString(this.minecraft.font, EMPTY_HISTORY_TEXT, this.width / 2, (72 + this.getSoundListBottom()) / 2, CommonColors.WHITE);
         }
 
         this.searchBox.render(context, mouseX, mouseY, delta);
@@ -156,8 +156,8 @@ public class JukeboxScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        this.searchBox.setCursorToEnd(false);
-        this.searchBox.setSelectionEnd(0);
+        this.searchBox.moveCursorToEnd(false);
+        this.searchBox.setHighlightPos(0);
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -171,7 +171,7 @@ public class JukeboxScreen extends Screen {
 
     private void setCurrentTab(Tab currentTab) {
         if (this.currentTab != currentTab) {
-            this.searchBox.setText("");
+            this.searchBox.setValue("");
         }
 
         this.currentTab = currentTab;
@@ -194,7 +194,7 @@ public class JukeboxScreen extends Screen {
                 this.soundTabButton.setMessage(SELECTED_SOUND_TAB_TITLE);
                 header.append(" - ").append(SOUND_TAB_TITLE);
                 Collection<MusicManager.Sound> col = Lists.newArrayList();
-                Registries.SOUND_EVENT.getIds().forEach(id -> col.add(new MusicManager.Sound(id)));
+                BuiltInRegistries.SOUND_EVENT.keySet().forEach(id -> col.add(new MusicManager.Sound(id)));
                 listEmpty = col.isEmpty();
                 this.soundList.update(col, this.soundList.getScrollAmount());
                 break;
@@ -209,14 +209,14 @@ public class JukeboxScreen extends Screen {
             }
         }
 
-        NarratorManager narratorManager = this.client.getNarratorManager();
-        if (!this.searchBox.getText().isEmpty() && this.soundList.isEmpty() && !this.searchBox.isFocused()) {
-            narratorManager.narrate(EMPTY_SEARCH_TEXT);
+        GameNarrator narratorManager = this.minecraft.getNarrator();
+        if (!this.searchBox.getValue().isEmpty() && this.soundList.isEmpty() && !this.searchBox.isFocused()) {
+            narratorManager.sayNow(EMPTY_SEARCH_TEXT);
         } else if (listEmpty) {
             if (currentTab == Tab.HOME || currentTab == Tab.SOUND) {
-                narratorManager.narrate(EMPTY_SEARCH_TEXT);
+                narratorManager.sayNow(EMPTY_SEARCH_TEXT);
             } else if (currentTab == Tab.HISTORY) {
-                narratorManager.narrate(EMPTY_HISTORY_TEXT);
+                narratorManager.sayNow(EMPTY_HISTORY_TEXT);
             }
         }
     }
