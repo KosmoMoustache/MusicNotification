@@ -2,24 +2,23 @@ package net.kosmo.music.mixin;
 
 import net.kosmo.music.ClientMusic;
 import net.kosmo.music.utils.ModConfig;
+import net.minecraft.client.gui.components.toasts.Toast;
+import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.kosmo.music.toast.MusicToast;
-import net.minecraft.client.toast.Toast;
-import net.minecraft.client.toast.ToastManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(ToastManager.Entry.class)
+@Mixin(ToastComponent.ToastInstance.class)
 public abstract class MixinToastManagerEntry<T extends Toast> {
     @Shadow
     @Final
-    int topIndex;
+    int index;
     @Shadow
     @Final
-    private T instance;
+    private T toast;
 
     /**
      * This method is called when a toast is drawn to the screen
@@ -33,14 +32,14 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
 //        return this.topIndex * 32;
 //    }
 
-    @Redirect(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/Toast$Visibility;playSound(Lnet/minecraft/client/sound/SoundManager;)V"), require = 0)
-    public void playSound(Toast.Visibility visibility, net.minecraft.client.sound.SoundManager soundManager) {
+    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/toasts/Toast$Visibility;playSound(Lnet/minecraft/client/sounds/SoundManager;)V"), require = 0)
+    public void playSound(Toast.Visibility visibility, net.minecraft.client.sounds.SoundManager soundManager) {
         if (ClientMusic.config.TOAST_CONFIG.DISABLE_TOAST_SOUND == null) ClientMusic.config.TOAST_CONFIG.DISABLE_TOAST_SOUND = ModConfig.DisableToastSound.MUTE_SELF;
         switch (ClientMusic.config.TOAST_CONFIG.DISABLE_TOAST_SOUND) {
             case MUTE_ALL:
                 break;
             case MUTE_SELF:
-                if (this.instance instanceof MusicToast) break;
+                if (this.toast instanceof MusicToast) break;
             case VANILLA:
                 visibility.playSound(soundManager);
         }
