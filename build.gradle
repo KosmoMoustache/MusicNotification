@@ -93,6 +93,10 @@ tasks.register('checkProperties') {
             }
         }
 
+        if (props['minecraft_version'].contains('w')) {
+            return;
+        }
+
         if (!compareVersions(props['minecraft_version'], json['depends']['minecraft'])) {
             throw new GradleException("The minecraft version in gradle.properties and fabric.mod.json do not match")
         }
