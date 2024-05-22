@@ -22,8 +22,8 @@
   "gui.musicnotification.jukebox.search_hint": "Search...",
   "gui.musicnotification.jukebox.search_empty": "No music found",
   "gui.musicnotification.jukebox.play_sound": "Play",
-  "gui.musicnotification.jukebox.music_volume_zero": "Music volume is zero",
-  "gui.musicnotification.jukebox.master_volume_zero": "Master volume is zero",
+  "gui.musicnotification.jukebox.music_volume_zero": "Music volume is at zero",
+  "gui.musicnotification.jukebox.master_volume_zero": "Master volume is at zero",
   "gui.musicnotification.jukebox.history_empty": "No music played",
   "gui.musicnotification.jukebox.clear_history": "Clear history",
   "gui.musicnotification.jukebox.cant_play": "is thus unable to play music"
