@@ -10,6 +10,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.loader.api.FabricLoader;
 import net.kosmo.music.gui.JukeboxScreen;
@@ -61,6 +62,8 @@ public class ClientMusic implements ClientModInitializer {
 
     public static MusicHistory musicHistory = new MusicHistory();
 
+    public static boolean isDarkModeEnabled = false;
+
     @Nullable
     public static SoundInstance currentlyPlaying;
 
@@ -110,8 +113,17 @@ public class ClientMusic implements ClientModInitializer {
             @Override
             public void reload(ResourceManager manager) {
                 musicManager.reload();
+                isDarkModeEnabled = manager.streamResourcePacks().anyMatch(resourcePack -> resourcePack.getId().equals(new Identifier(MOD_ID, "dark_mode").toString()));
             }
         });
+
+            // Register built-in resource pack
+        FabricLoader.getInstance().getModContainer(MOD_ID)
+                .ifPresent(container -> ResourceManagerHelper.registerBuiltinResourcePack(
+                        new Identifier(MOD_ID, "dark_mode"), container,
+                        Text.translatable("text.musicnotification.resourcepack.dark_mode.name"),
+                        ResourcePackActivationType.NORMAL)
+                );
 
         // Config
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);

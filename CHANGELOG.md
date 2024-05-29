@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Back button in Jukebox Menu
+- Dark Mode built-in resource pack  tanks to [Knewest](https://github.com/Knewest)
 
 ## [2.0.1] - 2024-05-09
 
