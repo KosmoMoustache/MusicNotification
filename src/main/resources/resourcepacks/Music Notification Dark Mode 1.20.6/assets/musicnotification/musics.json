@@ -1,0 +1,454 @@
+{
+  "minecraft:music/game/a_familiar_room": {
+    "album": "§fTrails & Tailes Update No.2",
+    "author": "§fAaron Cherof",
+    "cover": "trails_and_tales_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.a_familiar_room",
+    "title": "§eA Familiar Room"
+  },
+  "minecraft:music/game/an_ordinary_day": {
+    "album": "§fCaves & Cliffs No. 10",
+    "author": "§fKumi Tanioka",
+    "cover": "caves_and_cliffs_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.an_ordinary_day",
+    "title": "§eAn Ordinary Day"
+  },
+  "minecraft:music/game/ancestry": {
+    "album": "§fThe Wild Update No.3",
+    "author": "§fLena Raine",
+    "cover": "wild_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.ancestry",
+    "title": "§eAncestry"
+  },
+  "minecraft:music/game/bromeliad": {
+    "album": "§fTrails & Tailes Update No.3",
+    "author": "§fAaron Cherof",
+    "cover": "trails_and_tales_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.bromeliad",
+    "title": "§eBromeliad"
+  },
+  "minecraft:music/game/clark": {
+    "album": "§fVolume Alpha No. 14",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.clark",
+    "title": "§eClark"
+  },
+  "minecraft:music/game/comforting_memories": {
+    "album": "§fCaves & Cliffs No. 9",
+    "author": "§fKumi Tanioka",
+    "cover": "caves_and_cliffs_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.comforting_memories",
+    "title": "§eComforting Memories"
+  },
+  "minecraft:music/game/creative/aria_math": {
+    "album": "§fVolume Beta No. 13",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.creative.aria_math",
+    "title": "§eAria Math"
+  },
+  "minecraft:music/game/creative/biome_fest": {
+    "album": "§fVolume Beta No. 8",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.creative.biome_fest",
+    "title": "§eBiome Fest"
+  },
+  "minecraft:music/game/creative/blind_spots": {
+    "album": "§fVolume Beta No. 4",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.creative.blind_spots",
+    "title": "§eBlind Spots"
+  },
+  "minecraft:music/game/creative/dreiton": {
+    "album": "§fVolume Beta No. 18",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.creative.dreiton",
+    "title": "§eDreiton"
+  },
+  "minecraft:music/game/creative/haunt_muskie": {
+    "album": "§fVolume Beta No. 10",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.creative.haunt_muskie",
+    "title": "§eHaunt Muskie"
+  },
+  "minecraft:music/game/creative/taswell": {
+    "album": "§fVolume Beta No. 16",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.creative.taswell",
+    "title": "§eTaswell"
+  },
+  "minecraft:music/game/crescent_dunes": {
+    "album": "§fTrails & Tailes Update No.4",
+    "author": "§fAaron Cherof",
+    "cover": "trails_and_tales_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.crescent_dunes",
+    "title": "§eCrescent Dunes"
+  },
+  "minecraft:music/game/danny": {
+    "album": "§fVolume Alpha No. 21",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.danny",
+    "title": "§eDanny"
+  },
+  "minecraft:music/game/dry_hands": {
+    "album": "§fVolume Alpha No. 12",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.dry_hands",
+    "title": "§eDry Hands"
+  },
+  "minecraft:music/game/echo_in_the_wind": {
+    "album": "§fTrails & Tailes Update No.1",
+    "author": "§fAaron Cherof",
+    "cover": "trails_and_tales_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.echo_in_the_wind",
+    "title": "§eEcho in the Wind"
+  },
+  "minecraft:music/game/end/alpha": {
+    "album": "§fVolume Beta No. 2",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.end.alpha",
+    "title": "§eAlpha"
+  },
+  "minecraft:music/game/end/boss": {
+    "album": "§f",
+    "author": "§fC148",
+    "customId": "musicnotification:mn.minecraft.music.game.end.boss",
+    "title": "§eBoss"
+  },
+  "minecraft:music/game/end/the_end": {
+    "album": "§fVolume Beta No. 19",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.end.the_end",
+    "title": "§eThe End"
+  },
+  "minecraft:music/game/floating_dream": {
+    "album": "§fCaves & Cliffs No. 8",
+    "author": "§fKumi Tanioka",
+    "cover": "caves_and_cliffs_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.floating_dream",
+    "title": "§eFloating Dream"
+  },
+  "minecraft:music/game/haggstrom": {
+    "album": "§fVolume Alpha No. 7",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.haggstrom",
+    "title": "§eHaggstrom"
+  },
+  "minecraft:music/game/infinite_amethyst": {
+    "album": "§fCaves & Cliffs No. 5",
+    "author": "§fLena Raine",
+    "cover": "caves_and_cliffs_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.infinite_amethyst",
+    "title": "§eInfinite Amethyst"
+  },
+  "minecraft:music/game/key": {
+    "album": "§fVolume Alpha No. 1",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.key",
+    "title": "§eKey"
+  },
+  "minecraft:music/game/left_to_bloom": {
+    "album": "§fCaves & Cliffs No. 2",
+    "author": "§fLena Raine",
+    "cover": "caves_and_cliffs_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.left_to_bloom",
+    "title": "§eLeft to Bloom"
+  },
+  "minecraft:music/game/living_mice": {
+    "album": "§fVolume Alpha No. 5",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.living_mice",
+    "title": "§eLiving Mice"
+  },
+  "minecraft:music/game/mice_on_venus": {
+    "album": "§fVolume Alpha No. 11",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.mice_on_venus",
+    "title": "§eMice on Venus"
+  },
+  "minecraft:music/game/minecraft": {
+    "album": "§fVolume Alpha No. 8",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.minecraft",
+    "title": "§eMinecraft"
+  },
+  "minecraft:music/game/nether/ballad_of_the_cats": {
+    "album": "§fVolume Beta No. 15",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.nether.ballad_of_the_cats",
+    "title": "§eBallad of the Cats"
+  },
+  "minecraft:music/game/nether/concrete_halls": {
+    "album": "§fVolume Beta No. 7",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.nether.concrete_halls",
+    "title": "§eConcrete Halls"
+  },
+  "minecraft:music/game/nether/crimson_forest/chrysopoeia": {
+    "album": "§fNether Update No. 1",
+    "author": "§fLena Raine",
+    "cover": "nether_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.nether.crimson_forest.chrysopoeia",
+    "title": "§eChrysopoeia"
+  },
+  "minecraft:music/game/nether/dead_voxel": {
+    "album": "§fVolume Beta No. 3",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.nether.dead_voxel",
+    "title": "§eDead Voxel"
+  },
+  "minecraft:music/game/nether/nether_wastes/rubedo": {
+    "album": "§fNether Update No. 2",
+    "author": "§fLena Raine",
+    "cover": "nether_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.nether.nether_wastes.rubedo",
+    "title": "§eRubedo"
+  },
+  "minecraft:music/game/nether/soulsand_valley/so_below": {
+    "album": "§fNether Update No. 3",
+    "author": "§fLena Raine",
+    "cover": "nether_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.nether.soulsand_valley.so_below",
+    "title": "§eSo Below"
+  },
+  "minecraft:music/game/nether/warmth": {
+    "album": "§fVolume Beta No. 11",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.game.nether.warmth",
+    "title": "§eWarmth"
+  },
+  "minecraft:music/game/one_more_day": {
+    "album": "§fCaves & Cliffs No. 6",
+    "author": "§fLena Raine",
+    "cover": "caves_and_cliffs_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.one_more_day",
+    "title": "§eOne More Day"
+  },
+  "minecraft:music/game/oxygene": {
+    "album": "§fVolume Alpha No. 9",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.oxygene",
+    "title": "§eOxygène"
+  },
+  "minecraft:music/game/stand_tall": {
+    "album": "§fCaves & Cliffs No. 8",
+    "author": "§fLena Raine",
+    "cover": "caves_and_cliffs_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.stand_tall",
+    "title": "§eStand Tall"
+  },
+  "minecraft:music/game/subwoofer_lullaby": {
+    "album": "§fVolume Alpha No. 3",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.subwoofer_lullaby",
+    "title": "§eSubwoofer Lullaby"
+  },
+  "minecraft:music/game/swamp/aerie": {
+    "album": "§fThe Wild Update No.2",
+    "author": "§fLena Raine",
+    "cover": "wild_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.swamp.aerie",
+    "title": "§eAerie"
+  },
+  "minecraft:music/game/swamp/firebugs": {
+    "album": "§fThe Wild Update No. 1",
+    "author": "§fLena Raine",
+    "cover": "wild_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.swamp.firebugs",
+    "title": "§eFirebugs"
+  },
+  "minecraft:music/game/swamp/labyrinthine": {
+    "album": "§fThe Wild Update No. 3",
+    "author": "§fLena Raine",
+    "cover": "wild_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.swamp.labyrinthine",
+    "title": "§eLabyrinthine"
+  },
+  "minecraft:music/game/sweden": {
+    "album": "§fVolume Alpha No. 18",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.sweden",
+    "title": "§eSweden"
+  },
+  "minecraft:music/game/water/axolotl": {
+    "album": "§fAxolotl",
+    "author": "§fC418",
+    "cover": "aquatic_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.water.axolotl",
+    "title": "§eAxolotl"
+  },
+  "minecraft:music/game/water/dragon_fish": {
+    "album": "§fDragon Fish",
+    "author": "§fC418",
+    "cover": "aquatic_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.water.dragon_fish",
+    "title": "§eDragon Fish"
+  },
+  "minecraft:music/game/water/shuniji": {
+    "album": "§fShuniji",
+    "author": "§fC418",
+    "cover": "aquatic_update_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.water.shuniji",
+    "title": "§eShuniji"
+  },
+  "minecraft:music/game/wending": {
+    "album": "§fCaves & Cliffs No. 4",
+    "author": "§fLena Raine",
+    "cover": "caves_and_cliffs_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.wending",
+    "title": "§eWending"
+  },
+  "minecraft:music/game/wet_hands": {
+    "album": "§fVolume Alpha No. 13",
+    "author": "§fC418",
+    "cover": "vol_alpha",
+    "customId": "musicnotification:mn.minecraft.music.game.wet_hands",
+    "title": "§eWet Hands"
+  },
+  "minecraft:music/menu/beginning_2": {
+    "album": "§fVolume Beta No. 17",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.menu.beginning_2",
+    "title": "§eBeginning 2"
+  },
+  "minecraft:music/menu/floating_trees": {
+    "album": "§fVolume Beta No. 12",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.menu.floating_trees",
+    "title": "§eFloating Trees"
+  },
+  "minecraft:music/menu/moog_city_2": {
+    "album": "§fVolume Beta No. 6",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.menu.moog_city_2",
+    "title": "§eMoog City 2"
+  },
+  "minecraft:music/menu/mutation": {
+    "album": "§fVolume Beta No. 9",
+    "author": "§fC418",
+    "cover": "vol_beta",
+    "customId": "musicnotification:mn.minecraft.music.menu.mutation",
+    "title": "§eMutation"
+  },
+  "minecraft:music_disc.11": {
+    "album": "§f",
+    "author": "§fC418",
+    "cover": "11",
+    "title": "§e11"
+  },
+  "minecraft:music_disc.13": {
+    "album": "§fVolume Alpha No. 16",
+    "author": "§fC418",
+    "cover": "13",
+    "title": "§eThirteen"
+  },
+  "minecraft:music_disc.5": {
+    "album": "§fThe Wild Update No.4",
+    "author": "§fSamuel Åberg",
+    "cover": "5",
+    "title": "§eFive"
+  },
+  "minecraft:music_disc.blocks": {
+    "album": "§fVolume Beta No. 28",
+    "author": "§fC418",
+    "cover": "blocks",
+    "title": "§eBlocks"
+  },
+  "minecraft:music_disc.cat": {
+    "album": "§fVolume Alpha No. 19",
+    "author": "§fC418",
+    "cover": "cat",
+    "title": "§eCat"
+  },
+  "minecraft:music_disc.chirp": {
+    "album": "§fVolume Beta No. 20",
+    "author": "§fC418",
+    "cover": "chirp",
+    "title": "§eChirp"
+  },
+  "minecraft:music_disc.far": {
+    "album": "§fVolume Beta No. 29",
+    "author": "§fC418",
+    "cover": "far",
+    "title": "§eFar"
+  },
+  "minecraft:music_disc.mall": {
+    "album": "§fVolume Beta No. 27",
+    "author": "§fC418",
+    "cover": "mall",
+    "title": "§eMall"
+  },
+  "minecraft:music_disc.mellohi": {
+    "album": "§fVolume Beta No. 22",
+    "author": "§fC418",
+    "cover": "mellohi",
+    "title": "§eMellohi"
+  },
+  "minecraft:music_disc.otherside": {
+    "album": "§fCaves & Cliffs No. 7",
+    "author": "§fLena Raine",
+    "cover": "otherside",
+    "title": "§eOtherside"
+  },
+  "minecraft:music_disc.pigstep": {
+    "album": "§fNether Update No. 4",
+    "author": "§fLena Raine",
+    "cover": "pigstep",
+    "title": "§ePigstep"
+  },
+  "minecraft:music_disc.relic": {
+    "album": "§fTrails & Tailes Update No.5",
+    "author": "§fAaron Cherof",
+    "cover": "relic",
+    "title": "§eRelic"
+  },
+  "minecraft:music_disc.stal": {
+    "album": "§fVolume Beta No. 23",
+    "author": "§fC418",
+    "cover": "stal",
+    "title": "§eStal"
+  },
+  "minecraft:music_disc.strad": {
+    "album": "§fVolume Beta No. 24",
+    "author": "§fC418",
+    "cover": "strad",
+    "title": "§eStrad"
+  },
+  "minecraft:music_disc.wait": {
+    "album": "§fVolume Beta No. 21",
+    "author": "§fC418",
+    "cover": "wait",
+    "title": "§eWait"
+  },
+  "minecraft:music_disc.ward": {
+    "album": "§fVolume Beta No. 26",
+    "author": "§fC418",
+    "cover": "ward",
+    "title": "§eWard"
+  }
+}
