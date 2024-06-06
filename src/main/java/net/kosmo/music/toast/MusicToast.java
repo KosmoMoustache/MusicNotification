@@ -86,13 +86,13 @@ public class MusicToast implements Toast {
         this.albumCover.drawAlbumCover(context, 6, 6);
         context.getMatrices().pop();
 
-        context.drawText(manager.getClient().textRenderer, this.title, 30, 7, -11534256, false);
+        context.drawText(manager.getClient().textRenderer, this.title, 30, 7, ClientMusic.isDarkModeEnabled ? 0xff75ff : -11534256, false);
 
         if (ClientMusic.config.TOAST_CONFIG.SHOW_AUTHOR) {
-            context.drawText(manager.getClient().textRenderer, this.author, 30, 18, -16777216, false);
+            context.drawText(manager.getClient().textRenderer, this.author, 30, 18, ClientMusic.isDarkModeEnabled ? -3355444 : Colors.BLACK, false);
         }
         if (ClientMusic.config.TOAST_CONFIG.SHOW_ALBUM_NAME) {
-            ClientMusic.drawScrollableText(context, manager.getClient().textRenderer, this.albumName, 30, 30, 29, this.getWidth() - 4, 29 + manager.getClient().textRenderer.fontHeight, Colors.BLACK, false, context.getScaledWindowWidth() - 160 + 30, 0, context.getScaledWindowWidth() - 4, 44);
+            ClientMusic.drawScrollableText(context, manager.getClient().textRenderer, this.albumName, 30, 30, 29, this.getWidth() - 4, 29 + manager.getClient().textRenderer.fontHeight, ClientMusic.isDarkModeEnabled ? -3355444 : Colors.BLACK, false, context.getScaledWindowWidth() - 160 + 30, 0, context.getScaledWindowWidth() - 4, 44);
         }
 
         return (double) (startTime - this.startTime) >= 5000.0 * manager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
