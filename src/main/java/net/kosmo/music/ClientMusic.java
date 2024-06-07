@@ -13,6 +13,8 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.loader.api.FabricLoader;
 import net.kosmo.music.gui.JukeboxScreen;
@@ -31,6 +33,7 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEventListener;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.client.sounds.WeighedSoundEvents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.Resource;
@@ -59,6 +62,7 @@ public class ClientMusic implements ClientModInitializer {
     public static MusicManager musicManager;
     public static ModConfig config;
     public static MusicHistory musicHistory = new MusicHistory();
+    public static boolean isDarkModeEnabled = false;
     @Nullable
     public static SoundInstance currentlyPlaying;
 
@@ -116,6 +120,14 @@ public class ClientMusic implements ClientModInitializer {
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
+        // Register built-in resource pack
+        FabricLoader.getInstance().getModContainer(MOD_ID)
+                .ifPresent(container -> ResourceManagerHelper.registerBuiltinResourcePack(
+                        ResourceLocation.fromNamespaceAndPath(MOD_ID, "dark_mode"), container,
+                        Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
+                        ResourcePackActivationType.NORMAL)
+                );
+
         // Event Listeners
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new ClientResourceListener());
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new ServerDataResourceListener());
@@ -137,6 +149,7 @@ public class ClientMusic implements ClientModInitializer {
         public void onResourceManagerReload(ResourceManager manager) {
             ClientMusic.LOGGER.debug("ClientResource: Reloading MusicManager");
             ClientMusic.musicManager.reload();
+            isDarkModeEnabled = manager.listPacks().anyMatch(resourcePack -> resourcePack.packId().equals(ResourceLocation.fromNamespaceAndPath(MOD_ID, "dark_mode").toString()));
         }
     }
 

@@ -60,7 +60,6 @@ public class MusicToast implements Toast {
         this.justUpdated = true;
     }
 
-
     @Override
     public Toast.@NotNull Visibility render(GuiGraphics context, ToastComponent manager, long startTime) {
         if (rotation >= 360) rotation = 0;
@@ -89,13 +88,13 @@ public class MusicToast implements Toast {
         this.albumCover.drawAlbumCover(context, 6, 6);
         context.pose().popPose();
 
-        context.drawString(manager.getMinecraft().font, this.title, 30, 7, -11534256, false);
+        context.drawString(manager.getMinecraft().font, this.title, 30, 7, ClientMusic.isDarkModeEnabled ? 0xff75ff : -11534256, false);
 
         if (ClientMusic.config.TOAST_CONFIG.SHOW_AUTHOR) {
-            context.drawString(manager.getMinecraft().font, this.author, 30, 18, -16777216, false);
+            context.drawString(manager.getMinecraft().font, this.author, 30, 18, ClientMusic.isDarkModeEnabled ? -3355444 : Colors.BLACK, false);
         }
         if (ClientMusic.config.TOAST_CONFIG.SHOW_ALBUM_NAME) {
-            RenderHelper.drawScrollableText(context, manager.getMinecraft().font, this.albumName, 30, 30, 29, this.width() - 4, 29 + manager.getMinecraft().font.lineHeight, CommonColors.BLACK, false, context.guiWidth() - 160 + 30, 0, context.guiWidth() - 4, 44);
+            RenderHelper.drawScrollableText(context, manager.getMinecraft().font, this.albumName, 30, 30, 29, this.width() - 4, 29 + manager.getMinecraft().font.lineHeight, ClientMusic.isDarkModeEnabled ? -3355444 : CommonColors.BLACK, false, context.guiWidth() - 160 + 30, 0, context.guiWidth() - 4, 44);
         }
 
         return (double) (startTime - this.startTime) >= 5000.0 * manager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
