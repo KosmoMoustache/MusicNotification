@@ -472,11 +472,11 @@
     "customId": "musicnotification:mn.minecraft.music.game.puzzlebox",
     "title": "Puzzlebox"
   },
-  "minecraft:music/game/kamorebi": {
+  "minecraft:music/game/komorebi": {
     "album": "Tricky Trials Update No. 4",
     "author": "Kumi Tanioka",
     "cover": "tricky_trials_ost",
-    "customId": "musicnotification:mn.minecraft.music.game.kamorebi",
+    "customId": "musicnotification:mn.minecraft.music.game.komorebi",
     "title": "komorebi"
   },
   "minecraft:music/game/pokopoko": {
@@ -500,11 +500,11 @@
     "customId": "musicnotification:mn.minecraft.music.game.deeper",
     "title": "Deeper"
   },
-  "minecraft:music/game/eld_unkown": {
+  "minecraft:music/game/eld_unknown": {
     "album": "Tricky Trials Update No. 8",
     "author": "Lena Raine",
     "cover": "tricky_trials_ost",
-    "customId": "musicnotification:mn.minecraft.music.game.eld_unkown",
+    "customId": "musicnotification:mn.minecraft.music.game.eld_unknown",
     "title": "Eld Unknown"
   },
   "minecraft:music/game/endless": {
