@@ -1,0 +1,16 @@
+{
+  "music_disc.droopy_remembers": {
+    "sounds": [
+      {
+        "name": "custom_disc:records/droopy_remembers"
+      }
+    ]
+  },
+  "music_disc.seismic_stratigraphy": {
+    "sounds": [
+      {
+        "name": "custom_disc:records/seismic_stratigraphy"
+      }
+    ]
+  }
+}

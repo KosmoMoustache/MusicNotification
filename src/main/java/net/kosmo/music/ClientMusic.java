@@ -2,6 +2,7 @@ package net.kosmo.music;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.mojang.blaze3d.platform.InputConstants;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
@@ -9,7 +10,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.loader.api.FabricLoader;
@@ -18,26 +22,25 @@ import net.kosmo.music.mixin.IMixinMusicTracker;
 import net.kosmo.music.toast.MusicToast;
 import net.kosmo.music.utils.ModConfig;
 import net.kosmo.music.utils.MusicHistory;
+import net.kosmo.music.utils.Parser;
 import net.kosmo.music.utils.resource.AlbumCover;
 import net.kosmo.music.utils.resource.MusicManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.sound.*;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.item.MusicDiscItem;
-import net.minecraft.resource.Resource;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.sounds.SoundEventListener;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.client.sounds.WeighedSoundEvents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.GsonHelper;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
@@ -45,204 +48,167 @@ import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Environment(EnvType.CLIENT)
 public class ClientMusic implements ClientModInitializer {
     public static final String MOD_ID = "musicnotification";
     public static final Logger LOGGER = LoggerFactory.getLogger("MusicNotification");
-    public static final Identifier MUSICS_JSON_ID = new Identifier(MOD_ID, "musics.json");
+    public static final ResourceLocation MUSICS_JSON_ID = ResourceLocation.fromNamespaceAndPath(MOD_ID, "musics.json");
 
-    public static KeyBinding keyBinding;
+    public static KeyMapping keyBinding;
     public static SoundManager soundManager;
-    public static MinecraftClient client;
+    public static Minecraft client;
     public static MusicManager musicManager;
     public static ModConfig config;
-
     public static MusicHistory musicHistory = new MusicHistory();
-
     public static boolean isDarkModeEnabled = false;
-
     @Nullable
     public static SoundInstance currentlyPlaying;
 
-    public static SoundInstanceListener SoundListener = (soundInstance, soundSet, range) -> {
-        if (soundInstance.getCategory() != SoundCategory.MUSIC) return;
-
-        Sound sound = soundInstance.getSound();
-        Identifier identifier = sound.getIdentifier();
-
-        MusicManager.Music music = ClientMusic.musicManager.get(identifier);
-
-        if (music != null) {
-            MusicToast.show(MinecraftClient.getInstance().getToastManager(), music);
-        } else {
-            LOGGER.info("Unknown music {}", identifier.toString());
-
-            AtomicReference<String> namespace = new AtomicReference<>(identifier.getNamespace());
-            FabricLoader.getInstance().getModContainer(namespace.get()).ifPresent(modContainer -> namespace.set(modContainer.getMetadata().getName()));
-
-            String[] idSplit = identifier.getPath().split("/");
-            MusicManager.Music m = new MusicManager.Music(
-                    identifier,
-                    null,
-                    idSplit[idSplit.length - 1],
-                    namespace.get(),
-                    identifier.toString(),
-                    Objects.equals(namespace.get(), "Minecraft") ? AlbumCover.GENERIC : AlbumCover.MODDED,
-                    false
-            );
-            MusicToast.show(MinecraftClient.getInstance().getToastManager(), m);
-        }
-    };
-
-
-    @Override
-    public void onInitializeClient() {
-        LOGGER.info("Music Notification initialized");
-        client = MinecraftClient.getInstance();
-
-        // Resource Loader
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
-            @Override
-            public Identifier getFabricId() {
-                return MUSICS_JSON_ID;
-            }
-
-            @Override
-            public void reload(ResourceManager manager) {
-                musicManager.reload();
-                isDarkModeEnabled = manager.streamResourcePacks().anyMatch(resourcePack -> resourcePack.getId().equals(new Identifier(MOD_ID, "dark_mode").toString()));
-            }
-        });
-
-            // Register built-in resource pack
-        FabricLoader.getInstance().getModContainer(MOD_ID)
-                .ifPresent(container -> ResourceManagerHelper.registerBuiltinResourcePack(
-                        new Identifier(MOD_ID, "dark_mode"), container,
-                        Text.translatable("text.musicnotification.resourcepack.dark_mode.name"),
-                        ResourcePackActivationType.NORMAL)
-                );
-
-        // Config
-        AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
-        config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-
-        // Key Binding
-        keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.musicnotification.open_screen", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_M, "key.musicnotification.categories"));
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (keyBinding.wasPressed()) {
-                client.setScreen(new JukeboxScreen(client.currentScreen));
-            }
-        });
-    }
 
     public static void onClientInit() {
         soundManager = client.getSoundManager();
-        soundManager.registerListener(SoundListener);
+        soundManager.addListener((soundInstance, soundSet, range) -> (new SoundManagerSoundEventListener()).onPlaySound(soundInstance, soundSet, range));
         musicManager = new MusicManager(client.getResourceManager());
         musicManager.reload();
-    }
-
-    /**
-     * Inject when a music disc is played
-     */
-    public static void onDiscPlay(SoundEvent song) {
-        if (song != null) {
-            MusicDiscItem musicDiscItem = MusicDiscItem.bySound(song);
-            if (musicDiscItem != null) {
-                MusicManager.Music music = ClientMusic.musicManager.get(musicDiscItem.getSound().getId());
-
-                if (music != null) {
-                    MusicToast.show(MinecraftClient.getInstance().getToastManager(), music);
-                } else {
-                    LOGGER.info("Unknown music disc {}", musicDiscItem.getSound().getId());
-
-                    AtomicReference<String> namespace = new AtomicReference<>(musicDiscItem.getSound().getId().getNamespace());
-                    FabricLoader.getInstance().getModContainer(namespace.get()).ifPresent(modContainer -> namespace.set(modContainer.getMetadata().getName()));
-
-
-                    String[] string = musicDiscItem.getDescription().getString().split(" - ");
-                    // string[0] = title / string[1] = author | Now playing: Lena Raine - Pigstep;
-                    MusicManager.Music m = new MusicManager.Music(
-                            musicDiscItem.getSound().getId(),
-                            null,
-                            string[0],
-                            string[1],
-                            namespace.get(),
-                            AlbumCover.GENERIC,
-                            false
-                    );
-                    MusicToast.show(MinecraftClient.getInstance().getToastManager(), m);
-                }
-            }
-            LOGGER.debug("Playing music disc: {}", song.getId());
-        }
     }
 
     /**
      * Parse a JSON Resource
      */
     public static JsonObject parseJSONResource(Resource resource) throws IOException, JsonParseException {
-        BufferedReader reader = resource.getReader();
-        return JsonHelper.deserialize(reader);
+        BufferedReader reader = resource.openAsReader();
+        return GsonHelper.parse(reader);
     }
 
     /**
      * Return false if either MASTER or MUSIC volume is set to 0
      */
     public static boolean isVolumeZero() {
-        if (MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MUSIC) == 0f) return false;
-        if (MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MASTER) == 0f) return false;
+        if (Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.MUSIC) == 0f) return false;
+        if (Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.MASTER) == 0f) return false;
         return true;
     }
 
-    public static void playAndResetTracker(MinecraftClient client, MusicManager.Music music) {
+    public static void playAndResetTracker(Minecraft client, MusicManager.Music music) {
         SoundEvent soundEvent = music.getSoundEvent(ClientMusic.soundManager);
         if (soundEvent == null) {
             ClientMusic.LOGGER.warn("Unable to play unknown sound with id: {}", music.customId == null ? music.identifier : music.customId);
             return;
-        };
+        }
 
-        PositionedSoundInstance soundInstance = PositionedSoundInstance.music(soundEvent);
-        client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
-        IMixinMusicTracker musicTracker = (IMixinMusicTracker) client.getMusicTracker();
-        musicTracker.setCurrent(soundInstance);
+        SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent);
+        client.getSoundManager().stop(null, SoundSource.MUSIC);
+        IMixinMusicTracker musicTracker = (IMixinMusicTracker) client.getMusicManager();
+        musicTracker.setCurrentMusic(soundInstance);
 //        musicTracker.setTimeUntilNextSong(Integer.MAX_VALUE);
         client.getSoundManager().play(soundInstance);
 //        ClientMusic.musicHistory.addMusic(music);
         ClientMusic.currentlyPlaying = soundInstance;
     }
 
+    @Override
+    public void onInitializeClient() {
+        LOGGER.info("Music Notification initialized");
+        client = Minecraft.getInstance();
 
-    /**
-     * Draw a scrollable text
-     */
-    public static void drawScrollableText(DrawContext context, TextRenderer textRenderer, Text text, int centerX, int startX, int startY, int endX, int endY, int color, boolean shadow) {
-        drawScrollableText(context, textRenderer, text, centerX, startX, startY, endX, endY, color, shadow, startX, startY, endX, endY);
+        // Key Binding
+        keyBinding = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.musicnotification.open_screen", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_M, "key.musicnotification.categories"));
+
+        // Config
+        AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
+        config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+
+        // Register built-in resource pack
+        FabricLoader.getInstance().getModContainer(MOD_ID)
+                .ifPresent(container -> ResourceManagerHelper.registerBuiltinResourcePack(
+                        ResourceLocation.fromNamespaceAndPath(MOD_ID, "dark_mode"), container,
+                        Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
+                        ResourcePackActivationType.NORMAL)
+                );
+
+        // Event Listeners
+        ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new ClientResourceListener());
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new ServerDataResourceListener());
+        ClientPlayConnectionEvents.JOIN.register(new ClientPlayConnectionEventJoin());
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (keyBinding.consumeClick()) {
+                client.setScreen(new JukeboxScreen(client.screen));
+            }
+        });
     }
 
-    public static void drawScrollableText(DrawContext context, TextRenderer textRenderer, Text text, int centerX, int startX, int startY, int endX, int endY, int color, boolean shadow, int clipAreaX1, int clipAreaY1, int clipAreaX2, int clipAreaY2) {
-        int i = textRenderer.getWidth(text);
-        int j = (startY + endY - textRenderer.fontHeight) / 2 + 1;
-        int k = endX - startX;
-        if (i > k) {
-            int l = i - k;
-            double d = (double) Util.getMeasuringTimeMs() / 1000.0;
-            double e = Math.max((double) l * 0.5, 3.0);
-            double f = Math.sin(1.5707963267948966 * Math.cos(Math.PI * 2 * d / e)) / 2.0 + 0.5;
-            double g = MathHelper.lerp(f, 0.0, (double) l);
+    public static class ClientResourceListener implements SimpleSynchronousResourceReloadListener {
+        @Override
+        public ResourceLocation getFabricId() {
+            return ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "client_resource_listener");
+        }
 
-            context.enableScissor(clipAreaX1, clipAreaY1, clipAreaX2, clipAreaY2);
-//            context.fill(clipAreaX1,clipAreaY1,clipAreaX2,clipAreaY2, Colors.RED);
-            context.drawText(textRenderer, text.asOrderedText(), startX - (int) g, j, color, shadow);
-            context.disableScissor();
-        } else {
-            int l = MathHelper.clamp(centerX, startX + i / 2, endX - i / 2);
+        @Override
+        public void onResourceManagerReload(ResourceManager manager) {
+            ClientMusic.LOGGER.debug("ClientResource: Reloading MusicManager");
+            ClientMusic.musicManager.reload();
+            isDarkModeEnabled = manager.listPacks().anyMatch(resourcePack -> resourcePack.packId().equals(ResourceLocation.fromNamespaceAndPath(MOD_ID, "dark_mode").toString()));
+        }
+    }
 
-            OrderedText orderedText = text.asOrderedText();
-            context.drawText(textRenderer, orderedText, l - textRenderer.getWidth(orderedText) / 2, j, color, shadow);
+    public static class ServerDataResourceListener implements SimpleSynchronousResourceReloadListener {
+        @Override
+        public ResourceLocation getFabricId() {
+            return ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "server_data_listener");
+        }
+
+        @Override
+        public void onResourceManagerReload(ResourceManager manager) {
+            ClientMusic.LOGGER.debug("ServerData: Reloading MusicManager");
+            ClientMusic.musicManager.reload();
+        }
+    }
+
+    public static class ClientPlayConnectionEventJoin implements ClientPlayConnectionEvents.Join {
+        @Override
+        public void onPlayReady(ClientPacketListener handler, PacketSender sender, Minecraft client) {
+            ClientMusic.LOGGER.debug("ClientPlayConnectionEventJoin: Reloading MusicManager");
+            ClientMusic.musicManager.reload();
+        }
+    }
+
+    public static class SoundManagerSoundEventListener implements SoundEventListener {
+        public void onPlaySound(SoundInstance soundInstance, WeighedSoundEvents weighedSoundEvents, float f) {
+            if (soundInstance.getSource() != SoundSource.MUSIC && soundInstance.getSource() != SoundSource.RECORDS) {
+                return;
+            }
+
+            ResourceLocation identifier1 = soundInstance.getSound().getLocation();
+            ResourceLocation identifier2 = soundInstance.getLocation();
+
+            MusicManager.Music music = ClientMusic.musicManager.get(identifier1);
+            if (music == null) {
+                ClientMusic.LOGGER.info("Music not found with identifier: {} trying with {}", identifier1, identifier2);
+                music = ClientMusic.musicManager.get(identifier2);
+            }
+
+            if (music != null) {
+                MusicToast.show(Minecraft.getInstance().getToasts(), music);
+            } else {
+                ClientMusic.LOGGER.info("Unknown music {}", identifier1);
+
+                AtomicReference<String> namespace = new AtomicReference<>(identifier1.getNamespace());
+                FabricLoader.getInstance().getModContainer(namespace.get()).ifPresent(modContainer -> namespace.set(modContainer.getMetadata().getName()));
+
+                Parser.ResourceLocationParser parsed = new Parser.ResourceLocationParser(identifier1);
+                MusicManager.Music m = new MusicManager.Music(
+                        identifier1,
+                        null,
+                        parsed.title,
+                        namespace.get(),
+                        identifier1.toString(),
+                        AlbumCover.getDefaultCover(identifier1),
+                        false
+                );
+                MusicToast.show(Minecraft.getInstance().getToasts(), m);
+            }
         }
     }
 }
