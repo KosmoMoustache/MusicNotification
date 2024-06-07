@@ -1,10 +1,10 @@
 package net.kosmo.music.mixin;
 
 import net.kosmo.music.ClientMusic;
+import net.kosmo.music.toast.MusicToast;
 import net.kosmo.music.utils.ModConfig;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
-import net.kosmo.music.toast.MusicToast;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,10 +31,10 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
 //        }
 //        return this.topIndex * 32;
 //    }
-
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/toasts/Toast$Visibility;playSound(Lnet/minecraft/client/sounds/SoundManager;)V"), require = 0)
     public void playSound(Toast.Visibility visibility, net.minecraft.client.sounds.SoundManager soundManager) {
-        if (ClientMusic.config.TOAST_CONFIG.DISABLE_TOAST_SOUND == null) ClientMusic.config.TOAST_CONFIG.DISABLE_TOAST_SOUND = ModConfig.DisableToastSound.MUTE_SELF;
+        if (ClientMusic.config.TOAST_CONFIG.DISABLE_TOAST_SOUND == null)
+            ClientMusic.config.TOAST_CONFIG.DISABLE_TOAST_SOUND = ModConfig.DisableToastSound.MUTE_SELF;
         switch (ClientMusic.config.TOAST_CONFIG.DISABLE_TOAST_SOUND) {
             case MUTE_ALL:
                 break;

@@ -54,7 +54,6 @@ public class JukeboxScreen extends Screen {
     private Button soundTabButton;
     private Button stopSoundButton;
     private Button clearHistoryButton;
-    private Button backButton;
     private String currentSearch;
     private boolean initialized;
 
@@ -88,9 +87,11 @@ public class JukeboxScreen extends Screen {
 
         this.stopSoundButton = this.addRenderableWidget(Button.builder(STOP_SOUND_BUTTON, button -> {
             this.minecraft.getSoundManager().stop(null, SoundSource.MUSIC);
+            ClientMusic.currentlyPlaying = null;
+            this.setCurrentTab(this.currentTab);
         }).bounds(this.soundList.getRowLeft(), this.getSoundListBottom() + 10, this.soundList.getRowRight() - this.soundList.getRowLeft() - 1 - 50, 20).build());
 
-        this.backButton = this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, button -> {
+        this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, button -> {
             this.onClose();
         }).bounds(this.soundList.getRowRight() - 50, this.getSoundListBottom() + 10, 50, 20).build());
 
@@ -215,7 +216,7 @@ public class JukeboxScreen extends Screen {
         } else if (listEmpty) {
             if (currentTab == Tab.HOME || currentTab == Tab.SOUND) {
                 narratorManager.sayNow(EMPTY_SEARCH_TEXT);
-            } else if (currentTab == Tab.HISTORY) {
+            } else { // currentTab is Tab.HISTORY
                 narratorManager.sayNow(EMPTY_HISTORY_TEXT);
             }
         }

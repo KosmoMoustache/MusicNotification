@@ -22,6 +22,6 @@ public class MixinMusicTracker {
             ci.cancel();
         } else {
             ClientMusic.currentlyPlaying = null;
-        };
+        }
     }
 }
