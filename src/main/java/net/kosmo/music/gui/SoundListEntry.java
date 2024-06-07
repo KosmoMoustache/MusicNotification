@@ -1,6 +1,7 @@
 package net.kosmo.music.gui;
 
 import net.kosmo.music.ClientMusic;
+import net.kosmo.music.utils.RenderHelper;
 import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,6 +18,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.CommonColors;
 import net.minecraft.util.FastColor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class SoundListEntry extends ListEntry {
 
         int i = x + 4;
         int l = y + (entryHeight - this.client.font.lineHeight) / 2;
-        ClientMusic.drawScrollableText(context, this.client.font, Component.literal(entry.identifier.toString()), i, i, l, this.playButton.getX() - 4, l + this.client.font.lineHeight, CommonColors.WHITE, true);
+        RenderHelper.drawScrollableText(context, this.client.font, Component.literal(entry.identifier.toString()), i, i, l, this.playButton.getX() - 4, l + this.client.font.lineHeight, CommonColors.WHITE, true);
     }
 
     private void onButtonClick(MusicManager.Sound entry) {

@@ -3,21 +3,29 @@ package net.kosmo.music.utils.resource;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 import net.kosmo.music.ClientMusic;
+import net.kosmo.music.utils.Parser;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.client.sounds.WeighedSoundEvents;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.JukeboxSong;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 
 public class MusicManager {
     private final ResourceManager resourceManager;
@@ -31,15 +39,33 @@ public class MusicManager {
     public void reload() {
         musics.clear();
 
+        // Data Driver Jukebox Song
+        if (Minecraft.getInstance().level != null) {
+            RegistryAccess registries = Minecraft.getInstance().level.registryAccess();
+            Optional<Registry<JukeboxSong>> jukeboxSongRegistry = registries.registry(Registries.JUKEBOX_SONG);
+            if (jukeboxSongRegistry.isPresent()) {
+                for (Map.Entry<ResourceKey<JukeboxSong>, JukeboxSong> jukeboxSong : jukeboxSongRegistry.get().entrySet()) {
+                    Music m = Music.parseJukeboxSongRegistry(jukeboxSong.getValue());
+                    this.musics.put(m.identifier, m);
+                }
+            } else {
+                ClientMusic.LOGGER.error("Failed to load jukebox songs");
+            }
+        }
+
+        // Read musics.json from resource packs
         List<Resource> resources = resourceManager.getResourceStack(ClientMusic.MUSICS_JSON_ID);
         for (Resource resource : resources) {
             try {
                 for (Map.Entry<String, JsonElement> entry : ClientMusic.parseJSONResource(resource).entrySet()) {
-                    try {
-                        Music m = Music.parseJsonObject(entry);
+                    Music m = Music.parseJsonObject(entry);
+
+                    // Check if the sound event exists
+                    WeighedSoundEvents wse = m.customId != null ? ClientMusic.soundManager.getSoundEvent(m.customId) : ClientMusic.soundManager.getSoundEvent(m.identifier);
+                    if (wse != null) {
                         this.musics.put(m.identifier, m);
-                    } catch (Exception e) {
-                        ClientMusic.LOGGER.error("Failed to parse music entry: {}\nMessage: {}", entry.getKey(), e.getMessage());
+                    } else {
+                        ClientMusic.LOGGER.warn("Failed to load entry: '{}', sound event '{}' not found", entry.getKey(), m.customId != null ? m.customId : m.identifier);
                     }
                 }
             } catch (IOException | JsonParseException e) {
@@ -105,6 +131,20 @@ public class MusicManager {
             );
         }
 
+        public static Music parseJukeboxSongRegistry(JukeboxSong jukeboxSong) {
+            Parser.JukeboxSongParser parsed = new Parser.JukeboxSongParser(jukeboxSong);
+            ResourceLocation location = jukeboxSong.soundEvent().value().getLocation();
+            return new Music(
+                    location,
+                    location,
+                    parsed.title,
+                    parsed.author,
+                    location.toString(),
+                    AlbumCover.getDefaultCover(location),
+                    false
+            );
+        }
+
         public String toString() {
             return String.format("title: %s, author: %s, album: %s, cover: %s, identifier: %s, customId: %s, isRandom: %s", title, author, album, albumCover.textureId, identifier, customId, isRandom);
         }
@@ -119,14 +159,6 @@ public class MusicManager {
 
         public String getAlbumName() {
             return album == null ? "Unknown" : album;
-        }
-
-        public ResourceLocation getAlbumCoverTextureId() {
-            if (albumCover.textureId != null) return albumCover.textureId;
-            if (this.identifier != null && !Objects.equals(this.identifier.getNamespace(), "minecraft")) {
-                return AlbumCover.MODDED.textureId;
-            }
-            return AlbumCover.GENERIC.textureId;
         }
 
         public @Nullable SoundEvent getSoundEvent(SoundManager soundManager) {

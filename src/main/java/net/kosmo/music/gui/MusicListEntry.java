@@ -1,6 +1,7 @@
 package net.kosmo.music.gui;
 
 import net.kosmo.music.ClientMusic;
+import net.kosmo.music.utils.RenderHelper;
 import net.kosmo.music.utils.resource.AlbumCover;
 import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.Minecraft;
@@ -17,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.CommonColors;
 import net.minecraft.util.FastColor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,10 +60,9 @@ public class MusicListEntry extends ListEntry {
         context.fill(x, y, x + entryWidth, y + entryHeight, GRAY_COLOR);
 
         MutableComponent text = Component.literal(entry.getTitle()).append(" - ").withColor(CommonColors.WHITE).append(Component.literal(entry.getAuthor()).withColor(CommonColors.LIGHT_GRAY));
-        ClientMusic.drawScrollableText(context, this.client.font, text, xMargeCover, xMargeCover, y1, this.playButton.getX() - 4, y1 + this.client.font.lineHeight, CommonColors.WHITE, true);
+        RenderHelper.drawScrollableText(context, this.client.font, text, xMargeCover, xMargeCover, y1, this.playButton.getX() - 4, y1 + this.client.font.lineHeight, CommonColors.WHITE, true);
         context.drawString(this.client.font, entry.getAlbumName(), xMargeCover, y2, CommonColors.LIGHT_GRAY, false);
 
-//        this.entry.albumCover.drawAlbumCover(context, x + 4, y + 4);
         this.entry.albumCover.drawAlbumCover(context, x + 4, y + (entryHeight - AlbumCover.getHeight()) / 2);
 
         boolean shouldRenderButton = this.parent.parent.currentTab != JukeboxScreen.Tab.HISTORY;

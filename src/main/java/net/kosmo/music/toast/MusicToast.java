@@ -1,8 +1,9 @@
 package net.kosmo.music.toast;
 
-import net.kosmo.music.utils.resource.AlbumCover;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.kosmo.music.ClientMusic;
+import net.kosmo.music.utils.RenderHelper;
+import net.kosmo.music.utils.resource.AlbumCover;
 import net.kosmo.music.utils.resource.MusicManager;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -10,6 +11,7 @@ import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.CommonColors;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 
 public class MusicToast implements Toast {
@@ -58,8 +60,9 @@ public class MusicToast implements Toast {
         this.justUpdated = true;
     }
 
+
     @Override
-    public Toast.Visibility render(GuiGraphics context, ToastComponent manager, long startTime) {
+    public Toast.@NotNull Visibility render(GuiGraphics context, ToastComponent manager, long startTime) {
         if (rotation >= 360) rotation = 0;
         rotation += 1;
         if (this.justUpdated) {
@@ -92,7 +95,7 @@ public class MusicToast implements Toast {
             context.drawString(manager.getMinecraft().font, this.author, 30, 18, -16777216, false);
         }
         if (ClientMusic.config.TOAST_CONFIG.SHOW_ALBUM_NAME) {
-            ClientMusic.drawScrollableText(context, manager.getMinecraft().font, this.albumName, 30, 30, 29, this.width() - 4, 29 + manager.getMinecraft().font.lineHeight, CommonColors.BLACK, false, context.guiWidth() - 160 + 30, 0, context.guiWidth() - 4, 44);
+            RenderHelper.drawScrollableText(context, manager.getMinecraft().font, this.albumName, 30, 30, 29, this.width() - 4, 29 + manager.getMinecraft().font.lineHeight, CommonColors.BLACK, false, context.guiWidth() - 160 + 30, 0, context.guiWidth() - 4, 44);
         }
 
         return (double) (startTime - this.startTime) >= 5000.0 * manager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
@@ -106,7 +109,7 @@ public class MusicToast implements Toast {
         return 32;
     }
 
-    public Type getToken() {
+    public @NotNull Type getToken() {
         return this.type;
     }
 

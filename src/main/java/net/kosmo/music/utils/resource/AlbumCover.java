@@ -6,6 +6,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class AlbumCover {
     public static final AlbumCover GENERIC = new AlbumCover(ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "toast/generic"));
     public static final AlbumCover MODDED = new AlbumCover(ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "toast/modded"));
@@ -32,5 +34,9 @@ public class AlbumCover {
     public static AlbumCover parseAlbumCover(@Nullable String cover) {
         if (cover != null) return new AlbumCover(ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "toast/" + cover));
         return GENERIC;
+    }
+
+    public static AlbumCover getDefaultCover(ResourceLocation location) {
+        return Objects.equals(location.getNamespace().toLowerCase(), "minecraft") ? AlbumCover.GENERIC : AlbumCover.MODDED;
     }
 }

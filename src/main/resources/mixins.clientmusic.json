@@ -9,8 +9,7 @@
     "MixinMinecraftClient",
     "MixinMusicTracker",
     "MixinTitleScreen",
-    "MixinToastManagerEntry",
-    "MixinWorldRenderer"
+    "MixinToastManagerEntry"
   ],
   "injectors": {
     "defaultRequire": 1
