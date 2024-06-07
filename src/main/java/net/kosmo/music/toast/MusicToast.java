@@ -91,7 +91,7 @@ public class MusicToast implements Toast {
         context.drawString(manager.getMinecraft().font, this.title, 30, 7, ClientMusic.isDarkModeEnabled ? 0xff75ff : -11534256, false);
 
         if (ClientMusic.config.TOAST_CONFIG.SHOW_AUTHOR) {
-            context.drawString(manager.getMinecraft().font, this.author, 30, 18, ClientMusic.isDarkModeEnabled ? -3355444 : Colors.BLACK, false);
+            context.drawString(manager.getMinecraft().font, this.author, 30, 18, ClientMusic.isDarkModeEnabled ? -3355444 : CommonColors.BLACK, false);
         }
         if (ClientMusic.config.TOAST_CONFIG.SHOW_ALBUM_NAME) {
             RenderHelper.drawScrollableText(context, manager.getMinecraft().font, this.albumName, 30, 30, 29, this.width() - 4, 29 + manager.getMinecraft().font.lineHeight, ClientMusic.isDarkModeEnabled ? -3355444 : CommonColors.BLACK, false, context.guiWidth() - 160 + 30, 0, context.guiWidth() - 4, 44);
