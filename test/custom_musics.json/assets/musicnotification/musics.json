@@ -1,0 +1,38 @@
+{
+  "morediscs:music_disc_omen_sound": {
+    "title": "Omen",
+    "author": "Naps the Block",
+    "soundtrack": "More discs"
+  },
+  "morediscs:records/music_disc_omen_sound": {
+    "title": "Omen Record",
+    "author": "Naps the Block",
+    "soundtrack": "More discs"
+  },
+  "morediscs:music_disc_silence_sound": {
+    "title": "Silence",
+    "author": "Naps the Block",
+    "album": "More discs",
+    "cover": "test"
+  },
+  "morediscs:records/music_disc_silence_sound": {
+    "title": "Silence Record",
+    "author": "Naps the Block",
+    "album": "More discs",
+    "cover": "test"
+  },
+  "custom_disc:music_disc.droopy_remembers": {
+    "title": "Droopy Remembers",
+    "author": "C418",
+    "album": "148",
+    "cover": "148",
+    "custom_id": "custom_disc:records/droopy_remembers"
+  },
+  "custom_disc:music_disc.seismic_stratigraphy": {
+    "title": "Seismic Stratigraphy",
+    "author": "C418",
+    "album": "148",
+    "cover": "148",
+    "custom_id": "custom_disc:records/seismic_stratigraphy"
+  }
+}
