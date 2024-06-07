@@ -411,5 +411,12 @@
         "name": "music/game/yakusoku"
       }
     ]
+  },
+  "mn.minecraft.music.game.endless": {
+    "sounds": [
+      {
+        "name": "music/game/endless"
+      }
+    ]
   }
 }
