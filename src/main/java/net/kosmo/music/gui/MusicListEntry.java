@@ -1,49 +1,50 @@
 package net.kosmo.music.gui;
 
 import net.kosmo.music.ClientMusic;
+import net.kosmo.music.utils.RenderHelper;
 import net.kosmo.music.utils.resource.AlbumCover;
 import net.kosmo.music.utils.resource.MusicManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Element;
-import net.minecraft.client.gui.Selectable;
-import net.minecraft.client.gui.screen.ButtonTextures;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.TexturedButtonWidget;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Colors;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.ColorHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarratableEntry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.CommonColors;
+import net.minecraft.util.FastColor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MusicListEntry extends ListEntry {
-    public static final int GRAY_COLOR = ColorHelper.Argb.getArgb(255, 74, 74, 74);
-    private static final ButtonTextures PLAY_BUTTON_TEXTURE = new ButtonTextures(new Identifier("musicnotification", "jukebox/play_button"), new Identifier("musicnotification", "jukebox/play_button_disabled"), new Identifier("musicnotification", "jukebox/play_button_focused"));
-    private static final ButtonTextures STOP_BUTTON_TEXTURE = new ButtonTextures(new Identifier("musicnotification", "jukebox/stop_button"), new Identifier("musicnotification", "jukebox/stop_button_focused"));
-    public final ArrayList<ClickableWidget> buttons;
+    public static final int GRAY_COLOR = FastColor.ARGB32.color(255, 74, 74, 74);
+    private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
+    private static final WidgetSprites STOP_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/stop_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/stop_button_focused"));
+    public final ArrayList<AbstractWidget> buttons;
     public final MusicManager.Music entry;
-    private final MinecraftClient client;
+    private final Minecraft client;
     private final PlaySoundListWidget parent;
-    private final ButtonWidget playButton;
-    private final ButtonWidget stopButton;
+    private final Button playButton;
+    private final Button stopButton;
 
-    public MusicListEntry(MinecraftClient client, PlaySoundListWidget parent, MusicManager.Music music) {
+    public MusicListEntry(Minecraft client, PlaySoundListWidget parent, MusicManager.Music music) {
         this.client = client;
         this.parent = parent;
         this.entry = music;
 
-        this.playButton = new TexturedButtonWidget(0, 0, 20, 20, PLAY_BUTTON_TEXTURE, button -> {
+        this.playButton = new ImageButton(0, 0, 20, 20, PLAY_BUTTON_TEXTURE, button -> {
             this.onButtonClick(this.entry);
-        }, Text.translatable("gui.musicnotification.jukebox.play_sound"));
+        }, Component.translatable("gui.musicnotification.jukebox.play_sound"));
 
-        this.stopButton = new TexturedButtonWidget(0, 0, 20, 20, STOP_BUTTON_TEXTURE, button -> {
+        this.stopButton = new ImageButton(0, 0, 20, 20, STOP_BUTTON_TEXTURE, button -> {
             this.onButtonClick(this.entry);
-        }, Text.translatable("gui.musicnotification.jukebox.stop_sound"));
+        }, Component.translatable("gui.musicnotification.jukebox.stop_sound"));
 
         this.buttons = new ArrayList<>();
         this.buttons.add(this.playButton);
@@ -51,18 +52,17 @@ public class MusicListEntry extends ListEntry {
     }
 
     @Override
-    public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
+    public void render(GuiGraphics context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
         int y1 = y + 4;
         int y2 = y + (entryHeight / 2) + 3;
         int xMargeCover = x + 4 + 24 + 4;
 
         context.fill(x, y, x + entryWidth, y + entryHeight, GRAY_COLOR);
 
-        MutableText text = Text.literal(entry.getTitle()).append(" - ").withColor(Colors.WHITE).append(Text.literal(entry.getAuthor()).withColor(Colors.LIGHT_GRAY));
-        ClientMusic.drawScrollableText(context, this.client.textRenderer, text, xMargeCover, xMargeCover, y1, this.playButton.getX() - 4, y1 + this.client.textRenderer.fontHeight, Colors.WHITE, true);
-        context.drawText(this.client.textRenderer, entry.getAlbumName(), xMargeCover, y2, Colors.LIGHT_GRAY, false);
+        MutableComponent text = Component.literal(entry.getTitle()).append(" - ").withColor(CommonColors.WHITE).append(Component.literal(entry.getAuthor()).withColor(CommonColors.LIGHT_GRAY));
+        RenderHelper.drawScrollableText(context, this.client.font, text, xMargeCover, xMargeCover, y1, this.playButton.getX() - 4, y1 + this.client.font.lineHeight, CommonColors.WHITE, true);
+        context.drawString(this.client.font, entry.getAlbumName(), xMargeCover, y2, CommonColors.LIGHT_GRAY, false);
 
-//        this.entry.albumCover.drawAlbumCover(context, x + 4, y + 4);
         this.entry.albumCover.drawAlbumCover(context, x + 4, y + (entryHeight - AlbumCover.getHeight()) / 2);
 
         boolean shouldRenderButton = this.parent.parent.currentTab != JukeboxScreen.Tab.HISTORY;
@@ -81,7 +81,7 @@ public class MusicListEntry extends ListEntry {
 
     private void onButtonClick(MusicManager.Music entry) {
         if (isPlaying()) {
-            this.client.getSoundManager().stopSounds(null, SoundCategory.MUSIC);
+            this.client.getSoundManager().stop(null, SoundSource.MUSIC);
             ClientMusic.currentlyPlaying = null;
         } else {
             ClientMusic.playAndResetTracker(client, entry);
@@ -92,18 +92,18 @@ public class MusicListEntry extends ListEntry {
         if (ClientMusic.currentlyPlaying != null) {
             MusicManager.Music e = ClientMusic.musicManager.get(this.entry.identifier);
             if (e == null) return false;
-            return  e.customId == null ? e.identifier == ClientMusic.currentlyPlaying.getId() : e.customId == ClientMusic.currentlyPlaying.getId();
+            return  e.customId == null ? e.identifier == ClientMusic.currentlyPlaying.getLocation() : e.customId == ClientMusic.currentlyPlaying.getLocation();
         }
         return false;
     }
 
     @Override
-    public List<? extends Selectable> selectableChildren() {
+    public List<? extends NarratableEntry> narratables() {
         return this.buttons;
     }
 
     @Override
-    public List<? extends Element> children() {
+    public List<? extends GuiEventListener> children() {
         return this.buttons;
     }
 }

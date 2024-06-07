@@ -1,0 +1,26 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "item/music_disc_11"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "item/music_disc_aria_math"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 2
+      },
+      "model": "item/music_disc_droopy_remembers"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 3
+      },
+      "model": "item/music_disc_seismic_stratigraphy"
+    }
+  ]
+}

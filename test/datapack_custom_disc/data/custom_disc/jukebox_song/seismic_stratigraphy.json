@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": "Seismic Stratigraphy - C418",
+  "length_in_seconds": 456.0,
+  "sound_event": {
+    "sound_id": "custom_disc:music_disc.seismic_stratigraphy"
+  }
+}
