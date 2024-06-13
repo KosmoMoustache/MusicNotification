@@ -14,7 +14,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.loader.api.FabricLoader;
 import net.kosmo.music.gui.JukeboxScreen;
@@ -102,9 +101,7 @@ public class ClientMusic implements ClientModInitializer {
         client.getSoundManager().stop(null, SoundSource.MUSIC);
         IMixinMusicTracker musicTracker = (IMixinMusicTracker) client.getMusicManager();
         musicTracker.setCurrentMusic(soundInstance);
-//        musicTracker.setTimeUntilNextSong(Integer.MAX_VALUE);
         client.getSoundManager().play(soundInstance);
-//        ClientMusic.musicHistory.addMusic(music);
         ClientMusic.currentlyPlaying = soundInstance;
     }
 
@@ -179,6 +176,8 @@ public class ClientMusic implements ClientModInitializer {
             if (soundInstance.getSource() != SoundSource.MUSIC && soundInstance.getSource() != SoundSource.RECORDS) {
                 return;
             }
+
+            ClientMusic.LOGGER.info("DEBUG: SoundManagerSoundEventListener: onPlaySound: {} {}", soundInstance.getLocation(), soundInstance.getSound().getLocation());
 
             ResourceLocation identifier1 = soundInstance.getSound().getLocation();
             ResourceLocation identifier2 = soundInstance.getLocation();
