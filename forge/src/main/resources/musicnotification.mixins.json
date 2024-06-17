@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.kosmo.music.impl.forge.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "musicnotification-refmap.json",
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

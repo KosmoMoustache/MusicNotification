@@ -2,23 +2,29 @@ import net.fabricmc.loom.api.LoomGradleExtensionAPI
 
 plugins {
     java
-    id("dev.architectury.loom") version "1.6-SNAPSHOT" apply false
-    id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
+    alias(libs.plugins.architectury)
+    alias(libs.plugins.architectury.loom) apply false
+//    id("architectury-plugin") version "3.4-SNAPSHOT"
+//    id("dev.architectury.loom") version "1.6-SNAPSHOT" apply false
+//    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
 }
 
 architectury {
     minecraft = rootProject.property("minecraft_version").toString()
 }
 
-allprojects
-group = rootProject.property("maven_group").toString()
-base.archivesName.set(rootProject.property("archives_base_name").toString())
-
 subprojects {
     apply(plugin = "java")
-    apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
+    apply(plugin = "dev.architectury.loom")
+
+    base.archivesName.set(rootProject.property("archives_base_name").toString())
+    group = rootProject.property("maven_group").toString()
+    version = rootProject.property("mod_version").toString()
+
+    if (project.hasProperty("loom.platform")) {
+        version = "${version}+minecraft${rootProject.property("minecraft_version")}-${project.property("loom.platform").toString()}"
+    }
 
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
 
@@ -46,7 +52,6 @@ subprojects {
         targetCompatibility = JavaVersion.VERSION_21
     }
 }
-
 
 //
 //version = project.mod_version + "+" + project.minecraft_version
