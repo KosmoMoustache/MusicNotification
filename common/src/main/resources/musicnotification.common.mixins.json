@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "net.kosmo.music.impl.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "IMixinMusicTracker",
+    "MixinMusicTracker",
+    "MixinTitleScreen",
+    "MixinToastManagerEntry"
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
