@@ -3,10 +3,7 @@ package net.kosmo.music.impl.neoforge;
 import net.kosmo.music.impl.ClientMusic;
 import net.kosmo.music.impl.Listeners;
 import net.minecraft.client.sounds.SoundEventListener;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-
-import static net.kosmo.music.impl.ClientMusic.MOD_ID;
 
 public class NeoForgeListeners {
     public static void ClientResourceListener(ResourceManager manager) {
@@ -24,13 +21,6 @@ public class NeoForgeListeners {
     public static void ServerDataResourceListener(ResourceManager manager) {
             ClientMusic.LOGGER.debug("ServerData: Reloading MusicManager");
             ClientMusic.musicManager.reload();
-        }
     }
-
-//    public static class ClientPlayConnectionEventJoin {
-//        public void onPlayReady(ClientPacketListener handler, PacketSender sender, Minecraft client) {
-//            ClientMusic.LOGGER.debug("ClientPlayConnectionEventJoin: Reloading MusicManager");
-//            ClientMusic.musicManager.reload();
-//        }
-//    }
+}
 
