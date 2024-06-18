@@ -18,7 +18,7 @@ public class NeoForgeListeners {
         }
         ClientMusic.LOGGER.debug("ClientResource: Reloading MusicManager");
         ClientMusic.musicManager.reload();
-        ClientMusic.isDarkModeEnabled = manager.listPacks().anyMatch(resourcePack -> resourcePack.packId().equals(ResourceLocation.fromNamespaceAndPath(MOD_ID, "resourcepacks/dark_mode").toString()));
+        ClientMusic.isDarkModeEnabled = false /*manager.listPacks().anyMatch(resourcePack -> resourcePack.packId().equals(ResourceLocation.fromNamespaceAndPath(MOD_ID, "dark_mode").toString()))*/;
     }
 
     public static void ServerDataResourceListener(ResourceManager manager) {

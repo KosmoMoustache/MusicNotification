@@ -23,7 +23,7 @@ subprojects {
     version = rootProject.property("mod_version").toString()
 
     if (project.hasProperty("loom.platform")) {
-        version = "${version}+minecraft${rootProject.property("minecraft_version")}-${project.property("loom.platform").toString()}"
+        version = "${version}+minecraft-${rootProject.property("minecraft_version")}-${project.property("loom.platform").toString()}"
     }
 
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")

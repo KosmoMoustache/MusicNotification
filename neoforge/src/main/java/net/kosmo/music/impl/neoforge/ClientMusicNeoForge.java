@@ -10,12 +10,12 @@ import net.minecraft.client.Minecraft;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
+
 import org.lwjgl.glfw.GLFW;
 
 @Mod(ClientMusic.MOD_ID)
@@ -29,8 +29,9 @@ public class ClientMusicNeoForge {
         modEventBus.addListener(this::registerKeyMappings);
 //        modEventBus.addListener(this::onLoadComplete);
         modEventBus.addListener(this::onTextureAtlas);
+//        modEventBus.addListener(this::addBuiltinPack);
 
-        NeoForge.EVENT_BUS.addListener(ClientTickEvent.Pre.class, (unused) -> {
+        NeoForge.EVENT_BUS.addListener(ClientTickEvent.Pre.class, (event) -> {
             Minecraft client = Minecraft.getInstance();
             if (OPEN_SCREEN_KEYMAP.consumeClick()) {
                 client.setScreen(new JukeboxScreen(client.screen));
@@ -44,6 +45,21 @@ public class ClientMusicNeoForge {
 
 //    public void onLoadComplete(FMLClientSetupEvent event) {
 //
+//    }
+
+//    void addBuiltinPack(AddPackFindersEvent event) {
+//        try {
+//            event.addPackFinders(
+//                    ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "resourcepacks/dark_mode"),
+//                    PackType.CLIENT_RESOURCES,
+//                    Component.literal("Dark Mode"),
+//                    PackSource.BUILT_IN,
+//                    false,
+//                    Pack.Position.BOTTOM
+//            );
+//        } catch (NullPointerException e) {
+//            ClientMusic.LOGGER.error("Failed to add built-in pack", e);
+//        }
 //    }
 
     public void onTextureAtlas(TextureAtlasStitchedEvent event) {
