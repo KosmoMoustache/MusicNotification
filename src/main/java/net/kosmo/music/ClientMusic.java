@@ -150,14 +150,25 @@ public class ClientMusic implements ClientModInitializer {
                     AtomicReference<String> namespace = new AtomicReference<>(musicDiscItem.getSound().getId().getNamespace());
                     FabricLoader.getInstance().getModContainer(namespace.get()).ifPresent(modContainer -> namespace.set(modContainer.getMetadata().getName()));
 
-
                     String[] string = musicDiscItem.getDescription().getString().split(" - ");
+
+                    String title;
+                    String author;
+                    if (string.length >= 2){
+                        title = string[0];
+                        author = string[1];
+                    } else {
+                        title = string[0];
+                        author = "unknown author";
+                    }
+
+
                     // string[0] = title / string[1] = author | Now playing: Lena Raine - Pigstep;
                     MusicManager.Music m = new MusicManager.Music(
                             musicDiscItem.getSound().getId(),
                             null,
-                            string[0],
-                            string[1],
+                            title,
+                            author,
                             namespace.get(),
                             AlbumCover.GENERIC,
                             false
