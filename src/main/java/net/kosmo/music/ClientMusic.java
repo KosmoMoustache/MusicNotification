@@ -159,7 +159,7 @@ public class ClientMusic implements ClientModInitializer {
                         author = string[1];
                     } else {
                         title = string[0];
-                        author = "unknown author";
+                        author = "Unknown Author";
                     }
 
 
