@@ -20,7 +20,7 @@ jobs:
       - name: Install changelog parser
         uses: taiki-e/install-action@parse-changelog
       - name: Parse changelog
-        run: echo "CHANGELOG_VERSION=$(parse-changelog CHANGELOG.md --title | awk -F'[][]' '{print $2}'" >> $GITHUB_ENV
+        run: echo "CHANGELOG_VERSION=$(parse-changelog CHANGELOG.md --title | awk -F'[][]' '{print $2}')" >> $GITHUB_ENV
       - name: Get version from gradle.properties
         run: echo "GRADLE_VERSION=$(grep 'mod_version' gradle.properties | cut -f2- -d=)" >> $GITHUB_ENV
       - name: Compare versions
