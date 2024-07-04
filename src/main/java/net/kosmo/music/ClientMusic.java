@@ -181,11 +181,9 @@ public class ClientMusic implements ClientModInitializer {
 
             // Ignore sound events in the ignore list
             if (isMatchedInList(soundInstance.getLocation().toString(), ClientMusic.config.TOAST_CONFIG.IGNORE_SOUND_EVENT)) {
-                ClientMusic.LOGGER.info("DEBUG: Sound Event ignored: {}", soundInstance.getLocation());
+                ClientMusic.LOGGER.debug("Sound Event ignored: {}", soundInstance.getLocation());
                 return;
             }
-
-            ClientMusic.LOGGER.info("DEBUG: SoundManagerSoundEventListener: onPlaySound: {} {}", soundInstance.getLocation(), soundInstance.getSound().getLocation());
 
             ResourceLocation identifier1 = soundInstance.getSound().getLocation();
             ResourceLocation identifier2 = soundInstance.getLocation();
