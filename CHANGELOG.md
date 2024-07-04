@@ -21,6 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [2.0.1b] - 2024-07-04
+
+### Fixed
+
+- Fix a crash if a music disc description doesn't contain a hyphen (-) #49
+
 ## [2.0.1] - 2024-05-09
 
 ### Added
