@@ -1,4 +1,4 @@
-name: Check Version
+name: Checks
 
 on: [push]
 
@@ -12,11 +12,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-#      - name: Setup JDK 21
-#        uses: actions/setup-java@v2
-#        with:
-#          distribution: 'temurin'
-#          java-version: 21
       - name: Install changelog parser
         uses: taiki-e/install-action@parse-changelog
       - name: Parse changelog
