@@ -2,28 +2,30 @@ name: Check Version
 
 on: [push]
 
+env:
+  CHANGELOG_VERSION: ''
+  GRADLE_VERSION: ''
+
 jobs:
   check-version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Setup JDK 21
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: 21
+#      - name: Setup JDK 21
+#        uses: actions/setup-java@v2
+#        with:
+#          distribution: 'temurin'
+#          java-version: 21
       - name: Install changelog parser
         uses: taiki-e/install-action@parse-changelog
       - name: Parse changelog
-        id: parse-changelog
-        run: echo "::set-output name=version::$(parse-changelog CHANGELOG.md | head -n 1 | cut -d ' ' -f2)"
+        run: echo "CHANGELOG_VERSION=$(parse-changelog CHANGELOG.md | awk -F'[][]' '{print $2}'" >> $GITHUB_ENV
       - name: Get version from gradle.properties
-        id: gradle-version
-        run: echo "::set-output name=version::$(grep 'mod_version' gradle.properties | cut -f2- -d=)"
+        run: echo "GRADLE_VERSION=$(grep 'mod_version' gradle.properties | cut -f2- -d=)" >> $GITHUB_ENV
       - name: Compare versions
         run: |
-          if [ "${{ steps.parse-changelog.outputs.version }}" != "${{ steps.gradle-version.outputs.version }}" ]; then
+          if [ "${{ env.CHANGELOG_VERSION }}" != "${{ env.GRADLE_VERSION }}" ]; then
             echo "Version mismatch between CHANGELOG.md and gradle.properties"
             exit 1
           fi
