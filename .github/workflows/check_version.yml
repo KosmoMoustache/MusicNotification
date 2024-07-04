@@ -1,0 +1,29 @@
+name: Check Version
+
+on: [push]
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Setup JDK 21
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 21
+      - name: Install changelog parser
+        uses: taiki-e/install-action@parse-changelog
+      - name: Parse changelog
+        id: parse-changelog
+        run: echo "::set-output name=version::$(parse-changelog CHANGELOG.md | head -n 1 | cut -d ' ' -f2)"
+      - name: Get version from gradle.properties
+        id: gradle-version
+        run: echo "::set-output name=version::$(grep 'mod_version' gradle.properties | cut -f2- -d=)"
+      - name: Compare versions
+        run: |
+          if [ "${{ steps.parse-changelog.outputs.version }}" != "${{ steps.gradle-version.outputs.version }}" ]; then
+            echo "Version mismatch between CHANGELOG.md and gradle.properties"
+            exit 1
+          fi
