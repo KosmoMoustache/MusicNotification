@@ -150,6 +150,9 @@ public class ClientMusic implements ClientModInitializer {
                     AtomicReference<String> namespace = new AtomicReference<>(musicDiscItem.getSound().getId().getNamespace());
                     FabricLoader.getInstance().getModContainer(namespace.get()).ifPresent(modContainer -> namespace.set(modContainer.getMetadata().getName()));
 
+                    // Vanilla music disc description format: "Lena Raine - Pigstep", not guaranteed to be always like this
+                    // string[0] = title
+                    // string[1] = author
                     String[] string = musicDiscItem.getDescription().getString().split(" - ");
 
                     String title;
@@ -162,8 +165,6 @@ public class ClientMusic implements ClientModInitializer {
                         author = "Unknown Author";
                     }
 
-
-                    // string[0] = title / string[1] = author | Now playing: Lena Raine - Pigstep;
                     MusicManager.Music m = new MusicManager.Music(
                             musicDiscItem.getSound().getId(),
                             null,
