@@ -7,6 +7,7 @@
   "text.autoconfig.musicnotification.option.TOAST_CONFIG.ROTATE_ALBUM_COVER": "Animate the album cover",
   "text.autoconfig.musicnotification.option.TOAST_CONFIG.DISABLE_TOAST_SOUND.@Tooltip": "Mute the sound a toast make when it appears and disappears.\nENABLED_ALL = Vanilla (every toast will make sound)\nMUTE_SELF = Mute toast of this mod\nMUTE_ALL = Mute every toast",
   "text.autoconfig.musicnotification.option.TOAST_CONFIG.DISABLE_TOAST_SOUND": "Configure toast's in and out sound",
+  "text.autoconfig.musicnotification.option.TOAST_CONFIG.IGNORE_SOUND_EVENT": "List of sounds events ignored",
   "text.autoconfig.musicnotification.option.TOAST_CONFIG": "Toast Configuration",
   "text.autoconfig.musicnotification.option.SHOW_TITLE_SCREEN_BUTTON": "Show button to open Jukebox in the title screen",
   "text.autoconfig.musicnotification.option.JUKEBOX_CONFIG.MAX_COUNT_HISTORY": "Max number of history entries",

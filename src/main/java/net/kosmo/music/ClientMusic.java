@@ -47,7 +47,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Pattern;
 
 @Environment(EnvType.CLIENT)
 public class ClientMusic implements ClientModInitializer {
@@ -177,6 +179,12 @@ public class ClientMusic implements ClientModInitializer {
                 return;
             }
 
+            // Ignore sound events in the ignore list
+            if (isMatchedInList(soundInstance.getLocation().toString(), ClientMusic.config.TOAST_CONFIG.IGNORE_SOUND_EVENT)) {
+                ClientMusic.LOGGER.info("DEBUG: Sound Event ignored: {}", soundInstance.getLocation());
+                return;
+            }
+
             ClientMusic.LOGGER.info("DEBUG: SoundManagerSoundEventListener: onPlaySound: {} {}", soundInstance.getLocation(), soundInstance.getSound().getLocation());
 
             ResourceLocation identifier1 = soundInstance.getSound().getLocation();
@@ -209,5 +217,16 @@ public class ClientMusic implements ClientModInitializer {
                 MusicToast.show(Minecraft.getInstance().getToasts(), m);
             }
         }
+    }
+
+    public static boolean isMatchedInList(String input, List<String> patterns) {
+        for (String pattern : patterns) {
+            // Replace * with .* to create a regex pattern
+            String regex = pattern.replace(".", "\\.").replace("*", ".*");
+            if (Pattern.matches(regex, input)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
