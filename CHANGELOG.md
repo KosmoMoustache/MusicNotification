@@ -21,7 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [2.0.2] - TBD
+## [2.0.3] - 2024-07-05
+
+### Added
+
+- Add a new config option, "List of sounds events ignored", sound in this list will not display notification when played. (default to "minecraft:block.note_block.*", ignore every sound event for note blocks)
+
+## [2.0.2] - 2024-06-13
 
 ### Added
 

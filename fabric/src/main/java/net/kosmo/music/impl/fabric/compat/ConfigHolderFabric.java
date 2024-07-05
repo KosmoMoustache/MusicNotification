@@ -14,6 +14,7 @@ public class ConfigHolderFabric extends ConfigHolder {
                 config.TOAST_CONFIG.SHOW_ALBUM_NAME,
                 config.TOAST_CONFIG.ROTATE_ALBUM_COVER,
                 config.TOAST_CONFIG.DISABLE_TOAST_SOUND,
+                config.TOAST_CONFIG.IGNORE_SOUND_EVENT,
                 config.JUKEBOX_CONFIG.MAX_COUNT_HISTORY,
                 config.JUKEBOX_CONFIG.DEBUG_MOD
         );
@@ -30,6 +31,7 @@ public class ConfigHolderFabric extends ConfigHolder {
                     configData.TOAST_CONFIG.SHOW_ALBUM_NAME,
                     configData.TOAST_CONFIG.ROTATE_ALBUM_COVER,
                     configData.TOAST_CONFIG.DISABLE_TOAST_SOUND,
+                    configData.TOAST_CONFIG.IGNORE_SOUND_EVENT,
                     configData.JUKEBOX_CONFIG.MAX_COUNT_HISTORY,
                     configData.JUKEBOX_CONFIG.DEBUG_MOD);
             return InteractionResult.SUCCESS;

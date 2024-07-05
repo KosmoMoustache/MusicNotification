@@ -14,6 +14,8 @@ import net.minecraft.world.item.JukeboxSong;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Helper {
     /**
@@ -48,6 +50,17 @@ public class Helper {
         musicTracker.setCurrentMusic(soundInstance);
         client.getSoundManager().play(soundInstance);
         ClientMusic.currentlyPlaying = soundInstance;
+    }
+
+    public static boolean isMatchedInList(String input, List<String> patterns) {
+        for (String pattern : patterns) {
+            // Replace * with .* to create a regex pattern
+            String regex = pattern.replace(".", "\\.").replace("*", ".*");
+            if (Pattern.matches(regex, input)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static class ResourceLocationParser {

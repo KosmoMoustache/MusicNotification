@@ -8,10 +8,18 @@ import net.minecraft.client.sounds.WeighedSoundEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 
+import static net.kosmo.music.impl.Helper.isMatchedInList;
+
 public class Listeners {
     public static class SoundManagerSoundEventListener implements SoundEventListener {
         public void onPlaySound(SoundInstance soundInstance, WeighedSoundEvents weighedSoundEvents, float f) {
             if (soundInstance.getSource() != SoundSource.MUSIC && soundInstance.getSource() != SoundSource.RECORDS) {
+                return;
+            }
+
+            // Ignore sound events in the ignore list
+            if (isMatchedInList(soundInstance.getLocation().toString(), ClientMusic.config.IGNORE_SOUND_EVENT)) {
+                ClientMusic.LOGGER.debug("Sound Event ignored: {}", soundInstance.getLocation());
                 return;
             }
 
