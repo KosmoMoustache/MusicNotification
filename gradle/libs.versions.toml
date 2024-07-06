@@ -12,10 +12,6 @@ forge_full = "1.20.1-51.0.5"
 # NeoForge
 neoforge = "21.0.0-beta"
 
-# Quilt
-quilt_loader = "0.26.0"
-quilt_standard_libraries = "9.0.0-alpha.8+0.97.0-1.20.4"
-
 # Third-party libraries
 cloth_config = "15.0.127"
 modmenu = "11.0.0-beta.1"
@@ -35,10 +31,6 @@ forge = { module = "net.minecraftforge:forge", version.ref = "forge_full" }
 
 # NeoForge
 neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
-
-# Quilt
-quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
-qsl_lifecycle_events = { module = "org.quiltmc.qsl.core:lifecycle_events", version.ref = "quilt_standard_libraries" }
 
 # Third-party libraries
 
