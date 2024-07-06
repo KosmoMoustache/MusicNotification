@@ -3,6 +3,7 @@ package net.kosmo.music.impl.neoforge;
 import net.kosmo.music.impl.ClientMusic;
 import net.kosmo.music.impl.Listeners;
 import net.minecraft.client.sounds.SoundEventListener;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 
 public class NeoForgeListeners {
@@ -15,7 +16,7 @@ public class NeoForgeListeners {
         }
         ClientMusic.LOGGER.debug("ClientResource: Reloading MusicManager");
         ClientMusic.musicManager.reload();
-        ClientMusic.isDarkModeEnabled = false /*manager.listPacks().anyMatch(resourcePack -> resourcePack.packId().equals(ResourceLocation.fromNamespaceAndPath(MOD_ID, "dark_mode").toString()))*/;
+        ClientMusic.isDarkModeEnabled = manager.listPacks().anyMatch(resourcePack -> resourcePack.packId().equals("mod/" + ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "resourcepacks/dark_mode")));
     }
 
     public static void ServerDataResourceListener(ResourceManager manager) {
