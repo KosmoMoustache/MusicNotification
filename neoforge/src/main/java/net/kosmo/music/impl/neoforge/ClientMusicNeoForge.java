@@ -27,16 +27,17 @@ import org.lwjgl.glfw.GLFW;
 @Mod(ClientMusic.MOD_ID)
 public class ClientMusicNeoForge {
     private static final KeyMapping OPEN_SCREEN_KEYMAP = new KeyMapping("key.musicnotification.open_screen", GLFW.GLFW_KEY_M, "key.musicnotification.categories");
+    private boolean altasInit = false;
 
     public ClientMusicNeoForge(IEventBus modEventBus) {
         // Register Mod List config screen
         ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (client, parent) -> AutoConfig.getConfigScreen(AutoConfigNeoForge.class, parent).get());
 
         modEventBus.addListener(this::registerKeyMappings);
-//        modEventBus.addListener(this::onLoadComplete);
-        modEventBus.addListener(this::onTextureAtlas);
-//        modEventBus.addListener(this::addBuiltinPack);
+        modEventBus.addListener(this::onTextureAtlasStitchedEvent);
+        modEventBus.addListener(this::addBuiltinPacks);
 
+        NeoForge.EVENT_BUS.addListener(this::addReloadListener);
         NeoForge.EVENT_BUS.addListener(ClientTickEvent.Pre.class, (event) -> {
             Minecraft client = Minecraft.getInstance();
             if (OPEN_SCREEN_KEYMAP.consumeClick()) {
@@ -49,9 +50,10 @@ public class ClientMusicNeoForge {
         ClientMusic.init(OPEN_SCREEN_KEYMAP, new NeoForgeModLoader(), ConfigHolderNeoForge.init());
     }
 
-//    public void onLoadComplete(FMLClientSetupEvent event) {
-//
-//    }
+    void addReloadListener(AddReloadListenerEvent event) {
+        NeoForgeListeners.ClientResourceListener(Minecraft.getInstance().getResourceManager());
+        NeoForgeListeners.ServerDataResourceListener(Minecraft.getInstance().getResourceManager());
+    }
 
     void addBuiltinPacks(AddPackFindersEvent event) {
         event.addPackFinders(
@@ -64,12 +66,15 @@ public class ClientMusicNeoForge {
         );
     }
 
-    public void onTextureAtlas(TextureAtlasStitchedEvent event) {
-        NeoForgeListeners.ClientResourceListener(Minecraft.getInstance().getResourceManager());
-        NeoForgeListeners.ServerDataResourceListener(Minecraft.getInstance().getResourceManager());
+    void onTextureAtlasStitchedEvent(TextureAtlasStitchedEvent event) {
+        if (!altasInit) {
+            NeoForgeListeners.ClientResourceListener(Minecraft.getInstance().getResourceManager());
+            NeoForgeListeners.ServerDataResourceListener(Minecraft.getInstance().getResourceManager());
+            altasInit = true;
+        }
     }
 
-    public void registerKeyMappings(RegisterKeyMappingsEvent event) {
+    void registerKeyMappings(RegisterKeyMappingsEvent event) {
         event.register(OPEN_SCREEN_KEYMAP);
     }
 }
