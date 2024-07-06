@@ -24,3 +24,9 @@ dependencies {
     // Architectury API. This is optional, and you can comment it out if you don't need it.
 //    modImplementation("dev.architectury:architectury:${rootProject.property("architectury_version")}")
 }
+
+tasks {
+    processResources {
+        exclude("*")
+    }
+}

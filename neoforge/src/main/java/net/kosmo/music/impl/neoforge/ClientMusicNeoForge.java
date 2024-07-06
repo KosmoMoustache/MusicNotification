@@ -7,6 +7,11 @@ import net.kosmo.music.impl.neoforge.compat.AutoConfigNeoForge;
 import net.kosmo.music.impl.neoforge.compat.ConfigHolderNeoForge;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackSource;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
@@ -15,7 +20,8 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
-
+import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import org.lwjgl.glfw.GLFW;
 
 @Mod(ClientMusic.MOD_ID)
@@ -47,20 +53,16 @@ public class ClientMusicNeoForge {
 //
 //    }
 
-//    void addBuiltinPack(AddPackFindersEvent event) {
-//        try {
-//            event.addPackFinders(
-//                    ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "resourcepacks/dark_mode"),
-//                    PackType.CLIENT_RESOURCES,
-//                    Component.literal("Dark Mode"),
-//                    PackSource.BUILT_IN,
-//                    false,
-//                    Pack.Position.BOTTOM
-//            );
-//        } catch (NullPointerException e) {
-//            ClientMusic.LOGGER.error("Failed to add built-in pack", e);
-//        }
-//    }
+    void addBuiltinPacks(AddPackFindersEvent event) {
+        event.addPackFinders(
+                ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "resourcepacks/dark_mode"),
+                PackType.CLIENT_RESOURCES,
+                Component.literal("Dark Mode"),
+                PackSource.BUILT_IN,
+                false,
+                Pack.Position.TOP
+        );
+    }
 
     public void onTextureAtlas(TextureAtlasStitchedEvent event) {
         NeoForgeListeners.ClientResourceListener(Minecraft.getInstance().getResourceManager());

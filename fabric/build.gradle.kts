@@ -62,6 +62,11 @@ tasks {
         filesMatching("fabric.mod.json") {
             expand("version" to project.version)
         }
+
+        from(rootProject.file("common/src/main/resources")) {
+            include("**/**");
+            duplicatesStrategy = DuplicatesStrategy.WARN
+        }
     }
 
     shadowJar {

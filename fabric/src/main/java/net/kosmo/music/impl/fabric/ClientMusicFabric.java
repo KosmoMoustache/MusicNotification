@@ -36,11 +36,13 @@ public class ClientMusicFabricMod implements ClientModInitializer {
 
         // Register built-in resource pack
         FabricLoader.getInstance().getModContainer(MOD_ID)
-                .ifPresent(container -> ResourceManagerHelper.registerBuiltinResourcePack(
-                        ResourceLocation.fromNamespaceAndPath(MOD_ID, "dark_mode"), container,
-                        Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
-                        ResourcePackActivationType.NORMAL)
-                );
+                .ifPresent(container -> {
+                    ResourceManagerHelper.registerBuiltinResourcePack(
+                            ResourceLocation.fromNamespaceAndPath(MOD_ID, "dark_mode"),
+                            container,
+                            Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
+                            ResourcePackActivationType.NORMAL);
+                });
 
         // Event Listeners
         ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new ListenersFabric.ClientResourceListener());
