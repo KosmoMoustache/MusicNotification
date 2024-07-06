@@ -10,7 +10,7 @@
   "text.autoconfig.musicnotification.option.TOAST_CONFIG.IGNORE_SOUND_EVENT": "Liste des son ignorés",
   "text.autoconfig.musicnotification.option.TOAST_CONFIG": "Configuration du Toast",
   "text.autoconfig.musicnotification.option.SHOW_TITLE_SCREEN_BUTTON": "Affiche un bouton pour ouvrir le Jukebox sur l'écran titre",
-  "text.autoconfig.musicnotification.option.JUKEBOX_CONFIG.MAX_COUNT_HISTORY": "Nombre maximum d'entrée dans l'historique",
+  "text.autoconfig.musicnotification.option.JUKEBOX_CONFIG.MAX_COUNT_HISTORY": "Nombre maximum d'entrées dans l'historique",
   "text.autoconfig.musicnotification.option.JUKEBOX_CONFIG.DEBUG_MOD.@Tooltip": "Cela ajoutera un onglet \"Sound\" dans le Jukebox où vous pourrez jouer n'importe quel son du jeu",
   "text.autoconfig.musicnotification.option.JUKEBOX_CONFIG.DEBUG_MOD": "Activer le \"mode debug\" du Jukebox",
   "text.autoconfig.musicnotification.option.JUKEBOX_CONFIG": "Configuration du Jukebox",
