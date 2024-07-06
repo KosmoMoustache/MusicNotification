@@ -19,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import org.lwjgl.glfw.GLFW;
 
-
 import static net.kosmo.music.impl.ClientMusic.MOD_ID;
 
 @Environment(EnvType.CLIENT)
@@ -49,8 +48,6 @@ public class ClientMusicFabric implements ClientModInitializer {
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new ListenersFabric.ServerDataResourceListener());
         ClientPlayConnectionEvents.JOIN.register(new ListenersFabric.ClientPlayConnectionEventJoin());
 
-
-        //
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (ClientMusic.keyBinding.consumeClick()) {
                 client.setScreen(new JukeboxScreen(client.screen));

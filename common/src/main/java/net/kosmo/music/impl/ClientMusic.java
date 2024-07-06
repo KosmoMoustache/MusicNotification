@@ -27,10 +27,10 @@ public final class ClientMusic {
     public static IModLoader modLoader;
     public static boolean initialized;
 
-    public static void init(KeyMapping  keyMapping, IModLoader modLoader, ConfigHolder config) {
+    public static void init(KeyMapping keyMapping, IModLoader modLoader, ConfigHolder config) {
         LOGGER.info("Music Notification initialized");
 
-        ClientMusic.keyBinding =  keyMapping;
+        ClientMusic.keyBinding = keyMapping;
         ClientMusic.modLoader = modLoader;
         ClientMusic.config = config;
     }

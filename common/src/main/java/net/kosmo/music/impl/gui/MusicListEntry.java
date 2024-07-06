@@ -1,10 +1,6 @@
 package net.kosmo.music.impl.gui;
 
-import net.kosmo.music.impl.ClientMusic;
-import net.kosmo.music.impl.Helper;
-import net.kosmo.music.impl.RenderHelper;
-import net.kosmo.music.impl.AlbumCover;
-import net.kosmo.music.impl.MusicManager;
+import net.kosmo.music.impl.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -93,7 +89,7 @@ public class MusicListEntry extends ListEntry {
         if (ClientMusic.currentlyPlaying != null) {
             MusicManager.Music e = ClientMusic.musicManager.get(this.entry.identifier);
             if (e == null) return false;
-            return  e.customId == null ? e.identifier == ClientMusic.currentlyPlaying.getLocation() : e.customId == ClientMusic.currentlyPlaying.getLocation();
+            return e.customId == null ? e.identifier == ClientMusic.currentlyPlaying.getLocation() : e.customId == ClientMusic.currentlyPlaying.getLocation();
         }
         return false;
     }

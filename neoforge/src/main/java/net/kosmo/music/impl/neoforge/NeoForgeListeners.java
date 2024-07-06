@@ -20,8 +20,8 @@ public class NeoForgeListeners {
     }
 
     public static void ServerDataResourceListener(ResourceManager manager) {
-            ClientMusic.LOGGER.debug("ServerData: Reloading MusicManager");
-            ClientMusic.musicManager.reload();
+        ClientMusic.LOGGER.debug("ServerData: Reloading MusicManager");
+        ClientMusic.musicManager.reload();
     }
 }
 

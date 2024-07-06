@@ -22,15 +22,7 @@ public class ForgeListeners {
     }
 
     public static void ServerDataResourceListener(ResourceManager manager) {
-            ClientMusic.LOGGER.debug("ServerData: Reloading MusicManager");
-            ClientMusic.musicManager.reload();
-        }
+        ClientMusic.LOGGER.debug("ServerData: Reloading MusicManager");
+        ClientMusic.musicManager.reload();
     }
-
-//    public static class ClientPlayConnectionEventJoin {
-//        public void onPlayReady(ClientPacketListener handler, PacketSender sender, Minecraft client) {
-//            ClientMusic.LOGGER.debug("ClientPlayConnectionEventJoin: Reloading MusicManager");
-//            ClientMusic.musicManager.reload();
-//        }
-//    }
-
+}

@@ -2,8 +2,8 @@ package net.kosmo.music.impl.gui;
 
 import net.kosmo.music.impl.ClientMusic;
 import net.kosmo.music.impl.Helper;
-import net.kosmo.music.impl.RenderHelper;
 import net.kosmo.music.impl.MusicManager;
+import net.kosmo.music.impl.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -24,9 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SoundListEntry extends ListEntry {
-    private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
     public static final int GRAY_COLOR = FastColor.ARGB32.color(255, 74, 74, 74);
-
+    private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
     public final Minecraft client;
     public final PlaySoundListWidget parent;
     public final MusicManager.Sound entry;

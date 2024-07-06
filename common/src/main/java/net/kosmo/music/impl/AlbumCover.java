@@ -25,17 +25,18 @@ public class AlbumCover {
         return 20;
     }
 
-    public void drawAlbumCover(GuiGraphics context, int x, int y) {
-        RenderSystem.enableBlend();
-        context.blitSprite(this.textureId, x, y, getWidth(), getHeight());
-    }
-
     public static AlbumCover parseAlbumCover(@Nullable String cover) {
-        if (cover != null) return new AlbumCover(ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "toast/" + cover));
+        if (cover != null)
+            return new AlbumCover(ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "toast/" + cover));
         return GENERIC;
     }
 
     public static AlbumCover getDefaultCover(ResourceLocation location) {
         return Objects.equals(location.getNamespace().toLowerCase(), "minecraft") ? AlbumCover.GENERIC : AlbumCover.MODDED;
+    }
+
+    public void drawAlbumCover(GuiGraphics context, int x, int y) {
+        RenderSystem.enableBlend();
+        context.blitSprite(this.textureId, x, y, getWidth(), getHeight());
     }
 }

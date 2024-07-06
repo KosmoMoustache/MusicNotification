@@ -14,6 +14,11 @@ public class AutoConfigForge implements ConfigData {
     public JukeboxConfig JUKEBOX_CONFIG = new JukeboxConfig();
     public boolean SHOW_TITLE_SCREEN_BUTTON = true;
 
+    @Override
+    public void validatePostLoad() throws ValidationException {
+        ConfigData.super.validatePostLoad();
+    }
+
     public static class ToastConfig {
         public boolean SHOW_AUTHOR = true;
         public boolean SHOW_ALBUM_NAME = false;
@@ -27,11 +32,5 @@ public class AutoConfigForge implements ConfigData {
         public int MAX_COUNT_HISTORY = 10;
         @ConfigEntry.Gui.Tooltip
         public boolean DEBUG_MOD = false;
-    }
-
-
-    @Override
-    public void validatePostLoad() throws ValidationException {
-        ConfigData.super.validatePostLoad();
     }
 }

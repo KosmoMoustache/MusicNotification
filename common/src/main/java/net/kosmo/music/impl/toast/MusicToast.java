@@ -1,11 +1,7 @@
 package net.kosmo.music.impl.toast;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.kosmo.music.impl.ClientMusic;
-import net.kosmo.music.impl.Helper;
-import net.kosmo.music.impl.RenderHelper;
-import net.kosmo.music.impl.AlbumCover;
-import net.kosmo.music.impl.MusicManager;
+import net.kosmo.music.impl.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;

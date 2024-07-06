@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface IMixinMusicTracker {
     @Accessor
     SoundInstance getCurrentMusic();
+
     @Accessor
     void setCurrentMusic(SoundInstance soundInstance);
 }
