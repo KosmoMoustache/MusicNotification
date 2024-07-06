@@ -4,7 +4,9 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import net.kosmo.music.impl.ClientMusic;
-import net.kosmo.music.impl.config.Config.DisableToastSound;
+import net.kosmo.music.impl.config.ConfigHolder.DisableToastSound;
+
+import java.util.List;
 
 @Config(name = ClientMusic.MOD_ID)
 public class AutoConfigForge implements ConfigData {
@@ -26,6 +28,8 @@ public class AutoConfigForge implements ConfigData {
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
         public DisableToastSound DISABLE_TOAST_SOUND = DisableToastSound.MUTE_SELF;
+        public List<String> IGNORE_SOUND_EVENT = List.of("minecraft:block.note_block.*");
+
     }
 
     public static class JukeboxConfig {
