@@ -1,6 +1,6 @@
 package net.kosmo.music.impl.fabric.mixin;
 
-import net.kosmo.music.impl.fabric.ClientMusicFabricMod;
+import net.kosmo.music.impl.fabric.ClientMusicFabric;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -13,6 +13,6 @@ public abstract  class MixinMinecraftClient {
 
     @Inject(method = "<init>", at = @At(value="TAIL", target = "Lnet/minecraft/client/MinecraftClient;<init>(Lnet/minecraft/client/RunArgs;)V"))
     private void onInit(GameConfig args, CallbackInfo info) {
-        ClientMusicFabricMod.onMinecraftClientMixin();
+        ClientMusicFabric.onMinecraftClientMixin();
     }
 }

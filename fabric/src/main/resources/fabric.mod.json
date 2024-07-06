@@ -27,7 +27,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "net.kosmo.music.impl.fabric.ClientMusicFabricMod"
+      "net.kosmo.music.impl.fabric.ClientMusicFabric"
     ],
     "modmenu": [
       "net.kosmo.music.impl.fabric.compat.ModMenuCompatibility"

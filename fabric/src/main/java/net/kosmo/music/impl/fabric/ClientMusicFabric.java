@@ -23,7 +23,7 @@ import org.lwjgl.glfw.GLFW;
 import static net.kosmo.music.impl.ClientMusic.MOD_ID;
 
 @Environment(EnvType.CLIENT)
-public class ClientMusicFabricMod implements ClientModInitializer {
+public class ClientMusicFabric implements ClientModInitializer {
     public static KeyMapping keyMapping;
 
     public static void onMinecraftClientMixin() {
