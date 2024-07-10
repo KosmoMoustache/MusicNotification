@@ -6,15 +6,15 @@ fabric_loader = "0.15.11"
 fabric_api = "0.100.1+1.21"
 
 # Forge
-forge = "51.0.5"
-forge_full = "1.20.1-51.0.5"
+forge = "51.0.22"
+forge_full = "1.20.1-51.0.22"
 
 # NeoForge
 neoforge = "21.0.0-beta"
 
 # Third-party libraries
 cloth_config = "15.0.127"
-modmenu = "11.0.0-beta.1"
+modmenu = "11.0.1"
 
 mixinextras = "0.3.5"
 
@@ -35,7 +35,8 @@ neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 # Third-party libraries
 
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
-cloth_config = { module = "me.shedaniel.cloth:cloth-config", version.ref = "cloth_config" }
+cloth_config_fabric = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth_config" }
+cloth_config_neoforge = { module = "me.shedaniel.cloth:cloth-config-neoforge", version.ref = "cloth_config" }
 
 mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
 mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixinextras" }

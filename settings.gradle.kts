@@ -5,23 +5,23 @@ pluginManagement {
         maven("https://maven.fabricmc.net/") {
             name = "Fabric"
         }
-        maven("https://maven.architectury.dev/") {
-            name = "Architectury"
-        }
 //        maven("https://files.minecraftforge.net/maven/") {
 //            name = "Forge"
 //        }
         maven("https://maven.neoforged.net/releases") {
             name = "NeoForge"
         }
+        maven("https://maven.architectury.dev/") {
+            name = "Architectury"
+        }
         maven("https://maven.shedaniel.me/") {
             name = "Shedaniel"
         }
+        maven("https://maven.terraformersmc.com/releases/") {
+            name = "TerraformerMC"
+        }
     }
 }
-
-rootProject.name = "musicnotification"
-
 include("common")
 include("fabric")
 include("neoforge")

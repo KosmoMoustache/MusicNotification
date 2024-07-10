@@ -5,13 +5,14 @@ plugins {
 }
 
 repositories {
-    maven {
-        name = "Cloth Config"
-        url = uri("https://maven.shedaniel.me/")
+    maven("https://maven.fabricmc.net/") {
+        name = "Fabric"
     }
-    maven {
+    maven("https://maven.shedaniel.me/") {
+        name = "Shedaniel"
+    }
+    maven("https://maven.terraformersmc.com/releases/") {
         name = "TerraformerMC"
-        url = uri("https://maven.terraformersmc.com/releases/")
     }
 }
 
@@ -35,10 +36,12 @@ configurations {
 }
 
 dependencies {
-    modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric_loader_version")}")
+    modImplementation(libs.fabric.loader)
+//    modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric_loader_version")}")
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
+    modImplementation(libs.fabric.api)
+//    modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
 
 
     // Architectury API. This is optional, and you can comment it out if you don't need it.
@@ -48,9 +51,11 @@ dependencies {
     shadowCommon(project(":common", configuration = "transformProductionFabric")) { isTransitive = false }
 
     // ModMenu
-    modApi("com.terraformersmc:modmenu:${rootProject.property("mod_menu_version")}")
+//    modApi("com.terraformersmc:modmenu:${rootProject.property("mod_menu_version")}")
+    modApi(libs.modmenu)
     // Cloth Config
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config_version")}") {
+//    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config_version")}") {
+    modImplementation(libs.cloth.config.fabric) {
         exclude("net.fabricmc.fabric-api")
     }
 }

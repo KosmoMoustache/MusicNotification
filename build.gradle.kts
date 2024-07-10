@@ -8,6 +8,7 @@ plugins {
 
 architectury {
     minecraft = rootProject.property("minecraft_version").toString()
+//    minecraft = libs.versions.minecraft.toString()
 }
 
 subprojects {
@@ -21,13 +22,16 @@ subprojects {
 
     if (project.hasProperty("loom.platform")) {
         version =
-            "${version}+mc${rootProject.property("minecraft_version")}-${project.property("loom.platform").toString()}"
+            "${version}+mc${rootProject.property("minecraft_version").toString()}-${
+                project.property("loom.platform").toString()
+            }"
     }
 
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
 
     dependencies {
         "minecraft"("com.mojang:minecraft:${rootProject.property("minecraft_version")}")
+//        "minecraft"(libs.minecraft)
 
         @Suppress("UnstableApiUsage")
         "mappings"(loom.layered {

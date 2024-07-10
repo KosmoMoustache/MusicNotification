@@ -3,9 +3,14 @@ plugins {
 }
 
 repositories {
-    maven {
-        name = "NeoForged"
-        url = uri("https://maven.neoforged.net/releases")
+    maven("https://maven.neoforged.net/releases") {
+        name = "NeoForge"
+    }
+    maven("https://maven.architectury.dev/") {
+        name = "Architectury"
+    }
+    maven("https://maven.shedaniel.me/") {
+        name = "Shedaniel"
     }
 }
 
@@ -30,12 +35,14 @@ configurations {
 }
 
 dependencies {
-    neoForge("net.neoforged:neoforge:${rootProject.property("neoforge_version")}")
+//    neoForge("net.neoforged:neoforge:${rootProject.property("neoforge_version")}")
+    neoForge(libs.neoforge)
 
     // Architectury API. This is optional, and you can comment it out if you don't need it.
 //    modImplementation("dev.architectury:architectury-neoforge:${rootProject.property("architectury_version")}")
 
-    api("me.shedaniel.cloth:cloth-config-neoforge:${rootProject.property("cloth_config_version")}")
+//    api("me.shedaniel.cloth:cloth-config-neoforge:${rootProject.property("cloth_config_version")}")
+    api(libs.cloth.config.neoforge)
 
     common(project(":common", configuration = "namedElements")) { isTransitive = false }
     shadowCommon(project(":common", configuration = "transformProductionNeoForge")) { isTransitive = false }
