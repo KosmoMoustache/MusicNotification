@@ -46,6 +46,7 @@ jobs:
             fabricloader(required) 
             cloth-config(required)
             fabric-api(required)
+            modmenu(optional)
           loaders: fabric
           name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
