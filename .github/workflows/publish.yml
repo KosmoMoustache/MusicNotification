@@ -29,14 +29,14 @@ jobs:
         uses: taiki-e/install-action@parse-changelog
       - name: Parse changelog
         run: parse-changelog CHANGELOG.md ${{ env.MOD_VERSION }} > changes.md
-      - name: Publish on CurseForge Modrinth & GitHub
+      - name: (Fabric) Publish on CurseForge Modrinth & GitHub
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          curseforge-id: 817206
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-
-          modrinth-id: A4YQgwzz
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          #          curseforge-id: 817206
+          #          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          #
+          #          modrinth-id: A4YQgwzz
+          #          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
           github-token: ${{ secrets.P_GITHUB_TOKEN }}
           github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
@@ -51,4 +51,25 @@ jobs:
           name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
           changelog-file: changes.md
-          files: build/libs/!(*-@(dev|sources|javadoc)).jar
+          files: fabric/build/libs/!(*-@(dev|sources|javadoc)).jar
+      - name: (NeoForge) Publish on CurseForge Modrinth & GitHub
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          #          curseforge-id: 817206
+          #          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          #
+          #          modrinth-id: A4YQgwzz
+          #          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          github-token: ${{ secrets.P_GITHUB_TOKEN }}
+          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
+
+          game-versions: |
+            ${{env.MINECRAFT_VERSION}}
+          dependencies: |
+            cloth-config(required)
+          loaders: neoforge
+          name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
+          version-type: release
+          changelog-file: changes.md
+          files: neoforge/build/libs/!(*-@(dev|sources|javadoc)).jar
