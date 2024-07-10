@@ -24,7 +24,6 @@ jobs:
         run: |
           echo "MINECRAFT_VERSION="$(grep 'minecraft_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
           echo "MOD_VERSION="$(grep 'mod_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
-          echo "CLOTH_CONFIG_VERSION="$(grep 'cloth_config_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
       - name: Install changelog parser
         uses: taiki-e/install-action@parse-changelog
       - name: Parse changelog
