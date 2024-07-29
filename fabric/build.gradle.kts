@@ -2,18 +2,7 @@ import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
     alias(libs.plugins.shadow)
-}
-
-repositories {
-    maven("https://maven.fabricmc.net/") {
-        name = "Fabric"
-    }
-    maven("https://maven.shedaniel.me/") {
-        name = "Shedaniel"
-    }
-    maven("https://maven.terraformersmc.com/releases/") {
-        name = "TerraformerMC"
-    }
+//    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 architectury {
@@ -37,27 +26,31 @@ configurations {
 
 dependencies {
     modImplementation(libs.fabric.loader)
+    modApi(libs.fabric.api)
+
+    modApi(libs.modmenu)
+    modApi(libs.cloth.config.fabric) {
+        exclude("net.fabricmc.fabric-api")
+    }
+
 //    modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric_loader_version")}")
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation(libs.fabric.api)
 //    modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
 
 
     // Architectury API. This is optional, and you can comment it out if you don't need it.
-//    modImplementation("dev.architectury:architectury-fabric:${rootProject.property("architectury_version")}")
+    // modImplementation("dev.architectury:architectury-fabric:${rootProject.property("architectury_version")}")
 
     common(project(":common", configuration = "namedElements")) { isTransitive = false }
     shadowCommon(project(":common", configuration = "transformProductionFabric")) { isTransitive = false }
 
     // ModMenu
-//    modApi("com.terraformersmc:modmenu:${rootProject.property("mod_menu_version")}")
-    modApi(libs.modmenu)
-    // Cloth Config
+//    modApi("com.terraformersmc:modmenu:${rootProject.property("modmenu_version")}")
+//    // Cloth Config
 //    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config_version")}") {
-    modImplementation(libs.cloth.config.fabric) {
-        exclude("net.fabricmc.fabric-api")
-    }
+//        exclude("net.fabricmc.fabric-api")
+//    }
 }
 
 tasks {

@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.shadow)
+    id("com.github.johnrengelman.shadow")
 }
-//
+
 repositories {
     maven {
         name = "MinecraftForge"

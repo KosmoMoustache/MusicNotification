@@ -1,27 +1,37 @@
-pluginManagement {
+dependencyResolutionManagement {
     repositories {
-        gradlePluginPortal()
-
-        maven("https://maven.fabricmc.net/") {
-            name = "Fabric"
-        }
-//        maven("https://files.minecraftforge.net/maven/") {
-//            name = "Forge"
-//        }
+        // NeoForge
         maven("https://maven.neoforged.net/releases") {
-            name = "NeoForge"
+            mavenContent { releasesOnly() }
         }
-        maven("https://maven.architectury.dev/") {
-            name = "Architectury"
-        }
-        maven("https://maven.shedaniel.me/") {
-            name = "Shedaniel"
-        }
-        maven("https://maven.terraformersmc.com/releases/") {
-            name = "TerraformerMC"
+        // Minecraft
+        maven("https://libraries.minecraft.net") {
+            name = "minecraft"
         }
     }
 }
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.neoforged.net/releases")
+//        maven("https://maven.minecraftforge.net/")
+//        maven("https://files.minecraftforge.net/maven/")
+        maven("https://maven.architectury.dev/")
+        // Deps
+        maven("https://maven.shedaniel.me/")
+        maven("https://maven.terraformersmc.com/releases/")
+    }
+}
+
+//dependencyResolutionManagement {
+//    versionCatalogs {
+//        create("libs") {
+//            from(files("./gradle/libs.versions.toml"))
+//        }
+//    }
+//}
+
 include("common")
 include("fabric")
 include("neoforge")

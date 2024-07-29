@@ -2,13 +2,12 @@ import net.fabricmc.loom.api.LoomGradleExtensionAPI
 
 plugins {
     java
-    alias(libs.plugins.architectury)
-    alias(libs.plugins.architectury.loom) apply false
+    id("architectury-plugin") version "3.4-SNAPSHOT"
+    id("dev.architectury.loom") version "1.6-SNAPSHOT" apply false
 }
 
 architectury {
     minecraft = rootProject.property("minecraft_version").toString()
-//    minecraft = libs.versions.minecraft.toString()
 }
 
 subprojects {
@@ -30,8 +29,7 @@ subprojects {
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
 
     dependencies {
-        "minecraft"("com.mojang:minecraft:${rootProject.property("minecraft_version")}")
-//        "minecraft"(libs.minecraft)
+        "minecraft"("com.mojang:minecraft:${rootProject.property("minecraft_version").toString()}")
 
         @Suppress("UnstableApiUsage")
         "mappings"(loom.layered {
@@ -52,5 +50,13 @@ subprojects {
 
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
+    }
+}
+
+allprojects {
+    tasks {
+        named<Jar>("jar") {
+            from(project.rootProject.file("LICENSE"))
+        }
     }
 }
