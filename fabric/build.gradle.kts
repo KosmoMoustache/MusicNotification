@@ -49,7 +49,7 @@ tasks {
         }
 
         from(rootProject.file("common/src/main/resources")) {
-            include("**/**");
+            include("**/**")
             duplicatesStrategy = DuplicatesStrategy.WARN
         }
     }
