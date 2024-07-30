@@ -16,13 +16,13 @@ jobs:
     needs: ["Checks", "Build"]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
           path: artifacts
-      - name: Checkout Repository
-        uses: actions/checkout@v4
       - name: Set up Environment Variables
         run: |
           echo "MINECRAFT_VERSION="$(grep 'minecraft_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
