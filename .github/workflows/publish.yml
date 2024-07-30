@@ -21,6 +21,8 @@ jobs:
         with:
           name: build-artifacts
           path: build/libs
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - name: Set up Environment Variables
         run: |
           echo "MINECRAFT_VERSION="$(grep 'minecraft_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
