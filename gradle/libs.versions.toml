@@ -1,7 +1,7 @@
 [versions]
 fabric-loader = "0.15.11"
 fabric-api = "0.100.8+1.21"
-neoforge-minecraft = "21.0.0-beta"
+neoforge-minecraft = "21.0.146"
 minecraft = "1.21"
 # https://linkie.shedaniel.me/dependencies
 cloth-config = "15.0.128"
