@@ -29,6 +29,8 @@ subprojects {
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
 
     dependencies {
+        // TODO
+//        "minecraft"(libs.minecraft)
         "minecraft"("com.mojang:minecraft:${rootProject.property("minecraft_version").toString()}")
 
         @Suppress("UnstableApiUsage")
@@ -54,6 +56,27 @@ subprojects {
 }
 
 allprojects {
+    repositories {
+        // Minecraft
+        maven("https://libraries.minecraft.net") {
+            name = "minecraft"
+        }
+
+        // Fabric
+        maven("https://maven.fabricmc.net/")
+        // NeoForge
+        maven("https://maven.neoforged.net/releases") {
+            mavenContent { releasesOnly() }
+        }
+        // Forge
+//        maven("https://maven.minecraftforge.net/")
+//        maven("https://files.minecraftforge.net/maven/")
+        // Architectury
+        maven("https://maven.architectury.dev/")
+        // Deps
+        maven("https://maven.shedaniel.me/")
+        maven("https://maven.terraformersmc.com/releases/")
+    }
     tasks {
         named<Jar>("jar") {
             from(project.rootProject.file("LICENSE"))

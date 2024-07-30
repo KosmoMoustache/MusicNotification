@@ -33,24 +33,11 @@ dependencies {
         exclude("net.fabricmc.fabric-api")
     }
 
-//    modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric_loader_version")}")
-
-    // Fabric API. This is technically optional, but you probably want it anyway.
-//    modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
-
-
     // Architectury API. This is optional, and you can comment it out if you don't need it.
     // modImplementation("dev.architectury:architectury-fabric:${rootProject.property("architectury_version")}")
 
     common(project(":common", configuration = "namedElements")) { isTransitive = false }
     shadowCommon(project(":common", configuration = "transformProductionFabric")) { isTransitive = false }
-
-    // ModMenu
-//    modApi("com.terraformersmc:modmenu:${rootProject.property("modmenu_version")}")
-//    // Cloth Config
-//    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${rootProject.property("cloth_config_version")}") {
-//        exclude("net.fabricmc.fabric-api")
-//    }
 }
 
 tasks {
