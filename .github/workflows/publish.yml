@@ -6,20 +6,23 @@ permissions:
   contents: write
 
 jobs:
-  Build-And-Publish:
+  Checks:
+    uses: ./.github/workflows/checks.yml
+
+  Build:
+    uses: ./.github/workflows/build.yml
+
+  Publish:
+    needs: ["Checks", "Build"]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: Setup JDK 21
-        uses: actions/setup-java@v4
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
         with:
-          distribution: "temurin"
-          java-version: 21
-      - name: Grant execute permission to gradlew
-        run: chmod +x gradlew
-      - name: Build with Gradle
-        run: ./gradlew build
+          name: build-artifacts
+          path: artifacts
       - name: Set up Environment Variables
         run: |
           echo "MINECRAFT_VERSION="$(grep 'minecraft_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
@@ -28,18 +31,14 @@ jobs:
         uses: taiki-e/install-action@parse-changelog
       - name: Parse changelog
         run: parse-changelog CHANGELOG.md ${{ env.MOD_VERSION }} > changes.md
-      - name: (Fabric) Publish on CurseForge Modrinth & GitHub
+      - name: (Fabric) Publish on CurseForge Modrinth
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          #          curseforge-id: 817206
-          #          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          #
-          #          modrinth-id: A4YQgwzz
-          #          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: 817206
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
-          github-token: ${{ secrets.P_GITHUB_TOKEN }}
-          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
-
+          modrinth-id: A4YQgwzz
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           game-versions: |
             ${{env.MINECRAFT_VERSION}}
           dependencies: |
@@ -51,19 +50,15 @@ jobs:
           name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
           changelog-file: changes.md
-          files: fabric/build/libs/!(*-@(dev|sources|javadoc)).jar
-      - name: (NeoForge) Publish on CurseForge Modrinth & GitHub
+          files: artifacts/fabric/build/libs/!(*-@(dev|sources|javadoc)*.jar)
+      - name: (NeoForge) Publish on CurseForge Modrinth
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          #          curseforge-id: 817206
-          #          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          #
-          #          modrinth-id: A4YQgwzz
-          #          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: 817206
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
-          github-token: ${{ secrets.P_GITHUB_TOKEN }}
-          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
-
+          modrinth-id: A4YQgwzz
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           game-versions: |
             ${{env.MINECRAFT_VERSION}}
           dependencies: |
@@ -72,4 +67,24 @@ jobs:
           name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
           changelog-file: changes.md
-          files: neoforge/build/libs/!(*-@(dev|sources|javadoc)).jar
+          files: artifacts/neoforge/build/libs/!(*-@(dev|sources|javadoc)*.jar)
+      - name: Publish on GitHub
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          github-token: ${{ secrets.P_GITHUB_TOKEN }}
+          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
+
+          game-versions: |
+            ${{env.MINECRAFT_VERSION}}
+          dependencies: |
+            fabricloader(optional) 
+            fabric-api(optional)
+            modmenu(optional)
+            cloth-config(required)
+          loaders: |
+            fabric
+            neoforge
+          name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
+          version-type: release
+          changelog-file: changes.md
+          files: artifacts/*/build/libs/!(*-@(dev|sources|javadoc)*.jar)
