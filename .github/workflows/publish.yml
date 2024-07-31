@@ -40,8 +40,8 @@ jobs:
           #          modrinth-id: A4YQgwzz
           #          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
-#          github-token: ${{ secrets.P_GITHUB_TOKEN }}
-#          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
+          github-token: ${{ secrets.P_GITHUB_TOKEN }}
+          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
 
           game-versions: |
             ${{env.MINECRAFT_VERSION}}
@@ -64,8 +64,8 @@ jobs:
           #          modrinth-id: A4YQgwzz
           #          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
-#          github-token: ${{ secrets.P_GITHUB_TOKEN }}
-#          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
+          github-token: ${{ secrets.P_GITHUB_TOKEN }}
+          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
 
           game-versions: |
             ${{env.MINECRAFT_VERSION}}
