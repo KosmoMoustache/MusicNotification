@@ -54,7 +54,7 @@ jobs:
           name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
           changelog-file: changes.md
-          files: artifacts/fabric/build/libs/!(*-@(dev|sources|javadoc)).jar
+          files: artifacts/neoforge/build/libs/!(*-dev.jar|*-sources.jar|*-javadoc.jar)
       - name: (NeoForge) Publish on CurseForge Modrinth & GitHub
         uses: Kir-Antipov/mc-publish@v3.3
         with:
@@ -75,4 +75,4 @@ jobs:
           name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
           changelog-file: changes.md
-          files: artifacts/neoforge/build/libs/!(*-@(dev|sources|javadoc)).jar
+          files: artifacts/neoforge/build/libs/!(*-dev.jar|*-sources.jar|*-javadoc.jar)
