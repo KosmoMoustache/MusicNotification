@@ -31,7 +31,7 @@ jobs:
         uses: taiki-e/install-action@parse-changelog
       - name: Parse changelog
         run: parse-changelog CHANGELOG.md ${{ env.MOD_VERSION }} > changes.md
-      - name: (Fabric) Publish on CurseForge Modrinth & GitHub
+      - name: (Fabric) Publish on CurseForge Modrinth
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           #          curseforge-id: 817206
@@ -39,10 +39,6 @@ jobs:
           #
           #          modrinth-id: A4YQgwzz
           #          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-
-          github-token: ${{ secrets.P_GITHUB_TOKEN }}
-          github-tag: v${{ env.MINECRAFT_VERSION}}-${{ env.MOD_VERSION }}
-
           game-versions: |
             ${{env.MINECRAFT_VERSION}}
           dependencies: |
@@ -54,8 +50,25 @@ jobs:
           name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
           changelog-file: changes.md
-          files: artifacts/neoforge/build/libs/!(*-dev.jar|*-sources.jar|*-javadoc.jar)
-      - name: (NeoForge) Publish on CurseForge Modrinth & GitHub
+          files: artifacts/neoforge/build/libs/!(*-@(dev|sources|javadoc)*.jar)
+      - name: (NeoForge) Publish on CurseForge Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          #          curseforge-id: 817206
+          #          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          #
+          #          modrinth-id: A4YQgwzz
+          #          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          game-versions: |
+            ${{env.MINECRAFT_VERSION}}
+          dependencies: |
+            cloth-config(required)
+          loaders: neoforge
+          name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
+          version-type: release
+          changelog-file: changes.md
+          files: artifacts/neoforge/build/libs/!(*-@(dev|sources|javadoc)*.jar)
+      - name: Publish on GitHub
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           #          curseforge-id: 817206
@@ -75,4 +88,4 @@ jobs:
           name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
           changelog-file: changes.md
-          files: artifacts/neoforge/build/libs/!(*-dev.jar|*-sources.jar|*-javadoc.jar)
+          files: artifacts/*/build/libs/!(*-@(dev|sources|javadoc)*.jar)
