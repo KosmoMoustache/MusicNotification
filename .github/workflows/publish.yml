@@ -47,7 +47,7 @@ jobs:
             fabric-api(required)
             modmenu(optional)
           loaders: fabric
-          name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
+          name: '[Fabric] MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
           changelog-file: changes.md
           files: artifacts/fabric/build/libs/!(*-@(dev|sources|javadoc)*.jar)
@@ -64,7 +64,7 @@ jobs:
           dependencies: |
             cloth-config(required)
           loaders: neoforge
-          name: 'MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
+          name: '[NeoForge] MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
           version-type: release
           changelog-file: changes.md
           files: artifacts/neoforge/build/libs/!(*-@(dev|sources|javadoc)*.jar)
