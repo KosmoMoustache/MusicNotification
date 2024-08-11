@@ -65,6 +65,7 @@ jobs:
             cloth-config(required)
           loaders: neoforge
           name: '[NeoForge] MusicNotification v${{env.MOD_VERSION}} for ${{env.MINECRAFT_VERSION}}'
+          version: '${{env.MOD_VERSION}}'
           version-type: release
           changelog-file: changes.md
           files: artifacts/neoforge/build/libs/!(*-@(dev|sources|javadoc)*.jar)
