@@ -1,0 +1,52 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+issueTrackerURL = "https://github.com/KosmoMoustache/MusicNotification/issues"
+license = "LGPL-3.0-only"
+
+[[mods]]
+modId = "musicnotification"
+version = "${version}"
+displayName = "Music Notification"
+authors = "KosmoMoustache"
+description = '''
+Add toast notification when music is played in game with the name. And play music anytime you want
+'''
+logoFile = "logo.png"
+credits = """
+Thanks to:
+    Authors:
+        KosmoMoustache
+    Contributors:
+        YaCCBoy
+        akairoo
+    Translators:
+        Chiloven945
+"""
+
+#[[dependencies.musicnotification]]
+#modId = "neoforge"
+#type = "required"
+#versionRange = "[20.6,)"
+#ordering = "NONE"
+#side = "CLIENT"
+
+[[dependencies.musicnotification]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.musicnotification]]
+modId = "cloth_config"
+type = "required"
+versionRange = "[1,)"
+ordering = "NONE"
+side = "CLIENT"
+
+
+[[mixins]]
+config = "musicnotification.mixins.json"
+
+[[mixins]]
+config = "musicnotification.common.mixins.json"

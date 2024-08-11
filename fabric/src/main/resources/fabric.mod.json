@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "musicnotification",
+  "version": "${version}",
+  "name": "Music Notification",
+  "description": "Add toast notification when music is played in game with the name. And play music any time you want.",
+  "authors": [
+    "KosmoMoustache"
+  ],
+  "contributors": [
+    {
+      "name": "YaCCBoy"
+    },
+    {
+      "name": "Chiloven945"
+    },
+    {
+      "name": "akairoo"
+    }
+  ],
+  "contact": {
+    "homepage": "https://mod.kosmo.ovh/",
+    "sources": "https://github.com/KosmoMoustache/MusicNotification"
+  },
+  "license": "LGPL-3.0-only",
+  "icon": "assets/musicnotification/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.kosmo.music.impl.fabric.ClientMusicFabric"
+    ],
+    "modmenu": [
+      "net.kosmo.music.impl.fabric.compat.ModMenuCompatibility"
+    ]
+  },
+  "mixins": [
+    "musicnotification.common.mixins.json",
+    "musicnotification.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ["1.21", "1.21.1"],
+    "fabricloader": ">=0.15.11",
+    "fabric-api": ">=0.100.8+1.21",
+    "cloth-config": ">=15.0.128"
+  },
+  "recommends": {
+    "modmenu": "*"
+  }
+}

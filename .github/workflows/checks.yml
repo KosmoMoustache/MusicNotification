@@ -1,6 +1,6 @@
 name: Checks
 
-on: [push]
+on: [push, workflow_call]
 
 env:
   CHANGELOG_VERSION: ''
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Install changelog parser
         uses: taiki-e/install-action@parse-changelog
       - name: Parse changelog

@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.kosmo.music.impl.neoforge.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "musicnotification-refmap.json",
+  "client": [
+    "MixinMinecraftClient"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
