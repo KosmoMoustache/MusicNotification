@@ -34,11 +34,11 @@ jobs:
       - name: (Fabric) Publish on CurseForge Modrinth
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-#          curseforge-id: 817206
-#          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-#
-#          modrinth-id: A4YQgwzz
-#          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: 817206
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          modrinth-id: A4YQgwzz
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           game-versions: |
             ${{env.MINECRAFT_VERSION}}
           dependencies: |
@@ -54,11 +54,11 @@ jobs:
       - name: (NeoForge) Publish on CurseForge Modrinth
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-#          curseforge-id: 817206
-#          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-#
-#          modrinth-id: A4YQgwzz
-#          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-id: 817206
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          modrinth-id: A4YQgwzz
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           game-versions: |
             ${{env.MINECRAFT_VERSION}}
           dependencies: |
