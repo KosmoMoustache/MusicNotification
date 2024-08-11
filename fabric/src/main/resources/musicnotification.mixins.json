@@ -2,7 +2,6 @@
   "required": true,
   "package": "net.kosmo.music.impl.fabric.mixin",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "musicnotification-refmap.json",
   "client": [
     "MixinMinecraftClient"
   ],

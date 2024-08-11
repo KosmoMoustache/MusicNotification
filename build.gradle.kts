@@ -66,8 +66,7 @@ subprojects {
         }
 
         from(rootProject.file("common/src/main/resources")) {
-            include("**/**")
-            duplicatesStrategy = DuplicatesStrategy.WARN
+            include("resourcepacks/**")
         }
     }
 
