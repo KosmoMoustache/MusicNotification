@@ -1,16 +1,3 @@
-https://docs.neoforged.net/docs/resources/
-https://stonecutter.kikugie.dev/
-
-https://github.dev/RaphiMC/ImmediatelyFast
-https://github.dev/MrCrayfish/Backpacked/blob/multiloader/1.20.6/common/src/main/java/com/mrcrayfish/backpacked/core/ModCommands.java
-https://github.dev/IMB11/Sounds/tree/0.9.0
-https://github.dev/Serilum/Omega-Mute
-
-https://docs.minecraftforge.net/en/1.16.x/concepts/registries/
-https://docs.minecraftforge.net/en/1.19.x/misc/keymappings/
-https://neoforged.net/
-https://docs.neoforged.net/docs/resources/
-
 # Music Notification
 
 Adds a toast notification when music is played in the game with the track’s name, author, and album name.
