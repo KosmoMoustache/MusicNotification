@@ -1,6 +1,5 @@
 {
   "required": true,
-  "minVersion": "0.8",
   "package": "net.kosmo.music.impl.fabric.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "musicnotification-refmap.json",

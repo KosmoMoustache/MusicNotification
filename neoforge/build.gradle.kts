@@ -1,69 +1,65 @@
-plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+architectury {
+    neoForge()
 }
 
-architectury {
-    platformSetupLoomIde()
-    neoForge()
+val common: Configuration by configurations.creating {
+    configurations.compileClasspath.get().extendsFrom(this)
+    configurations.runtimeClasspath.get().extendsFrom(this)
+    configurations["developmentNeoForge"].extendsFrom(this)
 }
 
 loom {
     accessWidenerPath.set(project(":common").loom.accessWidenerPath)
 }
 
-val common: Configuration by configurations.creating
-val shadowCommon: Configuration by configurations.creating // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
-val developmentNeoForge: Configuration = configurations.getByName("developmentNeoForge")
-
-
-configurations {
-    compileClasspath.get().extendsFrom(configurations["common"])
-    runtimeClasspath.get().extendsFrom(configurations["common"])
-    developmentNeoForge.extendsFrom(configurations["common"])
-}
-
 dependencies {
-    neoForge(libs.neoforge.minecraft)
+    common(project(":common", configuration = "namedElements")) {
+        isTransitive = false
+    }
+    shadowCommon(project(path = ":common", configuration = "transformProductionNeoForge")) {
+        isTransitive = false
+    }
 
-    api(libs.cloth.config.neoforge)
+    val neoforgeVersion: String by project
+    neoForge(group = "net.neoforged", name = "neoforge", version = neoforgeVersion)
 
-    // Architectury API. This is optional, and you can comment it out if you don't need it.
-//    modImplementation("dev.architectury:architectury-neoforge:${rootProject.property("architectury_version")}")
-
-    common(project(":common", configuration = "namedElements")) { isTransitive = false }
-    shadowCommon(project(":common", configuration = "transformProductionNeoForge")) { isTransitive = false }
+    val clothConfigVersion: String by project
+    api( group = "me.shedaniel.cloth", name = "cloth-config-neoforge", version = clothConfigVersion )
 }
 
-tasks {
-    processResources {
-        inputs.property("version", project.version)
-
-        filesMatching("META-INF/neoforge.mods.toml") {
-            expand("version" to project.version)
-        }
-
-        from(rootProject.file("common/src/main/resources")) {
-            include("**/**")
-            duplicatesStrategy = DuplicatesStrategy.WARN
-        }
-    }
-
-    shadowJar {
-        configurations = listOf(project.configurations["shadowCommon"])
-        archiveClassifier.set("dev-shadow")
-    }
-
-    remapJar {
-        inputFile.set(shadowJar.flatMap { it.archiveFile })
-    }
-
-    jar {
-        archiveClassifier.set("dev")
-    }
-
-    sourcesJar {
-        val commonSources = project(":common").tasks.getByName<Jar>("sourcesJar")
-        dependsOn(commonSources)
-        from(commonSources.archiveFile.map { zipTree(it) })
-    }
-}
+//tasks {
+//    processResources {
+////        inputs.property("version", project.version)
+////
+////        filesMatching("META-INF/neoforge.mods.toml") {
+////            expand("version" to project.version)
+////        }
+//
+//        from(rootProject.file("common/src/main/resources")) {
+//            include("**/**")
+//            duplicatesStrategy = DuplicatesStrategy.WARN
+//        }
+//    }
+//
+////    shadowJar {
+////        exclude("architectury.common.json")
+////        configurations = listOf(project.configurations["shadowCommon"])
+////        archiveClassifier.set("dev-shadow")
+////    }
+////
+////    remapJar {
+////        injectAccessWidener.set(true)
+////        inputFile.set(shadowJar.flatMap { it.archiveFile })
+////        dependsOn(shadowJar)
+////    }
+////
+////    jar {
+////        archiveClassifier.set("dev")
+////    }
+////
+////    sourcesJar {
+////        val commonSources = project(":common").tasks.getByName<Jar>("sourcesJar")
+////        dependsOn(commonSources)
+////        from(commonSources.archiveFile.map { zipTree(it) })
+////    }
+//}

@@ -1,85 +1,98 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import dev.architectury.plugin.ArchitectPluginExtension
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
+import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
     java
-    id("architectury-plugin") version "3.4-SNAPSHOT"
     id("dev.architectury.loom") version "1.6-SNAPSHOT" apply false
+    id("architectury-plugin") version "3.4-SNAPSHOT"
+    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
 }
 
 architectury {
-    minecraft = rootProject.property("minecraft_version").toString()
+    val minecraftVersion: String by project
+    minecraft = minecraftVersion
 }
 
 subprojects {
-    apply(plugin = "java")
     apply(plugin = "architectury-plugin")
     apply(plugin = "dev.architectury.loom")
+    apply(plugin = "com.github.johnrengelman.shadow")
 
-    base.archivesName.set(rootProject.property("archives_base_name").toString())
-    group = rootProject.property("maven_group").toString()
-    version = rootProject.property("mod_version").toString()
+    val minecraftVersion: String by project
+    val modLoader = project.name
+    val modId = rootProject.name
+    val isCommon = modLoader == rootProject.projects.common.name
+    val loom: LoomGradleExtensionAPI by project
 
-    if (project.hasProperty("loom.platform")) {
-        version =
-            "${version}+mc${rootProject.property("minecraft_version").toString()}-${
-                project.property("loom.platform").toString()
-            }"
+    base {
+        archivesName.set("$modId-$modLoader-mc$minecraftVersion")
     }
 
-    val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
+    loom.silentMojangMappingsLicense()
 
-    dependencies {
-        // TODO
-//        "minecraft"(libs.minecraft)
-        "minecraft"("com.mojang:minecraft:${rootProject.property("minecraft_version").toString()}")
-
-        @Suppress("UnstableApiUsage")
-        "mappings"(loom.layered {
-            officialMojangMappings()
-        })
-    }
-
-    tasks.withType<JavaCompile> {
-        options.encoding = "UTF-8"
-        options.release = 21
-    }
-
-    java {
-        // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-        // if it is present.
-        // If you remove this line, sources will not be generated.
-        withSourcesJar()
-
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-}
-
-allprojects {
     repositories {
-        // Minecraft
-        maven("https://libraries.minecraft.net") {
-            name = "minecraft"
-        }
-
-        // Fabric
+        mavenCentral()
+        maven("https://libraries.minecraft.net")
         maven("https://maven.fabricmc.net/")
-        // NeoForge
-        maven("https://maven.neoforged.net/releases") {
-            mavenContent { releasesOnly() }
-        }
-        // Forge
-//        maven("https://maven.minecraftforge.net/")
-//        maven("https://files.minecraftforge.net/maven/")
-        // Architectury
+        maven("https://maven.neoforged.net/releases")
         maven("https://maven.architectury.dev/")
-        // Deps
         maven("https://maven.shedaniel.me/")
         maven("https://maven.terraformersmc.com/releases/")
     }
-    tasks {
-        named<Jar>("jar") {
-            from(project.rootProject.file("LICENSE"))
+
+    dependencies {
+        "minecraft"("::$minecraftVersion")
+        "mappings"(loom.officialMojangMappings())
+    }
+
+    java {
+        withSourcesJar()
+    }
+
+    tasks.jar {
+        archiveClassifier.set("dev")
+    }
+
+    tasks.named<RemapJarTask>("remapJar") {
+        archiveClassifier.set(null as String?)
+    }
+
+    tasks.processResources {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        filesMatching(listOf("META-INF/neoforge.mods.toml", "fabric.mod.json")) {
+            expand("version" to project.version)
+        }
+
+        from(rootProject.file("common/src/main/resources")) {
+            include("**/**")
+            duplicatesStrategy = DuplicatesStrategy.WARN
+        }
+    }
+
+    if (!isCommon) {
+        configure<ArchitectPluginExtension> {
+            platformSetupLoomIde()
+        }
+
+        val shadowCommon by configurations.creating
+
+        tasks {
+            "shadowJar"(ShadowJar::class) {
+                archiveClassifier.set("dev-shadow")
+                configurations = listOf(shadowCommon)
+            }
+
+            "remapJar"(RemapJarTask::class) {
+                dependsOn("shadowJar")
+                inputFile.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
+                archiveClassifier.set(null as String?)
+            }
+        }
+    } else {
+        tasks.named<RemapJarTask>("remapJar") {
+            archiveClassifier.set(null as String?)
         }
     }
 }

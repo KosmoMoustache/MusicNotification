@@ -5,6 +5,7 @@ import net.kosmo.music.impl.Listeners;
 import net.minecraft.client.sounds.SoundEventListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 
 public class NeoForgeListeners {
     public static void ClientResourceListener(ResourceManager manager) {

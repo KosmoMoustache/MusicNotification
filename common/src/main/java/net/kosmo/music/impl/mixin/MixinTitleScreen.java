@@ -14,13 +14,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TitleScreen.class)
-public class MixinTitleScreen extends Screen {
+public abstract class MixinTitleScreen extends Screen {
 
     protected MixinTitleScreen(Component title) {
         super(title);
     }
 
-    @Inject(method = "init", at = @At("RETURN"))
+    @Inject(method = "Lnet/minecraft/client/gui/screens/TitleScreen;init()V", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
         if (ClientMusic.config.SHOW_TITLE_SCREEN_BUTTON) {
             this.addRenderableWidget(new ImageButton(12, 0, 20, 20, new WidgetSprites(ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "jukebox/icon"), ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "jukebox/icon_focused")), (button) -> {

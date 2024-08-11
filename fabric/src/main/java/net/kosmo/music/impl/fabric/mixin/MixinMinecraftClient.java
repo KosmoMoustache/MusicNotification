@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraftClient {
 
-    @Inject(method = "<init>", at = @At(value = "TAIL", target = "Lnet/minecraft/client/MinecraftClient;<init>(Lnet/minecraft/client/RunArgs;)V"))
+    @Inject(method = "<init>", at = @At(value = "TAIL", target = "Lnet/minecraft/client/Minecraft;<init>(Lnet/minecraft/client/main/GameConfig;)V"))
     private void onInit(GameConfig args, CallbackInfo info) {
         ClientMusicFabric.onMinecraftClientMixin();
     }
