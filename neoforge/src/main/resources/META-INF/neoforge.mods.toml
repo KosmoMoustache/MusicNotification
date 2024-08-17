@@ -23,13 +23,6 @@ Thanks to:
         Chiloven945
 """
 
-#[[dependencies.musicnotification]]
-#modId = "neoforge"
-#type = "required"
-#versionRange = "[20.6,)"
-#ordering = "NONE"
-#side = "CLIENT"
-
 [[dependencies.musicnotification]]
 modId = "minecraft"
 type = "required"
