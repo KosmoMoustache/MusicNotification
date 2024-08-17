@@ -25,8 +25,8 @@ jobs:
           path: artifacts
       - name: Set up Environment Variables
         run: |
-          echo "MINECRAFT_VERSION="$(grep 'minecraft_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
-          echo "MOD_VERSION="$(grep 'mod_version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
+          echo "MINECRAFT_VERSION="$(grep 'minecraftVersion' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
+          echo "MOD_VERSION="$(grep 'version' gradle.properties | cut -f2- -d=)"" >> $GITHUB_ENV
       - name: Install changelog parser
         uses: taiki-e/install-action@parse-changelog
       - name: Parse changelog
