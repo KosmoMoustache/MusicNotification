@@ -40,8 +40,8 @@ public class MusicManager {
 
         // Data Driver Jukebox Song
         if (Minecraft.getInstance().level != null) {
-            RegistryAccess registries = Minecraft.getInstance().level.registryAccess();
-            Optional<Registry<JukeboxSong>> jukeboxSongRegistry = registries.registry(Registries.JUKEBOX_SONG);
+            RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
+            Optional<Registry<JukeboxSong>> jukeboxSongRegistry = registryAccess.lookup(Registries.JUKEBOX_SONG);
             if (jukeboxSongRegistry.isPresent()) {
                 for (Map.Entry<ResourceKey<JukeboxSong>, JukeboxSong> jukeboxSong : jukeboxSongRegistry.get().entrySet()) {
                     Music m = Music.parseJukeboxSongRegistry(jukeboxSong.getValue());
@@ -140,7 +140,7 @@ public class MusicManager {
 
         public static Music parseJukeboxSongRegistry(JukeboxSong jukeboxSong) {
             Helper.JukeboxSongParser parsed = new Helper.JukeboxSongParser(jukeboxSong);
-            ResourceLocation location = jukeboxSong.soundEvent().value().getLocation();
+            ResourceLocation location = jukeboxSong.soundEvent().value().location();
             return new Music(
                     location,
                     location,

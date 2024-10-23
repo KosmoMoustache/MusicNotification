@@ -9,6 +9,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -128,8 +129,8 @@ public class JukeboxScreen extends Screen {
     public void renderBackground(GuiGraphics context, int mouseX, int mouseY, float delta) {
         super.renderBackground(context, mouseX, mouseY, delta);
         int i = this.getSearchBoxX() + 3;
-        context.blitSprite(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
-        context.blitSprite(SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
+        context.blitSprite(RenderType::guiTextured, BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
+        context.blitSprite(RenderType::guiTextured, SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
     }
 
     @Override

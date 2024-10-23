@@ -4,18 +4,15 @@ import net.kosmo.music.impl.ClientMusic;
 import net.kosmo.music.impl.config.ConfigHolder;
 import net.kosmo.music.impl.toast.MusicToast;
 import net.minecraft.client.gui.components.toasts.Toast;
-import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.gui.components.toasts.ToastManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(ToastComponent.ToastInstance.class)
+@Mixin(ToastManager.ToastInstance.class)
 public abstract class MixinToastManagerEntry<T extends Toast> {
-    @Shadow
-    @Final
-    int index;
     @Shadow
     @Final
     private T toast;
@@ -31,7 +28,7 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
 //        }
 //        return this.topIndex * 32;
 //    }
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/toasts/Toast$Visibility;playSound(Lnet/minecraft/client/sounds/SoundManager;)V"), require = 0)
+    @Redirect(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/toasts/Toast$Visibility;playSound(Lnet/minecraft/client/sounds/SoundManager;)V"), require = 0)
     public void playSound(Toast.Visibility visibility, net.minecraft.client.sounds.SoundManager soundManager) {
         if (ClientMusic.config.DISABLE_TOAST_SOUND == null)
             ClientMusic.config.DISABLE_TOAST_SOUND = ConfigHolder.DisableToastSound.MUTE_SELF;
