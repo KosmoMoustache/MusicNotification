@@ -3,7 +3,7 @@
   "id": "musicnotification",
   "version": "${version}",
   "name": "Music Notification",
-  "description": "Add toast notification when music is played in game with the name. And play music any time you want.",
+  "description": "Add toast notification when music is played in game with infos about the track being played. And play music any time you want.",
   "authors": [
     "KosmoMoustache"
   ],
@@ -38,7 +38,7 @@
     "musicnotification.mixins.json"
   ],
   "depends": {
-    "minecraft": ["1.21", "1.21.1"],
+    "minecraft": "${minecraft_version}",
     "fabricloader": ">=0.15.11",
     "fabric-api": ">=0.100.8+1.21",
     "cloth-config": ">=15.0.128"

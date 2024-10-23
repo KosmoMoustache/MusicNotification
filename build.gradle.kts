@@ -5,7 +5,7 @@ import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
     java
-    id("dev.architectury.loom") version "1.6-SNAPSHOT" apply false
+    id("dev.architectury.loom") version "1.7-SNAPSHOT" apply false
     id("architectury-plugin") version "3.4-SNAPSHOT"
     id("com.github.johnrengelman.shadow") version "7.1.2" apply false
 }
@@ -62,7 +62,10 @@ subprojects {
     tasks.processResources {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         filesMatching(listOf("META-INF/neoforge.mods.toml", "fabric.mod.json")) {
-            expand("version" to project.version)
+            expand(
+                "version" to project.version,
+                "minecraft_version" to minecraftVersion
+            )
         }
 
         from(rootProject.file("common/src/main/resources")) {

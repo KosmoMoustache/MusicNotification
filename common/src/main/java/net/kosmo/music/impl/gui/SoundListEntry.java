@@ -17,14 +17,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.CommonColors;
-import net.minecraft.util.FastColor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SoundListEntry extends ListEntry {
-    public static final int GRAY_COLOR = FastColor.ARGB32.color(255, 74, 74, 74);
+    public static final int GRAY_COLOR = ARGB.color(255, 74, 74, 74);
     private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
     public final Minecraft client;
     public final PlaySoundListWidget parent;
