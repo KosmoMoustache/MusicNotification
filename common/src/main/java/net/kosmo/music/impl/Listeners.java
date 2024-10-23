@@ -26,21 +26,23 @@ public class Listeners {
             ResourceLocation identifier1 = soundInstance.getSound().getLocation();
             ResourceLocation identifier2 = soundInstance.getLocation();
 
-            MusicManager.Music music = ClientMusic.musicManager.get(identifier1);
-            if (music == null) {
+            // Try 1 with identifier1
+            MusicManager.Music managerMusic = ClientMusic.musicManager.get(identifier1);
+
+            // Try 2 with identifier2
+            if (managerMusic == null) {
                 ClientMusic.LOGGER.info("Music not found with identifier: {} trying with {}", identifier1, identifier2);
-                music = ClientMusic.musicManager.get(identifier2);
+                managerMusic = ClientMusic.musicManager.get(identifier2);
             }
 
-            if (music != null) {
-                MusicToast.show(Minecraft.getInstance().getToasts(), music);
-            } else {
+            // Try 3 create a dummy music entry
+            if (managerMusic == null) {
                 ClientMusic.LOGGER.info("Unknown music {}", identifier1);
 
                 String namespace = ClientMusic.getModName(identifier1);
 
                 Helper.ResourceLocationParser parsed = new Helper.ResourceLocationParser(identifier1);
-                MusicManager.Music m = new MusicManager.Music(
+                managerMusic = new MusicManager.Music(
                         identifier1,
                         null,
                         parsed.title,
@@ -49,8 +51,17 @@ public class Listeners {
                         AlbumCover.getDefaultCover(identifier1),
                         false
                 );
-                MusicToast.show(Minecraft.getInstance().getToasts(), m);
             }
+
+            MusicToast toast = Minecraft.getInstance().getToastManager().getToast(MusicToast.class, MusicToast.Type.DEFAULT);
+            if (toast == null) {
+                Minecraft.getInstance().getToastManager().addToast(new MusicToast(managerMusic));
+            } else {
+                toast.setContent(managerMusic);
+            }
+
+            // Add to history
+            ClientMusic.musicHistory.addMusic(managerMusic);
         }
     }
 }

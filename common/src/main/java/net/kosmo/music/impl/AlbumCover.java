@@ -2,6 +2,7 @@ package net.kosmo.music.impl;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,8 +36,8 @@ public class AlbumCover {
         return Objects.equals(location.getNamespace().toLowerCase(), "minecraft") ? AlbumCover.GENERIC : AlbumCover.MODDED;
     }
 
-    public void drawAlbumCover(GuiGraphics context, int x, int y) {
+    public void drawAlbumCover(GuiGraphics guiGraphics, int x, int y) {
         RenderSystem.enableBlend();
-        context.blitSprite(this.textureId, x, y, getWidth(), getHeight());
+        guiGraphics.blitSprite(RenderType::guiTextured, this.textureId, x, y, getWidth(), getHeight());
     }
 }
