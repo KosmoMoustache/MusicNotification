@@ -26,7 +26,7 @@ Thanks to:
 [[dependencies.musicnotification]]
 modId = "minecraft"
 type = "required"
-versionRange = "[${minecraft_version},)"
+versionRange = "[1.21.2, 1.21.3]"
 ordering = "NONE"
 side = "CLIENT"
 
