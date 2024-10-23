@@ -66,9 +66,7 @@ public class MusicManager {
                     } else {
                         wse.set(ClientMusic.soundManager.getSoundEvent(m.identifier));
                     }
-//                    WeighedSoundEvents wse = m.customId != null ?  :
 
-//                    WeighedSoundEvents wse = m.customId != null ? ClientMusic.soundManager.getSoundEvent(m.customId) : ClientMusic.soundManager.getSoundEvent(m.identifier);
                     if (wse.get() != null) {
                         this.musics.put(m.identifier, m);
                     } else {
