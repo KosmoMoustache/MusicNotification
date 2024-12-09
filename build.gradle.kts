@@ -62,14 +62,21 @@ subprojects {
     tasks.processResources {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         filesMatching(listOf("META-INF/neoforge.mods.toml", "fabric.mod.json")) {
-            expand(
-                "version" to project.version,
-                "minecraft_version" to minecraftVersion,
-                "fabric_loader_version" to project.property("fabricLoaderVersion"),
-                "fabric_api_version" to project.property("fabricApiVersion"),
-                "cloth_config_version" to project.property("clothConfigVersion"),
-                "modmenu_version" to project.property("modmenuVersion")
-            )
+            if (project.name == "fabric") {
+                expand(
+                    "version" to project.version,
+                    "minecraft_version" to minecraftVersion,
+                    "fabric_loader_version" to project.property("fabricLoaderVersion"),
+                    "fabric_api_version" to project.property("fabricApiVersion"),
+                    "cloth_config_version" to project.property("clothConfigVersion"),
+                    "modmenu_version" to project.property("modmenuVersion")
+                )
+            } else {
+                expand(
+                    "version" to project.version,
+                    "minecraft_version" to minecraftVersion,
+                )
+            }
         }
 
         from(rootProject.file("common/src/main/resources")) {
