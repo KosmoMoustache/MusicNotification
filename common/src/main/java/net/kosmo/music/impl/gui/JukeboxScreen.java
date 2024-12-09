@@ -189,7 +189,7 @@ public class JukeboxScreen extends Screen {
                 header.append(" - ").append(HOME_TAB_TITLE);
                 Collection<MusicManager.Music> col = ClientMusic.musicManager.musics.values();
                 listEmpty = col.isEmpty();
-                this.soundList.update(col, this.soundList.getScrollAmount());
+                this.soundList.update(col, this.soundList.scrollAmount());
                 break;
             }
             case SOUND: {
@@ -198,7 +198,7 @@ public class JukeboxScreen extends Screen {
                 Collection<MusicManager.Sound> col = Lists.newArrayList();
                 BuiltInRegistries.SOUND_EVENT.keySet().forEach(id -> col.add(new MusicManager.Sound(id)));
                 listEmpty = col.isEmpty();
-                this.soundList.update(col, this.soundList.getScrollAmount());
+                this.soundList.update(col, this.soundList.scrollAmount());
                 break;
             }
             case HISTORY: {
@@ -207,7 +207,7 @@ public class JukeboxScreen extends Screen {
                 header.append(" - ").append(HISTORY_TAB_TITLE);
                 Collection<MusicManager.Music> col = ClientMusic.musicHistory.getHistory();
                 listEmpty = col.isEmpty();
-                this.soundList.update(col, this.soundList.getScrollAmount());
+                this.soundList.update(col, this.soundList.scrollAmount());
             }
         }
 
