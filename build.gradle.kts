@@ -7,7 +7,7 @@ plugins {
     java
     id("dev.architectury.loom") version "1.7-SNAPSHOT" apply false
     id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
+    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
 }
 
 architectury {
@@ -62,10 +62,21 @@ subprojects {
     tasks.processResources {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         filesMatching(listOf("META-INF/neoforge.mods.toml", "fabric.mod.json")) {
-            expand(
-                "version" to project.version,
-                "minecraft_version" to minecraftVersion
-            )
+            if (project.name == "fabric") {
+                expand(
+                    "version" to project.version,
+                    "minecraft_version" to minecraftVersion,
+                    "fabric_loader_version" to project.property("fabricLoaderVersion"),
+                    "fabric_api_version" to project.property("fabricApiVersion"),
+                    "cloth_config_version" to project.property("clothConfigVersion"),
+                    "modmenu_version" to project.property("modmenuVersion")
+                )
+            } else {
+                expand(
+                    "version" to project.version,
+                    "minecraft_version" to minecraftVersion,
+                )
+            }
         }
 
         from(rootProject.file("common/src/main/resources")) {

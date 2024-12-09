@@ -38,12 +38,12 @@
     "musicnotification.mixins.json"
   ],
   "depends": {
-    "minecraft": ">=1.21.2 <=1.21.3",
-    "fabricloader": ">=0.15.11",
-    "fabric-api": ">=0.100.8+1.21",
-    "cloth-config": ">=15.0.128"
+    "minecraft": "${minecraft_version}",
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "cloth-config": ">=${cloth_config_version}"
   },
   "recommends": {
-    "modmenu": "*"
+    "modmenu": ">=${modmenu_version}"
   }
 }
