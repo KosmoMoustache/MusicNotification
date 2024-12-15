@@ -1,0 +1,23 @@
+{
+  "custom.vibing_over_venus": {
+    "sounds": [
+      {
+        "name": "custom_music:music/vibing_over_venus"
+      }
+    ]
+  },
+  "custom.morning": {
+    "sounds": [
+      {
+        "name": "custom_music:music/morning"
+      }
+    ]
+  },
+  "custom.evening": {
+    "sounds": [
+      {
+        "name": "custom_music:music/evening"
+      }
+    ]
+  }
+}

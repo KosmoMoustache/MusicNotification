@@ -1,0 +1,26 @@
+{
+  "custom_music:music/vibing_over_venus": {
+    "title": "Vibing Over venus",
+    "author": "Kevin MacLeod",
+    "album": "Royalty Free Music",
+    "customId": "custom_music:custom.vibing_over_venus",
+    "coverTextureSlotX": 0,
+    "coverTextureSlotY": 7
+  },
+  "custom_music:music/morning": {
+    "title": "Morning",
+    "author": "Kevin MacLeod",
+    "album": "Royalty Free Music",
+    "customId": "custom_music:custom.morning",
+    "coverTextureSlotX": 1,
+    "coverTextureSlotY": 7
+  },
+  "custom_music:music/evening": {
+    "title": "Evening",
+    "author": "Kevin MacLeod",
+    "album": "Royalty Free Music",
+    "customId": "custom_music:custom.evening",
+    "coverTextureSlotX": 2,
+    "coverTextureSlotY": 7
+  }
+}

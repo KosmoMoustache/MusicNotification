@@ -1,4 +1,6 @@
 # JSON Schema
+### An example resource pack can be found in test folder
+
 ### musics.json
 Default file: [musics.json](https://github.com/KosmoMoustache/MusicNotification/blob/next/src/main/resources/assets/musicnotification/musics.json)
 
