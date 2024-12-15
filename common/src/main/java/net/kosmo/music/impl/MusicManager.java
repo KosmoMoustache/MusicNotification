@@ -118,10 +118,6 @@ public class MusicManager {
             String title = GsonHelper.getAsString(jsonObject, "title");
             String author = GsonHelper.getAsString(jsonObject, "author");
             String album = GsonHelper.getAsString(jsonObject, "album", null);
-            if (album == null) {
-                album = GsonHelper.getAsString(jsonObject, "soundtrack");
-                ClientMusic.LOGGER.error("Key 'soundtrack' of '{}' is deprecated, use 'album' instead", title);
-            }
             AlbumCover cover = AlbumCover.parseAlbumCover(GsonHelper.getAsString(jsonObject, "cover", null));
             boolean isRandom = GsonHelper.getAsBoolean(jsonObject, "isRandom", false);
 
