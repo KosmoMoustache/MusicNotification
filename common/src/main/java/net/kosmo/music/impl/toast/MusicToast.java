@@ -83,10 +83,11 @@ public class MusicToast implements Toast {
         this.albumCover.drawAlbumCover(guiGraphics, 6, 6);
         guiGraphics.pose().popPose();
 
-        guiGraphics.drawString(font, this.title, 30, 7, ClientMusic.isDarkModeEnabled ? 0xff75ff : -11534256, false);
+        RenderHelper.drawScrollableText(guiGraphics, font, this.title, 30, 30, 7, this.width() - 4, 7 + font.lineHeight, ClientMusic.isDarkModeEnabled ? 0xff75ff : -11534256, false, 30, 0, this.width() + 4, this.height());
 
         if (ClientMusic.config.SHOW_AUTHOR) {
-            guiGraphics.drawString(font, this.author, 30, 18, ClientMusic.isDarkModeEnabled ? -3355444 : CommonColors.BLACK, false);
+            RenderHelper.drawScrollableText(guiGraphics, font, this.author, 30, 30, 18, this.width() - 4, 18 + font.lineHeight, ClientMusic.isDarkModeEnabled ? 0xff75ff : -11534256, false, 30, 0, this.width() + 4, this.height());
+
         }
         if (ClientMusic.config.SHOW_ALBUM_NAME) {
             RenderHelper.drawScrollableText(guiGraphics, font, this.albumName, 30, 30, 29, this.width() - 4, 29 + font.lineHeight, ClientMusic.isDarkModeEnabled ? -3355444 : CommonColors.BLACK, false, 30, 0, this.width() + 4, this.height());
