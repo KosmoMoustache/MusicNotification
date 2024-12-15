@@ -89,8 +89,7 @@ public class MusicToast implements Toast {
             guiGraphics.drawString(font, this.author, 30, 18, ClientMusic.isDarkModeEnabled ? -3355444 : CommonColors.BLACK, false);
         }
         if (ClientMusic.config.SHOW_ALBUM_NAME) {
-            // TODO: Make the mask follow the X of the toast
-            RenderHelper.drawScrollableText(guiGraphics, font, this.albumName, 30, 30, 29, this.width() - 4, 29 + font.lineHeight, ClientMusic.isDarkModeEnabled ? -3355444 : CommonColors.BLACK, false, guiGraphics.guiWidth() - 160 + 30, 0, guiGraphics.guiWidth() - 4, 44);
+            RenderHelper.drawScrollableText(guiGraphics, font, this.albumName, 30, 30, 29, this.width() - 4, 29 + font.lineHeight, ClientMusic.isDarkModeEnabled ? -3355444 : CommonColors.BLACK, false, 30, 0, this.width() + 4, this.height());
         }
     }
 
