@@ -21,6 +21,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [2.3.0] - 2025-12-15
+
+- Key 'soundtrack' in musics.json is no longer supported
+
+### Fixed
+
+- Long title, author and album name where cut in the toast
+- Wrong version pack format
+
 ## [2.2.2] - 2024-12-01
 
 - Support for 1.21.4
