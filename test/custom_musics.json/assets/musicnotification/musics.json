@@ -2,12 +2,12 @@
   "morediscs:music_disc_omen_sound": {
     "title": "Omen",
     "author": "Naps the Block",
-    "soundtrack": "More discs"
+    "album": "More discs"
   },
   "morediscs:records/music_disc_omen_sound": {
     "title": "Omen Record",
     "author": "Naps the Block",
-    "soundtrack": "More discs"
+    "album": "More discs"
   },
   "morediscs:music_disc_silence_sound": {
     "title": "Silence",
