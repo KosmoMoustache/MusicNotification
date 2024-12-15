@@ -27,7 +27,7 @@ public class RenderHelper {
             double g = Mth.lerp(f, 0.0, (double) l);
 
             context.enableScissor(clipAreaX1, clipAreaY1, clipAreaX2, clipAreaY2);
-//            context.fill(clipAreaX1,clipAreaY1,clipAreaX2,clipAreaY2, Colors.RED);
+//            context.fill(clipAreaX1,clipAreaY1,clipAreaX2,clipAreaY2, CommonColors.RED);
             context.drawString(textRenderer, text.getVisualOrderText(), startX - (int) g, j, color, shadow);
             context.disableScissor();
         } else {
