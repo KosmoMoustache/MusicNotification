@@ -1,4 +1,6 @@
 {
+  "text.musicnotification.resourcepack.dark_mode.name": "Music Notification: Mode Sombre",
+  "text.musicnotification.resourcepack.dark_mode.description": "Active le mod sombre pour l'interface de Music Notification.",
   "text.autoconfig.musicnotification.title": "Music Notification - Configuration",
   "text.autoconfig.musicnotification.option.TOAST_CONFIG.SHOW_AUTHOR": "Afficher le nom de l'auteur",
   "text.autoconfig.musicnotification.option.TOAST_CONFIG.SHOW_ALBUM_NAME": "Afficher le titre de l'album",
