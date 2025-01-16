@@ -1,4 +1,6 @@
 {
+  "text.musicnotification.resourcepack.dark_mode.name": "Music Notification：深色模式",
+  "text.musicnotification.resourcepack.dark_mode.description": "将 Music Notification 的 UI 切换为深色模式。",
   "text.autoconfig.musicnotification.title": "Music Notification - 配置文件",
   "text.autoconfig.musicnotification.option.TOAST_CONFIG.SHOW_AUTHOR": "显示作者名称",
   "text.autoconfig.musicnotification.option.TOAST_CONFIG.SHOW_ALBUM_NAME": "显示专辑名称",
