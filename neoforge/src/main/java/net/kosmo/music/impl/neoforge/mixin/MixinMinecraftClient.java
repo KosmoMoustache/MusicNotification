@@ -11,7 +11,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraftClient {
 
-    @Inject(method = "<init>", at = @At(value = "TAIL", target = "Lnet/minecraft/client/Minecraft;<init>(Lnet/minecraft/client/RunArgs;)V"))
+    @Inject(method = "<init>",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/quickplay/QuickPlayLog;of(Ljava/lang/String;)Lnet/minecraft/client/quickplay/QuickPlayLog;",
+                    shift = At.Shift.AFTER
+            ))
     private void onInit(GameConfig args, CallbackInfo info) {
         ClientMusicNeoForge.onMinecraftClientMixin();
     }
