@@ -10,6 +10,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.loader.api.FabricLoader;
 import net.kosmo.music.gui.JukeboxScreen;
@@ -28,6 +29,7 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.MusicDiscItem;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourcePack;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -52,6 +54,7 @@ public class ClientMusic implements ClientModInitializer {
     public static final String MOD_ID = "musicnotification";
     public static final Logger LOGGER = LoggerFactory.getLogger("MusicNotification");
     public static final Identifier MUSICS_JSON_ID = new Identifier(MOD_ID, "musics.json");
+    public static boolean isDarkModeEnabled = false;
 
     public static KeyBinding keyBinding;
     public static SoundManager soundManager;
@@ -110,6 +113,7 @@ public class ClientMusic implements ClientModInitializer {
             @Override
             public void reload(ResourceManager manager) {
                 musicManager.reload();
+                isDarkModeEnabled = manager.streamResourcePacks().anyMatch(resourcePack -> resourcePack.getId().equals(new Identifier(MOD_ID, "dark_mode").toString()));
             }
         });
 
@@ -124,6 +128,16 @@ public class ClientMusic implements ClientModInitializer {
                 client.setScreen(new JukeboxScreen(client.currentScreen));
             }
         });
+
+        FabricLoader.getInstance().getModContainer(MOD_ID)
+                .ifPresent(container -> {
+                    ResourceManagerHelper.registerBuiltinResourcePack(
+                            new Identifier(MOD_ID, "dark_mode"),
+                            container,
+                            Text.translatable("text.musicnotification.resourcepack.dark_mode.name"),
+                            ResourcePackActivationType.NORMAL);
+                });
+
     }
 
     public static void onClientInit() {
