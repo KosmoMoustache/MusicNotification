@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [2.3.1] - 2025-12-15
+
+- Fix incompatibility issue with [Remove Reloading Screens](https://modrinth.com/mod/rrls) by initializing the mod sooner
+
 ## [2.3.0] - 2025-12-15
 
 - Key 'soundtrack' in musics.json is no longer supported
