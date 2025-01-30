@@ -14,5 +14,5 @@ rootProject.name = "MusicNotification"
 
 include("common")
 include("fabric")
-include("neoforge")
+//include("neoforge")
 //include("forge")
