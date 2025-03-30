@@ -38,7 +38,7 @@
     "musicnotification.mixins.json"
   ],
   "depends": {
-    "minecraft": "1.21.5-alpha.25.5.a",
+    "minecraft": "${minecraft_version}",
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": ">=${fabric_api_version}",
     "cloth-config": ">=${cloth_config_version}"

@@ -8,7 +8,7 @@ loom {
 }
 
 dependencies {
-    val fabricLoaderVersion: String by project(":fabric").dependencyProject
+    val fabricLoaderVersion: String by project.project(":fabric")
     modImplementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
 
     // Architectury API. This is optional, and you can comment it out if you don't need it.
