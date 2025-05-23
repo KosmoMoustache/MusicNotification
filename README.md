@@ -57,6 +57,6 @@ If you have any question, feel free to fill an issue.
 
 # Contributor
 
-Discs icon are made by [YaCCBoy](https://github.com/YaCCBoy)  
+Discs icon are made by [carotteatomique](https://github.com/carotteatomique)  
 Mod icon was made by [akairoo](https://dribbble.com/akairoo)  
 Simplified Chinese translation by [Chiloven945](https://github.com/Chiloven945)
