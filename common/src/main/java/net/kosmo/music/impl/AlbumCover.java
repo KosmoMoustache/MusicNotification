@@ -1,7 +1,7 @@
 package net.kosmo.music.impl;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,6 +36,6 @@ public class AlbumCover {
     }
 
     public void drawAlbumCover(GuiGraphics guiGraphics, int x, int y) {
-        guiGraphics.blitSprite(RenderType::guiTextured, this.textureId, x, y, getWidth(), getHeight());
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.textureId, x, y, getWidth(), getHeight());
     }
 }
