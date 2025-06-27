@@ -1,6 +1,5 @@
 package net.kosmo.music.impl;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -37,7 +36,6 @@ public class AlbumCover {
     }
 
     public void drawAlbumCover(GuiGraphics guiGraphics, int x, int y) {
-        RenderSystem.enableBlend();
         guiGraphics.blitSprite(RenderType::guiTextured, this.textureId, x, y, getWidth(), getHeight());
     }
 }

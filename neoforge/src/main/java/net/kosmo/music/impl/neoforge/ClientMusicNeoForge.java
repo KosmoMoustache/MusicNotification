@@ -19,7 +19,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
@@ -50,8 +50,8 @@ public class ClientMusicNeoForge {
         ClientMusic.init(OPEN_SCREEN_KEYMAP, new NeoForgeModLoader(), ConfigHolderNeoForge.init());
     }
 
-    void addReloadListener(RegisterClientReloadListenersEvent event) {
-        event.registerReloadListener(new SimplePreparableReloadListener<>() {
+    void addReloadListener(AddClientReloadListenersEvent event) {
+        event.addListener(ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "reload_listener"), new SimplePreparableReloadListener<>() {
             @Override
             protected Object prepare(ResourceManager arg, ProfilerFiller arg2) {
                 return null;
