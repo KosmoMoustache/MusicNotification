@@ -514,6 +514,41 @@
     "customId": "musicnotification:mn.minecraft.music.game.endless",
     "title": "Endless"
   },
+  "minecraft:music/game/lilypad": {
+    "album": "Chase the Skies No. 1",
+    "author": "Amos Roddy",
+    "cover": "chase_the_skies_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.lilypad",
+    "title": "Lilypad"
+  },
+  "minecraft:music/game/below_and_above": {
+    "album": "Chase the Skies Update No. 2",
+    "author": "Amos Roddy",
+    "cover": "chase_the_skies_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.below_and_above",
+    "title": "Below and Above"
+  },
+  "minecraft:music/game/os_piano": {
+    "album": "Chase the Skies Update No. 3",
+    "author": "Amos Roddy",
+    "cover": "chase_the_skies_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.os_piano",
+    "title": "O's Piano"
+  },
+  "minecraft:music/game/broken_clocks": {
+    "album": "Chase the Skies Update No. 4",
+    "author": "Amos Roddy",
+    "cover": "chase_the_skies_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.broken_clocks",
+    "title": "Broken Clocks"
+  },
+  "minecraft:music/game/fireflies": {
+    "album": "Chase the Skies Update No. 5",
+    "author": "Amos Roddy",
+    "cover": "chase_the_skies_ost",
+    "customId": "musicnotification:mn.minecraft.music.game.fireflies",
+    "title": "Fireflies"
+  },
   "minecraft:music_disc.creator": {
     "album": "Tricky Trials Update No. 10",
     "author": "Lena Raine",
@@ -531,5 +566,11 @@
     "author": "Aaron Cherof",
     "cover": "precipice",
     "title": "Precipice"
+  },
+  "minecraft:music_disc.tears": {
+    "album": "Chase the Skies Update No. 6",
+    "author": "Amos Roddy",
+    "cover": "tears",
+    "title": "Tears"
   }
 }

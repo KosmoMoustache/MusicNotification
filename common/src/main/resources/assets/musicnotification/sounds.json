@@ -418,5 +418,40 @@
         "name": "music/game/endless"
       }
     ]
+  },
+  "mn.minecraft.music.game.lilypad": {
+    "sounds": [
+      {
+        "name": "music/game/lilypad"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.below_and_above": {
+    "sounds": [
+      {
+        "name": "music/game/below_and_above"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.os_piano": {
+    "sounds": [
+      {
+        "name": "music/game/os_piano"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.broken_clocks": {
+    "sounds": [
+      {
+        "name": "music/game/broken_clocks"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.fireflies": {
+    "sounds": [
+      {
+        "name": "music/game/fireflies"
+      }
+    ]
   }
 }
