@@ -114,7 +114,7 @@ public class JukeboxScreen extends Screen {
         };
         this.searchBox.setMaxLength(255);
         this.searchBox.setVisible(true);
-        this.searchBox.setTextColor(0xFFFFFF);
+        this.searchBox.setTextColor(CommonColors.WHITE);
         this.searchBox.setValue(string);
         this.searchBox.setHint(SEARCH_TEXT);
         this.searchBox.setResponder(this::onSearchChange);
@@ -137,7 +137,7 @@ public class JukeboxScreen extends Screen {
     public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
 
-        context.drawString(this.font, this.header, this.getSearchBoxX() + 8, 30, -1);
+        context.drawString(this.font, this.header, this.getSearchBoxX() + 8, 30, CommonColors.WHITE);
 
         if (Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.MASTER) == 0f) {
             this.stopSoundButton.setMessage(MASTER_VOLUME_ZERO);
