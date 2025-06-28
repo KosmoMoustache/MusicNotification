@@ -75,8 +75,7 @@ public class MusicToast implements Toast {
             Matrix3x2fStack matrices = guiGraphics.pose();
             matrices.translate(0, 0);
             matrices.translate(16, 16);
-            // FIXME
-            //matrices.mulPose(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
+            matrices.rotate((float) Math.toRadians(rotation));
             matrices.translate(-16, -16);
             matrices.translate(-0, -0);
         }
