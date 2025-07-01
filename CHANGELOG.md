@@ -21,7 +21,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [2.3.0] - 2025-12-15
+## [2.3.2] - 2025-03-30
+
+### Added
+
+- Support for 1.21.5
+- Italian translation
+
+## [2.3.1] - 2024-12-16
+
+### Fixed
+
+- Fix incompatibility issue with Remove Reloading Screens by initializing the mod sooner (#66)
+
+## [2.3.0] - 2024-12-15
 
 - Key 'soundtrack' in musics.json is no longer supported
 

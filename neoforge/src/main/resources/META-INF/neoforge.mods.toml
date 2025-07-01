@@ -11,7 +11,7 @@ authors = "KosmoMoustache"
 description = '''
 Add toast notification when music is played in game with infos about the track being played. And play music anytime you want
 '''
-logoFile = "logo.png"
+logoFile = "assets/musicnotification/icon.png"
 credits = """
 Thanks to:
     Authors:
@@ -19,6 +19,7 @@ Thanks to:
     Contributors:
         carotteatomique
         akairoo
+        Totchi Lagawi
     Translators:
         Chiloven945
 """

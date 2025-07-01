@@ -44,7 +44,7 @@ public class Helper {
 
         client.getSoundManager().stop(null, SoundSource.MUSIC);
 
-        SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent);
+        SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent, 1);
         IMixinMusicTracker musicTracker = (IMixinMusicTracker) client.getMusicManager();
 
         musicTracker.setCurrentMusic(soundInstance);

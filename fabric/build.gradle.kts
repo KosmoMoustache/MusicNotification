@@ -25,7 +25,11 @@ dependencies {
     val fabricApiVersion: String by project
 
     modImplementation(group = "net.fabricmc", name = "fabric-loader", version = fabricLoaderVersion)
-    modApi(group = "net.fabricmc.fabric-api", name = "fabric-api", version = "$fabricApiVersion+$minecraftVersion")
+    if (fabricApiVersion.contains("+")) {
+        modApi(group = "net.fabricmc.fabric-api", name = "fabric-api", version = fabricApiVersion)
+    } else {
+        modApi(group = "net.fabricmc.fabric-api", name = "fabric-api", version = "$fabricApiVersion+$minecraftVersion")
+    }
 
     val modmenuVersion: String by project
     val clothConfigVersion: String by project

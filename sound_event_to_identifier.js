@@ -7,7 +7,7 @@ const readFileSync = require('node:fs').readFileSync;
 const writeFileSync = require('node:fs').writeFileSync;
 const join = require('node:path').join;
 
-const rootPath = './src/main/resources/assets/musicnotification/';
+const rootPath = './common/src/main/resources/assets/musicnotification/';
 
 const MUSICS = readFile(join(rootPath, 'musics.json'));
 const RANDOM = readFile(join(rootPath, 'random.json'));

@@ -64,7 +64,7 @@ public class SoundListEntry extends ListEntry {
         if (soundEvent == null) {
             ClientMusic.LOGGER.warn("Unable to play unknown sound with id: {}", entry.identifier);
         } else {
-            SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent);
+            SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent, 1);
             this.client.getSoundManager().stop(null, SoundSource.MUSIC);
             this.client.getSoundManager().play(soundInstance);
         }

@@ -1,17 +1,16 @@
 package net.kosmo.music.impl.toast;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.kosmo.music.impl.*;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Quaternionf;
+import org.joml.Matrix3x2fStack;
 
 public class MusicToast implements Toast {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "toast/background");
@@ -65,23 +64,23 @@ public class MusicToast implements Toast {
         }
 
         if (ClientMusic.config.SHOW_ALBUM_NAME) {
-            guiGraphics.blitSprite(RenderType::guiTextured, TEXTURE_EXTENDED, 0, 0, this.width(), this.height());
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TEXTURE_EXTENDED, 0, 0, this.width(), this.height());
         } else {
-            guiGraphics.blitSprite(RenderType::guiTextured, TEXTURE, 0, 0, this.width(), this.height());
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TEXTURE, 0, 0, this.width(), this.height());
         }
 
         // Make the icon rotate
-        guiGraphics.pose().pushPose();
+        guiGraphics.pose().pushMatrix();
         if (ClientMusic.config.ROTATE_ALBUM_COVER) {
-            PoseStack matrices = guiGraphics.pose();
-            matrices.translate(0, 0, 0);
-            matrices.translate(16, 16, 0);
-            matrices.mulPose(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
-            matrices.translate(-16, -16, 0);
-            matrices.translate(-0, -0, 0);
+            Matrix3x2fStack matrices = guiGraphics.pose();
+            matrices.translate(0, 0);
+            matrices.translate(16, 16);
+            matrices.rotate((float) Math.toRadians(rotation));
+            matrices.translate(-16, -16);
+            matrices.translate(-0, -0);
         }
         this.albumCover.drawAlbumCover(guiGraphics, 6, 6);
-        guiGraphics.pose().popPose();
+        guiGraphics.pose().popMatrix();
 
         RenderHelper.drawScrollableText(guiGraphics, font, this.title, 30, 30, 7, this.width() - 4, 7 + font.lineHeight, ClientMusic.isDarkModeEnabled ? 0xff75ff : -11534256, false, 30, 0, this.width() + 4, this.height());
 
