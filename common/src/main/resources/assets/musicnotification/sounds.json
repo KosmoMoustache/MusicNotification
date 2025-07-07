@@ -20,6 +20,20 @@
       }
     ]
   },
+  "mn.minecraft.music.game.below_and_above": {
+    "sounds": [
+      {
+        "name": "music/game/below_and_above"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.broken_clocks": {
+    "sounds": [
+      {
+        "name": "music/game/broken_clocks"
+      }
+    ]
+  },
   "mn.minecraft.music.game.bromeliad": {
     "sounds": [
       {
@@ -97,6 +111,13 @@
       }
     ]
   },
+  "mn.minecraft.music.game.deeper": {
+    "sounds": [
+      {
+        "name": "music/game/deeper"
+      }
+    ]
+  },
   "mn.minecraft.music.game.dry_hands": {
     "sounds": [
       {
@@ -108,6 +129,13 @@
     "sounds": [
       {
         "name": "music/game/echo_in_the_wind"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.eld_unknown": {
+    "sounds": [
+      {
+        "name": "music/game/eld_unknown"
       }
     ]
   },
@@ -129,6 +157,27 @@
     "sounds": [
       {
         "name": "music/game/end/the_end"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.endless": {
+    "sounds": [
+      {
+        "name": "music/game/endless"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.featherfall": {
+    "sounds": [
+      {
+        "name": "music/game/featherfall"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.fireflies": {
+    "sounds": [
+      {
+        "name": "music/game/fireflies"
       }
     ]
   },
@@ -160,10 +209,24 @@
       }
     ]
   },
+  "mn.minecraft.music.game.komorebi": {
+    "sounds": [
+      {
+        "name": "music/game/komorebi"
+      }
+    ]
+  },
   "mn.minecraft.music.game.left_to_bloom": {
     "sounds": [
       {
         "name": "music/game/left_to_bloom"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.lilypad": {
+    "sounds": [
+      {
+        "name": "music/game/lilypad"
       }
     ]
   },
@@ -244,10 +307,31 @@
       }
     ]
   },
+  "mn.minecraft.music.game.os_piano": {
+    "sounds": [
+      {
+        "name": "music/game/os_piano"
+      }
+    ]
+  },
   "mn.minecraft.music.game.oxygene": {
     "sounds": [
       {
         "name": "music/game/oxygene"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.pokopoko": {
+    "sounds": [
+      {
+        "name": "music/game/pokopoko"
+      }
+    ]
+  },
+  "mn.minecraft.music.game.puzzlebox": {
+    "sounds": [
+      {
+        "name": "music/game/puzzlebox"
       }
     ]
   },
@@ -293,6 +377,13 @@
       }
     ]
   },
+  "mn.minecraft.music.game.watcher": {
+    "sounds": [
+      {
+        "name": "music/game/watcher"
+      }
+    ]
+  },
   "mn.minecraft.music.game.water.axolotl": {
     "sounds": [
       {
@@ -328,6 +419,13 @@
       }
     ]
   },
+  "mn.minecraft.music.game.yakusoku": {
+    "sounds": [
+      {
+        "name": "music/game/yakusoku"
+      }
+    ]
+  },
   "mn.minecraft.music.menu.beginning_2": {
     "sounds": [
       {
@@ -353,104 +451,6 @@
     "sounds": [
       {
         "name": "music/menu/mutation"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.deeper": {
-    "sounds": [
-      {
-        "name": "music/game/deeper"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.eld_unknown": {
-    "sounds": [
-      {
-        "name": "music/game/eld_unknown"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.featherfall": {
-    "sounds": [
-      {
-        "name": "music/game/featherfall"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.komorebi": {
-    "sounds": [
-      {
-        "name": "music/game/komorebi"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.pokopoko": {
-    "sounds": [
-      {
-        "name": "music/game/pokopoko"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.puzzlebox": {
-    "sounds": [
-      {
-        "name": "music/game/puzzlebox"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.watcher": {
-    "sounds": [
-      {
-        "name": "music/game/watcher"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.yakusoku": {
-    "sounds": [
-      {
-        "name": "music/game/yakusoku"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.endless": {
-    "sounds": [
-      {
-        "name": "music/game/endless"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.lilypad": {
-    "sounds": [
-      {
-        "name": "music/game/lilypad"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.below_and_above": {
-    "sounds": [
-      {
-        "name": "music/game/below_and_above"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.os_piano": {
-    "sounds": [
-      {
-        "name": "music/game/os_piano"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.broken_clocks": {
-    "sounds": [
-      {
-        "name": "music/game/broken_clocks"
-      }
-    ]
-  },
-  "mn.minecraft.music.game.fireflies": {
-    "sounds": [
-      {
-        "name": "music/game/fireflies"
       }
     ]
   }
