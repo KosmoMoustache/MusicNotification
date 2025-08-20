@@ -6,7 +6,7 @@ import net.minecraft.client.sounds.SoundEventListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 
-import static net.kosmo.music.impl.ClientMusic.MOD_ID;
+import static kosmo.sh.music.impl.ClientMusic.MOD_ID;
 
 public class ForgeListeners {
     public static void ClientResourceListener(ResourceManager manager) {

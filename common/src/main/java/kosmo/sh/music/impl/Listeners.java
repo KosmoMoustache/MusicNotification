@@ -8,7 +8,7 @@ import net.minecraft.client.sounds.WeighedSoundEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 
-import static net.kosmo.music.impl.Helper.isMatchedInList;
+import static kosmo.sh.music.impl.Helper.isMatchedInList;
 
 public class Listeners {
     public static class SoundManagerSoundEventListener implements SoundEventListener {

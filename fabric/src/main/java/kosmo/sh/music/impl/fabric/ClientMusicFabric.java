@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import org.lwjgl.glfw.GLFW;
 
-import static net.kosmo.music.impl.ClientMusic.MOD_ID;
+import static kosmo.sh.music.impl.ClientMusic.MOD_ID;
 
 @Environment(EnvType.CLIENT)
 public class ClientMusicFabric implements ClientModInitializer {
