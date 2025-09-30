@@ -1,16 +1,63 @@
-architectury {
-    val enabledPlatforms: String by rootProject
-    common(enabledPlatforms.split(","))
+plugins {
+    id("multiloader-common")
+    id("fabric-loom")
+    kotlin("jvm") version "2.2.0"
+    id("com.google.devtools.ksp") version "2.2.0-2.0.2"
+    id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.14"
 }
 
+
 loom {
-    accessWidenerPath = file("src/main/resources/musicnotification.accesswidener")
+    accessWidenerPath = common.project.file("../../src/main/resources/${mod.aw}")
+
+    mixin {
+        useLegacyMixinAp = false
+    }
+}
+
+fletchingTable {
+    j52j.register("main") {
+        extension("json", "**/*.json5")
+    }
 }
 
 dependencies {
-    val fabricLoaderVersion: String by project.project(":fabric")
-    modImplementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
+    minecraft(group = "com.mojang", name = "minecraft", version = commonMod.mcVersion)
+    mappings(loom.layered {
+        officialMojangMappings()
+        commonMod.depOrNull("parchment")?.let { parchmentVersion ->
+            parchment("org.parchmentmc.data:parchment-${commonMod.mcVersion}:$parchmentVersion@zip")
+        }
+    })
 
-    // Architectury API. This is optional, and you can comment it out if you don't need it.
-//    modImplementation("dev.architectury:architectury:${rootProject.property("architectury_version")}")
+    compileOnly("org.spongepowered:mixin:0.8.5")
+
+    "io.github.llamalad7:mixinextras-common:0.3.5".let {
+        compileOnly(it)
+        annotationProcessor(it)
+    }
+
+    modCompileOnly("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
+}
+
+val commonJava: Configuration by configurations.creating {
+    isCanBeResolved = false
+    isCanBeConsumed = true
+}
+
+val commonResources: Configuration by configurations.creating {
+    isCanBeResolved = false
+    isCanBeConsumed = true
+}
+
+artifacts {
+    afterEvaluate {
+        val mainSourceSet = sourceSets.main.get()
+        mainSourceSet.java.sourceDirectories.files.forEach {
+            add(commonJava.name, it)
+        }
+        mainSourceSet.resources.sourceDirectories.files.forEach {
+            add(commonResources.name, it)
+        }
+    }
 }

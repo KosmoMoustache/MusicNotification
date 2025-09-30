@@ -1,7 +1,8 @@
 {
   "required": true,
   "package": "net.kosmo.music.impl.fabric.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "refmap": "${modId}.refmap.json",
+  "compatibilityLevel": "JAVA_${javaVersion}",
   "client": [
     "MixinMinecraftClient"
   ],
