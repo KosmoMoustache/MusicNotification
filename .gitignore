@@ -1,43 +1,28 @@
-# gradle
-
-.gradle/
 build/
-out/
-classes/
-
-# eclipse
-
-*.launch
-
-# idea
-
-.idea/
-*.iml
 *.ipr
+run/
 *.iws
-
-# vscode
-
-.settings/
-.vscode/
+out/
+*.iml
+.gradle/
+output/
 bin/
+libs/
+
+.kotlin
 .classpath
 .project
+.idea/
+classes/
+.metadata
+.vscode
+.settings
+*.launch
+.architectury-transformer
+gradle_client_output.txt
+gradle_server_output.txt
 
-# macos
-
-*.DS_Store
-
-# fabric
-
-run/
-
-# java
-
-hs_err_*.log
-replay_*.log
-*.hprof
-*.jfr
-
+.artifacts
+RELEASE_CHANGELOG.md
 log4j.xml
 musics-generated.json
