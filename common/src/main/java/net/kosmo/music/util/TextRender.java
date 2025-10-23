@@ -1,4 +1,4 @@
-package net.kosmo.music.impl;
+package net.kosmo.music.util;
 
 import net.minecraft.Util;
 import net.minecraft.client.gui.Font;
@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 
-public class RenderHelper {
+public class TextRender {
     /**
      * Draw a scrollable text
      */

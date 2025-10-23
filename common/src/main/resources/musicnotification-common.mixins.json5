@@ -1,16 +1,15 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "net.kosmo.music.impl.mixin",
-  "refmap": "${modId}.refmap.json",
-  "compatibilityLevel": "JAVA_${javaVersion}",
-  "client": [
-    "IMixinMusicTracker",
-    "MixinMusicTracker",
-    "MixinTitleScreen",
-    "MixinToastManagerEntry"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"minVersion": "0.8",
+	"package": "net.kosmo.music.mixin",
+	"refmap": "${modId}.refmap.json",
+	"compatibilityLevel": "JAVA_${javaVersion}",
+	"client": [
+		"MixinGui",
+		"MixinMinecraft",
+		"MixinTitleScreen"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }

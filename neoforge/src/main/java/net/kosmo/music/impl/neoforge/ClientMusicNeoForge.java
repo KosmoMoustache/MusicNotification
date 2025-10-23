@@ -1,82 +1,68 @@
 package net.kosmo.music.impl.neoforge;
 
-import me.shedaniel.autoconfig.AutoConfig;
-import net.kosmo.music.impl.ClientMusic;
-import net.kosmo.music.impl.gui.JukeboxScreen;
-import net.kosmo.music.impl.neoforge.compat.AutoConfigNeoForge;
-import net.kosmo.music.impl.neoforge.compat.ConfigHolderNeoForge;
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
+import net.kosmo.music.KeyBinding;
+import net.kosmo.music.MusicNotificationClient;
+import net.kosmo.music.PlatformHelper;
+import net.kosmo.music.config.ClothScreenProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
-import org.lwjgl.glfw.GLFW;
 
-@Mod(ClientMusic.MOD_ID)
+@Mod(MusicNotificationClient.MOD_ID)
 public class ClientMusicNeoForge {
-    private static final KeyMapping OPEN_SCREEN_KEYMAP = new KeyMapping("key.musicnotification.open_screen", GLFW.GLFW_KEY_M, "key.musicnotification.categories");
 
-    public ClientMusicNeoForge(IEventBus modEventBus) {
-        // Register Mod List config screen
-        ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (client, parent) -> AutoConfig.getConfigScreen(AutoConfigNeoForge.class, parent).get());
+	public ClientMusicNeoForge(IEventBus modEventBus, ModContainer modContainer) {
+		PlatformHelper INSTANCE = new PlatformNeoForge();
+		MusicNotificationClient.init(INSTANCE);
 
-        modEventBus.addListener(this::registerKeyMappings);
-        modEventBus.addListener(this::addBuiltinPacks);
-        modEventBus.addListener(this::addReloadListener);
+		// Register config screen
+		ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (mc, parent) -> ClothScreenProvider.getConfigScreen(parent));
 
-        NeoForge.EVENT_BUS.addListener(ClientTickEvent.Pre.class, (event) -> {
-            Minecraft client = Minecraft.getInstance();
-            if (OPEN_SCREEN_KEYMAP.consumeClick()) {
-                client.setScreen(new JukeboxScreen(client.screen));
-            }
-        });
-    }
+		modEventBus.addListener(this::registerBuiltinPacks);
+		modEventBus.addListener(this::registerKeyMappings);
+		modEventBus.addListener(this::addClientReloadListener);
 
-    public static void onMinecraftClientMixin() {
-        ClientMusic.init(OPEN_SCREEN_KEYMAP, new NeoForgeModLoader(), ConfigHolderNeoForge.init());
-    }
+		NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class, (event) -> {
+			MusicNotificationClient.tick();
+		});
+	}
 
-    void addReloadListener(AddClientReloadListenersEvent event) {
-        event.addListener(ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "reload_listener"), new SimplePreparableReloadListener<>() {
-            @Override
-            protected Object prepare(ResourceManager arg, ProfilerFiller arg2) {
-                return null;
-            }
+	void registerBuiltinPacks(AddPackFindersEvent event) {
+		event.addPackFinders(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/dark_mode"), PackType.CLIENT_RESOURCES, Component.translatable("text.musicnotification.resourcepack.dark_mode.name"), PackSource.BUILT_IN, false, Pack.Position.TOP);
+	}
 
-            @Override
-            protected void apply(Object pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
-                NeoForgeListeners.ClientResourceListener(Minecraft.getInstance().getResourceManager());
-                NeoForgeListeners.ServerDataResourceListener(Minecraft.getInstance().getResourceManager());
-            }
-        });
-    }
+	void registerKeyMappings(RegisterKeyMappingsEvent event) {
+		event.register(KeyBinding.getKeyMapping());
+	}
 
-    void addBuiltinPacks(AddPackFindersEvent event) {
-        event.addPackFinders(
-                ResourceLocation.fromNamespaceAndPath(ClientMusic.MOD_ID, "resourcepacks/dark_mode"),
-                PackType.CLIENT_RESOURCES,
-                Component.literal("Dark Mode"),
-                PackSource.BUILT_IN,
-                false,
-                Pack.Position.TOP
-        );
-    }
+	void addClientReloadListener(AddClientReloadListenersEvent event) {
+		event.addListener(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), ReloadListener.INSTANCE);
+//		event.addListener(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "client_reload_listener"), ReloadListener);
+	}
 
-    void registerKeyMappings(RegisterKeyMappingsEvent event) {
-        event.register(OPEN_SCREEN_KEYMAP);
-    }
+//	static SimplePreparableReloadListener<Object> ReloadListener = new SimplePreparableReloadListener<>() {
+//		@Override
+//		protected Object prepare(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+//			MusicNotificationClient.LOGGER.info("PREPARE");
+//			return null;
+//		}
+//
+//		@Override
+//		protected void apply(Object o, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+//			MusicNotificationClient.LOGGER.info("APPLY");
+//		}
+//	};
+
 }

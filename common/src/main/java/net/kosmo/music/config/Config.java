@@ -1,0 +1,172 @@
+package net.kosmo.music.config;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import net.kosmo.music.MusicNotificationClient;
+import net.kosmo.music.notification.*;
+import net.minecraft.network.chat.Component;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.Optional;
+
+public class Config {
+	public final Options options = new Options();
+	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+	private static final Path DIR_PATH = Path.of("config");
+	private static final String FILE_NAME = MusicNotificationClient.MOD_ID + ".json";
+	private static Config instance = null;
+
+	public static Options options() {
+		return Config.get().options;
+	}
+
+	public static Config get() {
+		if (instance == null) {
+			instance = Config.load();
+		}
+		return instance;
+	}
+
+	public static Config getAndSave() {
+		get();
+		save();
+		return instance;
+	}
+
+	public static Config load() {
+		Path path = DIR_PATH.resolve(FILE_NAME);
+		Config config = null;
+		if (Files.exists(path)) {
+			config = load(path, GSON);
+			if (config == null) {
+				MusicNotificationClient.LOGGER.warn("Failed to load config, creating a new one.");
+			}
+		}
+		return config != null ? config : new Config();
+	}
+
+	public static Config load(Path path, Gson gson) {
+		try (InputStreamReader reader = new InputStreamReader(new FileInputStream(path.toFile()), StandardCharsets.UTF_8)) {
+			return gson.fromJson(reader, Config.class);
+		} catch (Exception e) {
+			MusicNotificationClient.LOGGER.error("Unable to load config file", e);
+			return null;
+		}
+	}
+
+	public static void save() {
+		if (instance == null) return;
+		try {
+			if (!Files.isDirectory(DIR_PATH)) Files.createDirectories(DIR_PATH);
+			Path file = DIR_PATH.resolve(FILE_NAME);
+			Path tempFile = file.resolveSibling(file.getFileName() + ".tmp");
+			try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(tempFile.toFile()), StandardCharsets.UTF_8)) {
+				writer.write(GSON.toJson(instance));
+			} catch (IOException e) {
+				throw new IOException(e);
+			}
+			Files.move(tempFile, file, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			MusicNotificationClient.LOGGER.error("Unable to save config file", e);
+		}
+	}
+
+	public static class Options {
+		public static final boolean SHOW_TITLE_SCREEN_BUTTON_DEFAULT = true;
+		public static final boolean SHOW_AUTHOR_DEFAULT = true;
+		public static final boolean SHOW_ALBUM_NAME_DEFAULT = false;
+		public static final boolean ROTATE_ALBUM_COVER_DEFAULT = false;
+		public static final DisableToastSound DISABLE_TOAST_SOUND_DEFAULT = DisableToastSound.MUTE_SELF;
+		public static final List<String> IGNORE_SOUND_EVENT_DEFAULT = List.of("minecraft:note/*");
+		public static final int MAX_COUNT_HISTORY_DEFAULT = 20;
+		public static final boolean DEBUG_MOD_DEFAULT = false;
+		public static final NotificationStyle NOTIFICATION_STYLE_DEFAULT = NotificationStyle.LOG;
+		public static final List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK_DEFAULT = List.of(NotificationStyle.LOG);
+		public static final boolean STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT = true;
+		public boolean SHOW_TITLE_SCREEN_BUTTON = SHOW_TITLE_SCREEN_BUTTON_DEFAULT;
+		public boolean SHOW_AUTHOR = SHOW_AUTHOR_DEFAULT;
+		public boolean SHOW_ALBUM_NAME = SHOW_ALBUM_NAME_DEFAULT;
+		public boolean ROTATE_ALBUM_COVER = ROTATE_ALBUM_COVER_DEFAULT;
+		public DisableToastSound DISABLE_TOAST_SOUND = DISABLE_TOAST_SOUND_DEFAULT;
+		public List<String> IGNORE_SOUND_EVENT = IGNORE_SOUND_EVENT_DEFAULT;
+		public int MAX_COUNT_HISTORY = MAX_COUNT_HISTORY_DEFAULT;
+		public boolean DEBUG_MOD = DEBUG_MOD_DEFAULT;
+		public NotificationStyle NOTIFICATION_STYLE = NOTIFICATION_STYLE_DEFAULT;
+		public final List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK = NOTIFICATION_STYLE_FALLBACK_DEFAULT;
+		public final boolean STYLE_ACTION_BAR_ANIMATE_COLOR = STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT;
+
+		public enum DisableToastSound {
+			VANILLA, MUTE_SELF, MUTE_ALL;
+
+			public static Component name(Enum<DisableToastSound> disableToastSoundEnum) {
+				return Component.translatable("config.musicnotification.notification.disable_toast_sound." + disableToastSoundEnum.name().toLowerCase());
+			}
+
+			public Optional<Component[]> tooltipSupplier() {
+				return Optional.of(new Component[]{Component.translatable("config.musicnotification.notification.disable_toast_sound." + this.name().toLowerCase() + ".tooltip")});
+			}
+		}
+
+		public enum NotificationStyle {
+			LOG() {
+				@Override
+				public boolean canBeShown() {
+					return Notification.canBeShown();
+				}
+			},
+			COMPACT() {
+				@Override
+				public boolean canBeShown() {
+					return CompactNotification.canBeShown();
+				}
+			},
+			ACTION_BAR() {
+				@Override
+				public boolean canBeShown() {
+					return ActionBarNotification.canBeShown();
+				}
+			},
+			VANILLA() {
+				@Override
+				public boolean canBeShown() {
+					return VanillaNotification.canBeShown();
+				}
+			},
+			VANILLA_ENHANCED() {
+				@Override
+				public boolean canBeShown() {
+					return VanillaNotification.Enhanced.canBeShown();
+				}
+			},
+			LEGACY() {
+				@Override
+				public boolean canBeShown() {
+					return LegacyNotification.canBeShown();
+				}
+			},
+			LEGACY_COMPACT() {
+				@Override
+				public boolean canBeShown() {
+					return LegacyNotification.Compact.canBeShown();
+				}
+			};
+
+			public boolean canBeShown() {
+				return false;
+			}
+
+			public static Component name(Enum<DisableToastSound> disableToastSoundEnum) {
+				return Component.translatable("config.musicnotification.notification.style." + disableToastSoundEnum.name().toLowerCase());
+			}
+
+			public Optional<Component[]> tooltipSupplier() {
+				return Optional.of(new Component[]{Component.translatable("config.musicnotification.notification.style." + this.name().toLowerCase() + ".tooltip")});
+			}
+		}
+	}
+}

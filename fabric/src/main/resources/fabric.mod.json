@@ -32,10 +32,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "net.kosmo.music.impl.fabric.ClientMusicFabric"
+      "net.kosmo.music.fabric.MusicNotificationClientFabric"
     ],
     "modmenu": [
-      "net.kosmo.music.impl.fabric.compat.ModMenuCompatibility"
+      "net.kosmo.music.fabric.compat.ModMenuCompatibility"
     ]
   },
   "mixins": [

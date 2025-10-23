@@ -1,11 +1,9 @@
 {
   "required": true,
-  "package": "net.kosmo.music.impl.fabric.mixin",
+  "package": "net.kosmo.music.fabric.mixin",
   "refmap": "${modId}.refmap.json",
   "compatibilityLevel": "JAVA_${javaVersion}",
-  "client": [
-    "MixinMinecraftClient"
-  ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }
