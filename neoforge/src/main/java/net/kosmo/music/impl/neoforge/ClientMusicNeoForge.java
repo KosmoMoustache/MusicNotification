@@ -4,6 +4,7 @@ import net.kosmo.music.KeyBinding;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.config.ClothScreenProvider;
+import net.kosmo.music.resource.MusicResourceReloadListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -48,7 +49,7 @@ public class ClientMusicNeoForge {
 	}
 
 	void addClientReloadListener(AddClientReloadListenersEvent event) {
-		event.addListener(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), ReloadListener.INSTANCE);
+		event.addListener(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), MusicResourceReloadListener.INSTANCE);
 //		event.addListener(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "client_reload_listener"), ReloadListener);
 	}
 

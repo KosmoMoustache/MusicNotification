@@ -20,11 +20,11 @@ public class ClientResourceListener implements SimpleResourceReloadListener<Map<
 	@Override
 	public CompletableFuture<Map<ResourceLocation, TrackData>> load(ResourceManager manager, Executor executor) {
 
-		return CompletableFuture.supplyAsync(() -> MusicResourceReloadListener.INSTANCE.prepare(manager, executor), executor);
+		return CompletableFuture.supplyAsync(() -> MusicResourceReloadListener.INSTANCE.prepare(manager), executor);
 	}
 
 	@Override
 	public CompletableFuture<Void> apply(Map<ResourceLocation, TrackData> data, ResourceManager manager, Executor executor) {
-		return CompletableFuture.runAsync(() -> MusicResourceReloadListener.INSTANCE.apply(data, manager, executor), executor);
+		return CompletableFuture.runAsync(() -> MusicResourceReloadListener.INSTANCE.apply(data, manager), executor);
 	}
 }
