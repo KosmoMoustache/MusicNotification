@@ -3,9 +3,12 @@ package net.kosmo.music.config;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.clothconfig2.api.Requirement;
+import me.shedaniel.clothconfig2.gui.entries.EnumListEntry;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 
 public class ClothScreenProvider {
 
@@ -43,12 +46,20 @@ public class ClothScreenProvider {
 			.setSaveConsumer(val -> options.DISABLE_TOAST_SOUND = val)
 			.build());
 
-		notification.add(entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.notification.notification_style"), Config.Options.NotificationStyle.class, options.NOTIFICATION_STYLE)
+		@NotNull EnumListEntry<Config.Options.NotificationStyle> notificationStyleEnumListEntry = entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.notification.notification_style"), Config.Options.NotificationStyle.class, options.NOTIFICATION_STYLE)
 			.setDefaultValue(Config.Options.NOTIFICATION_STYLE_DEFAULT)
 			.setEnumNameProvider(Config.Options.NotificationStyle::name)
 			.setTooltipSupplier(Config.Options.NotificationStyle::tooltipSupplier)
 			.setSaveConsumer(val -> options.NOTIFICATION_STYLE = val)
-			.build());
+			.build();
+		notification.add(notificationStyleEnumListEntry);
+
+		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.legacy.scale"), options.STYLE_LEGACY_TOAST_SCALE)
+			.setDefaultValue(Config.Options.STYLE_LEGACY_TOAST_SCALE_DEFAULT)
+			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.LEGACY))
+			.setSaveConsumer(val -> options.STYLE_LEGACY_TOAST_SCALE = val)
+			.build()
+		);
 
 		jukebox.add(entryBuilder.startIntField(Component.translatable("config.musicnotification.jukebox.max_count_history"), options.MAX_COUNT_HISTORY)
 			.setDefaultValue(Config.Options.MAX_COUNT_HISTORY_DEFAULT)
