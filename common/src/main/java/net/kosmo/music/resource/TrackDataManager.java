@@ -2,6 +2,7 @@ package net.kosmo.music.resource;
 
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.kosmo.music.MusicNotificationClient;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashMap;
@@ -33,8 +34,8 @@ public class TrackDataManager {
 			MusicNotificationClient.LOGGER.warn("TrackData not found for id: {}.", soundId);
 			return new TrackData(
 				soundId,
-				"Unknown Title",
-				"Unknown Artist",
+				Component.literal("Unknown Title"),
+				Component.literal("Unknown Artist"),
 				Optional.empty(),
 				Optional.empty(),
 				Optional.of(soundId));

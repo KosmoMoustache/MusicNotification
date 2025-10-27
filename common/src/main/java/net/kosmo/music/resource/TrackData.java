@@ -3,6 +3,7 @@ package net.kosmo.music.resource;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.kosmo.music.MusicNotificationClient;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 
@@ -13,18 +14,20 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public record TrackData(
 	ResourceLocation key,
-	String title,
-	String author,
-	Optional<String> album,
+	Component title,
+	Component author,
+	Optional<Component> album,
 	Optional<String> cover,
 	Optional<ResourceLocation> customId
 ) {
 
+	public static final Codec<Component> COMPONENT_CODEC = Codec.STRING.xmap(Component::literal, Component::getString);
+
 	public static final Codec<TrackData> CODEC = RecordCodecBuilder.create(i -> i.group(
 			ResourceLocation.CODEC.optionalFieldOf("key").forGetter(t -> Optional.ofNullable(t.key)),
-			Codec.STRING.fieldOf("title").forGetter(TrackData::title),
-			Codec.STRING.fieldOf("author").forGetter(TrackData::author),
-			Codec.STRING.optionalFieldOf("album").forGetter(TrackData::album),
+			COMPONENT_CODEC.fieldOf("title").forGetter(TrackData::title),
+			COMPONENT_CODEC.fieldOf("author").forGetter(TrackData::author),
+			COMPONENT_CODEC.optionalFieldOf("album").forGetter(TrackData::album),
 			Codec.STRING.optionalFieldOf("cover").forGetter(TrackData::cover),
 			ResourceLocation.CODEC.optionalFieldOf("customId").forGetter(TrackData::customId))
 		.apply(i, (keyOpt, title, author, album, cover, customId) -> new TrackData(keyOpt.orElse(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "generic")), title, author, album, cover, customId)));
