@@ -4,6 +4,7 @@ import net.kosmo.music.Helper;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.config.Config;
 import net.kosmo.music.resource.TrackData;
+import net.kosmo.music.util.TextRender;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -11,6 +12,7 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix3x2fStack;
@@ -60,19 +62,13 @@ public class MusicToast implements Toast {
 		if (rotation >= 360) rotation = 0;
 		rotation += 1;
 
-//		if (content == null) {
-//			return;
-//		}
-
 		if (this.justUpdated) {
 			this.startTime = visibilityTime;
 			this.justUpdated = false;
 		}
 
-		boolean scaleWidthWithContent = true;
-
 		int x = 0;
-		if (scaleWidthWithContent) {
+		if (Config.options().STYLE_LEGACY_TOAST_SCALE) {
 			int a = this.getMaxWidth(font);
 			int padding = 32 + (4 * 2) + 5;
 			x = (this.width() - a) - padding;
@@ -84,36 +80,46 @@ public class MusicToast implements Toast {
 			guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
 		}
 
-		guiGraphics.pose().pushMatrix();
+//		guiGraphics.fill(x, 0, this.width(), 50, CommonColors.RED);
+//		guiGraphics.fill(x + 30, 7, this.width() - 4, 7 + font.lineHeight, CommonColors.GREEN);
+
 		if (Config.options().ROTATE_ALBUM_COVER) {
-			Matrix3x2fStack matrices = guiGraphics.pose();
-			matrices.translate(0, 0);
-			matrices.translate(16, 16);
-			matrices.rotate((float) Math.toRadians(rotation));
-			matrices.translate(-16, -16);
-			matrices.translate(-0, -0);
+			renderAnimatedAlbumCover(guiGraphics, x, rotation);
+		} else {
+			content.getAlbumInfo().drawCover(guiGraphics, x + 6, 6);
 		}
 
+		// TODO: Fix: When album name is long and STYLE_LEGACY_TOAST_SCALE is true, title is not aligned properly (O's Piano; Lilypad)
+		TextRender.drawScrollableText(guiGraphics, font, content.title(), 30, x + 30, 7, this.width() - 4, 7 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? CommonColors.COSMOS_PINK : -11534256, false);
+		TextRender.drawScrollableText(guiGraphics, font, content.author(), 30, x + 30, 18, this.width() - 4, 18 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
+
+		if (Config.options().SHOW_ALBUM_NAME && content.album().isPresent()) {
+			TextRender.drawScrollableText(guiGraphics, font, content.album().get(), 30, x + 30, 29, this.width() - 4, 29 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
+		}
+	}
+
+	private void renderAnimatedAlbumCover(GuiGraphics guiGraphics, int x, int rotation) {
+		int cx = x + 16;
+		guiGraphics.pose().pushMatrix();
+		Matrix3x2fStack matrices = guiGraphics.pose();
+		// 16 = 6 + AlbumCover.get{Width/Height}() / 2
+		matrices.translate(cx, 16);
+		matrices.rotate((float) Math.toRadians(rotation));
+		matrices.translate(-16, -16);
 		content.getAlbumInfo().drawCover(guiGraphics, 6, 6);
 
-//		content.albumInfo().get().cover().drawCover(guiGraphics, 6, 6);
+		matrices.translate(x, 0);
+
 		guiGraphics.pose().popMatrix();
-
-
-//			guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, x, 0, this.width() - x, 30);
-
-//            int i = 7;
-//            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, MUSIC_NOTES_SPRITE, 7, 7, 16, 16, musicNoteColor);
-//            Component var10002 = getNowPlayingString(currentSong);
-//            Objects.requireNonNull(font);
-		guiGraphics.drawString(font, content.title(), x + 5, 15 - 9 / 2, -11534256);
-		guiGraphics.drawString(font, content.author(), x + 5, 15 - 9 / 2 + font.lineHeight, -11534256);
-		guiGraphics.drawString(font, content.album().get(), x + 5, 15 - 9 / 2 + font.lineHeight * 2, -11534256);
 	}
 
 	@Override
 	public Object getToken() {
 		return Toast.super.getToken();
+	}
+
+	public int width(Font font) {
+		return getMaxWidth(font);
 	}
 
 	@Override
@@ -131,32 +137,9 @@ public class MusicToast implements Toast {
 
 	private int getMaxWidth(Font font) {
 		int w = 0;
-		if (content.album().isPresent()) {
+		if (Config.options().SHOW_ALBUM_NAME && content.album().isPresent()) {
 			w = font.width(content.album().get());
 		}
 		return Math.max(font.width(content.title()), Math.max(font.width(content.author()), w));
 	}
-
-//	public static void tick() {
-//		currentSong = Minecraft.getInstance().getMusicManager().getCurrentMusicTranslationKey();
-//	}
-
-
-//	@Override
-//	public void update(ToastManager toastManager, long visibilityTime) {
-//        if (!Helper.isVolumeZero()) {
-//            this.visibility = Visibility.HIDE;
-//            return;
-//        }
-
-//		this.visibility = (double) visibilityTime < 5000.0F * toastManager.getNotificationDisplayTimeMultiplier() ? Visibility.SHOW : Visibility.HIDE;
-//		tick();
-
-//            musicNoteColor = ColorLerper.getLerpedColor(ColorLerper.Type.MUSIC_NOTE, (float)musicNoteColorTick);
-//	}
-
-
-//	private static int getWidth(@Nullable String text, Font font) {
-//		return 30 + font.width(getNowPlayingString(text)) + 7;
-//	}
 }
