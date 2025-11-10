@@ -7,10 +7,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"fabric-gametest": [
-			"net.kosmo.music.test.gametest.ExampleModGameTest"
+			"net.kosmo.music.test.gametest.GameTest"
 		],
 		"fabric-client-gametest": [
-			"net.kosmo.music.test.gametest.ExampleModClientGameTest"
+          "net.kosmo.music.test.gametest.ClientGameTest"
 		]
 	}
 }
