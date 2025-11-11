@@ -1,6 +1,5 @@
 package net.kosmo.music.config;
 
-import io.netty.util.internal.UnstableApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -56,9 +55,9 @@ public class ClothScreenProvider {
 		notification.add(notificationStyleEnumListEntry);
 
 		// Only show when Notification Style is Legacy
-		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.legacy.scale"), options.STYLE_LEGACY_TOAST_SCALE)
+		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.legacy_toast.scale"), options.STYLE_LEGACY_TOAST_SCALE)
 			.setDefaultValue(Config.Options.STYLE_LEGACY_TOAST_SCALE_DEFAULT)
-			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.LEGACY))
+			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.LEGACY_TOAST))
 			.setSaveConsumer(val -> options.STYLE_LEGACY_TOAST_SCALE = val)
 			.build()
 		);

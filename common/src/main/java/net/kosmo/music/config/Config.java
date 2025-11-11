@@ -151,16 +151,10 @@ public class Config {
 					return VanillaNotification.Enhanced.canBeShown();
 				}
 			},
-			LEGACY() {
+			LEGACY_TOAST() {
 				@Override
 				public boolean canBeShown() {
-					return LegacyNotification.canBeShown();
-				}
-			},
-			LEGACY_COMPACT() {
-				@Override
-				public boolean canBeShown() {
-					return LegacyNotification.Compact.canBeShown();
+					return LegacyToastNotification.canBeShown();
 				}
 			};
 

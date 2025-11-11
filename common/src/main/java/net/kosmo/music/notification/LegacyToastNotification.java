@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.resources.ResourceLocation;
 
-public class LegacyNotification extends Notification {
+public class LegacyToastNotification extends Notification {
 	public void show(ResourceLocation resourceLocation, TrackData trackData) {
 		super.show(resourceLocation, trackData);
 		ToastManager tm = Minecraft.getInstance().getToastManager();
@@ -15,12 +15,6 @@ public class LegacyNotification extends Notification {
 			tm.addToast(new MusicToast(trackData));
 		} else {
 			toast.setContent(trackData);
-		}
-	}
-
-	public static class Compact extends LegacyNotification {
-		public void show(ResourceLocation resourceLocation, TrackData trackData) {
-			super.show(resourceLocation, trackData);
 		}
 	}
 }

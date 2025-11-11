@@ -34,12 +34,9 @@ public class NotificationManager {
 			case Config.Options.NotificationStyle.COMPACT -> {
 				new CompactNotification().show(resourceLocation, trackData);
 			}
-			case Config.Options.NotificationStyle.LEGACY -> {
-				new LegacyNotification().show(resourceLocation, trackData);
+			case Config.Options.NotificationStyle.LEGACY_TOAST -> {
+				new LegacyToastNotification().show(resourceLocation, trackData);
 			}
-//			case Config.Options.NotificationStyle.LEGACY_COMPACT -> {
-//				new LegacyNotification.Compact().show(resourceLocation, trackData);
-//			}
 			case Config.Options.NotificationStyle.ACTION_BAR -> {
 				new ActionBarNotification().show(resourceLocation, trackData);
 			}
