@@ -1,6 +1,7 @@
 package net.kosmo.music.fabric;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.kosmo.music.Helper;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
@@ -19,9 +20,7 @@ public class PlatformFabric extends PlatformHelper {
 
 	public void setCompactNotification(TrackData trackData, int time) {
 		GuiAccessor gui = (GuiAccessor) Minecraft.getInstance().gui;
-		gui.musicNotification$setCompactNotificationMessage(
-			Component.literal(trackData.title() + " - " + trackData.author())
-		);
+		gui.musicNotification$setCompactNotificationMessage(Helper.getCompactNotificationMessage(trackData));
 		gui.musicNotification$setCompactNotificationTime(60);
 	}
 }

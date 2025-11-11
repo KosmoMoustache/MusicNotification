@@ -1,7 +1,6 @@
 package net.kosmo.music;
 
 import net.kosmo.music.resource.TrackData;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public abstract class PlatformHelper {

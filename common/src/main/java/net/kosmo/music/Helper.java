@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -67,5 +68,9 @@ public class Helper {
 //		musicTracker.setCurrentMusic(soundInstance);
 		client.getSoundManager().play(soundInstance);
 		MusicNotificationClient.currentlyPlaying = soundInstance;
+	}
+
+	public static Component getCompactNotificationMessage(TrackData trackData) {
+		return Component.literal(trackData.title().getString() + " - " + trackData.author().getString());
 	}
 }
