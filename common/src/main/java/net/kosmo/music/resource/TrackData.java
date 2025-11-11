@@ -55,6 +55,10 @@ public record TrackData(
 
 	private static final Map<ResourceLocation, AlbumCover> ALBUM_CACHE = new ConcurrentHashMap<>();
 
+	public ResourceLocation getResolvedId() {
+		return this.customId().isPresent() ? this.customId().get() : this.key();
+	}
+
 	public AlbumCover getAlbumInfo() {
 		return ALBUM_CACHE.computeIfAbsent(this.key, k -> new AlbumCover(k.getNamespace(), this.cover));
 	}

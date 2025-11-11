@@ -2,6 +2,7 @@ package net.kosmo.music.mixin;
 
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.config.Config;
+import net.kosmo.music.gui.JukeboxScreen;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
@@ -26,7 +27,7 @@ public abstract class MixinTitleScreen extends Screen {
 	private void init(CallbackInfo ci) {
 		if (Config.options().SHOW_TITLE_SCREEN_BUTTON) {
 			this.addRenderableWidget(new ImageButton(12, 12, 20, 20, new WidgetSprites(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/icon"), ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/icon_focused")), (button) -> {
-//                this.minecraft.setScreen(new JukeboxScreen(this));
+				this.minecraft.setScreen(new JukeboxScreen(this));
 			}));
 
 		}
