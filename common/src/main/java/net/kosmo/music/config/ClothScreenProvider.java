@@ -39,12 +39,7 @@ public class ClothScreenProvider {
 			.setDefaultValue(Config.Options.ROTATE_ALBUM_COVER_DEFAULT)
 			.setSaveConsumer(val -> options.ROTATE_ALBUM_COVER = val)
 			.build());
-		notification.add(entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.notification.disable_toast_sound"), Config.Options.DisableToastSound.class, options.DISABLE_TOAST_SOUND)
-			.setDefaultValue(Config.Options.DISABLE_TOAST_SOUND_DEFAULT)
-			.setEnumNameProvider(Config.Options.DisableToastSound::name)
-			.setTooltipSupplier(Config.Options.DisableToastSound::tooltipSupplier)
-			.setSaveConsumer(val -> options.DISABLE_TOAST_SOUND = val)
-			.build());
+
 
 		@NotNull EnumListEntry<Config.Options.NotificationStyle> notificationStyleEnumListEntry = entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.notification.notification_style"), Config.Options.NotificationStyle.class, options.NOTIFICATION_STYLE)
 			.setDefaultValue(Config.Options.NOTIFICATION_STYLE_DEFAULT)
@@ -55,25 +50,33 @@ public class ClothScreenProvider {
 		notification.add(notificationStyleEnumListEntry);
 
 		// Only show when Notification Style is Legacy
-		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.legacy_toast.scale"), options.STYLE_LEGACY_TOAST_SCALE)
-			.setDefaultValue(Config.Options.STYLE_LEGACY_TOAST_SCALE_DEFAULT)
+		notification.add(entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.notification.disable_toast_sound"), Config.Options.DisableToastSound.class, options.DISABLE_TOAST_SOUND)
 			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.LEGACY_TOAST))
+			.setDefaultValue(Config.Options.DISABLE_TOAST_SOUND_DEFAULT)
+			.setEnumNameProvider(Config.Options.DisableToastSound::name)
+			.setTooltipSupplier(Config.Options.DisableToastSound::tooltipSupplier)
+			.setSaveConsumer(val -> options.DISABLE_TOAST_SOUND = val)
+			.build()
+		);
+		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.legacy_toast.scale"), options.STYLE_LEGACY_TOAST_SCALE)
+			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.LEGACY_TOAST))
+			.setDefaultValue(Config.Options.STYLE_LEGACY_TOAST_SCALE_DEFAULT)
 			.setSaveConsumer(val -> options.STYLE_LEGACY_TOAST_SCALE = val)
 			.build()
 		);
 
 		// Only show when Notification Style is Compact
 		notification.add(entryBuilder.startIntSlider(Component.translatable("config.musicnotification.notification.style.compact.alpha"), (int) Math.round(options.STYLE_COMPACT_ALPHA / 2.55), 0, 100)
-			.setDefaultValue((int) Math.round(Config.Options.STYLE_COMPACT_ALPHA_DEFAULT / 2.55))
 			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.COMPACT))
+			.setDefaultValue((int) Math.round(Config.Options.STYLE_COMPACT_ALPHA_DEFAULT / 2.55))
 			.setSaveConsumer(val -> options.STYLE_COMPACT_ALPHA = (int) Math.round(val * 2.55))
 			.build()
 		);
 
 		// Only show when Notification Style is Action Bar
 		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.action_bar.animate_color"), options.STYLE_ACTION_BAR_ANIMATE_COLOR)
-			.setDefaultValue(Config.Options.STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT)
 			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.ACTION_BAR))
+			.setDefaultValue(Config.Options.STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT)
 			.setSaveConsumer(val -> options.STYLE_ACTION_BAR_ANIMATE_COLOR = val)
 			.build()
 		);
