@@ -1,5 +1,6 @@
 package net.kosmo.music.config;
 
+import io.netty.util.internal.UnstableApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -62,10 +63,19 @@ public class ClothScreenProvider {
 			.build()
 		);
 
+		// Only show when Notification Style is Compact
 		notification.add(entryBuilder.startIntSlider(Component.translatable("config.musicnotification.notification.style.compact.alpha"), (int) Math.round(options.STYLE_COMPACT_ALPHA / 2.55), 0, 100)
 			.setDefaultValue((int) Math.round(Config.Options.STYLE_COMPACT_ALPHA_DEFAULT / 2.55))
 			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.COMPACT))
 			.setSaveConsumer(val -> options.STYLE_COMPACT_ALPHA = (int) Math.round(val * 2.55))
+			.build()
+		);
+
+		// Only show when Notification Style is Action Bar
+		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.action_bar.animate_color"), options.STYLE_ACTION_BAR_ANIMATE_COLOR)
+			.setDefaultValue(Config.Options.STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT)
+			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.ACTION_BAR))
+			.setSaveConsumer(val -> options.STYLE_ACTION_BAR_ANIMATE_COLOR = val)
 			.build()
 		);
 

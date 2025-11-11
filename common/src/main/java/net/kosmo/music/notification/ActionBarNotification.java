@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ActionBarNotification extends Notification {
 	
 	public void show(ResourceLocation resourceLocation, TrackData trackData) {
-		if (canBeShown()) {
+		if (!canBeShown()) {
 			return;
 			// TODO: use fallback, put the check in NotificationManager
 		}
