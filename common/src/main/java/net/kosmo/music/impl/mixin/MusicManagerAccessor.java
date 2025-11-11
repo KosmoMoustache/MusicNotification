@@ -6,10 +6,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(MusicManager.class)
-public interface MusicTrackerAccessor {
-    @Accessor
-    void setCurrentMusic(SoundInstance soundInstance);
+public interface MusicManagerAccessor {
+	@Accessor
+	void setCurrentMusic(SoundInstance soundInstance);
 
-    @Accessor
-    SoundInstance getCurrentMusic();
+	@Accessor
+	SoundInstance getCurrentMusic();
 }

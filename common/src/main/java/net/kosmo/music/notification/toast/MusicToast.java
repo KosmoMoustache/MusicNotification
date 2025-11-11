@@ -44,7 +44,7 @@ public class MusicToast implements Toast {
 
 	@Override
 	public void update(ToastManager toastManager, long visibilityTime) {
-		if (!Helper.isVolumeZero()) {
+		if (Helper.isVolumeZero()) {
 			this.visibility = Visibility.HIDE;
 			return;
 		}

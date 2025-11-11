@@ -1,55 +1,55 @@
 {
-  "schemaVersion": 1,
-  "id": "${modId}",
-  "version": "${modVersion}",
-  "name": "${modName}",
-  "description": "${modDescription}",
-  "authors": [
-    "${modAuthor}"
-  ],
-  "contributors": [
-    {
-      "name": "carotteatomique"
-    },
-    {
-      "name": "Chiloven945"
-    },
-    {
-      "name": "akairoo"
-    },
-    {
-      "name": "Totchi Lagawi"
-    }
-  ],
-  "contact": {
-    "homepage": "https://mod.kosmo.ovh/",
-    "sources": "${modGitHub}",
-    "issues": "${modGitHub}/issues",
-    "wiki": "${modGitHub}/wiki"
-  },
-  "license": "${modLicense}",
-  "icon": "icon.png",
-  "environment": "client",
-  "entrypoints": {
-    "client": [
-      "net.kosmo.music.fabric.MusicNotificationClientFabric"
-    ],
-    "modmenu": [
-      "net.kosmo.music.fabric.compat.ModMenuCompatibility"
-    ]
-  },
-  "mixins": [
-    "${modId}-common.mixins.json",
-    "${modId}.mixins.json"
-  ],
-  "accessWidener": "${awFile}",
-  "depends": {
-    "minecraft": "${minecraftVersion}",
-    "fabricloader": "*",
-    "fabric-api": ">=${fabricApiVersion}",
-    "cloth-config": ">=${clothConfigVersion}"
-  },
-  "recommends": {
-    "modmenu": "*"
-  }
+	"schemaVersion": 1,
+	"id": "${modId}",
+	"version": "${modVersion}",
+	"name": "${modName}",
+	"description": "${modDescription}",
+	"authors": [
+		"${modAuthor}"
+	],
+	"contributors": [
+		{
+			"name": "carotteatomique"
+		},
+		{
+			"name": "Chiloven945"
+		},
+		{
+			"name": "akairoo"
+		},
+		{
+			"name": "Totchi Lagawi"
+		}
+	],
+	"contact": {
+		"homepage": "https://mod.kosmo.ovh/",
+		"sources": "${modGitHub}",
+		"issues": "${modGitHub}/issues",
+		"wiki": "${modGitHub}/wiki"
+	},
+	"license": "${modLicense}",
+	"icon": "icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"net.kosmo.music.fabric.MusicNotificationClientFabric"
+		],
+		"modmenu": [
+			"net.kosmo.music.fabric.compat.ModMenuCompatibility"
+		]
+	},
+	"mixins": [
+		"${modId}-common.mixins.json",
+		"${modId}.mixins.json"
+	],
+	"accessWidener": "${awFile}",
+	"depends": {
+		"minecraft": "${minecraftVersion}",
+		"fabricloader": "*",
+		"fabric-api": ">=${fabricApiVersion}",
+		"cloth-config": ">=${clothConfigVersion}"
+	},
+	"recommends": {
+		"modmenu": "*"
+	}
 }

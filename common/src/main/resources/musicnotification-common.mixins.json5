@@ -5,9 +5,10 @@
 	"refmap": "${modId}.refmap.json",
 	"compatibilityLevel": "JAVA_${javaVersion}",
 	"client": [
-		"MixinGui",
 		"MixinMinecraft",
-		"MixinTitleScreen"
+		"MixinTitleScreen",
+		"MusicManagerAccessor",
+		"SoundManagerAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

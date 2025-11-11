@@ -23,7 +23,6 @@ public class ActionBarNotification extends Notification {
 	}
 
 	static public boolean canBeShown() {
-		MusicNotificationClient.LOGGER.info("snddjsqdnjkdndjksndsjknfjksdnkfjds");
 		Screen screen = Minecraft.getInstance().screen;
 		return canShowOverlayMessage(screen);
 	}

@@ -1,4 +1,4 @@
-package net.kosmo.music.impl.neoforge;
+package net.kosmo.music.neoforge;
 
 import net.minecraft.server.packs.resources.ResourceManager;
 

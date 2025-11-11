@@ -15,7 +15,7 @@ public final class MusicNotificationClient {
 
 	public static PlatformHelper PLATFORM_HELPER;
 
-	public static final KeyBinding keyBinding = new KeyBinding();
+//	public static final KeyBinding keyBinding = new KeyBinding();
 
 //    public static SoundManager soundManager;
 
@@ -35,7 +35,7 @@ public final class MusicNotificationClient {
 	}
 
 	public static void tick(Minecraft minecraft) {
-		MusicNotificationClient.tick();
+		tick();
 	}
 
 	public static void tick() {
@@ -64,6 +64,4 @@ public final class MusicNotificationClient {
 			path
 		);
 	}
-
-
 }

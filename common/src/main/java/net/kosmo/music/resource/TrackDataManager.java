@@ -25,6 +25,7 @@ public class TrackDataManager {
 	}
 
 	public TrackData getTrackData(ResourceLocation soundId) {
+//		soundId = ResourceLocation.fromNamespaceAndPath("minecraft", "music/game/lilypad");
 		@Nullable TrackData td = tracks.get(soundId);
 		// TODO: Maybe if not found, try to find by converting record id to music disc id
 		//            m = musics.get(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath().replace("records/", "music_disc.")));

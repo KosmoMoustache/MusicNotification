@@ -3,7 +3,9 @@
   "package": "net.kosmo.music.fabric.mixin",
   "refmap": "${modId}.refmap.json",
   "compatibilityLevel": "JAVA_${javaVersion}",
-  "client": [],
+  "client": [
+	  "MixinGui"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

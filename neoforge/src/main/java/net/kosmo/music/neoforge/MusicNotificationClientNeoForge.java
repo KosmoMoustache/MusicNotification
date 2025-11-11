@@ -1,9 +1,10 @@
-package net.kosmo.music.impl.neoforge;
+package net.kosmo.music.neoforge;
 
 import net.kosmo.music.KeyBinding;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.config.ClothScreenProvider;
+import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.MusicResourceReloadListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -16,27 +17,30 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 
 @Mod(MusicNotificationClient.MOD_ID)
-public class ClientMusicNeoForge {
-
-	public ClientMusicNeoForge(IEventBus modEventBus, ModContainer modContainer) {
+public class MusicNotificationClientNeoForge {
+	public MusicNotificationClientNeoForge(IEventBus modEventBus, ModContainer modContainer) {
 		PlatformHelper INSTANCE = new PlatformNeoForge();
 		MusicNotificationClient.init(INSTANCE);
 
 		// Register config screen
 		ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (mc, parent) -> ClothScreenProvider.getConfigScreen(parent));
 
+
 		modEventBus.addListener(this::registerBuiltinPacks);
 		modEventBus.addListener(this::registerKeyMappings);
 		modEventBus.addListener(this::addClientReloadListener);
+		modEventBus.addListener(this::registerGuiCompactLayer);
 
 		NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class, (event) -> {
 			MusicNotificationClient.tick();
+			GuiCompactLayer.getInstance().tick();
 		});
 	}
 
@@ -53,7 +57,11 @@ public class ClientMusicNeoForge {
 //		event.addListener(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "client_reload_listener"), ReloadListener);
 	}
 
-//	static SimplePreparableReloadListener<Object> ReloadListener = new SimplePreparableReloadListener<>() {
+	void registerGuiCompactLayer(RegisterGuiLayersEvent event) {
+		event.registerBelowAll(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "gui_notification_compact"), new GuiCompactLayer());
+	}
+
+	//	static SimplePreparableReloadListener<Object> ReloadListener = new SimplePreparableReloadListener<>() {
 //		@Override
 //		protected Object prepare(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
 //			MusicNotificationClient.LOGGER.info("PREPARE");
@@ -65,5 +73,4 @@ public class ClientMusicNeoForge {
 //			MusicNotificationClient.LOGGER.info("APPLY");
 //		}
 //	};
-
 }

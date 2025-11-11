@@ -11,10 +11,6 @@ import java.util.List;
 public class NotificationManager {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-//	public static void show(ResourceLocation soundId) {
-//		show(soundId, TrackDataManager.getInstance().getTrackData(soundId));
-//	}
-
 	public static void show(ResourceLocation soundId, TrackData td) {
 		Config.Options.NotificationStyle style = Config.options().NOTIFICATION_STYLE;
 		if (style.canBeShown()) {

@@ -40,9 +40,9 @@ repositories {
 
 tasks {
 	processResources {
-		exclude {
-			it.name.endsWith(".accesswidener") && it.name != commonMod.aw
-		}
+//		exclude {
+//			it.name.endsWith(".accesswidener") && it.name != commonMod.aw
+//			}
 
 		val expandProps = mapOf(
 			"javaVersion" to commonMod.propOrNull("java.version"),

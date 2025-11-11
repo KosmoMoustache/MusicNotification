@@ -1,8 +1,6 @@
 package net.kosmo.music.impl.mixin;
 
-import net.kosmo.music.impl.ClientMusic;
-import net.kosmo.music.impl.config.ConfigHolder;
-import net.kosmo.music.impl.toast.MusicToast;
+import net.kosmo.music.config.Config;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import org.spongepowered.asm.mixin.Final;
@@ -13,14 +11,14 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ToastManager.ToastInstance.class)
 public abstract class MixinToastManagerEntry<T extends Toast> {
-    @Shadow
-    @Final
-    private T toast;
+	@Shadow
+	@Final
+	private T toast;
 
-    /**
-     * This method is called when a toast is drawn to the screen
-     * This mixins modify the argument `y` of MatrixStack.translate(x, y, z) to return the correct y position when drawing a MusicToast
-     */
+	/**
+	 * This method is called when a toast is drawn to the screen
+	 * This mixins modify the argument `y` of MatrixStack.translate(x, y, z) to return the correct y position when drawing a MusicToast
+	 */
 //    @ModifyArg(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V"), index = 1)
 //    public float modifyY(float y) {
 //        if (this.instance instanceof MusicToast && ClientMusic.config.SHOW_SOUNDTRACK_NAME) {
@@ -28,17 +26,17 @@ public abstract class MixinToastManagerEntry<T extends Toast> {
 //        }
 //        return this.topIndex * 32;
 //    }
-    @Redirect(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/toasts/Toast$Visibility;playSound(Lnet/minecraft/client/sounds/SoundManager;)V"), require = 0)
-    public void playSound(Toast.Visibility visibility, net.minecraft.client.sounds.SoundManager soundManager) {
-        if (ClientMusic.config.DISABLE_TOAST_SOUND == null)
-            ClientMusic.config.DISABLE_TOAST_SOUND = ConfigHolder.DisableToastSound.MUTE_SELF;
-        switch (ClientMusic.config.DISABLE_TOAST_SOUND) {
-            case MUTE_ALL:
-                break;
-            case MUTE_SELF:
-                if (this.toast instanceof MusicToast) break;
-            case VANILLA:
-                visibility.playSound(soundManager);
-        }
-    }
+	@Redirect(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/toasts/Toast$Visibility;playSound(Lnet/minecraft/client/sounds/SoundManager;)V"), require = 0)
+	public void playSound(Toast.Visibility visibility, net.minecraft.client.sounds.SoundManager soundManager) {
+		if (Config.options().DISABLE_TOAST_SOUND == null)
+			Config.options().DISABLE_TOAST_SOUND = Config.Options.DisableToastSound.MUTE_SELF;
+		switch (Config.options().DISABLE_TOAST_SOUND) {
+			case MUTE_ALL:
+				break;
+			case MUTE_SELF:
+//                if (this.toast instanceof MusicToast) break;
+			case VANILLA:
+				visibility.playSound(soundManager);
+		}
+	}
 }

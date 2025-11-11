@@ -1,4 +1,4 @@
-package net.kosmo.music;
+package net.kosmo.music.fabric;
 
 import net.minecraft.network.chat.Component;
 

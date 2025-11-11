@@ -4,7 +4,6 @@ import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 

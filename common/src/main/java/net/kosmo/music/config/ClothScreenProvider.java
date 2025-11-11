@@ -54,10 +54,18 @@ public class ClothScreenProvider {
 			.build();
 		notification.add(notificationStyleEnumListEntry);
 
+		// Only show when Notification Style is Legacy
 		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.legacy.scale"), options.STYLE_LEGACY_TOAST_SCALE)
 			.setDefaultValue(Config.Options.STYLE_LEGACY_TOAST_SCALE_DEFAULT)
 			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.LEGACY))
 			.setSaveConsumer(val -> options.STYLE_LEGACY_TOAST_SCALE = val)
+			.build()
+		);
+
+		notification.add(entryBuilder.startIntSlider(Component.translatable("config.musicnotification.notification.style.compact.alpha"), (int) Math.round(options.STYLE_COMPACT_ALPHA / 2.55), 0, 100)
+			.setDefaultValue((int) Math.round(Config.Options.STYLE_COMPACT_ALPHA_DEFAULT / 2.55))
+			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.COMPACT))
+			.setSaveConsumer(val -> options.STYLE_COMPACT_ALPHA = (int) Math.round(val * 2.55))
 			.build()
 		);
 

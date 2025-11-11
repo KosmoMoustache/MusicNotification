@@ -91,6 +91,7 @@ public class Config {
 		public static final List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK_DEFAULT = List.of(NotificationStyle.LOG);
 		public static final boolean STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT = true;
 		public static final boolean STYLE_LEGACY_TOAST_SCALE_DEFAULT = true;
+		public static final int STYLE_COMPACT_ALPHA_DEFAULT = 179; // 70%
 		// -
 		public boolean COMPUTED_IS_DARK_MODE_ENABLED = COMPUTED_IS_DARK_MODE_ENABLED_DEFAULT;
 		public boolean SHOW_TITLE_SCREEN_BUTTON = SHOW_TITLE_SCREEN_BUTTON_DEFAULT;
@@ -105,6 +106,7 @@ public class Config {
 		public List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK = NOTIFICATION_STYLE_FALLBACK_DEFAULT;
 		public boolean STYLE_ACTION_BAR_ANIMATE_COLOR = STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT;
 		public boolean STYLE_LEGACY_TOAST_SCALE = STYLE_LEGACY_TOAST_SCALE_DEFAULT;
+		public int STYLE_COMPACT_ALPHA = STYLE_COMPACT_ALPHA_DEFAULT;
 
 		public enum DisableToastSound {
 			VANILLA, MUTE_SELF, MUTE_ALL;
