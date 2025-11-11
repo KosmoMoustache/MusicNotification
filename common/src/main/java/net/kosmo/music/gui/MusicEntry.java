@@ -78,13 +78,15 @@ public class MusicEntry extends ListEntry {
 
 		this.playButton.setX(left + (width - this.playButton.getWidth()) - 8);
 		this.playButton.setY(top + (height - this.playButton.getHeight()) / 2);
-		this.playButton.active = !Helper.isVolumeZero() && shouldRenderButton && !isPlaying();
-		if (!isPlaying() && shouldRenderButton) this.playButton.render(guiGraphics, mouseX, mouseY, partialTick);
+		this.playButton.active = !isPlaying() && shouldRenderButton && !Helper.isVolumeZero();
+		this.playButton.visible =  !isPlaying() && shouldRenderButton;
+		this.playButton.render(guiGraphics, mouseX, mouseY, partialTick);
 
 		this.stopButton.setX(left + (width - this.stopButton.getWidth()) - 8);
-		this.stopButton.setY(top + (width - this.stopButton.getHeight()) / 2);
+		this.stopButton.setY(top + (height - this.stopButton.getHeight()) / 2);
 		this.stopButton.active = isPlaying() && shouldRenderButton;
-		if (isPlaying() && shouldRenderButton) this.stopButton.render(guiGraphics, mouseX, mouseY, partialTick);
+		this.stopButton.visible = isPlaying() && shouldRenderButton;
+		this.stopButton.render(guiGraphics, mouseX, mouseY, partialTick);
 	}
 
 	private void play() {
@@ -118,7 +120,7 @@ public class MusicEntry extends ListEntry {
 		Sound sound = soundInstance.getSound();
 		if (sound == null) return false;
 
-		return sound.getLocation() == entry.key() || entry.customId().isPresent() && sound.getLocation() == entry.customId().get();
+		return sound.getLocation().equals(entry.key());
 	}
 
 	@Override
