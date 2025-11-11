@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class LegacyToastNotification extends Notification {
 	public void show(ResourceLocation resourceLocation, TrackData trackData) {
-		super.show(resourceLocation, trackData);
+		super.show(resourceLocation, trackData, this.getClass());
 		ToastManager tm = Minecraft.getInstance().getToastManager();
 		MusicToast toast = tm.getToast(MusicToast.class, MusicToast.NO_TOKEN);
 		if (toast == null) {
