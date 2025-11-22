@@ -19,7 +19,6 @@ import org.joml.Matrix3x2fStack;
 
 public class MusicToast implements Toast {
 	private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/background");
-	private static final ResourceLocation EXTENDED_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/background_extended");
 	private Toast.Visibility visibility;
 
 	private TrackData content;
@@ -74,11 +73,7 @@ public class MusicToast implements Toast {
 			x = (this.width() - a) - padding;
 		}
 
-		if (Config.options().SHOW_ALBUM_NAME) {
-			guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, EXTENDED_BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
-		} else {
-			guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
-		}
+		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
 
 //		guiGraphics.fill(x, 0, this.width(), 50, CommonColors.RED);
 //		guiGraphics.fill(x + 30, 7, this.width() - 4, 7 + font.lineHeight, CommonColors.GREEN);
@@ -93,7 +88,7 @@ public class MusicToast implements Toast {
 		TextRender.drawScrollableText(guiGraphics, font, content.title(), 30, x + 30, 7, this.width() - 4, 7 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? CommonColors.COSMOS_PINK : -11534256, false);
 		TextRender.drawScrollableText(guiGraphics, font, content.author(), 30, x + 30, 18, this.width() - 4, 18 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
 
-		if (Config.options().SHOW_ALBUM_NAME && content.album().isPresent()) {
+		if (shouldRenderExtended()) {
 			TextRender.drawScrollableText(guiGraphics, font, content.album().get(), 30, x + 30, 29, this.width() - 4, 29 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
 		}
 	}
@@ -118,6 +113,10 @@ public class MusicToast implements Toast {
 		return Toast.super.getToken();
 	}
 
+	public boolean shouldRenderExtended() {
+		return Config.options().SHOW_ALBUM_NAME && content.album().isPresent();
+	}
+
 	public int width(Font font) {
 		return getMaxWidth(font);
 	}
@@ -129,7 +128,7 @@ public class MusicToast implements Toast {
 
 	@Override
 	public int height() {
-		if (Config.options().SHOW_ALBUM_NAME) {
+		if (shouldRenderExtended()) {
 			return 44;
 		}
 		return 32;
