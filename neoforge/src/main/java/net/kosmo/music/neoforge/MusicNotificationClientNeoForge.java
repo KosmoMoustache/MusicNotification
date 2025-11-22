@@ -4,6 +4,7 @@ import net.kosmo.music.KeyBinding;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.config.ClothScreenProvider;
+import net.kosmo.music.neoforge.commands.JukeboxSongCommandNeoForge;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.MusicResourceReloadListener;
 import net.minecraft.network.chat.Component;
@@ -11,37 +12,38 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 
-@Mod(MusicNotificationClient.MOD_ID)
+@Mod(value = MusicNotificationClient.MOD_ID, dist = Dist.CLIENT)
 public class MusicNotificationClientNeoForge {
-	public MusicNotificationClientNeoForge(IEventBus modEventBus, ModContainer modContainer) {
+	public MusicNotificationClientNeoForge(IEventBus modEventBus) {
 		PlatformHelper INSTANCE = new PlatformNeoForge();
 		MusicNotificationClient.init(INSTANCE);
 
 		// Register config screen
 		ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (mc, parent) -> ClothScreenProvider.getConfigScreen(parent));
 
-
 		modEventBus.addListener(this::registerBuiltinPacks);
 		modEventBus.addListener(this::registerKeyMappings);
 		modEventBus.addListener(this::addClientReloadListener);
 		modEventBus.addListener(this::registerGuiCompactLayer);
 
+		NeoForge.EVENT_BUS.addListener(this::registerCommands);
 		NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class, (event) -> {
 			MusicNotificationClient.tick();
 			GuiCompactLayer.getInstance().tick();
 		});
+	}
+
+	void registerCommands(RegisterClientCommandsEvent event) {
+		JukeboxSongCommandNeoForge.register(event.getDispatcher());
 	}
 
 	void registerBuiltinPacks(AddPackFindersEvent event) {

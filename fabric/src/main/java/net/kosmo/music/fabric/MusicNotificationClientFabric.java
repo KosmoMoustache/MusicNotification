@@ -3,6 +3,7 @@ package net.kosmo.music.fabric;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -11,6 +12,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.kosmo.music.KeyBinding;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.PlatformHelper;
+import net.kosmo.music.fabric.command.JukeboxSongCommandFabric;
 import net.kosmo.music.fabric.events.ClientResourceListener;
 import net.kosmo.music.fabric.events.ServerResourceListener;
 import net.minecraft.network.chat.Component;
@@ -30,16 +32,10 @@ public class MusicNotificationClientFabric implements ClientModInitializer {
 		this.registerKeyMappings();
 
 		ClientTickEvents.END_CLIENT_TICK.register(MusicNotificationClient::tick);
-//		ClientTickEvents.END_WORLD_TICK.register((ClientLevel clientLevel) -> {
-//			RegistryAccess registryAccess = clientLevel.registryAccess();
-//			Optional<Registry<JukeboxSong>> jukeboxSongRegistry = registryAccess.lookup(Registries.JUKEBOX_SONG);
-//			Set<Map.Entry<ResourceKey<JukeboxSong>, JukeboxSong>> jukeboxSong = jukeboxSongRegistry.get().entrySet();
-//			MusicNotificationClient.LOGGER.info("{}", jukeboxSong);
-//		});
+		ClientCommandRegistrationCallback.EVENT.register(JukeboxSongCommandFabric::register);
 		ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new ClientResourceListener());
 		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new ServerResourceListener());
 	}
-
 
 	public void registerBuiltinPacks() {
 		FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer -> {
@@ -55,4 +51,3 @@ public class MusicNotificationClientFabric implements ClientModInitializer {
 		KeyBindingHelper.registerKeyBinding(KeyBinding.getKeyMapping());
 	}
 }
-
