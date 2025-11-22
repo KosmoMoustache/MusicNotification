@@ -23,18 +23,6 @@ public class SoundListener implements SoundEventListener {
 			return;
 		}
 
-//		if (soundInstance.getSource() == SoundSource.RECORDS) {
-//			RegistryAccess registryAccess = Minecraft.getInstance().level.registryAccess();
-//			Optional<Registry<JukeboxSong>> jukeboxSongRegistry = registryAccess.lookup(Registries.JUKEBOX_SONG);
-//			MusicNotificationClient.LOGGER.info("{}", jukeboxSongRegistry);
-//			Set<Map.Entry<ResourceKey<JukeboxSong>, JukeboxSong>> a = jukeboxSongRegistry.get().;
-//			//                for (Map.Entry<ResourceKey<JukeboxSong>, JukeboxSong> jukeboxSong : jukeboxSongRegistry.get().entrySet()) {
-////                    Music m = Music.parseJukeboxSongRegistry(jukeboxSong.getValue());
-////                    musics.put(m.customId, m);
-////                }
-//			TrackDataManager.getInstance().setRecords();
-//		}
-
 		ResourceLocation soundEventLocation = soundInstance.getLocation();
 		ResourceLocation soundLocation = soundInstance.getSound().getLocation();
 
@@ -44,7 +32,7 @@ public class SoundListener implements SoundEventListener {
 			return;
 		}
 
-		TrackData td = TrackDataManager.getInstance().getTrackData(soundLocation);
+		TrackData td = TrackDataManager.getInstance().getTrackData(soundLocation, soundEventLocation);
 		NotificationManager.show(soundLocation, td);
 		TrackHistory.getInstance().addTrack(td);
 
