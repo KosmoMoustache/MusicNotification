@@ -33,6 +33,7 @@ public class MusicResourceReloadListener extends SimplePreparableReloadListener<
 	}
 
 	public void apply(Map<ResourceLocation, TrackData> sounds, ResourceManager resourceManager) {
+		TrackData.clearAlbumCache();
 		TrackDataManager.getInstance().setTracks(sounds);
 	}
 

@@ -63,4 +63,8 @@ public record TrackData(
 		return ALBUM_CACHE.computeIfAbsent(this.key, k -> new AlbumCover(k.getNamespace(), this.cover));
 	}
 
+	public static void clearAlbumCache() {
+		ALBUM_CACHE.clear();
+	}
+
 }
