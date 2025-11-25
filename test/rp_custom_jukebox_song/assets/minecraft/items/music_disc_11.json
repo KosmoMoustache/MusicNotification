@@ -1,0 +1,29 @@
+{
+	"model": {
+		"type": "select",
+		"property": "custom_model_data",
+		"cases": [
+			{
+				"when": "aria_math",
+				"model": {
+					"type": "model",
+					"model": "item/music_disc_11/aria_math"
+				}
+			},
+			{
+				"when": "amoris_galaxytones",
+				"model": {
+					"type": "model",
+					"model": "item/music_disc_11/amoris_galaxytones"
+				}
+			},
+			{
+				"when": "feelings_qlowdy",
+				"model": {
+					"type": "model",
+					"model": "item/music_disc_11/feelings_qlowdy"
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,22 @@
+	// "morediscs:music_disc_omen_sound": {
+	// 	"title": "Omen",
+	// 	"author": "Naps the Block",
+	// 	"album": "More discs"
+	// },
+	// "morediscs:records/music_disc_omen_sound": {
+	// 	"title": "Omen Record",
+	// 	"author": "Naps the Block",
+	// 	"album": "More discs"
+	// },
+	// "morediscs:music_disc_silence_sound": {
+	// 	"title": "Silence",
+	// 	"author": "Naps the Block",
+	// 	"album": "More discs",
+	// 	"cover": "test"
+	// },
+	// "morediscs:records/music_disc_silence_sound": {
+	// 	"title": "Silence Record",
+	// 	"author": "Naps the Block",
+	// 	"album": "More discs",
+	// 	"cover": "test"
+	// },
