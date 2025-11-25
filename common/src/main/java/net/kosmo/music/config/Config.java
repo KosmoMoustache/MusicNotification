@@ -88,7 +88,7 @@ public class Config {
 		public static final int MAX_COUNT_HISTORY_DEFAULT = 20;
 		public static final boolean DEBUG_MOD_DEFAULT = false;
 		public static final NotificationStyle NOTIFICATION_STYLE_DEFAULT = NotificationStyle.LOG;
-		public static final List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK_DEFAULT = List.of(NotificationStyle.LOG);
+		public static final List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK_DEFAULT = List.of(NotificationStyle.ACTION_BAR, NotificationStyle.LOG);
 		public static final boolean STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT = false;
 		public static final boolean STYLE_LEGACY_TOAST_SCALE_DEFAULT = true;
 		public static final int STYLE_COMPACT_ALPHA_DEFAULT = 179; // 70%

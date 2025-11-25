@@ -24,6 +24,7 @@ public class ClothScreenProvider {
 		ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
 		SubCategoryBuilder notification = entryBuilder.startSubCategory(Component.translatable("config.musicnotification.notification.title")).setExpanded(true);
+		SubCategoryBuilder style = entryBuilder.startSubCategory(Component.translatable("config.musicnotification.style.title")).setExpanded(true);
 		SubCategoryBuilder jukebox = entryBuilder.startSubCategory(Component.translatable("config.musicnotification.jukebox.title")).setExpanded(true);
 		SubCategoryBuilder general = entryBuilder.startSubCategory(Component.translatable("config.musicnotification.general.title")).setExpanded(false);
 
@@ -49,42 +50,57 @@ public class ClothScreenProvider {
 			.build();
 		notification.add(notificationStyleEnumListEntry);
 
+		@NotNull EnumListEntry<Config.Options.NotificationStyle> notificationStyleEnumListEntryFallback = entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.notification.notification_style_fallback"), Config.Options.NotificationStyle.class, options.NOTIFICATION_STYLE_FALLBACK.getFirst())
+			.setDefaultValue(Config.Options.NOTIFICATION_STYLE_FALLBACK_DEFAULT.getFirst())
+			.setEnumNameProvider(Config.Options.NotificationStyle::name)
+			.setTooltipSupplier(Config.Options.NotificationStyle::tooltipSupplier)
+			.setSaveConsumer(val -> options.NOTIFICATION_STYLE_FALLBACK.set(0, val))
+			.build();
+		notification.add(notificationStyleEnumListEntryFallback);
+
 		// Only show when Notification Style is Legacy
-		notification.add(entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.notification.disable_toast_sound"), Config.Options.DisableToastSound.class, options.DISABLE_TOAST_SOUND)
-			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.LEGACY_TOAST))
+		style.add(entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.notification.disable_toast_sound"), Config.Options.DisableToastSound.class, options.DISABLE_TOAST_SOUND)
+			.setDisplayRequirement(requirementAnyOfNotificationStyles(Config.Options.NotificationStyle.LEGACY_TOAST, notificationStyleEnumListEntry, notificationStyleEnumListEntryFallback))
 			.setDefaultValue(Config.Options.DISABLE_TOAST_SOUND_DEFAULT)
 			.setEnumNameProvider(Config.Options.DisableToastSound::name)
 			.setTooltipSupplier(Config.Options.DisableToastSound::tooltipSupplier)
 			.setSaveConsumer(val -> options.DISABLE_TOAST_SOUND = val)
 			.build()
 		);
-		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.legacy_toast.scale"), options.STYLE_LEGACY_TOAST_SCALE)
-			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.LEGACY_TOAST))
+
+		style.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.legacy_toast.scale"), options.STYLE_LEGACY_TOAST_SCALE)
+			.setDisplayRequirement(requirementAnyOfNotificationStyles(Config.Options.NotificationStyle.LEGACY_TOAST, notificationStyleEnumListEntry, notificationStyleEnumListEntryFallback))
 			.setDefaultValue(Config.Options.STYLE_LEGACY_TOAST_SCALE_DEFAULT)
 			.setSaveConsumer(val -> options.STYLE_LEGACY_TOAST_SCALE = val)
 			.build()
 		);
 
 		// Only show when Notification Style is Compact
-		notification.add(entryBuilder.startIntSlider(Component.translatable("config.musicnotification.notification.style.compact.alpha"), (int) Math.round(options.STYLE_COMPACT_ALPHA / 2.55), 0, 100)
-			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.COMPACT))
+		style.add(entryBuilder.startIntSlider(Component.translatable("config.musicnotification.notification.style.compact.alpha"), (int) Math.round(options.STYLE_COMPACT_ALPHA / 2.55), 0, 100)
+			.setDisplayRequirement(requirementAnyOfNotificationStyles(Config.Options.NotificationStyle.COMPACT, notificationStyleEnumListEntry, notificationStyleEnumListEntryFallback))
 			.setDefaultValue((int) Math.round(Config.Options.STYLE_COMPACT_ALPHA_DEFAULT / 2.55))
 			.setSaveConsumer(val -> options.STYLE_COMPACT_ALPHA = (int) Math.round(val * 2.55))
 			.build()
 		);
 
 		// Only show when Notification Style is Action Bar
-		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.action_bar.animate_color"), options.STYLE_ACTION_BAR_ANIMATE_COLOR)
-			.setDisplayRequirement(Requirement.isValue(notificationStyleEnumListEntry, Config.Options.NotificationStyle.ACTION_BAR))
+		style.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.action_bar.animate_color"), options.STYLE_ACTION_BAR_ANIMATE_COLOR)
+			.setDisplayRequirement(requirementAnyOfNotificationStyles(Config.Options.NotificationStyle.ACTION_BAR, notificationStyleEnumListEntry, notificationStyleEnumListEntryFallback))
 			.setDefaultValue(Config.Options.STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT)
 			.setSaveConsumer(val -> options.STYLE_ACTION_BAR_ANIMATE_COLOR = val)
 			.build()
 		);
 
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.show_on_title_screen"), options.SHOW_TITLE_SCREEN_BUTTON)
+			.setDefaultValue(Config.Options.SHOW_TITLE_SCREEN_BUTTON_DEFAULT)
+			.setSaveConsumer(val -> options.SHOW_TITLE_SCREEN_BUTTON = val)
+			.build());
+
 		jukebox.add(entryBuilder.startIntField(Component.translatable("config.musicnotification.jukebox.max_count_history"), options.MAX_COUNT_HISTORY)
 			.setDefaultValue(Config.Options.MAX_COUNT_HISTORY_DEFAULT)
 			.setSaveConsumer(val -> options.MAX_COUNT_HISTORY = val)
 			.build());
+
 		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.debug_mod"), options.DEBUG_MOD)
 			.setDefaultValue(Config.Options.DEBUG_MOD_DEFAULT)
 			.setSaveConsumer(val -> options.DEBUG_MOD = val)
@@ -97,9 +113,16 @@ public class ClothScreenProvider {
 			.build());
 
 		category.addEntry(notification.build());
+		category.addEntry(style.build());
 		category.addEntry(jukebox.build());
 		category.addEntry(general.build());
 
 		return builder.build();
+	}
+
+	;
+
+	private static Requirement requirementAnyOfNotificationStyles(Config.Options.NotificationStyle notificationStyle, EnumListEntry<Config.Options.NotificationStyle> style1, EnumListEntry<Config.Options.NotificationStyle> style2) {
+		return Requirement.any(Requirement.isValue(style1, notificationStyle), Requirement.isValue(style2, notificationStyle));
 	}
 }
