@@ -3,6 +3,7 @@ package net.kosmo.music.notification.toast;
 import net.kosmo.music.Helper;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.config.Config;
+import net.kosmo.music.resource.AlbumCover;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.util.TextRender;
 import net.minecraft.client.gui.Font;
@@ -75,9 +76,6 @@ public class MusicToast implements Toast {
 
 		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
 
-//		guiGraphics.fill(x, 0, this.width(), 50, CommonColors.RED);
-//		guiGraphics.fill(x + 30, 7, this.width() - 4, 7 + font.lineHeight, CommonColors.GREEN);
-
 		if (Config.options().ROTATE_ALBUM_COVER) {
 			renderAnimatedAlbumCover(guiGraphics, x, rotation);
 		} else {
@@ -85,11 +83,12 @@ public class MusicToast implements Toast {
 		}
 
 		// TODO: Fix: When album name is long and STYLE_LEGACY_TOAST_SCALE is true, title is not aligned properly (O's Piano; Lilypad)
-		TextRender.drawScrollableText(guiGraphics, font, content.title(), 30, x + 30, 7, this.width() - 4, 7 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? CommonColors.COSMOS_PINK : -11534256, false);
-		TextRender.drawScrollableText(guiGraphics, font, content.author(), 30, x + 30, 18, this.width() - 4, 18 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
+		int x1 = x + 6 + AlbumCover.getWidth() + 6;
+		TextRender.drawScrollableText(guiGraphics, font, content.title(), 30, x1, 7, this.width() - 4, 7 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? CommonColors.COSMOS_PINK : -11534256, false);
+		TextRender.drawScrollableText(guiGraphics, font, content.author(), 30, x1, 18, this.width() - 4, 18 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
 
 		if (shouldRenderExtended()) {
-			TextRender.drawScrollableText(guiGraphics, font, content.album().get(), 30, x + 30, 29, this.width() - 4, 29 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
+			TextRender.drawScrollableText(guiGraphics, font, content.album().get(), 30, x1, 29, this.width() - 4, 29 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
 		}
 	}
 
