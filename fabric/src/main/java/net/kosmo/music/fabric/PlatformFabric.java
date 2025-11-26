@@ -5,7 +5,6 @@ import net.kosmo.music.Helper;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.concurrent.atomic.AtomicReference;

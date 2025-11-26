@@ -13,11 +13,7 @@ public class NotificationManager {
 
 	public static void show(ResourceLocation soundId, TrackData td) {
 		Config.Options.NotificationStyle style = Config.options().NOTIFICATION_STYLE;
-		if (style.canBeShown()) {
-			show(style, soundId, td);
-		} else {
-			show(NotificationManager.getFallback(), soundId, td);
-		}
+		show(style.canBeShown() ? style : getFallback(), soundId, td);
 	}
 
 	public static void show(Config.Options.NotificationStyle style, ResourceLocation resourceLocation, TrackData trackData) {

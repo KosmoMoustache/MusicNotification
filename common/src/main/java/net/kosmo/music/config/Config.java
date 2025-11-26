@@ -15,11 +15,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class Config {
-	public final Options options = new Options();
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final Path DIR_PATH = Path.of("config");
 	private static final String FILE_NAME = MusicNotificationClient.MOD_ID + ".json";
 	private static Config instance = null;
+	public final Options options = new Options();
 
 	public static Options options() {
 		return Config.get().options;
@@ -160,12 +160,12 @@ public class Config {
 				}
 			};
 
-			public boolean canBeShown() {
-				return false;
-			}
-
 			public static Component name(Enum<DisableToastSound> disableToastSoundEnum) {
 				return Component.translatable("config.musicnotification.notification.style." + disableToastSoundEnum.name().toLowerCase());
+			}
+
+			public boolean canBeShown() {
+				return false;
 			}
 
 			public Optional<Component[]> tooltipSupplier() {

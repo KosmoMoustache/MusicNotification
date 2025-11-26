@@ -22,5 +22,4 @@ public class PlatformNeoForge extends PlatformHelper {
 			layer.setNotification(Helper.getCompactNotificationMessage(trackData), time);
 		}
 	}
-
 }
