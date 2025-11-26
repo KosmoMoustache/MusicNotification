@@ -7,6 +7,8 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ARGB;
@@ -17,7 +19,8 @@ import org.jetbrains.annotations.NotNull;
 public class CompactNotification extends Notification {
 
 	public static boolean canBeShown() {
-		return true;
+		Screen screen = Minecraft.getInstance().screen;
+		return screen == null || screen instanceof ChatScreen;
 	}
 
 	public static void render(GuiGraphics guiGraphics, @NotNull DeltaTracker deltaTracker, Component message, int time) {
