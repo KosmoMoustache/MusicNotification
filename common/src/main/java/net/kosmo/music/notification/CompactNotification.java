@@ -30,7 +30,6 @@ public class CompactNotification extends Notification {
 		Font font = client.font;
 
 		if (message != null) {
-			Profiler.get().push("musicnotification:compact");
 			float f = time - deltaTracker.getGameTimeDeltaPartialTick(false);
 			int i = (int) (f * 255.0F / 20.0F);
 			if (i > 255) {
@@ -51,7 +50,5 @@ public class CompactNotification extends Notification {
 				guiGraphics.pose().popMatrix();
 			}
 		}
-
-		Profiler.get().pop();
 	}
 }
