@@ -83,6 +83,13 @@ public class ClothScreenProvider {
 			.build()
 		);
 
+		style.add(entryBuilder.startIntField(Component.translatable("config.musicnotification.notification.style.compact.time"), options.STYLE_COMPACT_TIME / 20)
+			.setDisplayRequirement(requirementAnyOfNotificationStyles(Config.Options.NotificationStyle.COMPACT, notificationStyleEnumListEntry, notificationStyleEnumListEntryFallback))
+			.setDefaultValue(Config.Options.STYLE_COMPACT_TIME_DEFAULT / 20)
+			.setSaveConsumer(val -> options.STYLE_COMPACT_TIME = val * 20)
+			.build()
+		);
+
 		// Only show when Notification Style is Action Bar
 		style.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.action_bar.animate_color"), options.STYLE_ACTION_BAR_ANIMATE_COLOR)
 			.setDisplayRequirement(requirementAnyOfNotificationStyles(Config.Options.NotificationStyle.ACTION_BAR, notificationStyleEnumListEntry, notificationStyleEnumListEntryFallback))

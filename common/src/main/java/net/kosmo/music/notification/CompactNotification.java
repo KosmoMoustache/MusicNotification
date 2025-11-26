@@ -16,11 +16,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class CompactNotification extends Notification {
 
-	public void show(ResourceLocation resourceLocation, TrackData trackData) {
-		super.show(resourceLocation, trackData, this.getClass());
-		MusicNotificationClient.PLATFORM_HELPER.setCompactNotification(trackData, 60);
-	}
-
 	public static boolean canBeShown() {
 		return true;
 	}
