@@ -115,7 +115,6 @@ public class JukeboxScreen extends Screen {
 	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
 		int i = this.marginX() + 3;
-		//TODO: Fix 8 pixel left, 7 pixel right
 		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
 		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
 	}
