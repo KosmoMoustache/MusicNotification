@@ -35,7 +35,6 @@ public class CompactNotification extends Notification {
 			}
 
 			if (i > 0) {
-				guiGraphics.nextStratum();
 				guiGraphics.pose().pushMatrix();
 				guiGraphics.pose().translate(guiGraphics.guiWidth(), guiGraphics.guiHeight() - 8);
 
