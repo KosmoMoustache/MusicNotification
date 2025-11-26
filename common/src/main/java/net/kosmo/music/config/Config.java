@@ -25,7 +25,7 @@ public class Config {
 		return Config.get().options;
 	}
 
-	public static Config get() {
+	private static Config get() {
 		if (instance == null) {
 			instance = Config.load();
 		}
