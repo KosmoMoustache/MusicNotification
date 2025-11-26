@@ -1,4 +1,4 @@
-package net.kosmo.music.impl.mixin;
+package net.kosmo.music.mixin;
 
 import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.client.Minecraft;
@@ -11,14 +11,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MusicManager.class)
-public class MixinMusicManager {
+public abstract class MixinMusicManager {
 	@Shadow
 	private SoundInstance currentMusic;
 
 	@Inject(method = "tick", at = @At("HEAD"), cancellable = true)
 	private void tick(CallbackInfo ci) {
 		if (MusicNotificationClient.currentlyPlaying != null && Minecraft.getInstance().getSoundManager().isActive(MusicNotificationClient.currentlyPlaying)) {
-			currentMusic = null;
+			this.currentMusic = null;
 			ci.cancel();
 		} else {
 			MusicNotificationClient.currentlyPlaying = null;
