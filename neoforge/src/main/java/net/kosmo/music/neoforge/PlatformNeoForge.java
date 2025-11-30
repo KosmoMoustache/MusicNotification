@@ -1,6 +1,5 @@
 package net.kosmo.music.neoforge;
 
-import net.kosmo.music.Helper;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.TrackData;
@@ -19,7 +18,7 @@ public class PlatformNeoForge extends PlatformHelper {
 	public void setCompactNotification(TrackData trackData, int time) {
 		GuiCompactLayer layer = GuiCompactLayer.getInstance();
 		if (layer != null && trackData != null) {
-			layer.setNotification(Helper.getCompactNotificationMessage(trackData), time);
+			layer.setNotification(this.getCompactNotificationMessage(trackData), time);
 		}
 	}
 }
