@@ -86,10 +86,6 @@ public class JukeboxScreen extends Screen {
 //			this.setCurrentTab(this.currentTab);
 		}).bounds(this.soundList.getRowLeft(), this.listEnd() + 10, this.soundList.getRowRight() - this.soundList.getRowLeft() - 1 - 50, 20).build());
 
-		this.addRenderableWidget(Button.builder(CommonComponents.GUI_BACK, button -> {
-			this.onClose();
-		}).bounds(this.soundList.getRowRight() - 50, this.listEnd() + 10, 50, 20).build());
-
 		this.clearHistoryButton = this.addRenderableWidget(Button.builder(CLEAR_HISTORY, button -> {
 			TrackHistory.getInstance().clear();
 			this.setCurrentTab(Tab.HISTORY);
@@ -107,8 +103,30 @@ public class JukeboxScreen extends Screen {
 		this.addRenderableWidget(this.searchBox);
 		this.addWidget(soundList);
 		this.setCurrentTab(Tab.HOME);
+		this.layout.addToFooter(Button.builder(CommonComponents.GUI_BACK, button -> this.onClose()).build());
+
 		this.layout.visitWidgets(this::addRenderableWidget);
 		this.layout.arrangeElements();
+
+		this.repositionElements();
+	}
+
+	@Override
+	protected void repositionElements() {
+		this.layout.arrangeElements();
+		this.soundList.updateSizeAndPosition(this.width, this.listEnd() - 88, 88);
+		this.searchBox.setPosition(this.marginX() + 28, 74);
+		int middle = Config.options().DEBUG_MOD
+			? this.soundList.getRowWidth() / 3
+			: this.soundList.getRowWidth() / 2;
+		int rowLeft = this.soundList.getRowLeft();
+		int rowRight = this.soundList.getRowRight();
+
+		this.homeButton.setPosition(rowLeft, 45);
+		this.historyButton.setPosition((rowLeft + middle + 1), 45);
+		this.soundButton.setPosition(rowRight - middle + 1, 45);
+		this.stopSoundButton.setPosition(this.soundList.getRowLeft(), this.listEnd() + 10);
+		this.clearHistoryButton.setPosition(10, 10);
 	}
 
 	@Override
