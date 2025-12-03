@@ -10,25 +10,25 @@ Adds a toast notification when music is played in the game with the track’s na
     <table>
         <tr>
             <td align="middle">
-                <img alt="" src="./img/disc1.png"/>
+                <img alt="" src=".github/assets/disc1.png"/>
                 <figcaption align="middle">From a music disc with "Show album name": true</figcaption>
             </td>
         </tr>
         <tr>
             <td align="middle">
-                <img alt="" src="./img/toasts.png"/>
+                <img alt="" src=".github/assets/toasts.png"/>
                 <figcaption align="middle">The 3 different toasts configuration</figcaption>
             </td>
         </tr>
         <tr>
             <td align="middle">
-                <img alt="" src="./img/modded1.png"/>
+                <img alt="" src=".github/assets/modded1.png"/>
                 <figcaption align="middle">Works with modded cds</figcaption> 
             </td>
         </tr> 
         <tr>
             <td align="middle">
-                <img alt="" src="./img/jukebox.png"/>
+                <img alt="" src=".github/assets/jukebox.png"/>
                 <figcaption align="middle">Play any music anytime and anywhere</figcaption> 
             </td>
         </tr>
@@ -37,7 +37,7 @@ Adds a toast notification when music is played in the game with the track’s na
 
 # ⚙ Settings
 
-<img alt="" src="./img/config.png">
+<img alt="" src=".github/assets/config.png">
 
 # Video Preview
 
