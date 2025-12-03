@@ -75,17 +75,18 @@ public class MusicEntry extends ListEntry {
 		this.entry.getAlbumInfo().drawCover(guiGraphics, left + 4, top + (height - AlbumCover.getHeight()) / 2);
 
 		boolean shouldRenderButton = this.parent.parent.currentTab != JukeboxScreen.Tab.HISTORY;
+		boolean isPlaying = isPlaying();
 
 		this.playButton.setX(left + (width - this.playButton.getWidth()) - 8);
 		this.playButton.setY(top + (height - this.playButton.getHeight()) / 2);
-		this.playButton.active = !isPlaying() && shouldRenderButton && !Helper.isVolumeZero();
-		this.playButton.visible =  !isPlaying() && shouldRenderButton;
+		this.playButton.active = !isPlaying && shouldRenderButton && !Helper.isVolumeZero();
+		this.playButton.visible = !isPlaying && shouldRenderButton;
 		this.playButton.render(guiGraphics, mouseX, mouseY, partialTick);
 
 		this.stopButton.setX(left + (width - this.stopButton.getWidth()) - 8);
 		this.stopButton.setY(top + (height - this.stopButton.getHeight()) / 2);
-		this.stopButton.active = isPlaying() && shouldRenderButton;
-		this.stopButton.visible = isPlaying() && shouldRenderButton;
+		this.stopButton.active = isPlaying && shouldRenderButton;
+		this.stopButton.visible = isPlaying && shouldRenderButton;
 		this.stopButton.render(guiGraphics, mouseX, mouseY, partialTick);
 	}
 
@@ -114,13 +115,15 @@ public class MusicEntry extends ListEntry {
 //	}
 
 	private boolean isPlaying() {
-		SoundInstance soundInstance = ((MusicManagerAccessor) client.getMusicManager()).getCurrentMusic();
-		if (soundInstance == null) return false;
+		Sound sound1 = MusicNotificationClient.currentlyPlaying != null ? MusicNotificationClient.currentlyPlaying.getSound() : null;
+		Sound sound2 = ((MusicManagerAccessor) client.getMusicManager()).getCurrentMusic() != null ? ((MusicManagerAccessor) client.getMusicManager()).getCurrentMusic().getSound() : null;
+		if (sound1 != null) {
+			return sound1.getLocation().equals(entry.key());
+		} else if (sound2 != null) {
+			return sound2.getLocation().equals(entry.key());
+		}
+		return false;
 
-		Sound sound = soundInstance.getSound();
-		if (sound == null) return false;
-
-		return sound.getLocation().equals(entry.key());
 	}
 
 	@Override
