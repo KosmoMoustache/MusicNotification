@@ -9,13 +9,11 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Debug(export = true)
 @Mixin(TitleScreen.class)
 public abstract class MixinTitleScreen extends Screen {
 
