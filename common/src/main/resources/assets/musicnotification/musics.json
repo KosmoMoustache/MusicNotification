@@ -457,126 +457,147 @@
 		"album": "",
 		"author": "C418",
 		"cover": "11",
+		"customId": "minecraft:music_disc.11",
 		"title": "11"
 	},
 	"minecraft:records/13": {
 		"album": "Volume Alpha No. 16",
 		"author": "C418",
 		"cover__": "13",
+		"customId": "minecraft:music_disc.13",
 		"title": "Thirteen"
 	},
 	"minecraft:records/5": {
 		"album": "The Wild Update No.4",
 		"author": "Samuel Åberg",
 		"cover": "5",
+		"customId": "minecraft:music_disc.5",
 		"title": "Five"
 	},
 	"minecraft:records/blocks": {
 		"album": "Volume Beta No. 28",
 		"author": "C418",
 		"cover": "blocks",
+		"customId": "minecraft:music_disc.blocks",
 		"title": "Blocks"
 	},
 	"minecraft:records/cat": {
 		"album": "Volume Alpha No. 19",
 		"author": "C418",
 		"cover": "cat",
+		"customId": "minecraft:music_disc.cat",
 		"title": "Cat"
 	},
 	"minecraft:records/chirp": {
 		"album": "Volume Beta No. 20",
 		"author": "C418",
 		"cover": "chirp",
+		"customId": "minecraft:music_disc.chirp",
 		"title": "Chirp"
 	},
 	"minecraft:records/creator": {
 		"album": "Tricky Trials Update No. 10",
 		"author": "Lena Raine",
 		"cover": "creator",
+		"customId": "minecraft:music_disc.creator",
 		"title": "Creator"
 	},
 	"minecraft:records/creator_music_box": {
 		"album": "Tricky Trials Update No. 11",
 		"author": "Lena Raine",
 		"cover": "creator_music_box",
+		"customId": "minecraft:music_disc.creator_music_box",
 		"title": "Creator (Music Box)"
 	},
 	"minecraft:records/far": {
 		"album": "Volume Beta No. 29",
 		"author": "C418",
 		"cover": "far",
+		"customId": "minecraft:music_disc.far",
 		"title": "Far"
 	},
 	"minecraft:records/lava_chicken": {
 		"album": "Lava Chicken",
 		"author": "Hyper Potions",
 		"cover": "lava_chicken",
+		"customId": "minecraft:music_disc.lava_chicken",
 		"title": "Lava Chicken"
 	},
 	"minecraft:records/mall": {
 		"album": "Volume Beta No. 27",
 		"author": "C418",
 		"cover": "mall",
+		"customId": "minecraft:music_disc.mall",
 		"title": "Mall"
 	},
 	"minecraft:records/mellohi": {
 		"album": "Volume Beta No. 22",
 		"author": "C418",
 		"cover": "mellohi",
+		"customId": "minecraft:music_disc.mellohi",
 		"title": "Mellohi"
 	},
 	"minecraft:records/otherside": {
 		"album": "Caves & Cliffs No. 7",
 		"author": "Lena Raine",
 		"cover": "otherside",
+		"customId": "minecraft:music_disc.otherside",
 		"title": "Otherside"
 	},
 	"minecraft:records/pigstep": {
 		"album": "Nether Update No. 4",
 		"author": "Lena Raine",
 		"cover": "pigstep",
+		"customId": "minecraft:music_disc.pigstep",
 		"title": "Pigstep"
 	},
 	"minecraft:records/precipice": {
 		"album": "Tricky Trials Update No. 12",
 		"author": "Aaron Cherof",
 		"cover": "precipice",
+		"customId": "minecraft:music_disc.precipice",
 		"title": "Precipice"
 	},
 	"minecraft:records/relic": {
 		"album": "Trails & Tailes Update No.5",
 		"author": "Aaron Cherof",
 		"cover": "relic",
+		"customId": "minecraft:music_disc.relic",
 		"title": "Relic"
 	},
 	"minecraft:records/stal": {
 		"album": "Volume Beta No. 23",
 		"author": "C418",
 		"cover": "stal",
+		"customId": "minecraft:music_disc.stal",
 		"title": "Stal"
 	},
 	"minecraft:records/strad": {
 		"album": "Volume Beta No. 24",
 		"author": "C418",
 		"cover": "strad",
+		"customId": "minecraft:music_disc.strad",
 		"title": "Strad"
 	},
 	"minecraft:records/tears": {
 		"album": "Chase the Skies Update No. 6",
 		"author": "Amos Roddy",
 		"cover": "tears",
+		"customId": "minecraft:music_disc.tears",
 		"title": "Tears"
 	},
 	"minecraft:records/wait": {
 		"album": "Volume Beta No. 21",
 		"author": "C418",
 		"cover": "wait",
+		"customId": "minecraft:music_disc.wait",
 		"title": "Wait"
 	},
 	"minecraft:records/ward": {
 		"album": "Volume Beta No. 26",
 		"author": "C418",
 		"cover": "ward",
+		"customId": "minecraft:music_disc.ward",
 		"title": "Ward"
 	}
 }
