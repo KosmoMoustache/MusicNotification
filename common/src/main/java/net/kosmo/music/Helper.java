@@ -4,7 +4,6 @@ import net.kosmo.music.mixin.MusicManagerAccessor;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -49,23 +48,22 @@ public class Helper {
 		}
 	}
 
-	@Deprecated
-	public static void playAndResetTracker(Minecraft client, TrackData td) {
+	public static void playTrackData(Minecraft client, TrackData td) {
 		SoundEvent soundEvent = getSoundEvent(client, td.getResolvedId());
 		if (soundEvent == null) {
 			MusicNotificationClient.LOGGER.warn("Unable to play unknown sound with id: {}", td.getResolvedId());
 			return;
 		}
 
-		client.getSoundManager().stop(null, SoundSource.MUSIC);
+		playTrackData(client, soundEvent);
+	}
 
+	public static void playTrackData(Minecraft client, SoundEvent soundEvent) {
+		client.getSoundManager().stop(null, SoundSource.MUSIC);
 		SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent, 1);
 		MusicManagerAccessor musicManagerAccessor = (MusicManagerAccessor) client.getMusicManager();
-		MusicManager musicManager = client.getMusicManager();
-		client.getSoundManager().getAvailableSounds();
-
-//		musicTracker.setCurrentMusic(soundInstance);
 		client.getSoundManager().play(soundInstance);
+		musicManagerAccessor.setCurrentMusic(soundInstance);
 		MusicNotificationClient.currentlyPlaying = soundInstance;
 	}
 }

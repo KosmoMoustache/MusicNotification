@@ -13,13 +13,10 @@ import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.Sound;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.CommonColors;
@@ -32,10 +29,8 @@ public class MusicEntry extends ListEntry {
 	public static final int GRAY_COLOR = ARGB.color(255, 74, 74, 74);
 	private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
 	private static final WidgetSprites STOP_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/stop_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/stop_button_focused"));
-
-	private final List<AbstractWidget> children;
-
 	public final TrackData entry;
+	private final List<AbstractWidget> children;
 	private final ImageButton playButton;
 	private final ImageButton stopButton;
 
@@ -45,7 +40,7 @@ public class MusicEntry extends ListEntry {
 		this.entry = entry;
 
 		this.playButton = new ImageButton(0, 0, 20, 20, PLAY_BUTTON_TEXTURE, button -> {
-			Helper.playAndResetTracker(this.client, entry);
+			Helper.playTrackData(this.client, entry);
 		}, Component.translatable("gui.musicnotification.jukebox.play_sound"));
 
 		this.stopButton = new ImageButton(0, 0, 20, 20, STOP_BUTTON_TEXTURE, button -> {
@@ -89,30 +84,6 @@ public class MusicEntry extends ListEntry {
 		this.stopButton.visible = isPlaying && shouldRenderButton;
 		this.stopButton.render(guiGraphics, mouseX, mouseY, partialTick);
 	}
-
-	private void play() {
-		MusicNotificationClient.LOGGER.info("Playing sound: {} ({})", entry.title(), entry.getResolvedId());
-		SoundEvent soundEvent = Helper.getSoundEvent(client, entry.getResolvedId());
-		if (soundEvent == null) {
-			MusicNotificationClient.LOGGER.warn("Unable to play unknown sound with id: {}", entry.getResolvedId());
-		} else {
-			SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent, 1);
-//			MusicTrackerAccessor musicTracker = (MusicTrackerAccessor) client.getMusicManager();
-//			musicTracker.setCurrentMusic(soundInstance);
-			this.client.getSoundManager().stop(null, SoundSource.MUSIC);
-			client.getSoundManager().play(soundInstance);
-			MusicNotificationClient.currentlyPlaying = soundInstance;
-		}
-	}
-
-//	private void onButtonClick(TrackData entry) {
-//		if (isPlaying()) {
-//			this.client.getSoundManager().stop(null, SoundSource.MUSIC);
-//			MusicNotificationClient.currentlyPlaying = null;
-//		} else {
-//			Helper.playAndResetTracker(client, entry);
-//		}
-//	}
 
 	private boolean isPlaying() {
 		Sound sound1 = MusicNotificationClient.currentlyPlaying != null ? MusicNotificationClient.currentlyPlaying.getSound() : null;
