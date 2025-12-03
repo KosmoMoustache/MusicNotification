@@ -84,7 +84,7 @@ public class JukeboxScreen extends Screen {
 			this.minecraft.getSoundManager().stop(null, SoundSource.MUSIC);
 			MusicNotificationClient.currentlyPlaying = null;
 //			this.setCurrentTab(this.currentTab);
-		}).bounds(this.soundList.getRowLeft(), this.listEnd() + 10, this.soundList.getRowRight() - this.soundList.getRowLeft() - 1 - 50, 20).build());
+		}).bounds(this.soundList.getRowLeft() - 1, this.listEnd() + 10, this.soundList.getRowRight() - this.soundList.getRowLeft() + 1, 20).build());
 
 		this.clearHistoryButton = this.addRenderableWidget(Button.builder(CLEAR_HISTORY, button -> {
 			TrackHistory.getInstance().clear();
