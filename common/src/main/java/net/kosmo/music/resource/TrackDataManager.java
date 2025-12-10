@@ -34,7 +34,7 @@ public class TrackDataManager {
 		if (td != null) {
 			return td;
 		}
-		
+
 		if (Minecraft.getInstance().level != null) {
 			MusicNotificationClient.LOGGER.warn("no TrackData found for id: {} sound event: {}), trying with JukeboxSong registry", soundId, soundEventId);
 			try {
@@ -56,17 +56,19 @@ public class TrackDataManager {
 	}
 
 	public TrackData getTrackDataFromJukeboxSong(ResourceLocation soundId, JukeboxSong song) {
-		String title;
 		String author;
-		// string[0] = title / string[1] = author | Now playing: Lena Raine - Pigstep;
+		String title;
+		// string[0] = author / string[1] = title | Now playing: Lena Raine - Pigstep;
 		String[] split = song.description().getString().split(" - ");
 		try {
-			title = split[0];
-			author = split[1];
+			author = split[0];
+			title = split[1];
 		} catch (ArrayIndexOutOfBoundsException e) {
-			title = song.description().getString();
-			author = "Unknown";
+			author = song.description().getString();
+			title = "Unknown";
 		}
+		return getEmpty(soundId, title, author);
+	}
 
 	private TrackData getEmpty(ResourceLocation key, String title, String author) {
 		return new TrackData(
