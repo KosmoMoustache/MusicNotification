@@ -67,7 +67,8 @@ public class MusicEntry extends ListEntry {
 			guiGraphics.drawString(this.client.font, entry.album().get(), xMargeCover, y2, CommonColors.LIGHT_GRAY, false);
 		}
 
-		this.entry.getAlbumInfo().drawCover(guiGraphics, left + 4, top + (height - AlbumCover.getHeight()) / 2);
+		AlbumCover albumCover = this.entry.getAlbumCover();
+		albumCover.drawCover(guiGraphics, left + 4, top + (height - albumCover.getHeight()) / 2);
 
 		boolean shouldRenderButton = this.parent.parent.currentTab != JukeboxScreen.Tab.HISTORY;
 		boolean isPlaying = isPlaying();

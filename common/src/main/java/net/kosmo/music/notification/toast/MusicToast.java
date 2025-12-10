@@ -3,7 +3,6 @@ package net.kosmo.music.notification.toast;
 import net.kosmo.music.Helper;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.config.Config;
-import net.kosmo.music.resource.AlbumCover;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.util.TextRender;
 import net.minecraft.client.gui.Font;
@@ -76,14 +75,14 @@ public class MusicToast implements Toast {
 
 		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
 
-		if (Config.options().ROTATE_ALBUM_COVER) {
+		if (Config.options().ROTATE_ALBUM_COVER && content.getAlbumCover().canBeAnimated()) {
 			renderAnimatedAlbumCover(guiGraphics, x, rotation);
 		} else {
-			content.getAlbumInfo().drawCover(guiGraphics, x + 6, 6);
+			content.getAlbumCover().drawCover(guiGraphics, x + 6, 6);
 		}
 
 		// TODO: Fix: When album name is long and STYLE_LEGACY_TOAST_SCALE is true, title is not aligned properly (O's Piano; Lilypad)
-		int x1 = x + 6 + AlbumCover.getWidth() + 6;
+		int x1 = x + 6 + /*AlbumCover.getWidth() */ 20 + 6;
 		TextRender.drawScrollableText(guiGraphics, font, content.title(), 30, x1, 7, this.width() - 4, 7 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? CommonColors.COSMOS_PINK : -11534256, false);
 		TextRender.drawScrollableText(guiGraphics, font, content.author(), 30, x1, 18, this.width() - 4, 18 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
 
@@ -100,7 +99,7 @@ public class MusicToast implements Toast {
 		matrices.translate(cx, 16);
 		matrices.rotate((float) Math.toRadians(rotation));
 		matrices.translate(-16, -16);
-		content.getAlbumInfo().drawCover(guiGraphics, 6, 6);
+		content.getAlbumCover().drawCover(guiGraphics, 6, 6);
 
 		matrices.translate(x, 0);
 

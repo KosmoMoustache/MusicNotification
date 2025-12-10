@@ -18,6 +18,7 @@ public record TrackData(
 	Component author,
 	Optional<Component> album,
 	Optional<String> cover,
+	Optional<ResourceLocation> item,
 	Optional<ResourceLocation> customId
 ) {
 
@@ -29,12 +30,14 @@ public record TrackData(
 			COMPONENT_CODEC.fieldOf("author").forGetter(TrackData::author),
 			COMPONENT_CODEC.optionalFieldOf("album").forGetter(TrackData::album),
 			Codec.STRING.optionalFieldOf("cover").forGetter(TrackData::cover),
+			ResourceLocation.CODEC.optionalFieldOf("item").forGetter(TrackData::item),
 			ResourceLocation.CODEC.optionalFieldOf("customId").forGetter(TrackData::customId))
-		.apply(i, (keyOpt, title, author, album, cover, customId) -> new TrackData(keyOpt.orElse(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "generic")), title, author, album, cover, customId)));
+		.apply(i, (keyOpt, title, author, album, cover, item, customId) -> new TrackData(keyOpt.orElse(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "generic")), title, author, album, cover, item, customId)));
 
 	// A map codec that stores a map<ResourceLocation, TrackData> but injects the map key into each TrackData.key
 	public static final Codec<Map<ResourceLocation, TrackData>> MAP_CODEC = ExtraCodecs.strictUnboundedMap(ResourceLocation.CODEC, CODEC)
 		.xmap(TrackData::injectKeysFromMap, TrackData::ensureValuesHaveKeys);
+	private static final Map<ResourceLocation, AlbumCover> ALBUM_CACHE = new ConcurrentHashMap<>();
 
 	private static Map<ResourceLocation, TrackData> injectKeysFromMap(Map<ResourceLocation, TrackData> input) {
 		Map<ResourceLocation, TrackData> out = new LinkedHashMap<>();
@@ -42,7 +45,7 @@ public record TrackData(
 			ResourceLocation mapKey = e.getKey();
 			TrackData value = e.getValue();
 			if (!value.key().equals(mapKey)) {
-				value = new TrackData(mapKey, value.title(), value.author(), value.album(), value.cover(), value.customId());
+				value = new TrackData(mapKey, value.title(), value.author(), value.album(), value.cover(), value.item(), value.customId());
 			}
 			out.put(mapKey, value);
 		}
@@ -53,18 +56,23 @@ public record TrackData(
 		return injectKeysFromMap(input);
 	}
 
-	private static final Map<ResourceLocation, AlbumCover> ALBUM_CACHE = new ConcurrentHashMap<>();
+	public static void clearAlbumCache() {
+		MusicNotificationClient.LOGGER.info("Clearing album cover cache");
+		ALBUM_CACHE.clear();
+	}
 
 	public ResourceLocation getResolvedId() {
 		return this.customId().isPresent() ? this.customId().get() : this.key();
 	}
 
-	public AlbumCover getAlbumInfo() {
-		return ALBUM_CACHE.computeIfAbsent(this.key, k -> new AlbumCover(k.getNamespace(), this.cover));
+	public AlbumCover getAlbumCover() {
+		return ALBUM_CACHE.computeIfAbsent(this.key, k -> {
+				if (this.item.isPresent()) {
+					return AlbumCover.fromItem(this.item.get());
+				} else {
+					return AlbumCover.fromSprite(k.getNamespace(), this.cover.orElse(null));
+				}
+			}
+		);
 	}
-
-	public static void clearAlbumCache() {
-		ALBUM_CACHE.clear();
-	}
-
 }
