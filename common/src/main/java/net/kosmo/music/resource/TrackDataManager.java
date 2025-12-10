@@ -52,14 +52,7 @@ public class TrackDataManager {
 			MusicNotificationClient.LOGGER.warn("no TrackData found for id: {} sound event: {}", soundId, soundEventId);
 		}
 
-		return new TrackData(
-			soundId,
-			Component.literal(soundId.toString()),
-			Component.literal("Unknown Artist"),
-			Optional.empty(),
-			Optional.empty(),
-			Optional.of(soundId)
-		);
+		return getEmpty(soundId, soundId.toString(), "Unknown Artist");
 	}
 
 	public TrackData getTrackDataFromJukeboxSong(ResourceLocation soundId, JukeboxSong song) {
@@ -74,13 +67,16 @@ public class TrackDataManager {
 			title = song.description().getString();
 			author = "Unknown";
 		}
+
+	private TrackData getEmpty(ResourceLocation key, String title, String author) {
 		return new TrackData(
-			soundId,
+			key,
 			Component.literal(title),
 			Component.literal(author),
 			Optional.empty(),
 			Optional.empty(),
-			Optional.of(soundId)
+			Optional.empty(),
+			Optional.of(key)
 		);
 	}
 }
