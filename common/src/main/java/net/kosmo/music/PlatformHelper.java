@@ -13,5 +13,7 @@ public abstract class PlatformHelper {
 	public abstract String getModName(ResourceLocation location);
 
 	public abstract void setCompactNotification(TrackData trackData, int time);
+
+	public abstract String getDarkModeResourcePackId();
 }
 

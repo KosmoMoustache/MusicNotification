@@ -21,4 +21,9 @@ public class PlatformNeoForge extends PlatformHelper {
 			layer.setNotification(this.getCompactNotificationMessage(trackData), time);
 		}
 	}
+
+	@Override
+	public String getDarkModeResourcePackId() {
+		return "mod/musicnotification:resourcepacks/dark_mode";
+	}
 }

@@ -21,4 +21,9 @@ public class PlatformFabric extends PlatformHelper {
 		gui.musicNotification$setCompactNotificationMessage(this.getCompactNotificationMessage(trackData));
 		gui.musicNotification$setCompactNotificationTime(60);
 	}
+
+	@Override
+	public String getDarkModeResourcePackId() {
+		return "musicnotification:dark_mode";
+	}
 }

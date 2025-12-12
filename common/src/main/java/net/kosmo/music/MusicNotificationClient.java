@@ -15,11 +15,6 @@ public final class MusicNotificationClient {
 
 	public static PlatformHelper PLATFORM_HELPER;
 
-//	public static final KeyBinding keyBinding = new KeyBinding();
-
-//    public static SoundManager soundManager;
-
-//    public static boolean isDarkModeEnabled = false;
 
 	@Nullable
 	public static SoundInstance currentlyPlaying;
@@ -52,10 +47,6 @@ public final class MusicNotificationClient {
 
 	static Component getNowPlayingString(String currentSong) {
 		return currentSong == null ? Component.empty() : Component.translatable(currentSong.replace("/", "."));
-	}
-
-	public void isDarkModeEnabled() {
-		Minecraft.getInstance().getResourceManager().listPacks().anyMatch(resourcePack -> resourcePack.packId().equals("mod/" + ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/dark_mode")));
 	}
 
 	static ResourceLocation id(String path) {

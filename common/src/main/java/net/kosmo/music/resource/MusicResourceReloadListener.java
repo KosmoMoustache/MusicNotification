@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.mojang.serialization.JsonOps;
 import net.kosmo.music.MusicNotificationClient;
+import net.kosmo.music.config.Config;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -35,6 +36,7 @@ public class MusicResourceReloadListener extends SimplePreparableReloadListener<
 	public void apply(Map<ResourceLocation, TrackData> sounds, ResourceManager resourceManager) {
 		TrackData.clearAlbumCache();
 		TrackDataManager.getInstance().setTracks(sounds);
+		Config.options().COMPUTED_IS_DARK_MODE_ENABLED = resourceManager.listPacks().anyMatch(resourcePack -> resourcePack.packId().equals(MusicNotificationClient.PLATFORM_HELPER.getDarkModeResourcePackId()));
 	}
 
 	@Override
