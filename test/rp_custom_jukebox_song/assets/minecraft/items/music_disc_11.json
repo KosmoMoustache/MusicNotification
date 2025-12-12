@@ -1,6 +1,6 @@
 {
 	"model": {
-		"type": "select",
+		"type": "minecraft:select",
 		"property": "custom_model_data",
 		"cases": [
 			{
@@ -24,6 +24,10 @@
 					"model": "item/music_disc_11/feelings_qlowdy"
 				}
 			}
-		]
+		],
+		"fallback": {
+			"type": "model",
+			"model": "minecraft:item/music_disc_11"
+		}
 	}
 }
