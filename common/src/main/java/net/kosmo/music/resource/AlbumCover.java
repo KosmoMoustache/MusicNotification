@@ -101,7 +101,7 @@ public class AlbumCover {
 
 		private ItemStack getItemStack(ResourceLocation itemId) {
 			if (!BuiltInRegistries.ITEM.containsKey(itemId)) {
-				MusicNotificationClient.LOGGER.error("Failed to find album cover item '{}', falling back to dirt.", itemId);
+				MusicNotificationClient.LOGGER.error("Failed to find album cover item '{}', falling back to minecraft:music_disc_13.", itemId);
 				itemId = ResourceLocation.tryParse("minecraft:music_disc_13");
 			}
 			ItemStack itemStack = BuiltInRegistries.ITEM.get(itemId).get().value().getDefaultInstance();
