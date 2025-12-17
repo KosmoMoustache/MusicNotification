@@ -33,7 +33,7 @@ public abstract class MixinGui implements GuiAccessor {
 		method = "render",
 		at = @At(
 			value = "INVOKE",
-			//? if >=1.21.9 {
+			//? if >=1.21.10 {
 			target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphics;Z)V", ordinal = 0
 			//?} else {
 			/*target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"
