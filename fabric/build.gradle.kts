@@ -22,7 +22,15 @@ dependencies {
 	})
 
 	modImplementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
-	modApi("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
+
+	fun fabricModules(vararg modules: String) = modules.forEach {
+		modImplementation(fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
+	}
+
+	fabricModules("command-api-v2")
+
+
+//	modApi("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
 
 	modApi("com.terraformersmc:modmenu:${commonMod.depOrNull("modmenu")}")
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${commonMod.depOrNull("cloth_config")}")
