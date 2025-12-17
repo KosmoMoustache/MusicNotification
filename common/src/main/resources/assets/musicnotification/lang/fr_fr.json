@@ -51,7 +51,7 @@
 	"gui.musicnotification.jukebox.tab_home": "Accueil",
 	"gui.musicnotification.jukebox.tab_sound": "Sound",
 	"gui.musicnotification.jukebox.title": "Jukebox",
-	"key.musicnotification.categories": "Music Notification",
+	"key.category.musicnotification.category": "Music Notification",
 	"key.musicnotification.open_screen": "Ouvrir le Jukebox",
 	"text.musicnotification.notification.action_bar": "Lecture en cours: %s - %s",
 	"text.musicnotification.resourcepack.dark_mode.description": "Active le mod sombre pour l'interface de Music Notification.",

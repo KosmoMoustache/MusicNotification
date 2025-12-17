@@ -4,13 +4,20 @@ import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.fml.loading.LoadingModList;
+import net.neoforged.fml.loading.FMLLoader;
+//?} else {
+/*import net.neoforged.fml.loading.LoadingModList;
+ *///? }
 
 public class PlatformNeoForge extends PlatformHelper {
 	@Override
 	public String getModName(ResourceLocation location) {
 		String namespace = location.getNamespace();
-		namespace = LoadingModList.get().getModFileById(namespace).moduleName();
+		//? if >=1.21.9 {
+		namespace = FMLLoader.getCurrent().getLoadingModList().getModFileById(namespace).toString();
+		//?} else {
+		/*namespace = LoadingModList.get().getModFileById(namespace).moduleName();
+		 *///?}
 		return namespace;
 	}
 

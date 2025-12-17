@@ -13,7 +13,7 @@
 	"gui.musicnotification.jukebox.tab_home": "主页",
 	"gui.musicnotification.jukebox.tab_sound": "声音",
 	"gui.musicnotification.jukebox.title": "点唱机",
-	"key.musicnotification.categories": "Music Notification",
+	"key.category.musicnotification.category": "Music Notification",
 	"text.musicnotification.resourcepack.dark_mode.description": "将 Music Notification 的 UI 切换为深色模式。",
 	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification：深色模式"
 }

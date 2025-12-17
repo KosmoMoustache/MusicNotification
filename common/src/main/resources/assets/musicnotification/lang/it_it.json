@@ -13,7 +13,7 @@
 	"gui.musicnotification.jukebox.tab_home": "Home",
 	"gui.musicnotification.jukebox.tab_sound": "Suono",
 	"gui.musicnotification.jukebox.title": "Jukebox",
-	"key.musicnotification.categories": "Music Notification",
+	"key.category.musicnotification.category": "Music Notification",
 	"text.musicnotification.notification.action_bar": "In riproduzione: %s - %s",
 	"text.musicnotification.resourcepack.dark_mode.description": "Imposta l'interfaccia Music Notification in modalità oscura.",
 	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification: Modalità oscura"

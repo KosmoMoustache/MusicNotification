@@ -27,10 +27,8 @@ import java.util.List;
 public class SoundEntry extends ListEntry {
 	public static final int GRAY_COLOR = ARGB.color(255, 74, 74, 74);
 	private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
-
-	private final List<AbstractWidget> children;
-
 	public final SoundData entry;
+	private final List<AbstractWidget> children;
 	private final ImageButton playButton;
 
 	public SoundEntry(Minecraft client, JukeboxEntryList parent, SoundData entry) {
@@ -61,8 +59,27 @@ public class SoundEntry extends ListEntry {
 		}
 	}
 
+	//? if >=1.21.9 {
 	@Override
-	public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
+	public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
+		render(
+			guiGraphics,
+			0,
+			this.getContentY(),
+			this.getContentX(),
+			this.getContentWidth(),
+			this.getContentHeight(),
+			mouseX,
+			mouseY,
+			isHovering,
+			partialTick
+		);
+	}
+
+	//? } else {
+	/*@Override
+	 *///? }
+	public void render(GuiGraphics guiGraphics, int do_not_use_index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
 		guiGraphics.fill(left, top, left + width, top + height, GRAY_COLOR);
 
 		this.playButton.setX(left + (width - this.playButton.getWidth() - 4) - 4);
