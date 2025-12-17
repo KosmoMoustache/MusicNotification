@@ -56,23 +56,9 @@ public class MusicNotificationClientNeoForge {
 
 	void addClientReloadListener(AddClientReloadListenersEvent event) {
 		event.addListener(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), MusicResourceReloadListener.INSTANCE);
-//		event.addListener(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "client_reload_listener"), ReloadListener);
 	}
 
 	void registerGuiCompactLayer(RegisterGuiLayersEvent event) {
 		event.registerBelowAll(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "gui_notification_compact"), new GuiCompactLayer());
 	}
-
-	//	static SimplePreparableReloadListener<Object> ReloadListener = new SimplePreparableReloadListener<>() {
-//		@Override
-//		protected Object prepare(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-//			MusicNotificationClient.LOGGER.info("PREPARE");
-//			return null;
-//		}
-//
-//		@Override
-//		protected void apply(Object o, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-//			MusicNotificationClient.LOGGER.info("APPLY");
-//		}
-//	};
 }
