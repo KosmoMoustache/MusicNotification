@@ -23,11 +23,7 @@ fletchingTable {
 }
 
 dependencies {
-	minecraft(
-		group = "com.mojang",
-		name = "minecraft",
-		version = commonMod.mcVersion
-	)
+	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
 	mappings(loom.layered {
 		officialMojangMappings()
 		commonMod.depOrNull("parchment")?.let { parchmentVersion ->

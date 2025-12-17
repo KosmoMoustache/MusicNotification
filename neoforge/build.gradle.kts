@@ -19,7 +19,7 @@ neoForge {
 }
 
 dependencies {
-	api(group = "me.shedaniel.cloth", name = "cloth-config-neoforge", version = commonMod.dep("cloth_config"))
+	api("me.shedaniel.cloth:cloth-config-neoforge:${commonMod.dep("cloth_config")}")
 }
 
 neoForge {
