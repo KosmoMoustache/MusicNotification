@@ -4,6 +4,7 @@ import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.resources.ResourceLocation;
+//? if >=1.21.9 {
 import net.neoforged.fml.loading.FMLLoader;
 //?} else {
 /*import net.neoforged.fml.loading.LoadingModList;
