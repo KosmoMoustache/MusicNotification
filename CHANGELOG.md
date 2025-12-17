@@ -21,6 +21,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [3.0.0] - TBD
+
+- Added Support for 1.21.7 to 1.21.11 for Fabric and NeoForge
+- Added new notification styles, action bar, compact, vanilla enhanced
+- Added client only command `/jukeboxsong` for getting info on registered Jukebox songs
+- Change to the mod architecture, using Stonecutter preprocessor for multi-version support
+- JSON schema of musics.json, see the documentation for more details, there should be no breaking change with the
+  previous versions.
+
+### Known Issues
+
+- Translation for Italian, Chinese and Chinese (Taiwan) are incomplete
+
 ## [2.3.2] - 2025-03-30
 
 ### Added

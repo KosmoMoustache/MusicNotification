@@ -14,7 +14,6 @@ fletchingTable {
 
 dependencies {
 	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
-//	mappings(loom.officialMojangMappings())
 	mappings(loom.layered {
 		officialMojangMappings()
 		commonMod.depOrNull("parchment")?.let { parchmentVersion ->
@@ -24,15 +23,6 @@ dependencies {
 
 	modImplementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
 	modApi("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
-
-	// TODO: Enable individual fabric modules as needed
-//	dependencies {
-//		fun fabricModules(vararg modules: String) = modules.forEach {
-//			modImplementation(fabricApi.module("fabric-$it", property("deps.fabric-api") as String))
-//		}
-//
-//		fabricModules("registry-sync-v0", "resource-loader-v0", "gametest-api-v1", "data-generation-api-v1")
-//	}
 
 	modApi("com.terraformersmc:modmenu:${commonMod.depOrNull("modmenu")}")
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${commonMod.depOrNull("cloth_config")}")
@@ -51,14 +41,15 @@ afterEvaluate {
 
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${mod.aw}")
+	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.accesswidener")
 
 	runs {
 		create("FabricClient") {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
-//			vmArgs("-Dfabric.log.level=debug")
+			programArg("--quickPlaySingleplayer \"FabricPlayground\"")
+			vmArgs("-XX:+AllowEnhancedClassRedefinition") // "-Dfabric.log.level=debug"
 		}
 	}
 
@@ -70,8 +61,8 @@ loom {
 // gametest
 fabricApi {
 	configureTests {
+//		enableGameTests = true
 		createSourceSet = true
-		modId = commonMod.id
 		eula = true
 	}
 }
@@ -83,15 +74,3 @@ tasks.named<Test>("test") {
 tasks.named<Copy>("processGametestResources") {
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
-
-//tasks.processResources {
-//    if (stonecutterBuild.eval(stonecutterBuild.current.version, "<1.21")) {
-//        doLast {
-//            moveAndDeleteFileOrFolder(
-//                file("${layout.buildDirectory.get().toString()}/resources/main/"),
-//                "data/musicnotification/function",
-//                "data/musicnotification/functions"
-//            )
-//        }
-//    }
-//}

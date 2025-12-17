@@ -1,0 +1,14 @@
+{
+	"pack": {
+		"pack_format": 81,
+		"description": "Music Notification - Test Datapack"
+	},
+	"overlays": {
+		"entries": [
+			{
+				"directory": "overlay88",
+				"formats": 94
+			}
+		]
+	}
+}

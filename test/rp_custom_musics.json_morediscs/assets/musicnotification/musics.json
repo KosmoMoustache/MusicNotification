@@ -1,0 +1,23 @@
+{
+	"morediscs:records/music_disc_tall_sound": {
+		"album": "More Music Discs",
+		"author": "Naps the Block",
+		"item": "morediscs:music_disc_tall",
+		"customId": "morediscs:music_disc_tall_sound",
+		"title": "Tall"
+	},
+	"morediscs:records/music_disc_krushearz_sound": {
+		"album": "More Music Discs",
+		"author": "Schakavun",
+		"item": "morediscs:music_disc_krushearz",
+		"customId": "morediscs:music_disc_krushearz_sound",
+		"title": "Krushearz"
+	},
+	"morediscs:records/music_disc_sand_sound": {
+		"album": "More Music Discs",
+		"author": "mango unit",
+		"item": "morediscs:music_disc_sand_invalid",
+		"customId": "morediscs:music_disc_sand_sound",
+		"title": "Sand"
+	}
+}
