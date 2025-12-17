@@ -9,7 +9,7 @@ plugins {
 
 loom {
 	accessWidenerPath =
-		common.project.file("../../src/main/resources/${mod.aw}")
+		common.project.file("../../src/main/resources/${commonMod.awVersion}.accesswidener")
 
 	mixin {
 		useLegacyMixinAp = false

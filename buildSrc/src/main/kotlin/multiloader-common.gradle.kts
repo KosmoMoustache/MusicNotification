@@ -54,13 +54,13 @@ tasks {
 			"modDescription" to commonMod.description,
 			"modLicense" to commonMod.license,
 			"modGitHub" to commonMod.github,
+			"awVersion" to commonMod.awVersion,
 			"minecraftVersion" to commonMod.propOrNull("minecraft_version"),
 			"minMinecraftVersion" to commonMod.propOrNull("min_minecraft_version"),
 			"fabricLoaderVersion" to commonMod.depOrNull("fabric-loader"),
 			"fabricApiVersion" to commonMod.depOrNull("fabric-api"),
 			"neoForgeVersion" to commonMod.depOrNull("neoforge"),
-			"clothConfigVersion" to commonMod.depOrNull("cloth_config"),
-			"awFile" to commonMod.aw,
+			"clothConfigVersion" to commonMod.depOrNull("cloth_config")
 		).filterValues { it?.isNotEmpty() == true }.mapValues { (_, v) -> v!! }
 
 		val jsonExpandProps = expandProps.mapValues { (_, v) -> v.replace("\n", "\\\\n") }
