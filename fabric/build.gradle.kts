@@ -27,7 +27,7 @@ dependencies {
 		modImplementation(fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
 	}
 
-	fabricModules("command-api-v2")
+	fabricModules("command-api-v2", "gametest-api-v1", "client-gametest-api-v1")
 
 
 //	modApi("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
@@ -52,12 +52,14 @@ loom {
 	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.accesswidener")
 
 	runs {
-		create("FabricClient") {
+		getByName("client") {
+//		create("FabricClient") {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
 			programArg("--quickPlaySingleplayer \"FabricPlayground\"")
-			vmArgs("-XX:+AllowEnhancedClassRedefinition") // "-Dfabric.log.level=debug"
+			vmArgs("-XX:+AllowEnhancedClassRedefinition")
+			// "-Dfabric.log.level=debug"
 		}
 	}
 
@@ -72,6 +74,7 @@ fabricApi {
 //		enableGameTests = true
 		createSourceSet = true
 		eula = true
+		modId = "musicnotification-test"
 	}
 }
 

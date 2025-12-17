@@ -45,8 +45,7 @@
 	"accessWidener": "${awVersion}.accesswidener",
 	"depends": {
 		"minecraft": "${minecraftVersion}",
-		"fabricloader": "*",
-		"fabric-api-base": ">=${fabricApiVersion}",
+		"fabric-api-base": "*",
 		"cloth-config": ">=${clothConfigVersion}"
 	},
 	"recommends": {
