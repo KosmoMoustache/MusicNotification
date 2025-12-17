@@ -8,14 +8,15 @@ import org.slf4j.Logger;
 public class Notification {
 	Logger LOGGER = LogUtils.getLogger();
 
+	public static boolean canBeShown() {
+		return true;
+	}
+
 	void show(ResourceLocation resourceLocation, TrackData trackData, Class<? extends Notification> aClass) {
 		LOGGER.info("Showing notification of {} using {} with {}", resourceLocation, aClass, trackData.toString());
 	}
+
 	void show(ResourceLocation resourceLocation, TrackData trackData) {
 		show(resourceLocation, trackData, this.getClass());
-	}
-
-	public static boolean canBeShown() {
-		return true;
 	}
 }

@@ -8,14 +8,14 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Test {
-	private final Logger LOGGER;
 	public final Map<ResourceLocation, TestResult> RESULT = new LinkedHashMap<>();
+	private final Logger LOGGER;
 
 	Test(Logger logger) {
 		this.LOGGER = logger;
 	}
 
-	public Boolean booleanTest(boolean soundEventValid, AtomicReference<String> atomicReference,  String good, String bad) {
+	public Boolean booleanTest(boolean soundEventValid, AtomicReference<String> atomicReference, String good, String bad) {
 		boolean b = booleanTest(soundEventValid, good, bad);
 		if (!b) {
 			atomicReference.set(bad);
@@ -24,7 +24,8 @@ public class Test {
 		}
 		return b;
 	}
-		public Boolean booleanTest(boolean soundEventValid, String good, String bad) {
+
+	public Boolean booleanTest(boolean soundEventValid, String good, String bad) {
 		if (soundEventValid) {
 			LOGGER.info("{}", good);
 			return true;
