@@ -1,8 +1,8 @@
 {
 	"config.musicnotification.jukebox.max_count_history": "最大历史记录数",
 	"config.musicnotification.notification.animate_cover": "专辑封面动画",
-	"config.musicnotification.notification.show_album_name": "显示作者名称",
-	"config.musicnotification.notification.show_author": "显示专辑名称",
+	"config.musicnotification.notification.show_album_name": "显示专辑名称",
+	"config.musicnotification.notification.show_author": "显示作者名称",
 	"gui.musicnotification.jukebox.clear_history": "清除历史",
 	"gui.musicnotification.jukebox.master_volume_zero": "主音量为关",
 	"gui.musicnotification.jukebox.music_volume_zero": "音乐音量为关",

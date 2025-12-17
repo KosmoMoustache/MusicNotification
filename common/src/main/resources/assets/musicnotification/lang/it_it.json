@@ -1,8 +1,8 @@
 {
 	"config.musicnotification.jukebox.max_count_history": "Numero massimo di voci nella cronologia",
 	"config.musicnotification.notification.animate_cover": "Anima la copertina dell'album",
-	"config.musicnotification.notification.show_album_name": "Mostra il nome dell'autore",
-	"config.musicnotification.notification.show_author": "Mostra il nome dell'album",
+	"config.musicnotification.notification.show_album_name": "Mostra il nome dell'album",
+	"config.musicnotification.notification.show_author": "Mostra il nome dell'autore",
 	"gui.musicnotification.jukebox.clear_history": "Pulisci la cronologia",
 	"gui.musicnotification.jukebox.master_volume_zero": "Il volume master è a zero",
 	"gui.musicnotification.jukebox.music_volume_zero": "Il volume della musica è a zero",

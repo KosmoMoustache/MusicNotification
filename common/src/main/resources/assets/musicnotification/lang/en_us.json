@@ -23,6 +23,7 @@
 	"config.musicnotification.notification.show_album_name": "Show album name",
 	"config.musicnotification.notification.show_author": "Show author name",
 	"config.musicnotification.notification.style.action_bar": "Action Bar",
+	"config.musicnotification.notification.style.action_bar.animate_color": "Rainbow text color",
 	"config.musicnotification.notification.style.action_bar.tooltip": "Above the hotbar. Show only the music title and author. Similar to playing a Jukebox",
 	"config.musicnotification.notification.style.compact": "Compact",
 	"config.musicnotification.notification.style.compact.alpha": "Opacity",

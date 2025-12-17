@@ -1,4 +1,8 @@
 {
+	"config.musicnotification.jukebox.max_count_history": "最大歷史記錄數",
+	"config.musicnotification.notification.animate_cover": "專輯封面動畫",
+	"config.musicnotification.notification.show_album_name": "展示專輯名稱",
+	"config.musicnotification.notification.show_author": "展示作者名稱",
 	"gui.musicnotification.jukebox.clear_history": "清除歷史",
 	"gui.musicnotification.jukebox.master_volume_zero": "主音量為關",
 	"gui.musicnotification.jukebox.music_volume_zero": "音樂音量為關",
@@ -9,10 +13,6 @@
 	"gui.musicnotification.jukebox.tab_home": "首頁",
 	"gui.musicnotification.jukebox.tab_sound": "聲音",
 	"gui.musicnotification.jukebox.title": "點唱機",
-	"text.autoconfig.musicnotification.option.JUKEBOX_CONFIG.MAX_COUNT_HISTORY": "最大歷史記錄數",
-	"text.autoconfig.musicnotification.option.TOAST_CONFIG.ROTATE_ALBUM_COVER": "專輯封面動畫",
-	"text.autoconfig.musicnotification.option.TOAST_CONFIG.SHOW_ALBUM_NAME": "展示專輯名稱",
-	"text.autoconfig.musicnotification.option.TOAST_CONFIG.SHOW_AUTHOR": "展示作者名稱",
 	"key.category.musicnotification.category": "Music Notification",
 	"text.musicnotification.resourcepack.dark_mode.description": "將 Music Notification 的 UI 切換為深色模式。",
 	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification：深色模式"
