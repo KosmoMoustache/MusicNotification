@@ -1,16 +1,20 @@
 {
-  description = "flake java gnu git";
+  description = "flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }: {
-    devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
-      packages = with nixpkgs.legacyPackages.x86_64-linux; [
-        pkgs.gnumake
-        pkgs.git
-        pkgs.zulu21
+  outputs = { self, nixpkgs }:
+  let
+	  system = "x86_64-linux";
+	  pkgs = import nixpkgs { inherit system ; };
+  in {
+    devShells.x86_64-linux.default = pkgs.mkShell {
+      packages = with pkgs; [
+        gnumake
+        git
+       	zulu21
       ];
     };
   };
