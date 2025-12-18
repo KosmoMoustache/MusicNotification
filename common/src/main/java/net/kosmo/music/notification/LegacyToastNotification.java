@@ -4,10 +4,10 @@ import net.kosmo.music.notification.toast.MusicToast;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.ToastManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class LegacyToastNotification extends Notification {
-	public void show(ResourceLocation resourceLocation, TrackData trackData) {
+	public void show(Identifier resourceLocation, TrackData trackData) {
 		super.show(resourceLocation, trackData, this.getClass());
 		ToastManager tm = Minecraft.getInstance().getToastManager();
 		MusicToast toast = tm.getToast(MusicToast.class, MusicToast.NO_TOKEN);

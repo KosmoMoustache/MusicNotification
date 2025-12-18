@@ -10,7 +10,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +48,7 @@ public class CompactNotification extends Notification {
 		}
 	}
 
-	public void show(ResourceLocation resourceLocation, TrackData trackData) {
+	public void show(Identifier resourceLocation, TrackData trackData) {
 		super.show(resourceLocation, trackData, this.getClass());
 		MusicNotificationClient.PLATFORM_HELPER.setCompactNotification(trackData, Config.options().STYLE_COMPACT_TIME);
 	}

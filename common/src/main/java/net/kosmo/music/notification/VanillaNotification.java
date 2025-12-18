@@ -1,7 +1,7 @@
 package net.kosmo.music.notification;
 
 import net.kosmo.music.resource.TrackData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class VanillaNotification extends Notification {
 
@@ -9,7 +9,7 @@ public class VanillaNotification extends Notification {
 		return false;
 	}
 
-	public void show(ResourceLocation resourceLocation, TrackData trackData) {
+	public void show(Identifier resourceLocation, TrackData trackData) {
 		super.show(resourceLocation, trackData, this.getClass());
 //		ToastManager tm = Minecraft.getInstance().getToastManager();
 //		tm.createNowPlayingToast();

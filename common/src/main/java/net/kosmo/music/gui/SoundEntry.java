@@ -14,7 +14,7 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ARGB;
@@ -26,7 +26,7 @@ import java.util.List;
 
 public class SoundEntry extends ListEntry {
 	public static final int GRAY_COLOR = ARGB.color(255, 74, 74, 74);
-	private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), ResourceLocation.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
+	private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(Identifier.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), Identifier.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), Identifier.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
 	public final SoundData entry;
 	private final List<AbstractWidget> children;
 	private final ImageButton playButton;
@@ -51,7 +51,7 @@ public class SoundEntry extends ListEntry {
 	private void play(SoundData entry) {
 		SoundEvent soundEvent = Helper.getSoundEvent(this.client, entry.id());
 		if (soundEvent != null) {
-			SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent, 10);
+			SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 {*/ /*?} else {*//*, 10 *//*?}*/);
 			this.client.getSoundManager().stop(null, SoundSource.MASTER);
 			this.client.getSoundManager().play(soundInstance);
 		} else {
