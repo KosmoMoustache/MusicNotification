@@ -12,6 +12,10 @@ fletchingTable {
 	}
 }
 
+stonecutter {
+	constants["modMenu"] = commonMod.depOrNull("modmenu") != null
+}
+
 dependencies {
 	fun fabricModules(vararg modules: String) = modules.forEach {
 		modImplementation(fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
@@ -27,7 +31,9 @@ dependencies {
 	})
 
 	modImplementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
-	modImplementation("com.terraformersmc:modmenu:${commonMod.depOrNull("modmenu")}")
+	commonMod.depOrNull("modmenu")?.let { modMenuVersion ->
+		modImplementation("com.terraformersmc:modmenu:${modMenuVersion}")
+	}
 	modImplementation("me.shedaniel.cloth:cloth-config-fabric:${commonMod.depOrNull("cloth_config")}")
 
 	fabricModules("command-api-v2", "gametest-api-v1", "client-gametest-api-v1")
