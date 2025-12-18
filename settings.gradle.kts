@@ -16,7 +16,7 @@ pluginManagement {
 }
 
 plugins {
-	id("dev.kikugie.stonecutter") version "0.7.11"
+	id("dev.kikugie.stonecutter") version "0.8-beta.2"
 	id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
