@@ -75,7 +75,7 @@ loom {
 // gametest
 fabricApi {
 	configureTests {
-//		enableGameTests = true
+		enableGameTests = false
 		createSourceSet = true
 		eula = true
 		modId = "musicnotification-test"
