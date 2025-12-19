@@ -21,12 +21,12 @@ public class NotificationManager {
 			case Config.Options.NotificationStyle.LOG -> {
 				new Notification().show(resourceLocation, trackData);
 			}
-			case Config.Options.NotificationStyle.VANILLA -> {
-				new VanillaNotification().show(resourceLocation, trackData);
-			}
-			case Config.Options.NotificationStyle.VANILLA_ENHANCED -> {
-				new VanillaNotification.Enhanced().show(resourceLocation, trackData);
-			}
+//			case Config.Options.NotificationStyle.VANILLA -> {
+//				new VanillaNotification().show(resourceLocation, trackData);
+//			}
+//			case Config.Options.NotificationStyle.VANILLA_ENHANCED -> {
+//				new VanillaNotification.Enhanced().show(resourceLocation, trackData);
+//			}
 			case Config.Options.NotificationStyle.COMPACT -> {
 				new CompactNotification().show(resourceLocation, trackData);
 			}

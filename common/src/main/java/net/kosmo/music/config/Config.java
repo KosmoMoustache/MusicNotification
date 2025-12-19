@@ -141,18 +141,18 @@ public class Config {
 					return ActionBarNotification.canBeShown();
 				}
 			},
-			VANILLA() {
-				@Override
-				public boolean canBeShown() {
-					return VanillaNotification.canBeShown();
-				}
-			},
-			VANILLA_ENHANCED() {
-				@Override
-				public boolean canBeShown() {
-					return VanillaNotification.Enhanced.canBeShown();
-				}
-			},
+			//			VANILLA() {
+//				@Override
+//				public boolean canBeShown() {
+//					return VanillaNotification.canBeShown();
+//				}
+//			},
+//			VANILLA_ENHANCED() {
+//				@Override
+//				public boolean canBeShown() {
+//					return VanillaNotification.Enhanced.canBeShown();
+//				}
+//			},
 			LEGACY_TOAST() {
 				@Override
 				public boolean canBeShown() {
