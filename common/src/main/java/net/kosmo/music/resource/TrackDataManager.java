@@ -52,7 +52,8 @@ public class TrackDataManager {
 			MusicNotificationClient.LOGGER.warn("no TrackData found for id: {} sound event: {}", soundId, soundEventId);
 		}
 
-		return getEmpty(soundId, soundId.toString(), "Unknown Artist");
+		String end_path = soundId.toString().split("/")[soundId.toString().split("/").length - 1];
+		return getEmpty(soundId, end_path, soundId.toString());
 	}
 
 	public TrackData getTrackDataFromJukeboxSong(Identifier soundId, JukeboxSong song) {
