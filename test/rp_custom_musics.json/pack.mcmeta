@@ -1,12 +1,12 @@
 {
 	"pack": {
 		"description": "Custom musics.json",
-		"pack_format": 4,
+		"pack_format": 15,
 		"supported_formats": [
-			4,
+			15,
 			94
 		],
-		"min_format": 4,
+		"min_format": 15,
 		"max_format": [
 			94,
 			1
