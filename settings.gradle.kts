@@ -16,7 +16,7 @@ pluginManagement {
 }
 
 plugins {
-	id("dev.kikugie.stonecutter") version "0.8-beta.2"
+	id("dev.kikugie.stonecutter") version "0.8-beta.3"
 	id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
@@ -35,9 +35,6 @@ val dists = mapOf(
 val uniqueVersions = dists.values.flatten().distinct()
 
 stonecutter {
-//    kotlinController = true
-//    centralScript = "build.gradle.kts"
-
 	create(rootProject) {
 		versions(*uniqueVersions.toTypedArray())
 
