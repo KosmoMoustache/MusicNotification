@@ -64,8 +64,8 @@ public class TrackDataManager {
 			author = split[0];
 			title = split[1];
 		} catch (ArrayIndexOutOfBoundsException e) {
-			author = song.description().getString();
-			title = "Unknown";
+			title = song.description().getString();
+			author = "Unknown";
 		}
 		return getEmpty(soundId, title, author);
 	}
