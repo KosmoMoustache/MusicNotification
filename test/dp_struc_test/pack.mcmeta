@@ -1,6 +1,15 @@
 {
 	"pack": {
-		"description": "struc_test",
-		"pack_format": 81
+		"description": "Music Notification - Structure",
+		"pack_format": 81,
+		"supported_formats": [
+			81,
+			94
+		],
+		"min_format": 81,
+		"max_format": [
+			94,
+			1
+		]
 	}
 }

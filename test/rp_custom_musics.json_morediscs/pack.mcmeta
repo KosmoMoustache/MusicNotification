@@ -1,10 +1,15 @@
 {
 	"pack": {
-		"pack_format": 4,
 		"description": "Custom musics.json More Music Discs",
+		"pack_format": 4,
 		"supported_formats": [
 			4,
-			2147483647
+			94
+		],
+		"min_format": 4,
+		"max_format": [
+			94,
+			1
 		]
 	}
 }
