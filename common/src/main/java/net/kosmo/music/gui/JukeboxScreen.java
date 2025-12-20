@@ -16,7 +16,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.CommonColors;
 
@@ -24,8 +24,8 @@ import java.util.Collection;
 import java.util.Locale;
 
 public class JukeboxScreen extends Screen {
-	private static final ResourceLocation BACKGROUND_TEXTURE = ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/background");
-	private static final ResourceLocation SEARCH_ICON_TEXTURE = ResourceLocation.fromNamespaceAndPath("minecraft", "icon/search");
+	private static final Identifier BACKGROUND_TEXTURE = Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/background");
+	private static final Identifier SEARCH_ICON_TEXTURE = Identifier.fromNamespaceAndPath("minecraft", "icon/search");
 
 	private static final Component TITLE = Component.translatable("gui.musicnotification.jukebox.title");
 	private static final Component HOME_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.tab_home");

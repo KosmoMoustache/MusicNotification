@@ -3,7 +3,7 @@ plugins {
 	`multiloader-loader`
 	kotlin("jvm") version "2.2.0"
 	id("com.google.devtools.ksp") version "2.2.0-2.0.2"
-	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.18"
+	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
 fletchingTable {
@@ -12,7 +12,16 @@ fletchingTable {
 	}
 }
 
+stonecutter {
+	constants["modMenu"] = commonMod.depOrNull("modmenu") != null
+}
+
 dependencies {
+	fun fabricModules(vararg modules: String) = modules.forEach {
+		modImplementation(fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
+	}
+
+
 	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
 	mappings(loom.layered {
 		officialMojangMappings()
@@ -22,10 +31,15 @@ dependencies {
 	})
 
 	modImplementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
-	modApi("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
+	commonMod.depOrNull("modmenu")?.let { modMenuVersion ->
+		modImplementation("com.terraformersmc:modmenu:${modMenuVersion}")
+	}
+	modImplementation("me.shedaniel.cloth:cloth-config-fabric:${commonMod.depOrNull("cloth_config")}")
 
-	modApi("com.terraformersmc:modmenu:${commonMod.depOrNull("modmenu")}")
-	modApi("me.shedaniel.cloth:cloth-config-fabric:${commonMod.depOrNull("cloth_config")}")
+	fabricModules("command-api-v2", "gametest-api-v1", "client-gametest-api-v1")
+
+	// Runtime only mods
+	modRuntimeOnly("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
 
 	// Fabric Loader JUnit for testing
 	testImplementation("net.fabricmc:fabric-loader-junit:${commonMod.dep("fabric-loader")}")
@@ -39,17 +53,17 @@ afterEvaluate {
 	}
 }
 
-
 loom {
 	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.accesswidener")
 
 	runs {
-		create("FabricClient") {
+		getByName("client") {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
 			programArg("--quickPlaySingleplayer \"FabricPlayground\"")
-			vmArgs("-XX:+AllowEnhancedClassRedefinition") // "-Dfabric.log.level=debug"
+			vmArgs("-XX:+AllowEnhancedClassRedefinition")
+			// "-Dfabric.log.level=debug"
 		}
 	}
 
@@ -61,9 +75,10 @@ loom {
 // gametest
 fabricApi {
 	configureTests {
-//		enableGameTests = true
+		enableGameTests = false
 		createSourceSet = true
 		eula = true
+		modId = "musicnotification-test"
 	}
 }
 

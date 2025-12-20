@@ -3,7 +3,7 @@ plugins {
 	id("net.neoforged.moddev")
 	kotlin("jvm") version "2.2.0"
 	id("com.google.devtools.ksp") version "2.2.0-2.0.2"
-	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.18"
+	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
 }
 
 fletchingTable {
@@ -19,7 +19,7 @@ neoForge {
 }
 
 dependencies {
-	api(group = "me.shedaniel.cloth", name = "cloth-config-neoforge", version = commonMod.dep("cloth_config"))
+	api("me.shedaniel.cloth:cloth-config-neoforge:${commonMod.dep("cloth_config")}")
 }
 
 neoForge {

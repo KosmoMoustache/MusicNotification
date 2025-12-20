@@ -1,6 +1,6 @@
 package net.kosmo.music.test.gametest;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 
 import java.util.LinkedHashMap;
@@ -8,14 +8,14 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Test {
+	public final Map<Identifier, TestResult> RESULT = new LinkedHashMap<>();
 	private final Logger LOGGER;
-	public final Map<ResourceLocation, TestResult> RESULT = new LinkedHashMap<>();
 
 	Test(Logger logger) {
 		this.LOGGER = logger;
 	}
 
-	public Boolean booleanTest(boolean soundEventValid, AtomicReference<String> atomicReference,  String good, String bad) {
+	public Boolean booleanTest(boolean soundEventValid, AtomicReference<String> atomicReference, String good, String bad) {
 		boolean b = booleanTest(soundEventValid, good, bad);
 		if (!b) {
 			atomicReference.set(bad);
@@ -24,7 +24,8 @@ public class Test {
 		}
 		return b;
 	}
-		public Boolean booleanTest(boolean soundEventValid, String good, String bad) {
+
+	public Boolean booleanTest(boolean soundEventValid, String good, String bad) {
 		if (soundEventValid) {
 			LOGGER.info("{}", good);
 			return true;
@@ -36,7 +37,7 @@ public class Test {
 
 	public void printAllResult() {
 		LOGGER.info("━━━━ Test summary ━━━━");
-		for (Map.Entry<ResourceLocation, TestResult> entry : RESULT.entrySet()) {
+		for (Map.Entry<Identifier, TestResult> entry : RESULT.entrySet()) {
 			if (entry.getValue().result) {
 				LOGGER.info("  ✔ {}", entry.getKey());
 				LOGGER.info("  ↳ {}", entry.getValue().message);

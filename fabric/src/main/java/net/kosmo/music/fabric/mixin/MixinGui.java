@@ -29,7 +29,17 @@ public abstract class MixinGui implements GuiAccessor {
 		}
 	}
 
-	@Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"))
+	@Inject(
+		method = "render",
+		at = @At(
+			value = "INVOKE",
+			//? if >=1.21.10 {
+			target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphics;Z)V", ordinal = 0
+			//?} else {
+			/*target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"
+			*///?}
+		)
+	)
 	private void renderSubtitleOverlayInject(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 		CompactNotification.render(guiGraphics, deltaTracker, musicnotification$compact$message, musicnotification$compact$time);
 	}

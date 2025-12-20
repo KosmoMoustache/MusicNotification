@@ -2,7 +2,7 @@ package net.kosmo.music;
 
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public abstract class PlatformHelper {
 
@@ -10,7 +10,7 @@ public abstract class PlatformHelper {
 		return Component.literal(trackData.title().getString() + " - " + trackData.author().getString());
 	}
 
-	public abstract String getModName(ResourceLocation location);
+	public abstract String getModName(Identifier location);
 
 	public abstract void setCompactNotification(TrackData trackData, int time);
 

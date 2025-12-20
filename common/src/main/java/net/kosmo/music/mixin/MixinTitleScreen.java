@@ -8,7 +8,7 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,7 +24,7 @@ public abstract class MixinTitleScreen extends Screen {
 	@Inject(method = "init()V", at = @At("RETURN"))
 	private void init(CallbackInfo ci) {
 		if (Config.options().SHOW_TITLE_SCREEN_BUTTON) {
-			this.addRenderableWidget(new ImageButton(12, 12, 20, 20, new WidgetSprites(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/icon"), ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/icon_focused")), (button) -> {
+			this.addRenderableWidget(new ImageButton(12, 12, 20, 20, new WidgetSprites(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/icon"), Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/icon_focused")), (button) -> {
 				this.minecraft.setScreen(new JukeboxScreen(this));
 			}));
 

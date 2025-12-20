@@ -1,12 +1,12 @@
 {
-  "required": true,
-  "package": "net.kosmo.music.fabric.mixin",
-  "refmap": "${modId}.refmap.json",
-  "compatibilityLevel": "JAVA_${javaVersion}",
-  "client": [
-	  "MixinGui"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"package": "net.kosmo.music.fabric.mixin",
+	"refmap": "${modId}.refmap.json",
+	"compatibilityLevel": "JAVA_${javaVersion}",
+	"client": [
+		"MixinGui"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }

@@ -12,5 +12,12 @@
 				"name": "custom_disc:records/feelings_qlowdy"
 			}
 		]
+	},
+	"music.all_night": {
+		"sounds": [
+			{
+				"name": "custom_disc:music/all_night"
+			}
+		]
 	}
 }

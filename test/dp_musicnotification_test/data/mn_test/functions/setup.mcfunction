@@ -5,4 +5,3 @@ gamerule doWeatherCycle false
 gamerule commandBlockOutput false
 
 time set noon
-

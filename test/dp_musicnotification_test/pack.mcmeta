@@ -1,13 +1,36 @@
 {
 	"pack": {
+		"description": "Music Notification - Test",
 		"pack_format": 81,
-		"description": "Music Notification - Test Datapack"
+		"supported_formats": [
+			81,
+			94
+		],
+		"min_format": 81,
+		"max_format": [
+			94,
+			1
+		]
 	},
 	"overlays": {
 		"entries": [
 			{
-				"directory": "overlay88",
-				"formats": 94
+				"directory": "overlay_48_93_function",
+				"formats": [
+					48,
+					93
+				],
+				"min_format": 48,
+				"max_format": 93
+			},
+			{
+				"directory": "overlay_94_new_gamerules_names",
+				"formats": 94,
+				"min_format": [
+					94,
+					1
+				],
+				"max_format": 94
 			}
 		]
 	}

@@ -36,11 +36,6 @@ public class ClothScreenProvider {
 			.setDefaultValue(Config.Options.SHOW_ALBUM_NAME_DEFAULT)
 			.setSaveConsumer(val -> options.SHOW_ALBUM_NAME = val)
 			.build());
-		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.animate_cover"), options.ROTATE_ALBUM_COVER)
-			.setDefaultValue(Config.Options.ROTATE_ALBUM_COVER_DEFAULT)
-			.setSaveConsumer(val -> options.ROTATE_ALBUM_COVER = val)
-			.build());
-
 
 		@NotNull EnumListEntry<Config.Options.NotificationStyle> notificationStyleEnumListEntry = entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.notification.notification_style"), Config.Options.NotificationStyle.class, options.NOTIFICATION_STYLE)
 			.setDefaultValue(Config.Options.NOTIFICATION_STYLE_DEFAULT)
@@ -67,6 +62,11 @@ public class ClothScreenProvider {
 			.setSaveConsumer(val -> options.DISABLE_TOAST_SOUND = val)
 			.build()
 		);
+		style.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.animate_cover"), options.ROTATE_ALBUM_COVER)
+			.setDisplayRequirement(requirementAnyOfNotificationStyles(Config.Options.NotificationStyle.LEGACY_TOAST, notificationStyleEnumListEntry, notificationStyleEnumListEntryFallback))
+			.setDefaultValue(Config.Options.ROTATE_ALBUM_COVER_DEFAULT)
+			.setSaveConsumer(val -> options.ROTATE_ALBUM_COVER = val)
+			.build());
 
 		style.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.style.legacy_toast.scale"), options.STYLE_LEGACY_TOAST_SCALE)
 			.setDisplayRequirement(requirementAnyOfNotificationStyles(Config.Options.NotificationStyle.LEGACY_TOAST, notificationStyleEnumListEntry, notificationStyleEnumListEntryFallback))

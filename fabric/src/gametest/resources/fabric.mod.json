@@ -10,7 +10,7 @@
 			"net.kosmo.music.test.gametest.GameTest"
 		],
 		"fabric-client-gametest": [
-          "net.kosmo.music.test.gametest.ClientGameTest"
+			"net.kosmo.music.test.gametest.ClientGameTest"
 		]
 	}
 }

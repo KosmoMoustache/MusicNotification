@@ -8,7 +8,7 @@ import net.kosmo.music.neoforge.commands.JukeboxSongCommandNeoForge;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.MusicResourceReloadListener;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
@@ -47,7 +47,7 @@ public class MusicNotificationClientNeoForge {
 	}
 
 	void registerBuiltinPacks(AddPackFindersEvent event) {
-		event.addPackFinders(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/dark_mode"), PackType.CLIENT_RESOURCES, Component.translatable("text.musicnotification.resourcepack.dark_mode.name"), PackSource.BUILT_IN, false, Pack.Position.TOP);
+		event.addPackFinders(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/dark_mode"), PackType.CLIENT_RESOURCES, Component.translatable("text.musicnotification.resourcepack.dark_mode.name"), PackSource.BUILT_IN, false, Pack.Position.TOP);
 	}
 
 	void registerKeyMappings(RegisterKeyMappingsEvent event) {
@@ -55,10 +55,10 @@ public class MusicNotificationClientNeoForge {
 	}
 
 	void addClientReloadListener(AddClientReloadListenersEvent event) {
-		event.addListener(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), MusicResourceReloadListener.INSTANCE);
+		event.addListener(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), MusicResourceReloadListener.INSTANCE);
 	}
 
 	void registerGuiCompactLayer(RegisterGuiLayersEvent event) {
-		event.registerBelowAll(ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "gui_notification_compact"), new GuiCompactLayer());
+		event.registerBelowAll(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "gui_notification_compact"), new GuiCompactLayer());
 	}
 }

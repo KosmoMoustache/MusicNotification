@@ -3,7 +3,7 @@ plugins {
 	id("fabric-loom")
 	kotlin("jvm") version "2.2.0"
 	id("com.google.devtools.ksp") version "2.2.0-2.0.2"
-	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.14"
+	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
 
@@ -23,11 +23,7 @@ fletchingTable {
 }
 
 dependencies {
-	minecraft(
-		group = "com.mojang",
-		name = "minecraft",
-		version = commonMod.mcVersion
-	)
+	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
 	mappings(loom.layered {
 		officialMojangMappings()
 		commonMod.depOrNull("parchment")?.let { parchmentVersion ->

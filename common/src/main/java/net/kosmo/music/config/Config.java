@@ -87,10 +87,10 @@ public class Config {
 		public static final List<String> IGNORE_SOUND_EVENT_DEFAULT = List.of("minecraft:note/*");
 		public static final int MAX_COUNT_HISTORY_DEFAULT = 20;
 		public static final boolean DEBUG_MOD_DEFAULT = false;
-		public static final NotificationStyle NOTIFICATION_STYLE_DEFAULT = NotificationStyle.LOG;
-		public static final List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK_DEFAULT = List.of(NotificationStyle.ACTION_BAR, NotificationStyle.LOG);
+		public static final NotificationStyle NOTIFICATION_STYLE_DEFAULT = NotificationStyle.LEGACY_TOAST;
+		public static final List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK_DEFAULT = List.of(NotificationStyle.COMPACT, NotificationStyle.LOG);
 		public static final boolean STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT = false;
-		public static final boolean STYLE_LEGACY_TOAST_SCALE_DEFAULT = true;
+		public static final boolean STYLE_LEGACY_TOAST_SCALE_DEFAULT = false;
 		public static final int STYLE_COMPACT_ALPHA_DEFAULT = 179; // 70%
 		public static final int STYLE_COMPACT_TIME_DEFAULT = 60; // 3*20 ticks = 3 seconds
 		// -
@@ -111,7 +111,7 @@ public class Config {
 		public int STYLE_COMPACT_TIME = STYLE_COMPACT_TIME_DEFAULT;
 
 		public enum DisableToastSound {
-			VANILLA, MUTE_SELF, MUTE_ALL;
+			VANILLA, MUTE_SELF/*, MUTE_ALL*/;
 
 			public static Component name(Enum<DisableToastSound> disableToastSoundEnum) {
 				return Component.translatable("config.musicnotification.notification.disable_toast_sound." + disableToastSoundEnum.name().toLowerCase());
@@ -141,18 +141,18 @@ public class Config {
 					return ActionBarNotification.canBeShown();
 				}
 			},
-			VANILLA() {
-				@Override
-				public boolean canBeShown() {
-					return VanillaNotification.canBeShown();
-				}
-			},
-			VANILLA_ENHANCED() {
-				@Override
-				public boolean canBeShown() {
-					return VanillaNotification.Enhanced.canBeShown();
-				}
-			},
+			//			VANILLA() {
+//				@Override
+//				public boolean canBeShown() {
+//					return VanillaNotification.canBeShown();
+//				}
+//			},
+//			VANILLA_ENHANCED() {
+//				@Override
+//				public boolean canBeShown() {
+//					return VanillaNotification.Enhanced.canBeShown();
+//				}
+//			},
 			LEGACY_TOAST() {
 				@Override
 				public boolean canBeShown() {

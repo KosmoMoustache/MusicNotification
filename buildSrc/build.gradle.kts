@@ -1,7 +1,7 @@
 plugins {
 	`kotlin-dsl`
 	kotlin("jvm") version "2.2.0"
-    id("project-report")
+	id("project-report")
 }
 
 repositories {
@@ -13,5 +13,5 @@ repositories {
 dependencies {
 	fun plugin(id: String, version: String) = "$id:$id.gradle.plugin:$version"
 
-	implementation("dev.kikugie:stonecutter:0.7.7")
+	implementation("dev.kikugie:stonecutter:0.8-beta.3")
 }

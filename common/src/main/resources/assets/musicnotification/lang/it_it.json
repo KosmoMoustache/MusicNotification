@@ -1,8 +1,8 @@
 {
 	"config.musicnotification.jukebox.max_count_history": "Numero massimo di voci nella cronologia",
 	"config.musicnotification.notification.animate_cover": "Anima la copertina dell'album",
-	"config.musicnotification.notification.show_album_name": "Mostra il nome dell'autore",
-	"config.musicnotification.notification.show_author": "Mostra il nome dell'album",
+	"config.musicnotification.notification.show_album_name": "Mostra il nome dell'album",
+	"config.musicnotification.notification.show_author": "Mostra il nome dell'autore",
 	"gui.musicnotification.jukebox.clear_history": "Pulisci la cronologia",
 	"gui.musicnotification.jukebox.master_volume_zero": "Il volume master è a zero",
 	"gui.musicnotification.jukebox.music_volume_zero": "Il volume della musica è a zero",
@@ -13,7 +13,7 @@
 	"gui.musicnotification.jukebox.tab_home": "Home",
 	"gui.musicnotification.jukebox.tab_sound": "Suono",
 	"gui.musicnotification.jukebox.title": "Jukebox",
-	"key.musicnotification.categories": "Music Notification",
+	"key.category.musicnotification.category": "Music Notification",
 	"text.musicnotification.notification.action_bar": "In riproduzione: %s - %s",
 	"text.musicnotification.resourcepack.dark_mode.description": "Imposta l'interfaccia Music Notification in modalità oscura.",
 	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification: Modalità oscura"
