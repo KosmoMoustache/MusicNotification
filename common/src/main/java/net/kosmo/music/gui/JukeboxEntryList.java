@@ -6,7 +6,7 @@ import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -45,7 +45,7 @@ public class JukeboxEntryList extends ContainerObjectSelectionList<ListEntry> {
 	}
 
 	public <T> void update(Collection<T> entries, double scrollAmount) {
-		HashMap<Identifier, ListEntry> map = new LinkedHashMap<>();
+		HashMap<ResourceLocation, ListEntry> map = new LinkedHashMap<>();
 
 		for (T entry : entries) {
 			if (entry instanceof TrackData td) {

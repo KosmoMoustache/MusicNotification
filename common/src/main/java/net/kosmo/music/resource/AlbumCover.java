@@ -5,7 +5,7 @@ import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -20,7 +20,7 @@ public class AlbumCover {
 		return new AlbumCover(new SpriteCover(namespace, spriteId));
 	}
 
-	public static AlbumCover fromItem(Identifier itemId) {
+	public static AlbumCover fromItem(ResourceLocation itemId) {
 		return new AlbumCover(new ItemCover(itemId));
 	}
 
@@ -49,7 +49,7 @@ public class AlbumCover {
 	}
 
 	private static class SpriteCover implements AlbumCoverType {
-		private final Identifier sprite;
+		private final ResourceLocation sprite;
 
 		SpriteCover(String namespace, @Nullable String spriteId) {
 			if (spriteId == null || spriteId.isEmpty()) {
@@ -62,12 +62,12 @@ public class AlbumCover {
 			return namespace.equalsIgnoreCase("minecraft") ? "generic" : "modded";
 		}
 
-		private Identifier fromCoverId(String coverId) {
+		private ResourceLocation fromCoverId(String coverId) {
 			try {
-				return Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/" + coverId);
+				return ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/" + coverId);
 			} catch (Exception e) {
 				MusicNotificationClient.LOGGER.warn("Failed to load album cover '{}', falling back to default. Error: {}", coverId, e.getMessage());
-				return Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/" + getDefaultCoverId("minecraft"));
+				return ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/" + getDefaultCoverId("minecraft"));
 			}
 		}
 
@@ -87,7 +87,7 @@ public class AlbumCover {
 	private static class ItemCover implements AlbumCoverType {
 		private final ItemStack stack;
 
-		private ItemCover(Identifier stack) {
+		private ItemCover(ResourceLocation stack) {
 			this.stack = getItemStack(stack);
 		}
 
@@ -99,10 +99,10 @@ public class AlbumCover {
 			return 16;
 		}
 
-		private ItemStack getItemStack(Identifier itemId) {
+		private ItemStack getItemStack(ResourceLocation itemId) {
 			if (!BuiltInRegistries.ITEM.containsKey(itemId)) {
 				MusicNotificationClient.LOGGER.error("Failed to find album cover item '{}', falling back to minecraft:music_disc_13.", itemId);
-				itemId = Identifier.tryParse("minecraft:music_disc_13");
+				itemId = ResourceLocation.tryParse("minecraft:music_disc_13");
 			}
 			ItemStack itemStack = BuiltInRegistries.ITEM.get(itemId).get().value().getDefaultInstance();
 			if (itemStack.isEmpty()) {

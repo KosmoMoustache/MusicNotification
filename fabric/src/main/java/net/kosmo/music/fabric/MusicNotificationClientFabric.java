@@ -16,7 +16,7 @@ import net.kosmo.music.fabric.command.JukeboxSongCommandFabric;
 import net.kosmo.music.fabric.events.ClientResourceListener;
 import net.kosmo.music.fabric.events.ServerResourceListener;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 
 import static net.kosmo.music.MusicNotificationClient.MOD_ID;
@@ -40,7 +40,7 @@ public class MusicNotificationClientFabric implements ClientModInitializer {
 	public void registerBuiltinPacks() {
 		FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer -> {
 			ResourceManagerHelper.registerBuiltinResourcePack(
-				Identifier.fromNamespaceAndPath(MOD_ID, "dark_mode"),
+				ResourceLocation.fromNamespaceAndPath(MOD_ID, "dark_mode"),
 				modContainer,
 				Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
 				ResourcePackActivationType.NORMAL);

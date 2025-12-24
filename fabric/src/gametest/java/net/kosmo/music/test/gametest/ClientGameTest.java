@@ -10,7 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.client.sounds.WeighedSoundEvents;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import org.slf4j.Logger;
@@ -72,7 +72,7 @@ public class ClientGameTest implements FabricClientGameTest {
 		this.test.printAllResult();
 	}
 
-	public boolean isSoundEventValid(Minecraft minecraft, Identifier location) {
+	public boolean isSoundEventValid(Minecraft minecraft, ResourceLocation location) {
 		SoundManager soundManager = minecraft.getSoundManager();
 
 		SoundEvent soundEvent = Helper.getSoundEvent(soundManager, location);
@@ -81,7 +81,7 @@ public class ClientGameTest implements FabricClientGameTest {
 			return false;
 		}
 
-		SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 {*/ /*?} else {*//*, 1 *//*?}*/);
+		SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 {*/ /*?} else {*/, 1 /*?}*/);
 		WeighedSoundEvents weighedSoundEvents = soundInstance.resolve(soundManager);
 		if (weighedSoundEvents == null) {
 			return false;

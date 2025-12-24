@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class ActionBarNotification extends Notification {
 
@@ -15,7 +15,7 @@ public class ActionBarNotification extends Notification {
 		return screen == null || screen instanceof ChatScreen;
 	}
 
-	public void show(Identifier resourceLocation, TrackData trackData) {
+	public void show(ResourceLocation resourceLocation, TrackData trackData) {
 		super.show(resourceLocation, trackData, this.getClass());
 		// TODO: Allow customization of message time
 		// TODO: Check if a message is already being displayed and queue the next one ?

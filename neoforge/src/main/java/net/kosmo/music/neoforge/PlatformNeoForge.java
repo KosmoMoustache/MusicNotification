@@ -3,22 +3,22 @@ package net.kosmo.music.neoforge;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.TrackData;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 //? if >=1.21.10 {
-import net.neoforged.fml.loading.FMLLoader;
-//?} else {
-/*import net.neoforged.fml.loading.LoadingModList;
- *///?}
+/*import net.neoforged.fml.loading.FMLLoader;
+ *///?} else {
+import net.neoforged.fml.loading.LoadingModList;
+	//?}
 
 public class PlatformNeoForge extends PlatformHelper {
 	@Override
-	public String getModName(Identifier location) {
+	public String getModName(ResourceLocation location) {
 		String namespace = location.getNamespace();
 		//? if >=1.21.10 {
-		namespace = FMLLoader.getCurrent().getLoadingModList().getModFileById(namespace).toString();
-		//?} else {
-		/*namespace = LoadingModList.get().getModFileById(namespace).moduleName();
-		 *///?}
+		/*namespace = FMLLoader.getCurrent().getLoadingModList().getModFileById(namespace).toString();
+		 *///?} else {
+		namespace = LoadingModList.get().getModFileById(namespace).moduleName();
+		//?}
 		return namespace;
 	}
 

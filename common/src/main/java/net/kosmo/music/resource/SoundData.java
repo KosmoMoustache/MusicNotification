@@ -1,6 +1,6 @@
 package net.kosmo.music.resource;
 
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
-public record SoundData(Identifier id) {
+public record SoundData(ResourceLocation id) {
 }
