@@ -5,7 +5,7 @@ import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import org.jetbrains.annotations.Nullable;
@@ -36,11 +36,11 @@ public class Helper {
 		return false;
 	}
 
-	public static @Nullable SoundEvent getSoundEvent(Minecraft client, ResourceLocation location) {
+	public static @Nullable SoundEvent getSoundEvent(Minecraft client, Identifier location) {
 		return getSoundEvent(client.getSoundManager(), location);
 	}
 
-	public static @Nullable SoundEvent getSoundEvent(SoundManager soundManager, ResourceLocation location) {
+	public static @Nullable SoundEvent getSoundEvent(SoundManager soundManager, Identifier location) {
 		if (soundManager.getSoundEvent(location) != null) {
 			return SoundEvent.createVariableRangeEvent(location);
 		} else {
@@ -60,7 +60,7 @@ public class Helper {
 
 	public static void playTrackData(Minecraft client, SoundEvent soundEvent) {
 		client.getSoundManager().stop(null, SoundSource.MUSIC);
-		SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 {*/ /*?} else {*/, 10 /*?}*/);
+		SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 {*/ /*?} else {*//*, 10 *//*?}*/);
 		MusicManagerAccessor musicManagerAccessor = (MusicManagerAccessor) client.getMusicManager();
 		client.getSoundManager().play(soundInstance);
 		musicManagerAccessor.setCurrentMusic(soundInstance);

@@ -7,7 +7,7 @@ import net.kosmo.music.resource.TrackDataManager;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEventListener;
 import net.minecraft.client.sounds.WeighedSoundEvents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +23,8 @@ public class SoundListener implements SoundEventListener {
 			return;
 		}
 
-		ResourceLocation soundEventLocation = soundInstance/*? >=1.21.11 {*//*.getIdentifier()*//*?} else {*/.getLocation() /*?}*/;
-		ResourceLocation soundLocation = soundInstance.getSound().getLocation();
+		Identifier soundEventLocation = soundInstance/*? >=1.21.11 {*/.getIdentifier()/*?} else {*//*.getLocation() *//*?}*/;
+		Identifier soundLocation = soundInstance.getSound().getLocation();
 
 		// Ignore sound from the ignore list
 		if (isMatchedInList(soundLocation.toString(), Config.options().IGNORE_SOUND_EVENT)) {

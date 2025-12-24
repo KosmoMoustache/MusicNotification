@@ -3,7 +3,7 @@ package net.kosmo.music.neoforge;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.TrackData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 //? if >=1.21.10 {
 import net.neoforged.fml.loading.FMLLoader;
 	//?} else {
@@ -12,7 +12,7 @@ import net.neoforged.fml.loading.FMLLoader;
 
 public class PlatformNeoForge extends PlatformHelper {
 	@Override
-	public String getModName(ResourceLocation location) {
+	public String getModName(Identifier location) {
 		String namespace = location.getNamespace();
 		//? if >=1.21.10 {
 		namespace = FMLLoader.getCurrent().getLoadingModList().getModFileById(namespace).toString();

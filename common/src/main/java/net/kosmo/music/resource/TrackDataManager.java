@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.JukeboxSong;
 
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class TrackDataManager {
 	static TrackDataManager instance;
-	public Map<ResourceLocation, TrackData> tracks = new HashMap<>();
+	public Map<Identifier, TrackData> tracks = new HashMap<>();
 
 	public static TrackDataManager getInstance() {
 		if (instance == null) {
@@ -24,11 +24,11 @@ public class TrackDataManager {
 		return instance;
 	}
 
-	public void setTracks(Map<ResourceLocation, TrackData> sounds) {
+	public void setTracks(Map<Identifier, TrackData> sounds) {
 		this.tracks = sounds;
 	}
 
-	public TrackData getTrackData(ResourceLocation soundId, ResourceLocation soundEventId) {
+	public TrackData getTrackData(Identifier soundId, Identifier soundEventId) {
 		@Nullable TrackData td = tracks.get(soundId);
 
 		if (td != null) {
@@ -56,7 +56,7 @@ public class TrackDataManager {
 		return getEmpty(soundId, end_path, soundId.toString());
 	}
 
-	public TrackData getTrackDataFromJukeboxSong(ResourceLocation soundId, JukeboxSong song) {
+	public TrackData getTrackDataFromJukeboxSong(Identifier soundId, JukeboxSong song) {
 		String author;
 		String title;
 		// string[0] = author / string[1] = title | Now playing: Lena Raine - Pigstep;
@@ -71,7 +71,7 @@ public class TrackDataManager {
 		return getEmpty(soundId, title, author);
 	}
 
-	private TrackData getEmpty(ResourceLocation key, String title, String author) {
+	private TrackData getEmpty(Identifier key, String title, String author) {
 		return new TrackData(
 			key,
 			Component.literal(title),

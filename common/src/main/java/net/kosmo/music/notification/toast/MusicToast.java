@@ -10,7 +10,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix3x2fStack;
 
 public class MusicToast implements Toast {
-	private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/background");
+	private static final Identifier BACKGROUND_SPRITE = Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/background");
 	private Toast.Visibility visibility;
 
 	private TrackData content;
