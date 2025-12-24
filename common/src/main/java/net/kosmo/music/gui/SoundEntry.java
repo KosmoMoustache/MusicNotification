@@ -60,7 +60,7 @@ public class SoundEntry extends ListEntry {
 	}
 
 	//? if >=1.21.10 {
-	/*@Override
+	@Override
 	public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
 		render(
 			guiGraphics,
@@ -76,9 +76,9 @@ public class SoundEntry extends ListEntry {
 		);
 	}
 
-	*///?} else {
-	@Override
-		//?}
+	//?} else {
+	/*@Override
+	 *///?}
 	public void render(GuiGraphics guiGraphics, int do_not_use_index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
 		guiGraphics.fill(left, top, left + width, top + height, GRAY_COLOR);
 
