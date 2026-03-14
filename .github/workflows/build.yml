@@ -4,12 +4,50 @@
 # against bad commits.
 
 name: build
-on: [ pull_request, push, workflow_call, workflow_dispatch ]
+
+on:
+    pull_request:
+    push:
+    workflow_dispatch:
+    workflow_call:
+        inputs:
+            mod_loaders:
+                description: "Optional list of mod loaders to build"
+                required: false
+                default: ""
+                type: string
+            versions:
+                description: "Optional list of Minecraft versions to build"
+                required: false
+                default: ""
+                type: string
 
 jobs:
+    generate-build-matrix:
+        runs-on: ubuntu-latest
+        name: Generate build matrix
+        outputs:
+            matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v5
+
+            -   name: Grant execute permission to generate-publish-matrix.sh
+                run: chmod +x ./.github/scripts/generate-publish-matrix.sh
+
+            -   name: Generate matrix for the build job
+                id: set-matrix
+                run: ./.github/scripts/generate-publish-matrix.sh "${{ inputs.mod_loaders || github.event.inputs.mod_loaders || '' }}" "${{ inputs.versions || github.event.inputs.versions || '' }}"
+
     build:
         runs-on: ubuntu-latest
+        needs: generate-build-matrix
+        name: Build ${{ matrix.mod_loader }} ${{ matrix.version }}
         # timeout-minutes: 30
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.generate-build-matrix.outputs.matrix) }}
 
         steps:
             -   name: Checkout repository
@@ -33,22 +71,27 @@ jobs:
 
             -   name: "Parse gradle properties"
                 id: gradle-properties
-                run: ./.github/scripts/parse-gradle-properties.sh
+                run: ./.github/scripts/parse-gradle-properties.sh ${{ matrix.version }}
 
             -   name: Grant execute permission to gradlew
                 run: chmod +x gradlew
 
-            -   name: "Run build"
-                run: ./gradlew build --debug --info --stacktrace
+            -   name: "Run build for ${{ matrix.mod_loader }} ${{ matrix.version }}"
+                run: ./gradlew :${{ matrix.mod_loader }}:${{ matrix.version }}:build --info --stacktrace
 
             -   name: "Prepare artifacts"
                 run: |
                     mkdir -p artifacts
-                    find . -path "./*/versions/*/build/libs/*.jar" ! -name "*-common*.jar" -exec cp {} artifacts/ \;
+                    jar_path="./${{ matrix.mod_loader }}/versions/${{ matrix.version }}/build/libs/${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ matrix.version }}.jar"
+                    if [[ ! -f "$jar_path" ]]; then
+                        echo "Expected artifact not found: $jar_path"
+                        exit 1
+                    fi
+                    cp "$jar_path" artifacts/
 
             -   name: "Upload artifacts"
                 uses: actions/upload-artifact@v4
                 with:
-                    name: ${{ steps.gradle-properties.outputs.MOD_ID }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    name: ${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ matrix.version }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     if-no-files-found: error
-                    path: artifacts/*.jar
+                    path: artifacts/${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ matrix.version }}.jar

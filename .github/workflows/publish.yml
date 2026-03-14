@@ -2,16 +2,22 @@ name: Publish on Modrinth, Github & CurseForge
 
 on:
     workflow_dispatch:
+    workflow_call:
         inputs:
             mod_loaders:
                 description: "List of mod loaders to be published"
-                required: true
-                default: "['fabric', 'neoforge']"
+                required: false
+                default: ""
                 type: string
             versions:
                 description: "List of versions to be published"
-                required: true
-                default: "['1.21', '1.21.1', '1.21.3', '1.21.4', '1.21.5', '1.21.8']"
+                required: false
+                default: ""
+                type: string
+            platforms:
+                description: "Optional list of publish targets: github, curseforge, modrinth"
+                required: false
+                default: ""
                 type: string
 
 permissions:
@@ -20,6 +26,9 @@ permissions:
 jobs:
     build:
         uses: ./.github/workflows/build.yml
+        with:
+            mod_loaders: ${{ inputs.mod_loaders || '' }}
+            versions: ${{ inputs.versions || '' }}
 
     generate-publish-matrix:
         runs-on: ubuntu-latest
@@ -37,9 +46,9 @@ jobs:
 
             -   name: "Generate matrix for the publish job"
                 id: set-matrix
-                run: ./.github/scripts/generate-publish-matrix.sh "${{ inputs.mod_loaders }}" "${{ inputs.versions }}"
+                run: ./.github/scripts/generate-publish-matrix.sh "${{ inputs.mod_loaders || '' }}" "${{ inputs.versions || '' }}"
 
-    Publish:
+    publish:
         runs-on: ubuntu-latest
         needs: [ build, generate-publish-matrix ]
         name: Publish ${{ matrix.mod_loader }} ${{ matrix.version }}
@@ -61,8 +70,35 @@ jobs:
             -   name: "Download artifacts"
                 uses: actions/download-artifact@v4
                 with:
-                    name: ${{ steps.gradle-properties.outputs.MOD_ID }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    name: ${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ matrix.version }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     path: artifacts
+
+            -   name: Resolve publish platforms
+                id: publish-platforms
+                run: |
+                    raw="${{ inputs.platforms || github.event.inputs.platforms || '' }}"
+                    raw="${raw//[\[\]\']/}"
+                    raw="${raw//\"/}"
+                    raw="${raw// /}"
+
+                    enabled_github=false
+                    enabled_curseforge=false
+                    enabled_modrinth=false
+
+                    if [[ -z "$raw" ]]; then
+                        enabled_github=true
+                        enabled_curseforge=true
+                        enabled_modrinth=true
+                    else
+                        list=",$raw,"
+                        [[ "$list" == *,github,* ]] && enabled_github=true
+                        [[ "$list" == *,curseforge,* ]] && enabled_curseforge=true
+                        [[ "$list" == *,modrinth,* ]] && enabled_modrinth=true
+                    fi
+
+                    echo "github=$enabled_github" >> "$GITHUB_OUTPUT"
+                    echo "curseforge=$enabled_curseforge" >> "$GITHUB_OUTPUT"
+                    echo "modrinth=$enabled_modrinth" >> "$GITHUB_OUTPUT"
 
             -   name: Install changelog parser
                 uses: taiki-e/install-action@parse-changelog
@@ -73,15 +109,15 @@ jobs:
             -   name: Publish ${{ matrix.mod_loader }}
                 uses: Kir-Antipov/mc-publish@v3.3.0
                 with:
-                    github-token: ${{ secrets.GITHUB_TOKEN }}
+                    github-token: ${{ steps.publish-platforms.outputs.github == 'true' && secrets.GITHUB_TOKEN || '' }}
                     github-tag: v${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }} #mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
 
-                    curseforge-id: ${{ vars.CURSEFORGE_PROJECT_ID }}
-                    curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+                    curseforge-id: ${{ steps.publish-platforms.outputs.curseforge == 'true' && vars.CURSEFORGE_PROJECT_ID || '' }}
+                    curseforge-token: ${{ steps.publish-platforms.outputs.curseforge == 'true' && secrets.CURSEFORGE_TOKEN || '' }}
 
                     modrinth-featured: true
-                    modrinth-id: ${{ vars.MODRINTH_PROJECT_ID }}
-                    modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+                    modrinth-id: ${{ steps.publish-platforms.outputs.modrinth == 'true' && vars.MODRINTH_PROJECT_ID || '' }}
+                    modrinth-token: ${{ steps.publish-platforms.outputs.modrinth == 'true' && secrets.MODRINTH_TOKEN || '' }}
 
                     name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     version: ${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}

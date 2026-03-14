@@ -66,5 +66,6 @@ for platform in $(echo "$enabled_platforms" | tr ',' ' '); do
 done
 
 matrix_content="${matrix_content%,}]}"
-echo "Generated matrix: $matrix_content"
+echo $matrix_content
 set_output "matrix" "$matrix_content"
+
