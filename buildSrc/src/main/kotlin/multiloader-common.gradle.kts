@@ -12,8 +12,8 @@ base {
 
 java {
 	toolchain.languageVersion = JavaLanguageVersion.of(commonProject.prop("java.version")!!)
-	withSourcesJar()
-	withJavadocJar()
+//	withSourcesJar()
+//	withJavadocJar()
 }
 
 repositories {
