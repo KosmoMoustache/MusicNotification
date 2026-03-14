@@ -131,7 +131,6 @@ jobs:
                     curseforge-id: ${{ steps.publish-platforms.outputs.curseforge == 'true' && vars.CURSEFORGE_PROJECT_ID || '' }}
                     curseforge-token: ${{ steps.publish-platforms.outputs.curseforge == 'true' && secrets.CURSEFORGE_TOKEN || '' }}
 
-                    modrinth-featured: true
                     modrinth-id: ${{ steps.publish-platforms.outputs.modrinth == 'true' && vars.MODRINTH_PROJECT_ID || '' }}
                     modrinth-token: ${{ steps.publish-platforms.outputs.modrinth == 'true' && secrets.MODRINTH_TOKEN || '' }}
 
@@ -146,3 +145,4 @@ jobs:
 
                     retry-attempts: 6
                     retry-delay: 30000
+                    fail-mode: "warn"
