@@ -1,8 +1,3 @@
-# Automatically build the project and run any configured tests for every push
-# and submitted pull request. This can help catch issues that only occur on
-# certain platforms or Java versions, and provides a first line of defense
-# against bad commits.
-
 name: build
 
 on:
@@ -44,12 +39,12 @@ jobs:
             -   name: Checkout repository
                 uses: actions/checkout@v5
 
-            -   name: Grant execute permission to generate-publish-matrix.sh
-                run: chmod +x ./.github/scripts/generate-publish-matrix.sh
+            -   name: Grant execute permission to generate-build-matrix.sh
+                run: chmod +x ./.github/scripts/generate-build-matrix.sh
 
             -   name: Generate matrix for the build job
                 id: set-matrix
-                run: ./.github/scripts/generate-publish-matrix.sh "${{ inputs.mod_loaders || github.event.inputs.mod_loaders || '' }}" "${{ inputs.versions || github.event.inputs.versions || '' }}"
+                run: ./.github/scripts/generate-build-matrix.sh "${{ inputs.mod_loaders || github.event.inputs.mod_loaders || '' }}" "${{ inputs.versions || github.event.inputs.versions || '' }}"
 
     build:
         runs-on: ubuntu-latest
@@ -101,7 +96,7 @@ jobs:
                     cp "$jar_path" artifacts/
 
             -   name: "Upload artifacts"
-                uses: actions/upload-artifact@v4
+                uses: actions/upload-artifact@v7 # TODO: upload single file without zipping https://github.com/actions/upload-artifact/releases/tag/v7.0.0
                 with:
                     name: ${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ matrix.version }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     if-no-files-found: error
