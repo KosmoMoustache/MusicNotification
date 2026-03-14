@@ -9,6 +9,17 @@ on:
     pull_request:
     push:
     workflow_dispatch:
+        inputs:
+            mod_loaders:
+                description: "Optional list of mod loaders to build"
+                required: false
+                default: ""
+                type: string
+            versions:
+                description: "Optional list of Minecraft versions to build"
+                required: false
+                default: ""
+                type: string
     workflow_call:
         inputs:
             mod_loaders:

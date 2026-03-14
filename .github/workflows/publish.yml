@@ -2,6 +2,22 @@ name: Publish on Modrinth, Github & CurseForge
 
 on:
     workflow_dispatch:
+        inputs:
+            mod_loaders:
+                description: "List of mod loaders to be published"
+                required: false
+                default: ""
+                type: string
+            versions:
+                description: "List of versions to be published"
+                required: false
+                default: ""
+                type: string
+            platforms:
+                description: "Optional list of publish targets: github, curseforge, modrinth"
+                required: false
+                default: ""
+                type: string
     workflow_call:
         inputs:
             mod_loaders:

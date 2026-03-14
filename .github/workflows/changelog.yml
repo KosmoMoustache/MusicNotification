@@ -2,6 +2,12 @@ name: Parse changelog
 
 on:
     workflow_dispatch:
+        inputs:
+            mod_version:
+                description: "Optional mod version to parse from CHANGELOG.md"
+                required: false
+                default: ""
+                type: string
     workflow_call:
         inputs:
             mod_version:
