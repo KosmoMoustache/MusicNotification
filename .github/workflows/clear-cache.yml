@@ -11,6 +11,7 @@ jobs:
         steps:
             -   uses: MyAlbum/purge-cache@v2
                 with:
+                    debug: true
                     accessed: true
                     created: true
                     max-age: 0
