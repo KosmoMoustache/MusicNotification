@@ -15,7 +15,7 @@ on:
                 required: false
                 default: ""
                 type: string
-            run_runtime_tests:
+            run_tests:
                 description: "Run client/server after build"
                 required: false
                 default: true
