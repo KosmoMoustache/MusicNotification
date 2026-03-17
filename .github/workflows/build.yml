@@ -169,9 +169,10 @@ jobs:
                 with:
                     mc: ${{ matrix.version }}
                     modloader: ${{ matrix.mod_loader }}
-                    #                    regex: ${{ matrix.mod_loader == 'fabric' && '.*fabric.*' || matrix.mod_loader == 'neoforge' && '.*neoforge.*' || '.*forge.*' }}
+                    regex: .*${{ matrix.mod_loader }}.*
                     mc-runtime-test: ${{ matrix.mod_loader == 'forge' && 'lexforge' || matrix.mod_loader }}
                     java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+                    headlessmc-command: '--jvm "-Djava.awt.headless=true" --server'
                     fabric-api: ${{ steps.gradle-properties.outputs.DEPS_FABRIC_API }}
 
     run-server:
@@ -228,5 +229,5 @@ jobs:
                     mc-runtime-test: ${{ matrix.mod_loader == 'forge' && 'lexforge' || matrix.mod_loader }}
                     java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
                     #                    xvfb: "false"
-                    #                    headlessmc-command: '--jvm "-Djava.awt.headless=true" --server'
+                    headlessmc-command: '--jvm "-Djava.awt.headless=true" --server'
                     fabric-api: ${{ steps.gradle-properties.outputs.DEPS_FABRIC_API }}
