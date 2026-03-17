@@ -32,8 +32,8 @@ on:
                 required: false
                 default: ""
                 type: string
-            run_runtime_tests:
-                description: "Run runtime client/server tests after build"
+            run_tests:
+                description: "Run client/server after build"
                 required: false
                 default: false
                 type: boolean
@@ -112,12 +112,107 @@ jobs:
                     if-no-files-found: error
                     path: artifacts/${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ matrix.version }}.jar
 
-    runtime-tests:
-        if: ${{ inputs.run_runtime_tests || github.event.inputs.run_runtime_tests == 'true' }}
-        needs: build
-        uses: ./.github/workflows/run.yml
-        with:
-            mod_loaders: ${{ inputs.mod_loaders || github.event.inputs.mod_loaders || '' }}
-            versions: ${{ inputs.versions || github.event.inputs.versions || '' }}
-            skip_build: true
+    run-client:
+        runs-on: ubuntu-latest
+        needs: [ build, generate-build-matrix ]
+        if: ${{ inputs.run_tests }}
+        name: Run client ${{ matrix.mod_loader }} ${{ matrix.version }}
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.generate-build-matrix.outputs.matrix) }}
 
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v6
+
+            -   name: Grant execute permission to parse-gradle-properties.sh
+                run: chmod +x ./.github/scripts/parse-gradle-properties.sh
+
+            -   name: Parse gradle properties
+                id: gradle-properties
+                run: ./.github/scripts/parse-gradle-properties.sh ${{ matrix.version }}
+
+            -   name: Set up JDK
+                uses: actions/setup-java@v5
+                with:
+                    distribution: "temurin"
+                    java-version: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+
+            -   name: Download build artifact
+                uses: actions/download-artifact@v8
+                with:
+                    name: ${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ matrix.version }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    path: artifacts
+
+            -   name: Stage mod and runtime test assets
+                run: |
+                    mkdir -p run/mods
+                    cp artifacts/${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ matrix.version }}.jar run/mods/
+
+                    mkdir -p run/saves/wd_PlaygroundVoid/datapacks
+                    mkdir -p run/resourcepacks
+
+                    cp -a test/wd_PlaygroundVoid run/saves/
+                    cp -a test/dp_* run/saves/wd_PlaygroundVoid/datapacks/
+                    cp -a test/rp_* run/resourcepacks/
+
+                    if [[ -f "test/options.txt" ]]; then
+                        cp test/options.txt run/options.txt
+                    fi
+
+            -   name: Run client runtime test
+                uses: headlesshq/mc-runtime-test@4.1.0
+                with:
+                    mc: ${{ matrix.version }}
+                    modloader: ${{ matrix.mod_loader }}
+                    regex: ${{ matrix.mod_loader == 'fabric' && '.*fabric.*' || matrix.mod_loader == 'neoforge' && '.*neoforge.*' || '.*forge.*' }}
+                    mc-runtime-test: ${{ matrix.mod_loader == 'forge' && 'lexforge' || matrix.mod_loader }}
+                    java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+
+    run-server:
+        runs-on: ubuntu-latest
+        needs: [ build, generate-build-matrix ]
+        if: ${{ inputs.run_tests }}
+        name: Run server ${{ matrix.mod_loader }} ${{ matrix.version }}
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.generate-build-matrix.outputs.matrix) }}
+
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v6
+
+            -   name: Grant execute permission to parse-gradle-properties.sh
+                run: chmod +x ./.github/scripts/parse-gradle-properties.sh
+
+            -   name: Parse gradle properties
+                id: gradle-properties
+                run: ./.github/scripts/parse-gradle-properties.sh ${{ matrix.version }}
+
+            -   name: Set up JDK
+                uses: actions/setup-java@v5
+                with:
+                    distribution: "temurin"
+                    java-version: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+
+            -   name: Download build artifact
+                uses: actions/download-artifact@v8
+                with:
+                    name: ${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ matrix.version }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    path: artifacts
+
+            -   name: Stage mod
+                run: |
+                    mkdir -p run/mods
+                    cp artifacts/${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ matrix.version }}.jar run/mods/
+
+            -   name: Run server runtime test
+                uses: headlesshq/mc-runtime-test@4.1.0
+                with:
+                    mc: ${{ matrix.version }}
+                    modloader: ${{ matrix.mod_loader }}
+                    regex: ${{ matrix.mod_loader == 'fabric' && '.*fabric.*' || matrix.mod_loader == 'neoforge' && '.*neoforge.*' || '.*forge.*' }}
+                    mc-runtime-test: ${{ matrix.mod_loader == 'forge' && 'lexforge' || matrix.mod_loader }}
+                    java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+                    xvfb: "false"
+                    headlessmc-command: '--jvm "-Djava.awt.headless=true" --server'
