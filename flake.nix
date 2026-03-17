@@ -15,6 +15,8 @@
         gnumake
         git
        	zulu21
+	just
+	jq
       ];
     };
   };

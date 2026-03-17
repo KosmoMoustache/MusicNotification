@@ -1,0 +1,46 @@
+name: Parse changelog
+
+on:
+    workflow_dispatch:
+        inputs:
+            mod_version:
+                description: "Optional mod version to parse from CHANGELOG.md"
+                required: false
+                default: ""
+                type: string
+    workflow_call:
+        inputs:
+            mod_version:
+                description: "Optional mod version to parse from CHANGELOG.md"
+                required: false
+                default: ""
+                type: string
+
+permissions:
+    contents: write
+
+jobs:
+    parse-and-print:
+        runs-on: ubuntu-latest
+        name: Parse and print changelog
+
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v6
+
+            -   name: Grant execute permission to parse-gradle-properties.sh
+                run: chmod +x ./.github/scripts/parse-gradle-properties.sh
+
+            -   name: "Parse gradle properties"
+                id: gradle-properties
+                run: ./.github/scripts/parse-gradle-properties.sh
+
+            -   name: "Install changelog parser"
+                uses: taiki-e/install-action@parse-changelog
+
+            -   name: "Parse changelog"
+                run: parse-changelog CHANGELOG.md "${{ inputs.mod_version || steps.gradle-properties.outputs.MOD_VERSION }}" > RELEASE_CHANGELOG.md
+
+            -   name: "Show RELEASE_CHANGELOG.md"
+                run: cat RELEASE_CHANGELOG.md
+

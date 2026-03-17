@@ -1,7 +1,17 @@
 #!/bin/bash
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 version=${1:-}
+
+set_output() {
+    local key="$1"
+    local value="$2"
+    if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
+        echo "${key}=${value}" >> "$GITHUB_OUTPUT"
+    fi
+}
 
 parse_properties_file() {
     local file=$1
@@ -17,7 +27,7 @@ parse_properties_file() {
         key=$(echo "$key" | sed 's/_$//')
 
         echo "${key}=${value}"
-        echo "${key}=${value}" >> "$GITHUB_OUTPUT"
+        set_output "$key" "$value"
     done < "$file"
 }
 
