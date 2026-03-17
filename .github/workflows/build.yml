@@ -16,9 +16,9 @@ on:
                 default: ""
                 type: string
             run_runtime_tests:
-                description: "Run runtime client/server tests after build"
+                description: "Run client/server after build"
                 required: false
-                default: false
+                default: true
                 type: boolean
     workflow_call:
         inputs:
@@ -35,7 +35,7 @@ on:
             run_tests:
                 description: "Run client/server after build"
                 required: false
-                default: false
+                default: true
                 type: boolean
 
 jobs:
