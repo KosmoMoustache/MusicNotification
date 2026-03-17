@@ -15,6 +15,11 @@ on:
                 required: false
                 default: ""
                 type: string
+            run_runtime_tests:
+                description: "Run runtime client/server tests after build"
+                required: false
+                default: false
+                type: boolean
     workflow_call:
         inputs:
             mod_loaders:
@@ -27,6 +32,11 @@ on:
                 required: false
                 default: ""
                 type: string
+            run_runtime_tests:
+                description: "Run runtime client/server tests after build"
+                required: false
+                default: false
+                type: boolean
 
 jobs:
     generate-build-matrix:
@@ -101,3 +111,13 @@ jobs:
                     name: ${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ matrix.version }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     if-no-files-found: error
                     path: artifacts/${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ matrix.version }}.jar
+
+    runtime-tests:
+        if: ${{ inputs.run_runtime_tests || github.event.inputs.run_runtime_tests == 'true' }}
+        needs: build
+        uses: ./.github/workflows/run.yml
+        with:
+            mod_loaders: ${{ inputs.mod_loaders || github.event.inputs.mod_loaders || '' }}
+            versions: ${{ inputs.versions || github.event.inputs.versions || '' }}
+            skip_build: true
+

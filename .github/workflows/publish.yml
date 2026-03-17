@@ -18,6 +18,11 @@ on:
                 required: false
                 default: ""
                 type: string
+            run_runtime_tests:
+                description: "Run runtime client/server tests before/alongside publish"
+                required: false
+                default: false
+                type: boolean
     workflow_call:
         inputs:
             mod_loaders:
@@ -35,6 +40,11 @@ on:
                 required: false
                 default: ""
                 type: string
+            run_runtime_tests:
+                description: "Run runtime client/server tests before/alongside publish"
+                required: false
+                default: false
+                type: boolean
 
 permissions:
     contents: write
@@ -63,6 +73,15 @@ jobs:
             -   name: "Generate matrix for the publish job"
                 id: set-matrix
                 run: ./.github/scripts/generate-build-matrix.sh "${{ inputs.mod_loaders || '' }}" "${{ inputs.versions || '' }}"
+
+    runtime-tests:
+        if: ${{ inputs.run_runtime_tests || github.event.inputs.run_runtime_tests == 'true' }}
+        needs: build
+        uses: ./.github/workflows/run.yml
+        with:
+            mod_loaders: ${{ inputs.mod_loaders || '' }}
+            versions: ${{ inputs.versions || '' }}
+            skip_build: true
 
     publish:
         runs-on: ubuntu-latest
