@@ -66,10 +66,6 @@ loom {
 			// "-Dfabric.log.level=debug"
 		}
 	}
-
-	mixin {
-		defaultRefmapName = "${mod.id}.refmap.json"
-	}
 }
 
 // gametest
