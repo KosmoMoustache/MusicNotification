@@ -144,30 +144,32 @@ jobs:
                     name: ${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ matrix.version }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     path: artifacts
 
-            -   name: Stage mod and runtime test assets
-                run: |
-                    mkdir -p run/mods
-                    cp artifacts/${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ matrix.version }}.jar run/mods/
+ee            -   name: Copy mod jar & test resources to run/
+    run: |
+        mkdir -p run/mods
+        cp artifacts/*.jar run/mods/
+        
+        mkdir -p run/saves/wd_PlaygroundVoid/datapacks
+        mkdir -p run/resourcepacks
+        
+        cp -a test/wd_PlaygroundVoid run/saves/
+        cp -a test/dp_* run/saves/wd_PlaygroundVoid/datapacks/
+        cp -a test/rp_* run/resourcepacks/
 
-                    mkdir -p run/saves/wd_PlaygroundVoid/datapacks
-                    mkdir -p run/resourcepacks
+        -   name: "Download Cloth Config API"
+            run: |
+                MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "cloth-config" "${{ steps.gradle-properties.outputs.DEPS_CLOTH_CONFIG }}" "${{ matrix.mod_loader }}")
+                wget -P run/mods "$MOD_URL"
 
-                    cp -a test/wd_PlaygroundVoid run/saves/
-                    cp -a test/dp_* run/saves/wd_PlaygroundVoid/datapacks/
-                    cp -a test/rp_* run/resourcepacks/
-
-                    if [[ -f "test/options.txt" ]]; then
-                        cp test/options.txt run/options.txt
-                    fi
-
-            -   name: Run client runtime test
-                uses: headlesshq/mc-runtime-test@4.1.0
-                with:
-                    mc: ${{ matrix.version }}
-                    modloader: ${{ matrix.mod_loader }}
-                    regex: ${{ matrix.mod_loader == 'fabric' && '.*fabric.*' || matrix.mod_loader == 'neoforge' && '.*neoforge.*' || '.*forge.*' }}
-                    mc-runtime-test: ${{ matrix.mod_loader == 'forge' && 'lexforge' || matrix.mod_loader }}
-                    java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+        -   name: Run client runtime test
+            uses: headlesshq/mc-runtime-test@4.1.0
+            with:
+                mc: ${{ matrix.version }}
+                modloader: ${{ matrix.mod_loader }}
+                #                    regex: ${{ matrix.mod_loader == 'fabric' && '.*fabric.*' || matrix.mod_loader == 'neoforge' && '.*neoforge.*' || '.*forge.*' }}
+                mc-runtime-test: ${{ matrix.mod_loader == 'forge' && 'lexforge' || matrix.mod_loader }}
+                java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+                fabric-api: ${{ steps.gradle-properties.outputs.DEPS_FABRIC_API }}
 
     run-server:
         runs-on: ubuntu-latest
@@ -201,18 +203,24 @@ jobs:
                     name: ${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ matrix.version }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     path: artifacts
 
-            -   name: Stage mod
+            -   name: Copy mod jar to run/
                 run: |
                     mkdir -p run/mods
-                    cp artifacts/${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ matrix.version }}.jar run/mods/
+                    cp artifacts/*.jar run/mods/
+
+            -   name: "Download Cloth Config API"
+                run: |
+                    MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "cloth-config" "${{ steps.gradle-properties.outputs.DEPS_CLOTH_CONFIG }}" "${{ matrix.mod_loader }}")
+                    wget -P run/mods "$MOD_URL"
 
             -   name: Run server runtime test
                 uses: headlesshq/mc-runtime-test@4.1.0
                 with:
                     mc: ${{ matrix.version }}
                     modloader: ${{ matrix.mod_loader }}
-                    regex: ${{ matrix.mod_loader == 'fabric' && '.*fabric.*' || matrix.mod_loader == 'neoforge' && '.*neoforge.*' || '.*forge.*' }}
+                    #                    regex: ${{ matrix.mod_loader == 'fabric' && '.*fabric.*' || matrix.mod_loader == 'neoforge' && '.*neoforge.*' || '.*forge.*' }}
                     mc-runtime-test: ${{ matrix.mod_loader == 'forge' && 'lexforge' || matrix.mod_loader }}
                     java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
-                    xvfb: "false"
-                    headlessmc-command: '--jvm "-Djava.awt.headless=true" --server'
+                    #                    xvfb: "false"
+                    #                    headlessmc-command: '--jvm "-Djava.awt.headless=true" --server'
+                    fabric-api: ${{ steps.gradle-properties.outputs.DEPS_FABRIC_API }}
