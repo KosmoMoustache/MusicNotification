@@ -144,32 +144,32 @@ jobs:
                     name: ${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-${{ matrix.version }}-artifacts-${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     path: artifacts
 
-ee            -   name: Copy mod jar & test resources to run/
-    run: |
-        mkdir -p run/mods
-        cp artifacts/*.jar run/mods/
-        
-        mkdir -p run/saves/wd_PlaygroundVoid/datapacks
-        mkdir -p run/resourcepacks
-        
-        cp -a test/wd_PlaygroundVoid run/saves/
-        cp -a test/dp_* run/saves/wd_PlaygroundVoid/datapacks/
-        cp -a test/rp_* run/resourcepacks/
+            -   name: Copy mod jar & test resources to run/
+                run: |
+                    mkdir -p run/mods
+                    cp artifacts/*.jar run/mods/
 
-        -   name: "Download Cloth Config API"
-            run: |
-                MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "cloth-config" "${{ steps.gradle-properties.outputs.DEPS_CLOTH_CONFIG }}" "${{ matrix.mod_loader }}")
-                wget -P run/mods "$MOD_URL"
+                    mkdir -p run/saves/wd_PlaygroundVoid/datapacks
+                    mkdir -p run/resourcepacks
 
-        -   name: Run client runtime test
-            uses: headlesshq/mc-runtime-test@4.1.0
-            with:
-                mc: ${{ matrix.version }}
-                modloader: ${{ matrix.mod_loader }}
-                #                    regex: ${{ matrix.mod_loader == 'fabric' && '.*fabric.*' || matrix.mod_loader == 'neoforge' && '.*neoforge.*' || '.*forge.*' }}
-                mc-runtime-test: ${{ matrix.mod_loader == 'forge' && 'lexforge' || matrix.mod_loader }}
-                java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
-                fabric-api: ${{ steps.gradle-properties.outputs.DEPS_FABRIC_API }}
+                    cp -a test/wd_PlaygroundVoid run/saves/
+                    cp -a test/dp_* run/saves/wd_PlaygroundVoid/datapacks/
+                    cp -a test/rp_* run/resourcepacks/
+
+            -   name: "Download Cloth Config API"
+                run: |
+                    MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "cloth-config" "${{ steps.gradle-properties.outputs.DEPS_CLOTH_CONFIG }}" "${{ matrix.mod_loader }}")
+                    wget -P run/mods "$MOD_URL"
+
+            -   name: Run client runtime test
+                uses: headlesshq/mc-runtime-test@4.1.0
+                with:
+                    mc: ${{ matrix.version }}
+                    modloader: ${{ matrix.mod_loader }}
+                    #                    regex: ${{ matrix.mod_loader == 'fabric' && '.*fabric.*' || matrix.mod_loader == 'neoforge' && '.*neoforge.*' || '.*forge.*' }}
+                    mc-runtime-test: ${{ matrix.mod_loader == 'forge' && 'lexforge' || matrix.mod_loader }}
+                    java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+                    fabric-api: ${{ steps.gradle-properties.outputs.DEPS_FABRIC_API }}
 
     run-server:
         runs-on: ubuntu-latest
