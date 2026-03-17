@@ -156,6 +156,9 @@ jobs:
                     cp -a test/dp_* run/saves/wd_PlaygroundVoid/datapacks/
                     cp -a test/rp_* run/resourcepacks/
 
+            -   name: Grant execute permission to get-modrinth-dependency-url.sh
+                run: chmod +x ./.github/scripts/get-modrinth-dependency-url.sh
+
             -   name: "Download Cloth Config API"
                 run: |
                     MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "cloth-config" "${{ steps.gradle-properties.outputs.DEPS_CLOTH_CONFIG }}" "${{ matrix.mod_loader }}")
@@ -207,6 +210,9 @@ jobs:
                 run: |
                     mkdir -p run/mods
                     cp artifacts/*.jar run/mods/
+
+            -   name: Grant execute permission to get-modrinth-dependency-url.sh
+                run: chmod +x ./.github/scripts/get-modrinth-dependency-url.sh
 
             -   name: "Download Cloth Config API"
                 run: |
