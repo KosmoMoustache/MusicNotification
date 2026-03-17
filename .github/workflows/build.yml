@@ -161,7 +161,7 @@ jobs:
 
             -   name: "Download Cloth Config API"
                 run: |
-                    MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "cloth-config" "${{ steps.gradle-properties.outputs.DEPS_CLOTH_CONFIG }}" "${{ matrix.mod_loader }}")
+                    MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "cloth-config" "${{ steps.gradle-properties.outputs.DEPS_CLOTH_CONFIG }}+${{ matrix.mod_loader }}" "${{ matrix.mod_loader }}")
                     wget -P run/mods "$MOD_URL"
 
             -   name: Run client runtime test
@@ -216,7 +216,7 @@ jobs:
 
             -   name: "Download Cloth Config API"
                 run: |
-                    MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "cloth-config" "${{ steps.gradle-properties.outputs.DEPS_CLOTH_CONFIG }}" "${{ matrix.mod_loader }}")
+                    MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "cloth-config" "${{ steps.gradle-properties.outputs.DEPS_CLOTH_CONFIG }}+${{ matrix.mod_loader }}" "${{ matrix.mod_loader }}")
                     wget -P run/mods "$MOD_URL"
 
             -   name: Run server runtime test
