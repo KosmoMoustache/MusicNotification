@@ -2,8 +2,8 @@ set shell := ["bash", "-cu"]
 set windows-shell := ["powershell.exe", "-NoLogo", "-NoProfile", "-Command"]
 
 gradlew := if os_family() == "windows" { ".\\gradlew.bat" } else { "./gradlew" }
-nuke_target := if os_family() == "windows" { "nuke-windows" } else { "nuke-unix" }
-copy_tests_target := if os_family() == "windows" { "copy-tests-windows" } else { "copy-tests-unix" }
+nuke_target := if os_family() == "windows" { "_nuke-windows" } else { "_nuke-unix" }
+copy_tests_target := if os_family() == "windows" { "_copy-tests-windows" } else { "_copy-tests-unix" }
 
 # Prints help for recipes
 help:
@@ -76,9 +76,8 @@ nuke:
 # Nuke implementation for Linux/macOS
 _nuke-unix:
     {{ gradlew }} --stop
-    gradle_home="${GRADLE_HOME:-$HOME/.gradle}"
-    rm -rf "$gradle_home"/caches/transforms-*
-    rm -rf "$gradle_home"/caches/build-cache-*
+    rm -rf "${GRADLE_HOME:-$HOME/.gradle}"/caches/transforms-*
+    rm -rf "${GRADLE_HOME:-$HOME/.gradle}"/caches/build-cache-*
     find . -type d \( -name ".idea" -o -name ".kotlin" -o -name ".gradle" -o -name "build" -o -name "run" \) -exec rm -rf {} +
 
 # Nuke implementation for Windows (PowerShell)
