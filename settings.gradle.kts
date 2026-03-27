@@ -11,8 +11,8 @@ pluginManagement {
 }
 
 plugins {
+	id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 	id("dev.kikugie.stonecutter") version "0.9"
-	id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
 val commonVersions =
@@ -35,7 +35,9 @@ stonecutter {
 
 		dists.forEach { (branchName, branchVersions) ->
 			branch(branchName) {
-				versions(*branchVersions.toTypedArray())
+				branchVersions.forEach { version ->
+				version(version).buildscript(if (stonecutter.eval(version, ">=26.1")) "build-unobf.gradle.kts" else "build.gradle.kts")
+				}
 			}
 		}
 	}

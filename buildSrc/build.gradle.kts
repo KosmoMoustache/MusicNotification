@@ -1,17 +1,17 @@
 plugins {
 	`kotlin-dsl`
-	kotlin("jvm") version "2.2.0"
-	id("project-report")
+//	kotlin("jvm") version "2.2.0"
+//	id("project-report")
 }
 
 repositories {
 	mavenCentral()
 	gradlePluginPortal()
-	maven("https://maven.kikugie.dev/snapshots")
+	maven("https://maven.fabricmc.net/") { name = "Fabric" }
 }
 
 dependencies {
-	fun plugin(id: String, version: String) = "$id:$id.gradle.plugin:$version"
-
 	implementation("dev.kikugie:stonecutter:0.9")
+	implementation("net.fabricmc.fabric-loom-remap:net.fabricmc.fabric-loom-remap.gradle.plugin:1.15-SNAPSHOT")
+	implementation("net.fabricmc.fabric-loom:net.fabricmc.fabric-loom.gradle.plugin:1.15-SNAPSHOT")
 }

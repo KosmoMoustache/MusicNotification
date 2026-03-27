@@ -3,7 +3,7 @@
 plugins {
 	kotlin("jvm")
 	id("multiloader-common")
-	id("net.fabricmc.fabric-loom-remap")
+	id("net.fabricmc.fabric-loom")
 	id("com.google.devtools.ksp")
 	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
@@ -21,12 +21,6 @@ fletchingTable {
 
 dependencies {
 	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
-	mappings(loom.layered {
-		officialMojangMappings()
-		commonMod.depOrNull("parchment")?.let { parchmentVersion ->
-			parchment("org.parchmentmc.data:parchment-${commonMod.mcVersion}:$parchmentVersion@zip")
-		}
-	})
 
 	compileOnly("org.spongepowered:mixin:0.8.5")
 
@@ -36,8 +30,10 @@ dependencies {
 	}
 
 	compileOnly("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
-	modApi("me.shedaniel.cloth:cloth-config-neoforge:${commonMod.depOrNull("cloth_config")}")
-}
+
+	commonMod.depOrNull("cloth_config")?.let { cloth_configVersion ->
+		api("me.shedaniel.cloth:cloth-config-neoforge:${cloth_configVersion}")
+	}}
 
 val commonJava: Configuration by configurations.creating {
 	isCanBeResolved = false

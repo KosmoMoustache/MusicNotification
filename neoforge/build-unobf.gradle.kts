@@ -12,9 +12,11 @@ fletchingTable {
 	}
 }
 
-
 dependencies {
-	api("me.shedaniel.cloth:cloth-config-neoforge:${commonMod.dep("cloth_config")}")
+	commonMod.depOrNull("cloth_config")?.let { cloth_configVersion ->
+		api("me.shedaniel.cloth:cloth-config-neoforge:${cloth_configVersion}")
+	}
+//	api("me.shedaniel.cloth:cloth-config-neoforge:${commonMod.dep("cloth_config")}")
 }
 
 neoForge {
