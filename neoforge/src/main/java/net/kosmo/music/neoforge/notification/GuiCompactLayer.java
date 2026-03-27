@@ -2,7 +2,7 @@ package net.kosmo.music.neoforge.notification;
 
 import net.kosmo.music.notification.CompactNotification;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +36,7 @@ public class GuiCompactLayer implements GuiLayer {
 	}
 
 	@Override
-	public void render(@NotNull GuiGraphics guiGraphics, @NotNull DeltaTracker deltaTracker) {
+	public void render(@NotNull GuiGraphicsExtractor guiGraphics, @NotNull DeltaTracker deltaTracker) {
 		CompactNotification.render(guiGraphics, deltaTracker, this.message, this.time);
 	}
 }

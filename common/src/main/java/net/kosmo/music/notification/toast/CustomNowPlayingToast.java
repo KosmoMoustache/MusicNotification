@@ -2,7 +2,7 @@ package net.kosmo.music.notification.toast;
 
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.NowPlayingToast;
 
 public class CustomNowPlayingToast extends NowPlayingToast {
@@ -14,8 +14,9 @@ public class CustomNowPlayingToast extends NowPlayingToast {
 		content = td;
 	}
 
-	public static void renderToast(GuiGraphics guiGraphics, Font font) {
-		NowPlayingToast.renderToast(guiGraphics, font);
+	public static void renderToast(GuiGraphicsExtractor guiGraphics, Font font) {
+		//~ if >26 renderToast -> extractToast
+		NowPlayingToast.extractToast(guiGraphics, font);
 	}
 
 	public static void tickMusicNotes() {

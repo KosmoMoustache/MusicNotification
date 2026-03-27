@@ -23,6 +23,4 @@ stonecutter parameters {
 			replace("KeyBindingHelper.registerKeyBinding", "KeyMappingHelper.registerKeyMapping")
 		}
 	}
-
-	constants["cloth"] = true
 }

@@ -6,7 +6,7 @@ import net.kosmo.music.config.Config;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.util.TextRender;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -57,7 +57,8 @@ public class MusicToast implements Toast {
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, Font font, long visibilityTime) {
+		//~ if >26 render -> extractRenderState
+	public void extractRenderState(GuiGraphicsExtractor guiGraphics, Font font, long visibilityTime) {
 		if (rotation >= 360) rotation = 0;
 		rotation += 1;
 
@@ -91,7 +92,7 @@ public class MusicToast implements Toast {
 		}
 	}
 
-	private void renderAnimatedAlbumCover(GuiGraphics guiGraphics, int x, int rotation) {
+	private void renderAnimatedAlbumCover(GuiGraphicsExtractor guiGraphics, int x, int rotation) {
 		int cx = x + 16;
 		guiGraphics.pose().pushMatrix();
 		Matrix3x2fStack matrices = guiGraphics.pose();

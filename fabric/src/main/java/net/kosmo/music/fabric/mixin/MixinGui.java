@@ -4,7 +4,7 @@ import net.kosmo.music.fabric.GuiAccessor;
 import net.kosmo.music.notification.CompactNotification;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -30,17 +30,19 @@ public abstract class MixinGui implements GuiAccessor {
 	}
 
 	@Inject(
-		method = "render",
+		//~ if >26 render -> extractRenderState
+		method = "extractRenderState",
 		at = @At(
 			value = "INVOKE",
 			//? if >=1.21.10 {
-			target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphics;Z)V", ordinal = 0
+			//~ if >26 renderSubtitleOverlay -> extractSubtitleOverlay
+			target = "Lnet/minecraft/client/gui/Gui;extractSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Z)V", ordinal = 0
 			//?} else {
-			/*target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"
+			/*target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"
 			*///?}
 		)
 	)
-	private void renderSubtitleOverlayInject(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+	private void renderSubtitleOverlayInject(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 		CompactNotification.render(guiGraphics, deltaTracker, musicnotification$compact$message, musicnotification$compact$time);
 	}
 

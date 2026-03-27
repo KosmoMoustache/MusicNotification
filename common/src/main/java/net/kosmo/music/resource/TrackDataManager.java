@@ -1,6 +1,6 @@
 package net.kosmo.music.resource;
 
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
