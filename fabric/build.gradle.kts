@@ -20,7 +20,7 @@ stonecutter {
 
 dependencies {
 	fun fabricModules(vararg modules: String) = modules.forEach {
-		implementation (fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
+		modImplementation(fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
 	}
 
 
@@ -32,16 +32,18 @@ dependencies {
 		}
 	})
 
-	implementation ("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
+	modImplementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
 	commonMod.depOrNull("modmenu")?.let { modMenuVersion ->
-		implementation ("com.terraformersmc:modmenu:${modMenuVersion}")
+		modImplementation("com.terraformersmc:modmenu:${modMenuVersion}")
 	}
-	implementation ("me.shedaniel.cloth:cloth-config-fabric:${commonMod.depOrNull("cloth_config")}")
+	commonMod.depOrNull("cloth_config")?.let { clothConfigVersion ->
+		modImplementation("me.shedaniel.cloth:cloth-config-fabric:$clothConfigVersion")
+	}
 
 	fabricModules("command-api-v2", "gametest-api-v1", "client-gametest-api-v1")
 
 	// Runtime only mods
-	modRuntimeOnly("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
 
 	// Fabric Loader JUnit for testing
 	testImplementation("net.fabricmc:fabric-loader-junit:${commonMod.dep("fabric-loader")}")
@@ -63,7 +65,7 @@ loom {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
-			programArg("--quickPlaySingleplayer \"FabricPlayground\"")
+			programArgs("--quickPlaySingleplayer \"FabricPlayground\"", "--width 1280", "--height 720")
 			vmArgs("-XX:+AllowEnhancedClassRedefinition")
 			// "-Dfabric.log.level=debug"
 		}
