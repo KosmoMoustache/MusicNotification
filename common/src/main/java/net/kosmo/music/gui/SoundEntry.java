@@ -5,7 +5,7 @@ import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.resource.SoundData;
 import net.kosmo.music.util.TextRender;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -61,7 +61,8 @@ public class SoundEntry extends ListEntry {
 
 	//? if >=1.21.10 {
 	@Override
-	public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
+		//~ if >26 renderContent -> extractContent
+	public void extractContent(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
 		render(
 			guiGraphics,
 			0,
@@ -79,13 +80,14 @@ public class SoundEntry extends ListEntry {
 	//?} else {
 	/*@Override
 	 *///?}
-	public void render(GuiGraphics guiGraphics, int do_not_use_index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
+	public void render(GuiGraphicsExtractor guiGraphics, int do_not_use_index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
 		guiGraphics.fill(left, top, left + width, top + height, GRAY_COLOR);
 
 		this.playButton.setX(left + (width - this.playButton.getWidth() - 4) - 4);
 		this.playButton.setY(top + (height - this.playButton.getHeight()) / 2);
 		this.playButton.active = !Helper.isVolumeZero();
-		this.playButton.render(guiGraphics, mouseX, mouseY, partialTick);
+		//~ if >26 render -> extractRenderState
+		this.playButton.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
 
 		TextRender.drawScrollableText(guiGraphics, this.client.font, Component.literal(entry.id().toString()), left + 4, left + 4, top + (height - this.client.font.lineHeight) / 2, left + width - 24 - 8, top + (height - this.client.font.lineHeight) / 2 + this.client.font.lineHeight, CommonColors.WHITE, true);
 	}

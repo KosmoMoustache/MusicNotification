@@ -1,13 +1,13 @@
 package net.kosmo.music.resource;
 
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.kosmo.music.MusicNotificationClient;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.Nullable;
 
 public class AlbumCover {
 	private final AlbumCoverType cover;
@@ -36,12 +36,12 @@ public class AlbumCover {
 		return this.cover instanceof SpriteCover;
 	}
 
-	public void drawCover(GuiGraphics guiGraphics, int x, int y) {
+	public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y) {
 		this.cover.drawCover(guiGraphics, x, y);
 	}
 
 	interface AlbumCoverType {
-		void drawCover(GuiGraphics guiGraphics, int x, int y);
+		void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y);
 
 		int getHeight();
 
@@ -79,7 +79,7 @@ public class AlbumCover {
 			return 20;
 		}
 
-		public void drawCover(GuiGraphics guiGraphics, int x, int y) {
+		public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y) {
 			guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, getWidth(), getHeight());
 		}
 	}
@@ -111,8 +111,9 @@ public class AlbumCover {
 			return itemStack;
 		}
 
-		public void drawCover(GuiGraphics guiGraphics, int x, int y) {
-			guiGraphics.renderFakeItem(this.stack, x, y);
+		public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y) {
+			//~ if >26 renderFakeItem -> fakeItem
+			guiGraphics.fakeItem(this.stack, x, y);
 		}
 	}
 }

@@ -2,7 +2,7 @@ package net.kosmo.music.util;
 
 import net.minecraft.util.Util;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
@@ -11,7 +11,7 @@ public class TextRender {
 	/**
 	 * Draw a scrollable text
 	 */
-	public static void drawScrollableText(GuiGraphics context, Font textRenderer, Component text, int centerX, int minX, int minY, int maxX, int maxY, int color, boolean shadow) {
+	public static void drawScrollableText(GuiGraphicsExtractor context, Font textRenderer, Component text, int centerX, int minX, int minY, int maxX, int maxY, int color, boolean shadow) {
 		int i = textRenderer.width(text);
 		int j = (minY + maxY - textRenderer.lineHeight) / 2 + 1;
 		int k = maxX - minX;
@@ -24,14 +24,16 @@ public class TextRender {
 
 			context.enableScissor(minX, minY, maxX, maxY);
 //			context.fill(minX, minY, maxX, maxY, CommonColors.RED);
-			context.drawString(textRenderer, text.getVisualOrderText(), minX - (int) g, j, color, shadow);
+			//~ if >26 'context.drawString' -> 'context.text'
+			context.text(textRenderer, text.getVisualOrderText(), minX - (int) g, j, color, shadow);
 			context.disableScissor();
 		} else {
 //			context.fill(0, 0, 1, 10, CommonColors.RED);
 			int l = Mth.clamp(centerX, minX + i / 2, maxX - i / 2);
 
 			FormattedCharSequence orderedText = text.getVisualOrderText();
-			context.drawString(textRenderer, orderedText, l - textRenderer.width(orderedText) / 2, j, color, shadow);
+			//~ if >26 'context.drawString' -> 'context.text'
+			context.text(textRenderer, orderedText, l - textRenderer.width(orderedText) / 2, j, color, shadow);
 		}
 	}
 }

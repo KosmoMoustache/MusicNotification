@@ -34,7 +34,7 @@ public record TrackData(
 			Identifier.CODEC.optionalFieldOf("customId").forGetter(TrackData::customId))
 		.apply(i, (keyOpt, title, author, album, cover, item, customId) -> new TrackData(keyOpt.orElse(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "generic")), title, author, album, cover, item, customId)));
 
-	// A map codec that stores a map<ResourceLocation, TrackData> but injects the map key into each TrackData.key
+	// A map codec that stores a map<Identifier, TrackData> but injects the map key into each TrackData.key
 	public static final Codec<Map<Identifier, TrackData>> MAP_CODEC = ExtraCodecs.strictUnboundedMap(Identifier.CODEC, CODEC)
 		.xmap(TrackData::injectKeysFromMap, TrackData::ensureValuesHaveKeys);
 	private static final Map<Identifier, AlbumCover> ALBUM_CACHE = new ConcurrentHashMap<>();

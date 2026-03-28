@@ -26,7 +26,8 @@ public class ClientGameTest implements FabricClientGameTest {
 	@Override
 	public void runTest(ClientGameTestContext context) {
 		try (TestSingleplayerContext singleplayer = context.worldBuilder().create()) {
-			singleplayer.getClientWorld().waitForChunksRender();
+			//~ if >26 getClientWorld -> getClientLevel
+			singleplayer.getClientLevel().waitForChunksRender();
 
 
 			context.runOnClient(this::testSoundEventExistence);

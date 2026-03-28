@@ -8,7 +8,7 @@ import net.kosmo.music.resource.SoundData;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.resource.TrackDataManager;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
@@ -106,7 +106,7 @@ public class JukeboxScreen extends Screen {
 		this.layout.addToFooter(Button.builder(CommonComponents.GUI_BACK, button -> this.onClose()).build());
 
 		this.layout.visitWidgets(this::addRenderableWidget);
-		this.layout.arrangeElements();
+		this.layout.visitWidgets(this::addRenderableWidget);
 
 		this.repositionElements();
 	}
@@ -130,17 +130,20 @@ public class JukeboxScreen extends Screen {
 	}
 
 	@Override
-	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+	//~ if >26 renderBackground -> extractBackground {
+	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+		super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
+		//~ }
 		int i = this.marginX() + 3;
 		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
 		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-		super.render(guiGraphics, mouseX, mouseY, delta);
-
+		//~ if >26 render -> extractRenderState {
+	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float delta) {
+		super.extractRenderState(guiGraphics, mouseX, mouseY, delta);
+//~ }
 		if (this.minecraft.options.getSoundSourceVolume(SoundSource.MASTER) == 0f) {
 			this.stopSoundButton.setMessage(MASTER_VOLUME_ZERO);
 		} else if (this.minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) == 0f) {
@@ -148,14 +151,18 @@ public class JukeboxScreen extends Screen {
 		}
 
 		if (!this.soundList.isEmpty()) {
-			this.soundList.render(guiGraphics, mouseX, mouseY, delta);
+			//~ if >26 render -> extractRenderState
+			this.soundList.extractRenderState(guiGraphics, mouseX, mouseY, delta);
 		} else if (!this.searchBox.getValue().isEmpty()) {
-			guiGraphics.drawCenteredString(this.minecraft.font, EMPTY_SEARCH_TEXT, this.width / 2, (72 + this.listEnd()) / 2, CommonColors.WHITE);
+			//~ if >26 drawCenteredString -> centeredText
+			guiGraphics.centeredText(this.minecraft.font, EMPTY_SEARCH_TEXT, this.width / 2, (72 + this.listEnd()) / 2, CommonColors.WHITE);
 		} else if (this.currentTab == Tab.HISTORY) {
-			guiGraphics.drawCenteredString(this.minecraft.font, EMPTY_HISTORY_TEXT, this.width / 2, (72 + this.listEnd()) / 2, CommonColors.WHITE);
+			//~ if >26 drawCenteredString -> centeredText
+			guiGraphics.centeredText(this.minecraft.font, EMPTY_HISTORY_TEXT, this.width / 2, (72 + this.listEnd()) / 2, CommonColors.WHITE);
 		}
 
-		this.searchBox.render(guiGraphics, mouseX, mouseY, delta);
+		//~ if >26 render -> extractRenderState
+		this.searchBox.extractRenderState(guiGraphics, mouseX, mouseY, delta);
 	}
 
 	private void setCurrentTab(Tab currentTab) {
@@ -193,6 +200,11 @@ public class JukeboxScreen extends Screen {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public boolean isPauseScreen() {
+		return false;
 	}
 
 

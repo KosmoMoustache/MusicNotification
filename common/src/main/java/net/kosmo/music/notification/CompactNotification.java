@@ -6,7 +6,7 @@ import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -22,7 +22,7 @@ public class CompactNotification extends Notification {
 		return screen == null || screen instanceof ChatScreen;
 	}
 
-	public static void render(GuiGraphics guiGraphics, @NotNull DeltaTracker deltaTracker, Component message, int time) {
+	public static void render(GuiGraphicsExtractor guiGraphics, @NotNull DeltaTracker deltaTracker, Component message, int time) {
 		Minecraft client = Minecraft.getInstance();
 		Font font = client.font;
 
@@ -42,7 +42,8 @@ public class CompactNotification extends Notification {
 				if (f < 10.0F) {
 					alpha = Math.min(alpha, i);
 				}
-				guiGraphics.drawStringWithBackdrop(font, message, -width - 10, -4, width, ARGB.color(alpha, CommonColors.WHITE));
+				//~ if >26 drawStringWithBackdrop -> textWithBackdrop
+				guiGraphics.textWithBackdrop(font, message, -width - 10, -4, width, ARGB.color(alpha, CommonColors.WHITE));
 				guiGraphics.pose().popMatrix();
 			}
 		}

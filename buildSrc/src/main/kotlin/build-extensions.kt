@@ -38,7 +38,7 @@ value class ModData(private val project: Project) {
 	val license: String get() = modProp("license")
 	val github: String get() = modProp("github")
 	val mcVersion: String get() = depOrNull("minecraft") ?: project.stonecutterBuild.current.version
-	val awVersion: String get() = prop("aw_version")
+	val awVersion: String get() = modProp("aw")
 
 	fun propOrNull(key: String) = project.prop(key)
 	fun prop(key: String) = requireNotNull(propOrNull(key)) { "Missing '$key'" }

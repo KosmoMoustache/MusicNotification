@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import net.kosmo.music.resource.SoundData;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -23,12 +23,15 @@ public class JukeboxEntryList extends ContainerObjectSelectionList<ListEntry> {
 		this.parent = jukeboxScreen;
 	}
 
+	// Prevent Background
 	@Override
-	protected void renderListBackground(GuiGraphics guiGraphics) {
+	//~ if >26 renderListBackground -> extractListBackground
+	protected void extractListBackground(GuiGraphicsExtractor graphics) {
 	}
-
+	// Prevent Header & Footer separator
 	@Override
-	protected void renderListSeparators(GuiGraphics guiGraphics) {
+	//~ if >26 renderListSeparators -> extractListSeparators
+	protected void extractListSeparators(GuiGraphicsExtractor graphics) {
 	}
 
 	public int getRowWidth() {

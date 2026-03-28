@@ -2,7 +2,7 @@
 
 plugins {
 	kotlin("jvm")
-	id("net.fabricmc.fabric-loom-remap")
+	id("net.fabricmc.fabric-loom")
 	id("multiloader-loader")
 	id("com.google.devtools.ksp")
 	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
@@ -20,30 +20,26 @@ stonecutter {
 
 dependencies {
 	fun fabricModules(vararg modules: String) = modules.forEach {
-		modImplementation(fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
+		implementation(fabricApi.module(it, "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
 	}
 
 
 	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
-	mappings(loom.layered {
-		officialMojangMappings()
-		commonMod.depOrNull("parchment")?.let { parchmentVersion ->
-			parchment("org.parchmentmc.data:parchment-${commonMod.mcVersion}:$parchmentVersion@zip")
-		}
-	})
 
-	modImplementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
+	implementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
 	commonMod.depOrNull("modmenu")?.let { modMenuVersion ->
-		modImplementation("com.terraformersmc:modmenu:${modMenuVersion}")
+		implementation("com.terraformersmc:modmenu:${modMenuVersion}")
 	}
-	commonMod.depOrNull("cloth_config")?.let { clothConfigVersion ->
-		modImplementation("me.shedaniel.cloth:cloth-config-fabric:$clothConfigVersion")
+	commonMod.depOrNull("cloth_config")?.let { cloth_configVersion ->
+		implementation("me.shedaniel.cloth:cloth-config-fabric:${cloth_configVersion}")
 	}
 
-	fabricModules("command-api-v2", "gametest-api-v1", "client-gametest-api-v1")
+	fabricModules(
+		"fabric-command-api-v2", "fabric-gametest-api-v1", "fabric-client-gametest-api-v1"
+	)
 
 	// Runtime only mods
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
+	implementation("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
 
 	// Fabric Loader JUnit for testing
 	testImplementation("net.fabricmc:fabric-loader-junit:${commonMod.dep("fabric-loader")}")
@@ -65,7 +61,7 @@ loom {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
-			programArgs("--quickPlaySingleplayer \"FabricPlayground\"", "--width 1280", "--height 720")
+			programArg("--quickPlaySingleplayer \"FabricPlayground\"")
 			vmArgs("-XX:+AllowEnhancedClassRedefinition")
 			// "-Dfabric.log.level=debug"
 		}

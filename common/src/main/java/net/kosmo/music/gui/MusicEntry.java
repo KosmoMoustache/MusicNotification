@@ -7,7 +7,7 @@ import net.kosmo.music.resource.AlbumCover;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.util.TextRender;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -55,7 +55,8 @@ public class MusicEntry extends ListEntry {
 
 	//? if >=1.21.10 {
 	@Override
-	public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
+		//~ if >26 renderContent -> extractContent
+	public void extractContent(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
 		render(
 			guiGraphics,
 			0,
@@ -73,7 +74,7 @@ public class MusicEntry extends ListEntry {
 	//?} else {
 	/*@Override
 	 *///?}
-	public void render(GuiGraphics guiGraphics, int do_not_use_index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
+	public void render(GuiGraphicsExtractor guiGraphics, int do_not_use_index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
 		int y1 = top + 4;
 		int y2 = top + (height / 2) + 3;
 		int xMargeCover = left + 4 + 24 + 4;
@@ -83,7 +84,8 @@ public class MusicEntry extends ListEntry {
 		MutableComponent text = entry.title().copy().append(" - ").withColor(CommonColors.WHITE).append(entry.author().copy().withColor(CommonColors.LIGHT_GRAY));
 		TextRender.drawScrollableText(guiGraphics, this.client.font, text, xMargeCover, xMargeCover, y1, this.playButton.getX() - 4, y1 + this.client.font.lineHeight, CommonColors.WHITE, true);
 		if (entry.album().isPresent()) {
-			guiGraphics.drawString(this.client.font, entry.album().get(), xMargeCover, y2, CommonColors.LIGHT_GRAY, false);
+			//~ if >26 'guiGraphics.drawString' -> 'guiGraphics.text'
+			guiGraphics.text(this.client.font, entry.album().get(), xMargeCover, y2, CommonColors.LIGHT_GRAY, false);
 		}
 
 		AlbumCover albumCover = this.entry.getAlbumCover();
@@ -96,13 +98,15 @@ public class MusicEntry extends ListEntry {
 		this.playButton.setY(top + (height - this.playButton.getHeight()) / 2);
 		this.playButton.active = !isPlaying && shouldRenderButton && !Helper.isVolumeZero();
 		this.playButton.visible = !isPlaying && shouldRenderButton;
-		this.playButton.render(guiGraphics, mouseX, mouseY, partialTick);
+		//~ if >26 render -> extractRenderState
+		this.playButton.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
 
 		this.stopButton.setX(left + (width - this.stopButton.getWidth()) - 8);
 		this.stopButton.setY(top + (height - this.stopButton.getHeight()) / 2);
 		this.stopButton.active = isPlaying && shouldRenderButton;
 		this.stopButton.visible = isPlaying && shouldRenderButton;
-		this.stopButton.render(guiGraphics, mouseX, mouseY, partialTick);
+		//~ if >26 render -> extractRenderState
+		this.stopButton.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
 	}
 
 	private boolean isPlaying() {
