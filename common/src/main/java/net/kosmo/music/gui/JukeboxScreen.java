@@ -100,17 +100,15 @@ public class JukeboxScreen extends Screen {
 		this.searchBox.setHint(SEARCH_TEXT);
 		this.searchBox.setResponder(this::onSearchChange);
 
-//		this.addRenderableWidget(this.searchBox);
-//		this.addWidget(soundList);
+		this.addRenderableWidget(this.searchBox);
+		this.addWidget(soundList);
 		this.setCurrentTab(Tab.HOME);
 		this.layout.addToFooter(Button.builder(CommonComponents.GUI_BACK, button -> this.onClose()).build());
 
-//		this.layout.visitWidgets(this::addRenderableWidget);
-//		this.layout.visitWidgets(this::addRenderableWidget);
+		this.layout.visitWidgets(this::addRenderableWidget);
+		this.layout.visitWidgets(this::addRenderableWidget);
 
-//		this.layout.arrangeElements();
-
-//		this.repositionElements();
+		this.repositionElements();
 	}
 
 	@Override
