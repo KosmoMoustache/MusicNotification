@@ -136,7 +136,8 @@ jobs:
                     modrinth-id: ${{ steps.publish-platforms.outputs.modrinth == 'true' && vars.MODRINTH_PROJECT_ID || 'donotupload' }}
                     modrinth-token: ${{ steps.publish-platforms.outputs.modrinth == 'true' && secrets.MODRINTH_TOKEN || '' }}
 
-                    name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    # [Fabric|Neoforge|Forge] ModName ModVersion for MinecraftVersion
+                    name: ${{ format('[{0}] {1} {2} for {3}', matrix.mod_loader == 'fabric' && 'Fabric' || matrix.mod_loader == 'neoforge' && 'Neoforge' || matrix.mod_loader == 'forge' && 'Forge' || matrix.mod_loader, steps.gradle-properties.outputs.MOD_NAME, steps.gradle-properties.outputs.MOD_VERSION, steps.gradle-properties.outputs.MINECRAFT_VERSION) }}
                     version: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}-${{ matrix.mod_loader }}
                     loaders: ${{ join(matrix.supported_mod_loaders, ' ') }}
                     game-versions: |
