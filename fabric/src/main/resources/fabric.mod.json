@@ -42,7 +42,7 @@
 		"${modId}-common.mixins.json",
 		"${modId}.mixins.json"
 	],
-	"accessWidener": "${awVersion}.accesswidener",
+	"accessWidener": "${awVersion}.aw",
 	"depends": {
 		"minecraft": "${minecraftVersion}",
 		"fabric-api-base": "*",

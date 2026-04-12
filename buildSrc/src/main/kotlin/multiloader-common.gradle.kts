@@ -1,3 +1,5 @@
+import org.gradle.internal.jvm.inspection.JvmVendor
+
 plugins {
 	id("java")
 	id("idea")
@@ -11,7 +13,10 @@ base {
 }
 
 java {
+	toolchain.vendor = JvmVendorSpec.JETBRAINS
 	toolchain.languageVersion = JavaLanguageVersion.of(commonProject.prop("java.version")!!)
+//	sourceCompatibility = JavaVersion.VERSION_25
+//	targetCompatibility = JavaVersion.VERSION_25
 //	withSourcesJar()
 //	withJavadocJar()
 }
@@ -40,10 +45,6 @@ repositories {
 
 tasks {
 	processResources {
-//		exclude {
-//			it.name.endsWith(".accesswidener") && it.name != commonMod.aw
-//			}
-
 		val expandProps = mapOf(
 			"javaVersion" to commonMod.propOrNull("java.version"),
 			"modId" to commonMod.id,

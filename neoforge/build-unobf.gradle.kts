@@ -52,7 +52,7 @@ sourceSets.main {
 
 tasks {
 	processResources {
-		exclude("${mod.id}.accesswidener")
+		exclude("${mod.id}.aw")
 	}
 }
 

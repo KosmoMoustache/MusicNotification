@@ -9,6 +9,7 @@ import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.server.packs.resources.ResourceManager;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import net.minecraft.util.profiling.ProfilerFiller;
 *///? }
 import net.kosmo.music.resource.MusicResourceReloadListener;
 import net.kosmo.music.resource.TrackData;
@@ -28,8 +29,8 @@ public class ClientResourceListener extends SimpleReloadListener<Map<Identifier,
 		MusicResourceReloadListener.INSTANCE.apply(prepared, state.resourceManager());
 	}
 }
-//? } else {
-	/*public class ClientResourceListener implements SimpleResourceReloadListener<Map<Identifier, TrackData>> {
+//? } elif >1.21.1 {
+/*public class ClientResourceListener implements SimpleResourceReloadListener<Map<Identifier, TrackData>> {
 		@Override
 		public Identifier getFabricId() {
 			return Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "client_resources");
@@ -45,5 +46,22 @@ public class ClientResourceListener extends SimpleReloadListener<Map<Identifier,
 		public CompletableFuture<Void> apply(Map<Identifier, TrackData> data, ResourceManager manager, Executor executor) {
 			return CompletableFuture.runAsync(() -> MusicResourceReloadListener.INSTANCE.apply(data, manager), executor);
 		}
+}
+*///? } else {
+/*public class ClientResourceListener implements SimpleResourceReloadListener<Map<Identifier, TrackData>> {
+	@Override
+	public Identifier getFabricId() {
+		return Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "client_resources");
 	}
+
+	@Override
+	public CompletableFuture<Map<Identifier, TrackData>> load(ResourceManager manager, ProfilerFiller profiler, Executor executor) {
+		return CompletableFuture.supplyAsync(() -> MusicResourceReloadListener.INSTANCE.prepare(manager), executor);
+	}
+
+	@Override
+	public CompletableFuture<Void> apply(Map<Identifier, TrackData> data, ResourceManager manager, ProfilerFiller profiler, Executor executor) {
+		return CompletableFuture.runAsync(() -> MusicResourceReloadListener.INSTANCE.apply(data, manager), executor);
+	}
+}
 *///? }

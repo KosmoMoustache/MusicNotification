@@ -18,14 +18,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.ARGB;
 import net.minecraft.util.CommonColors;
+//~ if >1.21.1 'FastColor' -> 'ARGB'
+import net.minecraft.util.ARGB;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MusicEntry extends ListEntry {
+	//~ if >1.21.1 'FastColor.ARGB32' -> 'ARGB'
 	public static final int GRAY_COLOR = ARGB.color(255, 74, 74, 74);
 	private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(Identifier.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), Identifier.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), Identifier.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
 	private static final WidgetSprites STOP_BUTTON_TEXTURE = new WidgetSprites(Identifier.fromNamespaceAndPath("musicnotification", "jukebox/stop_button"), Identifier.fromNamespaceAndPath("musicnotification", "jukebox/stop_button_focused"));
@@ -73,7 +76,7 @@ public class MusicEntry extends ListEntry {
 
 	//?} else {
 	/*@Override
-	 *///?}
+		*///?}
 	public void render(GuiGraphicsExtractor guiGraphics, int do_not_use_index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
 		int y1 = top + 4;
 		int y2 = top + (height / 2) + 3;

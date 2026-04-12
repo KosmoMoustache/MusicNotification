@@ -46,13 +46,18 @@ public class JukeboxSongCommandFabric {
 
 	public static int run(FabricClientCommandSource source, Identifier location) {
 		try {
+			//? if >1.21.1 {
 			Registry<JukeboxSong> r = source.registryAccess().lookupOrThrow(Registries.JUKEBOX_SONG);
 			Optional<Holder.Reference<JukeboxSong>> song = r.get(location);
+			//? } else {
+			/*Optional<Holder.Reference<JukeboxSong>> song = source.registryAccess().registryOrThrow(Registries.JUKEBOX_SONG).getHolder(location);
+			*///? }
 			if (song.isPresent()) {
 				source.sendFeedback(Component.translatable("commands.jukeboxsong.success", Component.translationArg(location),
 					song.get().value().comparatorOutput(),
 					song.get().value().description(),
 					song.get().value().lengthInSeconds(),
+					//~ if >1.21.1 'getLocation()' -> 'location()'
 					Component.translationArg(song.get().value().soundEvent().value().location())
 				));
 				return 0;

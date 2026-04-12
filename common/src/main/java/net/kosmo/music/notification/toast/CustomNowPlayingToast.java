@@ -1,3 +1,4 @@
+//? if >= 1.21.6 {
 package net.kosmo.music.notification.toast;
 
 import net.kosmo.music.resource.TrackData;
@@ -29,3 +30,4 @@ public class CustomNowPlayingToast extends NowPlayingToast {
 //		}
 	}
 }
+//? }

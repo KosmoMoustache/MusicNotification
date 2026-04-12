@@ -2,6 +2,7 @@ package net.kosmo.music.resource;
 
 import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+//? >1.21.1
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -80,7 +81,7 @@ public class AlbumCover {
 		}
 
 		public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y) {
-			guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, getWidth(), getHeight());
+			guiGraphics.blitSprite(/*? >1.21.1 {*/RenderPipelines.GUI_TEXTURED,/*?}*/sprite, x, y, getWidth(), getHeight());
 		}
 	}
 
@@ -104,6 +105,7 @@ public class AlbumCover {
 				MusicNotificationClient.LOGGER.error("Failed to find album cover item '{}', falling back to minecraft:music_disc_13.", itemId);
 				itemId = Identifier.tryParse("minecraft:music_disc_13");
 			}
+			//~ if >1.21.1 '.getDefaultInstance()' -> '.get().value().getDefaultInstance()'
 			ItemStack itemStack = BuiltInRegistries.ITEM.get(itemId).get().value().getDefaultInstance();
 			if (itemStack.isEmpty()) {
 				itemStack = new ItemStack(Items.MUSIC_DISC_13);
