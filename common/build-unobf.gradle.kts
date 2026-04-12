@@ -10,13 +10,17 @@ plugins {
 
 loom {
 	accessWidenerPath =
-		common.project.file("../../src/main/resources/${commonMod.awVersion}.accesswidener")
+		common.project.file("../../src/main/resources/${commonMod.awVersion}.aw")
 }
 
 fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
 	}
+}
+
+stonecutter {
+	filters.exclude("**/*.aw")
 }
 
 dependencies {

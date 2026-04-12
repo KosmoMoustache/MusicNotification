@@ -23,7 +23,6 @@ dependencies {
 		implementation(fabricApi.module(it, "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
 	}
 
-
 	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
 
 	implementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
@@ -54,7 +53,7 @@ afterEvaluate {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.accesswidener")
+	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.aw")
 
 	runs {
 		getByName("client") {
