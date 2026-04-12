@@ -60,7 +60,7 @@ public class Helper {
 
 	public static void playTrackData(Minecraft client, SoundEvent soundEvent) {
 		client.getSoundManager().stop(null, SoundSource.MUSIC);
-		SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 {*/ /*?} else {*//*, 10 *//*?}*/);
+		SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 || <1.21.2 {*/ /*?} else {*//*, 10 *//*?}*/);
 		MusicManagerAccessor musicManagerAccessor = (MusicManagerAccessor) client.getMusicManager();
 		client.getSoundManager().play(soundInstance);
 		musicManagerAccessor.setCurrentMusic(soundInstance);

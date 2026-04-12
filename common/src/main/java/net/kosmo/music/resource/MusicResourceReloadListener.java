@@ -9,7 +9,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+//? if >1.21.1 {
 import net.minecraft.util.StrictJsonParser;
+//? } else {
+/*import com.google.gson.JsonParser;
+*///? }
 import net.minecraft.util.profiling.ProfilerFiller;
 
 import java.io.BufferedReader;
@@ -24,7 +28,11 @@ public class MusicResourceReloadListener extends SimplePreparableReloadListener<
 		Map<Identifier, TrackData> map = new HashMap<>();
 		for (Resource resource : resourceManager.getResourceStack(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, MUSIC_PATH))) {
 			try (BufferedReader bufferedReader = resource.openAsReader()) {
+				//? if >1.21.1 {
 				JsonElement jsonElement = StrictJsonParser.parse(bufferedReader);
+				//? } else {
+				/*JsonElement jsonElement = JsonParser.parseReader(bufferedReader);
+				*///? }
 				map.putAll(TrackData.MAP_CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(JsonParseException::new));
 			} catch (Exception exception) {
 				MusicNotificationClient.LOGGER.error("Failed to parse song information {} in resource pack '{}'", MUSIC_PATH, resource.sourcePackId(), exception);

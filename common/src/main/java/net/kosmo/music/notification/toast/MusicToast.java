@@ -1,6 +1,5 @@
 package net.kosmo.music.notification.toast;
 
-import net.kosmo.music.Helper;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.config.Config;
 import net.kosmo.music.resource.TrackData;
@@ -9,13 +8,19 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
+//? if > 1.21.1 {
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.Identifier;
+import net.kosmo.music.Helper;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix3x2fStack;
+//? } else {
+/*import org.joml.Quaternionf;
+import com.mojang.blaze3d.vertex.PoseStack;
+*///? }
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.CommonColors;
 
 public class MusicToast implements Toast {
 	private static final Identifier BACKGROUND_SPRITE = Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/background");
@@ -36,6 +41,11 @@ public class MusicToast implements Toast {
 		this.justUpdated = true;
 	}
 
+	private Visibility computeVisibility(long visibilityTime, ToastManager toastManager) {
+		return (double) (visibilityTime - this.startTime) >= 5000.0 * toastManager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+	}
+
+	//? if >1.21.1 {
 	@Override
 	public @NotNull Visibility getWantedVisibility() {
 		return this.visibility;
@@ -48,16 +58,27 @@ public class MusicToast implements Toast {
 			return;
 		}
 
-		this.visibility = (double) (visibilityTime - this.startTime) >= 5000.0 * toastManager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+		this.visibility = computeVisibility(visibilityTime, toastManager);
 	}
 
 	@Override
 	public @Nullable SoundEvent getSoundEvent() {
 		return Config.options().DISABLE_TOAST_SOUND == Config.Options.DisableToastSound.MUTE_SELF ? null : Toast.super.getSoundEvent();
 	}
+	//? }
 
+	//? if <=1.21.1 {
+	/*@Override
+	public Visibility render(GuiGraphicsExtractor guiGraphics, ToastManager toastComponent, long timeSinceLastVisible) {
+		render(guiGraphics, toastComponent.getMinecraft().font, timeSinceLastVisible);
+		this.visibility = computeVisibility(timeSinceLastVisible, toastComponent);
+		return this.visibility;
+	}
+	*///? }
+
+	//? if >1.21.1
 	@Override
-		//~ if >26 render -> extractRenderState
+	//~ if >26 render -> extractRenderState
 	public void extractRenderState(GuiGraphicsExtractor guiGraphics, Font font, long visibilityTime) {
 		if (rotation >= 360) rotation = 0;
 		rotation += 1;
@@ -74,7 +95,7 @@ public class MusicToast implements Toast {
 			x = (this.width() - a) - padding;
 		}
 
-		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
+		guiGraphics.blitSprite(/*? >1.21.1 {*/RenderPipelines.GUI_TEXTURED,/*?}*/BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
 
 		if (Config.options().ROTATE_ALBUM_COVER && content.getAlbumCover().canBeAnimated()) {
 			renderAnimatedAlbumCover(guiGraphics, x, rotation);
@@ -84,6 +105,7 @@ public class MusicToast implements Toast {
 
 		// TODO: Fix: When album name is long and STYLE_LEGACY_TOAST_SCALE is true, title is not aligned properly (O's Piano; Lilypad)
 		int x1 = x + 6 + /*AlbumCover.getWidth() */ 20 + 6;
+		//~ if >1.21.1 '-13108' -> 'CommonColors.COSMOS_PINK'
 		TextRender.drawScrollableText(guiGraphics, font, content.title(), 30, x1, 7, this.width() - 4, 7 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? CommonColors.COSMOS_PINK : -11534256, false);
 		TextRender.drawScrollableText(guiGraphics, font, content.author(), 30, x1, 18, this.width() - 4, 18 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
 
@@ -95,14 +117,22 @@ public class MusicToast implements Toast {
 	private void renderAnimatedAlbumCover(GuiGraphicsExtractor guiGraphics, int x, int rotation) {
 		int cx = x + 16;
 		guiGraphics.pose().pushMatrix();
-		Matrix3x2fStack matrices = guiGraphics.pose();
 		// 16 = 6 + AlbumCover.get{Width/Height}() / 2
+		//? if >1.21.1 {
+		Matrix3x2fStack matrices = guiGraphics.pose();
 		matrices.translate(cx, 16);
 		matrices.rotate((float) Math.toRadians(rotation));
 		matrices.translate(-16, -16);
 		content.getAlbumCover().drawCover(guiGraphics, 6, 6);
-
 		matrices.translate(x, 0);
+		//? } else {
+		/*PoseStack matrices = guiGraphics.pose();
+		matrices.translate(cx, 16, 0);
+		matrices.mulPose(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
+		matrices.translate(-16, -16, 0);
+		content.getAlbumCover().drawCover(guiGraphics, 6, 6);
+		matrices.translate(x, 0, 0);
+		*///? }
 
 		guiGraphics.pose().popMatrix();
 	}

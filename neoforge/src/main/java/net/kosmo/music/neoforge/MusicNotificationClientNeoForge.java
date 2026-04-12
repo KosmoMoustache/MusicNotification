@@ -54,9 +54,16 @@ public class MusicNotificationClientNeoForge {
 		event.register(KeyBinding.getKeyMapping());
 	}
 
+	//? if >1.21.1 {
 	void addClientReloadListener(AddClientReloadListenersEvent event) {
 		event.addListener(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), MusicResourceReloadListener.INSTANCE);
 	}
+	//? } else {
+	/*void addClientReloadListener(RegisterClientReloadListenersEvent event) {
+		event.registerReloadListener(MusicResourceReloadListener.INSTANCE);
+//		event.addListener(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), MusicResourceReloadListener.INSTANCE);
+	}
+	*///? }
 
 	void registerGuiCompactLayer(RegisterGuiLayersEvent event) {
 		event.registerBelowAll(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "gui_notification_compact"), new GuiCompactLayer());

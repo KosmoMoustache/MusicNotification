@@ -1,5 +1,9 @@
 package net.kosmo.music.resource;
 
+//? if <=1.21.1 {
+/*import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+*///? }
 import org.jetbrains.annotations.Nullable;
 import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.client.Minecraft;
@@ -38,14 +42,20 @@ public class TrackDataManager {
 		if (Minecraft.getInstance().level != null) {
 			MusicNotificationClient.LOGGER.warn("no TrackData found for id: {} sound event: {}), trying with JukeboxSong registry", soundId, soundEventId);
 			try {
+				//? if >1.21.1 {
 				Registry<JukeboxSong> registryLookup = Minecraft.getInstance().level.registryAccess().lookupOrThrow(Registries.JUKEBOX_SONG);
-
 				Optional<JukeboxSong> songOpt = registryLookup.stream()
 					.filter(e -> e.soundEvent().value().location().equals(soundEventId))
 					.findFirst();
 				if (songOpt.isPresent()) {
 					return getTrackDataFromJukeboxSong(soundId, songOpt.get());
 				}
+				//? } else {
+				/*Optional<Holder.Reference<JukeboxSong>> registryLookup = Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.JUKEBOX_SONG).getHolder(soundEventId);
+				if (registryLookup.isPresent()) {
+					return getTrackDataFromJukeboxSong(soundId, registryLookup.get().value());
+				}
+				*///? }
 			} catch (IllegalStateException ignored) {
 			}
 		} else {

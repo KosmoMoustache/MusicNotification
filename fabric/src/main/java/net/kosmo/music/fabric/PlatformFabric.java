@@ -19,7 +19,7 @@ public class PlatformFabric extends PlatformHelper {
 	public void setCompactNotification(TrackData trackData, int time) {
 		GuiAccessor gui = (GuiAccessor) Minecraft.getInstance().gui;
 		gui.musicNotification$setCompactNotificationMessage(this.getCompactNotificationMessage(trackData));
-		gui.musicNotification$setCompactNotificationTime(60);
+		gui.musicNotification$setCompactNotificationTime(time);
 	}
 
 	@Override

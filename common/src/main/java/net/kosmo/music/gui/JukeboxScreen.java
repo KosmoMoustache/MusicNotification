@@ -13,6 +13,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.screens.Screen;
+//? >1.21.1
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -135,8 +136,8 @@ public class JukeboxScreen extends Screen {
 		super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
 		//~ }
 		int i = this.marginX() + 3;
-		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
-		guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
+		guiGraphics.blitSprite(/*? >1.21.1 {*/RenderPipelines.GUI_TEXTURED,/*?}*/BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
+		guiGraphics.blitSprite(/*? >1.21.1 {*/RenderPipelines.GUI_TEXTURED,/*?}*/SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
 	}
 
 	@Override
@@ -182,6 +183,7 @@ public class JukeboxScreen extends Screen {
 			case HOME: {
 				this.homeButton.setMessage(SELECTED_HOME_TAB_TITLE);
 				Collection<TrackData> col = TrackDataManager.getInstance().tracks.values();
+				//~ if >1.21.1 'getScrollAmount()' -> 'scrollAmount()'
 				this.soundList.update(col, this.soundList.scrollAmount());
 				break;
 			}
@@ -189,6 +191,7 @@ public class JukeboxScreen extends Screen {
 				this.soundButton.setMessage(SELECTED_SOUND_TAB_TITLE);
 				Collection<SoundData> col = Lists.newArrayList();
 				this.minecraft.getSoundManager().getAvailableSounds().forEach(id -> col.add(new SoundData(id)));
+				//~ if >1.21.1 'getScrollAmount()' -> 'scrollAmount()'
 				this.soundList.update(col, this.soundList.scrollAmount());
 				break;
 			}
@@ -196,6 +199,7 @@ public class JukeboxScreen extends Screen {
 				this.historyButton.setMessage(SELECTED_HISTORY_TAB_TITLE);
 				this.clearHistoryButton.visible = true;
 				Collection<TrackData> col = TrackHistory.getInstance().getHistory();
+				//~ if >1.21.1 'getScrollAmount()' -> 'scrollAmount()'
 				this.soundList.update(col, this.soundList.scrollAmount());
 				break;
 			}
