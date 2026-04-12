@@ -8,6 +8,10 @@ plugins {
 	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
+kotlin {
+	jvmToolchain(commonProject.prop("java.version")!!.toInt())
+}
+
 fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
@@ -22,7 +26,6 @@ dependencies {
 	fun fabricModules(vararg modules: String) = modules.forEach {
 		modImplementation(fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
 	}
-
 
 	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
 	mappings(loom.layered {
@@ -40,7 +43,11 @@ dependencies {
 		modImplementation("me.shedaniel.cloth:cloth-config-fabric:$clothConfigVersion")
 	}
 
-	fabricModules("command-api-v2", "gametest-api-v1", "client-gametest-api-v1")
+	if (sc.current.parsed >= "1.21.5") {
+		fabricModules("command-api-v2", "gametest-api-v1", "client-gametest-api-v1")
+	} else {
+		fabricModules("command-api-v2")
+	}
 
 	// Runtime only mods
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
@@ -58,7 +65,7 @@ afterEvaluate {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.accesswidener")
+	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.aw")
 
 	runs {
 		getByName("client") {
@@ -66,26 +73,30 @@ loom {
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
 			programArgs("--quickPlaySingleplayer \"FabricPlayground\"", "--width 1280", "--height 720")
-			vmArgs("-XX:+AllowEnhancedClassRedefinition")
+			if (sc.current.parsed > "1.21.1") {
+				vmArgs("-XX:+AllowEnhancedClassRedefinition")
+			}
 			// "-Dfabric.log.level=debug"
 		}
 	}
 }
 
 // gametest
-fabricApi {
-	configureTests {
-		enableGameTests = false
-		createSourceSet = true
-		eula = true
-		modId = "musicnotification-test"
+if (sc.current.parsed > "1.21.1") {
+	fabricApi {
+		configureTests {
+			enableGameTests = false
+			createSourceSet = true
+			eula = true
+			modId = "musicnotification-test"
+		}
+	}
+	tasks.named<Test>("test") {
+		useJUnitPlatform()
+	}
+
+	tasks.named<Copy>("processGametestResources") {
+		duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 	}
 }
 
-tasks.named<Test>("test") {
-	useJUnitPlatform()
-}
-
-tasks.named<Copy>("processGametestResources") {
-	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
