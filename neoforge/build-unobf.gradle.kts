@@ -13,14 +13,13 @@ fletchingTable {
 }
 
 dependencies {
-	commonMod.depOrNull("cloth_config")?.let { cloth_configVersion ->
-		api("me.shedaniel.cloth:cloth-config-neoforge:${cloth_configVersion}")
+	deps.cloth_config?.let { version ->
+		api("me.shedaniel.cloth:cloth-config-neoforge:${version}")
 	}
-//	api("me.shedaniel.cloth:cloth-config-neoforge:${commonMod.dep("cloth_config")}")
 }
 
 neoForge {
-	version = commonMod.dep("neoforge")
+	version = deps.neoforge
 
 	accessTransformers.from(project.file("../../src/main/resources/META-INF/accesstransformer.cfg").absolutePath)
 
@@ -28,20 +27,15 @@ neoForge {
 		register("client") {
 			client()
 			ideName = "NeoForge Client (${project.path})"
-			programArgument("--quickPlaySingleplayer \"NeoForgePlayground\"")
+			programArgument("--quickPlaySingleplayer wd_PlaygroundVoid")
+			programArgument("--width 1280")
+			programArgument("--height 720")
 		}
 	}
 
 	mods {
-		register(commonMod.id) {
+		register(mod.id) {
 			sourceSet(sourceSets.main.get())
-		}
-	}
-
-	parchment {
-		commonMod.depOrNull("parchment")?.let {
-			mappingsVersion = it
-			minecraftVersion = commonMod.mcVersion
 		}
 	}
 }
@@ -52,10 +46,10 @@ sourceSets.main {
 
 tasks {
 	processResources {
-		exclude("${mod.id}.aw")
+		exclude("**/*.aw")
 	}
 }
 
 tasks.named("createMinecraftArtifacts") {
-	dependsOn(":neoforge:${commonMod.propOrNull("minecraft_version")}:stonecutterGenerate")
+	dependsOn(":neoforge:${deps.minecraft}:stonecutterGenerate")
 }

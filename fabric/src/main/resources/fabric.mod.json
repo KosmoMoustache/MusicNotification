@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
-	"id": "${modId}",
-	"version": "${modVersion}",
-	"name": "${modName}",
-	"description": "${modDescription}",
+	"id": "${mod_id}",
+	"version": "${mod_version}",
+	"name": "${mod_name}",
+	"description": "${mod_description}",
 	"authors": [
-		"${modAuthor}"
+		"KosmoMoustache"
 	],
 	"contributors": [
 		{
@@ -23,11 +23,11 @@
 	],
 	"contact": {
 		"homepage": "https://mod.kosmo.ovh/",
-		"sources": "${modGitHub}",
-		"issues": "${modGitHub}/issues",
-		"wiki": "${modGitHub}/wiki"
+		"sources": "${mod_github}",
+		"issues": "${mod_github}/issues",
+		"wiki": "${mod_github}/wiki"
 	},
-	"license": "${modLicense}",
+	"license": "${mod_license}",
 	"icon": "icon.png",
 	"environment": "client",
 	"entrypoints": {
@@ -39,14 +39,15 @@
 		]
 	},
 	"mixins": [
-		"${modId}-common.mixins.json",
-		"${modId}.mixins.json"
+		"${mod_id}-common.mixins.json",
+		"${mod_id}.mixins.json"
 	],
-	"accessWidener": "${awVersion}.aw",
+	"accessWidener": "${aw_version}.aw",
 	"depends": {
-		"minecraft": "${minecraftVersion}",
-		"fabric-api-base": "*",
-		"cloth-config": ">=${clothConfigVersion}"
+		"minecraft": "${fabric_mc_range}",
+		"fabricloader": ">=${floader}",
+		"command-api-v2": "*",
+		"cloth-config": ">=${cloth_config}"
 	},
 	"recommends": {
 		"modmenu": "*"

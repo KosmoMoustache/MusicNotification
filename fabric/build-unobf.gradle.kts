@@ -8,6 +8,10 @@ plugins {
 	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
+kotlin {
+	jvmToolchain(lproject.prop("java.version")!!.toInt())
+}
+
 fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
@@ -15,22 +19,22 @@ fletchingTable {
 }
 
 stonecutter {
-	constants["modMenu"] = commonMod.depOrNull("modmenu") != null
+	constants["modMenu"] = deps.modmenu != null
 }
 
 dependencies {
 	fun fabricModules(vararg modules: String) = modules.forEach {
-		implementation(fabricApi.module(it, "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
+		implementation(fabricApi.module(it, "${deps.fapi}+${deps.minecraft}"))
 	}
 
-	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
+	minecraft("com.mojang:minecraft:${deps.minecraft}")
 
-	implementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
-	commonMod.depOrNull("modmenu")?.let { modMenuVersion ->
-		implementation("com.terraformersmc:modmenu:${modMenuVersion}")
+	implementation("net.fabricmc:fabric-loader:${deps.floader}")
+	deps.modmenu?.let { version ->
+		implementation("com.terraformersmc:modmenu:${version}")
 	}
-	commonMod.depOrNull("cloth_config")?.let { cloth_configVersion ->
-		implementation("me.shedaniel.cloth:cloth-config-fabric:${cloth_configVersion}")
+	deps.cloth_config?.let { version ->
+		implementation("me.shedaniel.cloth:cloth-config-fabric:${version}")
 	}
 
 	fabricModules(
@@ -38,10 +42,10 @@ dependencies {
 	)
 
 	// Runtime only mods
-	implementation("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
+	implementation("net.fabricmc.fabric-api:fabric-api:${deps.fapi}+${deps.minecraft}")
 
 	// Fabric Loader JUnit for testing
-	testImplementation("net.fabricmc:fabric-loader-junit:${commonMod.dep("fabric-loader")}")
+	testImplementation("net.fabricmc:fabric-loader-junit:${deps.floader}")
 }
 
 //Mixin hotswap
@@ -53,14 +57,14 @@ afterEvaluate {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.aw")
+	accessWidenerPath = common.project.file("../../src/main/resources/${mod.aw_version}.aw")
 
 	runs {
 		getByName("client") {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
-			programArg("--quickPlaySingleplayer \"FabricPlayground\"")
+			programArgs("--quickPlaySingleplayer", "wd_PlaygroundVoid", "--width",  "1280", "--height",  "720")
 			vmArgs("-XX:+AllowEnhancedClassRedefinition")
 			// "-Dfabric.log.level=debug"
 		}

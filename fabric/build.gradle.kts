@@ -9,7 +9,7 @@ plugins {
 }
 
 kotlin {
-	jvmToolchain(commonProject.prop("java.version")!!.toInt())
+	jvmToolchain(lproject.prop("java.version")!!.toInt())
 }
 
 fletchingTable {
@@ -19,28 +19,28 @@ fletchingTable {
 }
 
 stonecutter {
-	constants["modMenu"] = commonMod.depOrNull("modmenu") != null
+	constants["modMenu"] = deps.modmenu != null
 }
 
 dependencies {
 	fun fabricModules(vararg modules: String) = modules.forEach {
-		modImplementation(fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
+		modImplementation(fabricApi.module("fabric-$it", "${deps.fapi}+${deps.minecraft}"))
 	}
 
-	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
+	minecraft("com.mojang:minecraft:${deps.minecraft}")
 	mappings(loom.layered {
 		officialMojangMappings()
-		commonMod.depOrNull("parchment")?.let { parchmentVersion ->
-			parchment("org.parchmentmc.data:parchment-${commonMod.mcVersion}:$parchmentVersion@zip")
+		deps.parchment?.let { version ->
+			parchment("org.parchmentmc.data:parchment-${deps.minecraft}:$version@zip")
 		}
 	})
 
-	modImplementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
-	commonMod.depOrNull("modmenu")?.let { modMenuVersion ->
-		modImplementation("com.terraformersmc:modmenu:${modMenuVersion}")
+	modImplementation("net.fabricmc:fabric-loader:${deps.floader}")
+	deps.modmenu?.let { version ->
+		modImplementation("com.terraformersmc:modmenu:${version}")
 	}
-	commonMod.depOrNull("cloth_config")?.let { clothConfigVersion ->
-		modImplementation("me.shedaniel.cloth:cloth-config-fabric:$clothConfigVersion")
+	deps.cloth_config?.let { version ->
+		modImplementation("me.shedaniel.cloth:cloth-config-fabric:$version")
 	}
 
 	if (sc.current.parsed >= "1.21.5") {
@@ -50,10 +50,10 @@ dependencies {
 	}
 
 	// Runtime only mods
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fapi}+${deps.minecraft}")
 
 	// Fabric Loader JUnit for testing
-	testImplementation("net.fabricmc:fabric-loader-junit:${commonMod.dep("fabric-loader")}")
+	testImplementation("net.fabricmc:fabric-loader-junit:${deps.floader}")
 }
 
 //Mixin hotswap
@@ -65,14 +65,15 @@ afterEvaluate {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.aw")
+	accessWidenerPath = common.project.file("../../src/main/resources/${mod.aw_version}.aw")
 
 	runs {
 		getByName("client") {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
-			programArgs("--quickPlaySingleplayer \"FabricPlayground\"", "--width 1280", "--height 720")
+			programArgs()
+			programArgs("--quickPlaySingleplayer", "wd_PlaygroundVoid", "--width",  "1280", "--height",  "720")
 			if (sc.current.parsed > "1.21.1") {
 				vmArgs("-XX:+AllowEnhancedClassRedefinition")
 			}

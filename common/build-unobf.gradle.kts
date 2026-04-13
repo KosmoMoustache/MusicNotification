@@ -10,7 +10,7 @@ plugins {
 
 loom {
 	accessWidenerPath =
-		common.project.file("../../src/main/resources/${commonMod.awVersion}.aw")
+		common.project.file("../../src/main/resources/${mod.aw_version}.aw")
 }
 
 fletchingTable {
@@ -24,7 +24,7 @@ stonecutter {
 }
 
 dependencies {
-	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
+	minecraft("com.mojang:minecraft:${deps.minecraft}")
 
 	compileOnly("org.spongepowered:mixin:0.8.5")
 
@@ -33,11 +33,12 @@ dependencies {
 		annotationProcessor(it)
 	}
 
-	compileOnly("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
+	compileOnly("net.fabricmc:fabric-loader:${deps.floader}")
 
-	commonMod.depOrNull("cloth_config")?.let { cloth_configVersion ->
-		api("me.shedaniel.cloth:cloth-config-neoforge:${cloth_configVersion}")
-	}}
+	deps.cloth_config?.let { version ->
+		api("me.shedaniel.cloth:cloth-config-neoforge:${version}")
+	}
+}
 
 val commonJava: Configuration by configurations.creating {
 	isCanBeResolved = false
