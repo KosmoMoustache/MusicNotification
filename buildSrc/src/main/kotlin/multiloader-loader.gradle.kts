@@ -19,13 +19,20 @@ dependencies {
 }
 
 tasks {
-	compileJava {
+	named<JavaCompile>("compileJava") {
 		dependsOn(commonJava)
 		source(commonJava)
 	}
+	named<ProcessResources>("processResources") {
+//		dependsOn(commonResources)
 
-	processResources {
-		dependsOn(commonResources)
-		from(commonResources)
+
+		// Only include the right aw file
+		from(commonResources) {
+			exclude("**/*.aw")
+		}
+		from(commonResources) {
+			include("${mod.aw_version}.aw")
+		}
 	}
 }
