@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.Copy
+
 plugins {
 	kotlin("jvm") version "2.3.20" apply false
 	id("dev.kikugie.stonecutter")
@@ -25,5 +27,19 @@ stonecutter parameters {
 			replace("net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper", "net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper")
 			replace("KeyBindingHelper.registerKeyBinding", "KeyMappingHelper.registerKeyMapping")
 		}
+	}
+}
+
+tasks.register<Copy>("collectBuildFiles") {
+	group = "build"
+	description = "Collect built jars into the root output directory."
+	into(layout.projectDirectory.dir("output"))
+	from(allprojects.filter {
+		it != rootProject &&
+			it.childProjects.isEmpty() &&
+			!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("common").asFile.toPath()) &&
+			!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("versions").asFile.toPath())
+	}.map { it.layout.buildDirectory.dir("libs") }) {
+		include("**/*.jar")
 	}
 }
