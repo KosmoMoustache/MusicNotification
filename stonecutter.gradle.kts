@@ -1,10 +1,13 @@
 import org.gradle.api.tasks.Copy
 
 plugins {
-	kotlin("jvm") version "2.3.20" apply false
 	id("dev.kikugie.stonecutter")
-	id("net.neoforged.moddev") version "2.0.140" apply false
 	id("com.google.devtools.ksp") version "2.3.6" apply false
+	id("net.neoforged.moddev") version "2.0.140" apply false
+	id("net.fabricmc.fabric-loom") version "1.15-SNAPSHOT" apply false
+	id("net.fabricmc.fabric-loom-remap") version "1.15-SNAPSHOT" apply false
+	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22" apply false
+	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22" apply false
 }
 stonecutter active "26.1" /* [SC] DO NOT EDIT */
 

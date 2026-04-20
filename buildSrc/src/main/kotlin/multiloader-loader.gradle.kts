@@ -24,9 +24,6 @@ tasks {
 		source(commonJava)
 	}
 	named<ProcessResources>("processResources") {
-//		dependsOn(commonResources)
-
-
 		// Only include the right aw file
 		from(commonResources) {
 			exclude("**/*.aw")

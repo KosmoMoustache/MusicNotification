@@ -2,14 +2,18 @@
 
 plugins {
 	kotlin("jvm")
-	id("net.fabricmc.fabric-loom-remap")
+	 id("fabric-loom-compat")
 	id("multiloader-loader")
-	id("com.google.devtools.ksp")
-	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
+	id("dev.kikugie.fletching-table.fabric")
 }
 
+// TODO: Useless ??
 kotlin {
 	jvmToolchain(lproject.prop("java.version")!!.toInt())
+}
+
+stonecutter {
+	constants["modMenu"] = deps.modmenu != null
 }
 
 fletchingTable {
@@ -18,22 +22,21 @@ fletchingTable {
 	}
 }
 
-stonecutter {
-	constants["modMenu"] = deps.modmenu != null
-}
-
 dependencies {
 	fun fabricModules(vararg modules: String) = modules.forEach {
 		modImplementation(fabricApi.module("fabric-$it", "${deps.fapi}+${deps.minecraft}"))
 	}
 
 	minecraft("com.mojang:minecraft:${deps.minecraft}")
-	mappings(loom.layered {
-		officialMojangMappings()
-		deps.parchment?.let { version ->
-			parchment("org.parchmentmc.data:parchment-${deps.minecraft}:$version@zip")
-		}
-	})
+
+	if (stonecutter.eval(deps.minecraft, "<=1.21.11")) {
+		mappings(loom.layered {
+			officialMojangMappings()
+			deps.parchment?.let { version ->
+				parchment("org.parchmentmc.data:parchment-${deps.minecraft}:$version@zip")
+			}
+		})
+	}
 
 	modImplementation("net.fabricmc:fabric-loader:${deps.floader}")
 	deps.modmenu?.let { version ->
@@ -72,8 +75,7 @@ loom {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
-			programArgs()
-			programArgs("--quickPlaySingleplayer", "wd_PlaygroundVoid", "--width",  "1280", "--height",  "720")
+			programArgs("--quickPlaySingleplayer", "wd_PlaygroundVoid", "--width", "1280", "--height", "720")
 			if (sc.current.parsed > "1.21.1") {
 				vmArgs("-XX:+AllowEnhancedClassRedefinition")
 			}
@@ -92,12 +94,14 @@ if (sc.current.parsed > "1.21.1") {
 			modId = "musicnotification-test"
 		}
 	}
-	tasks.named<Test>("test") {
-		useJUnitPlatform()
-	}
+	tasks {
+		named<Test>("test") {
+			useJUnitPlatform()
+		}
 
-	tasks.named<Copy>("processGametestResources") {
-		duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+		named<Copy>("processGametestResources") {
+			duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+		}
 	}
 }
 

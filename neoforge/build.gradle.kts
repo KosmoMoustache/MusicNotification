@@ -1,9 +1,10 @@
+import net.neoforged.nfrtgradle.CreateMinecraftArtifacts
+
 plugins {
 	kotlin("jvm")
 	id("multiloader-loader")
 	id("net.neoforged.moddev")
-	id("com.google.devtools.ksp")
-	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
+	id("dev.kikugie.fletching-table.neoforge")
 }
 
 fletchingTable {
@@ -11,7 +12,6 @@ fletchingTable {
 		extension("json", "**/*.json5")
 	}
 }
-
 
 dependencies {
 	deps.cloth_config?.let { version ->
@@ -40,8 +40,8 @@ neoForge {
 		}
 	}
 
-	parchment {
-		deps.parchment?.let {
+	deps.parchment?.let {
+		parchment {
 			mappingsVersion = it
 			minecraftVersion = deps.minecraft
 		}
@@ -53,11 +53,11 @@ sourceSets.main {
 }
 
 tasks {
-	processResources {
+	named<ProcessResources>("processResources") {
 		exclude("**/*.aw")
+	}
+	named<CreateMinecraftArtifacts>("createMinecraftArtifacts") {
+		dependsOn(":neoforge:${deps.minecraft}:stonecutterGenerate")
 	}
 }
 
-tasks.named("createMinecraftArtifacts") {
-	dependsOn(":neoforge:${deps.minecraft}:stonecutterGenerate")
-}

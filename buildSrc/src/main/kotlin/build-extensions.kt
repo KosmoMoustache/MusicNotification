@@ -36,7 +36,7 @@ value class ModData(private val project: Project) {
 	val fabric_mc_range: String get() = modProp("fabric_range")
 	val neoforge_mc_range: String get() = modProp("neoforge_range")
 
-	fun modPropOrNull(key: String) = project.prop("mod.$key")
+	fun modPropOrNull(key: String) = project.prop("mod.$key")?.takeIf { it.isNotEmpty() && it != ""}
 	fun modProp(key: String) = requireNotNull(modPropOrNull(key)) { "Missing 'mod.$key'" }
 }
 
@@ -50,7 +50,7 @@ value class DepsData(private val project: Project) {
 	val modmenu: String? get() = getOrNull("modmenu")
 	val cloth_config: String? get() = getOrNull("cloth_config")
 
-	fun getOrNull(key: String): String? = project.prop("deps.$key")
+	fun getOrNull(key: String): String? = project.prop("deps.$key")?.takeIf { it.isNotEmpty() && it != ""}
 	fun get(key: String) = requireNotNull(getOrNull(key)) { "Missing 'deps.$key'" }
 }
 
