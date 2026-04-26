@@ -12,9 +12,8 @@ base {
 }
 
 java {
-	toolchain.vendor = JvmVendorSpec.ADOPTIUM
+	toolchain.vendor = JvmVendorSpec.JETBRAINS
 	toolchain.languageVersion = JavaLanguageVersion.of(lproject.prop("java.version")!!)
-//	toolchain.languageVersion = JavaLanguageVersion.of(props.java_version)
 //	sourceCompatibility = JavaVersion.VERSION_25
 //	targetCompatibility = JavaVersion.VERSION_25
 //	withSourcesJar()
