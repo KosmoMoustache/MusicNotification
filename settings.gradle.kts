@@ -2,41 +2,39 @@ pluginManagement {
 	repositories {
 		mavenCentral()
 		gradlePluginPortal()
-		maven("https://maven.fabricmc.net/")
-		maven("https://maven.neoforged.net/releases/")
-		maven("https://maven.minecraftforge.net")
-		maven("https://maven.kikugie.dev/snapshots")
-		maven("https://maven.kikugie.dev/releases")
+		maven("https://maven.fabricmc.net/") { name = "Fabric"}
+		maven("https://maven.neoforged.net/releases/") { name = "NeoForge"}
+		maven("https://maven.minecraftforge.net") { name = "Forge"}
+		maven("https://maven.kikugie.dev/snapshots") { name = "KikuGie Snapshots" }
+		maven("https://maven.kikugie.dev/releases") { name = "KikuGie Release" }
 	}
 }
 
 plugins {
 	id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-	id("dev.kikugie.stonecutter") version "0.9"
+	id("dev.kikugie.stonecutter") version "0.9.2"
+	id("dev.kikugie.loom-back-compat") version "0.2.1"
 }
 
-val commonVersions =
-	providers.gradleProperty("stonecutter_enabled_common_versions").orNull?.split(",")?.map { it.trim() } ?: emptyList()
-val fabricVersions =
-	providers.gradleProperty("stonecutter_enabled_fabric_versions").orNull?.split(",")?.map { it.trim() } ?: emptyList()
-val neoforgeVersions =
-	providers.gradleProperty("stonecutter_enabled_neoforge_versions").orNull?.split(",")?.map { it.trim() }
-		?: emptyList()
-val dists = mapOf(
-	"common" to commonVersions,
-	"fabric" to fabricVersions,
-	"neoforge" to neoforgeVersions
+fun getVersions(name: String): List<String> {
+	return providers.gradleProperty(name).orNull?.split(",")?.map { it.trim() } ?: emptyList()
+}
+
+val enabledVersions = mapOf(
+	"common" to getVersions("stonecutter_enabled_common_versions"),
+	"fabric" to getVersions("stonecutter_enabled_fabric_versions"),
+	"neoforge" to getVersions("stonecutter_enabled_neoforge_versions"),
 )
-val uniqueVersions = dists.values.flatten().distinct()
+val enabledUniqueVersions = enabledVersions.values.flatten().distinct()
 
 stonecutter {
 	create(rootProject) {
-		versions(*uniqueVersions.toTypedArray())
+		versions(*enabledUniqueVersions.toTypedArray())
 
-		dists.forEach { (branchName, branchVersions) ->
+		enabledVersions.forEach { (branchName, branchVersions) ->
 			branch(branchName) {
 				branchVersions.forEach { version ->
-				version(version).buildscript(if (stonecutter.eval(version, ">=26.1")) "build-unobf.gradle.kts" else "build.gradle.kts")
+					version(version)
 				}
 			}
 		}

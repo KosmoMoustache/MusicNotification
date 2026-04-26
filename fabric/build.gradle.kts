@@ -2,14 +2,18 @@
 
 plugins {
 	kotlin("jvm")
-	id("net.fabricmc.fabric-loom-remap")
 	id("multiloader-loader")
-	id("com.google.devtools.ksp")
+	id("dev.kikugie.loom-back-compat")
 	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
+// TODO: Useless ??
 kotlin {
-	jvmToolchain(commonProject.prop("java.version")!!.toInt())
+	jvmToolchain(lproject.prop("java.version")!!.toInt())
+}
+
+stonecutter {
+	constants["modMenu"] = deps.modmenu != null
 }
 
 fletchingTable {
@@ -18,29 +22,28 @@ fletchingTable {
 	}
 }
 
-stonecutter {
-	constants["modMenu"] = commonMod.depOrNull("modmenu") != null
-}
-
 dependencies {
 	fun fabricModules(vararg modules: String) = modules.forEach {
-		modImplementation(fabricApi.module("fabric-$it", "${commonMod.dep("fabric-api")}+${commonMod.mcVersion}"))
+		modImplementation(fabricApi.module("fabric-$it", "${deps.fapi}+${deps.minecraft}"))
 	}
 
-	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
-	mappings(loom.layered {
-		officialMojangMappings()
-		commonMod.depOrNull("parchment")?.let { parchmentVersion ->
-			parchment("org.parchmentmc.data:parchment-${commonMod.mcVersion}:$parchmentVersion@zip")
-		}
-	})
+	minecraft("com.mojang:minecraft:${deps.minecraft}")
 
-	modImplementation("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
-	commonMod.depOrNull("modmenu")?.let { modMenuVersion ->
-		modImplementation("com.terraformersmc:modmenu:${modMenuVersion}")
+	if (stonecutter.eval(deps.minecraft, "<=1.21.11")) {
+		mappings(loom.layered {
+			officialMojangMappings()
+			deps.parchment?.let { version ->
+				parchment("org.parchmentmc.data:parchment-${deps.minecraft}:$version@zip")
+			}
+		})
 	}
-	commonMod.depOrNull("cloth_config")?.let { clothConfigVersion ->
-		modImplementation("me.shedaniel.cloth:cloth-config-fabric:$clothConfigVersion")
+
+	modImplementation("net.fabricmc:fabric-loader:${deps.floader}")
+	deps.modmenu?.let { version ->
+		modImplementation("com.terraformersmc:modmenu:${version}")
+	}
+	deps.cloth_config?.let { version ->
+		modImplementation("me.shedaniel.cloth:cloth-config-fabric:$version")
 	}
 
 	if (sc.current.parsed >= "1.21.5") {
@@ -50,10 +53,10 @@ dependencies {
 	}
 
 	// Runtime only mods
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${commonMod.dep("fabric-api")}+${commonMod.mcVersion}")
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fapi}+${deps.minecraft}")
 
 	// Fabric Loader JUnit for testing
-	testImplementation("net.fabricmc:fabric-loader-junit:${commonMod.dep("fabric-loader")}")
+	testImplementation("net.fabricmc:fabric-loader-junit:${deps.floader}")
 }
 
 //Mixin hotswap
@@ -65,14 +68,14 @@ afterEvaluate {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${commonMod.awVersion}.aw")
+	accessWidenerPath = common.project.file("../../src/main/resources/${mod.aw_version}.aw")
 
 	runs {
 		getByName("client") {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
-			programArgs("--quickPlaySingleplayer \"FabricPlayground\"", "--width 1280", "--height 720")
+			programArgs("--quickPlaySingleplayer", "wd_PlaygroundVoid", "--width", "1280", "--height", "720")
 			if (sc.current.parsed > "1.21.1") {
 				vmArgs("-XX:+AllowEnhancedClassRedefinition")
 			}
@@ -91,12 +94,14 @@ if (sc.current.parsed > "1.21.1") {
 			modId = "musicnotification-test"
 		}
 	}
-	tasks.named<Test>("test") {
-		useJUnitPlatform()
-	}
+	tasks {
+		named<Test>("test") {
+			useJUnitPlatform()
+		}
 
-	tasks.named<Copy>("processGametestResources") {
-		duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+		named<Copy>("processGametestResources") {
+			duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+		}
 	}
 }
 

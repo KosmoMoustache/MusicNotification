@@ -1,16 +1,18 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-	kotlin("jvm")
 	id("multiloader-common")
-	id("net.fabricmc.fabric-loom-remap")
-	id("com.google.devtools.ksp")
+	id("dev.kikugie.loom-back-compat")
 	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
 loom {
 	accessWidenerPath =
-		common.project.file("../../src/main/resources/${commonMod.awVersion}.aw")
+		common.project.file("../../src/main/resources/${mod.aw_version}.aw")
+}
+
+stonecutter {
+	filters.exclude("**/*.aw")
 }
 
 fletchingTable {
@@ -19,28 +21,29 @@ fletchingTable {
 	}
 }
 
-stonecutter {
-	filters.exclude("**/*.aw")
-}
-
 dependencies {
-	minecraft("com.mojang:minecraft:${commonMod.mcVersion}")
-	mappings(loom.layered {
-		officialMojangMappings()
-		commonMod.depOrNull("parchment")?.let { parchmentVersion ->
-			parchment("org.parchmentmc.data:parchment-${commonMod.mcVersion}:$parchmentVersion@zip")
-		}
-	})
+	minecraft("com.mojang:minecraft:${deps.minecraft}")
+
+	if (stonecutter.eval(deps.minecraft, "<=26.0")) {
+		mappings(loom.layered {
+			officialMojangMappings()
+			deps.parchment?.let { version ->
+				parchment("org.parchmentmc.data:parchment-${deps.minecraft}:$version@zip")
+			}
+		})
+	}
 
 	compileOnly("org.spongepowered:mixin:0.8.5")
 
-	"io.github.llamalad7:mixinextras-common:0.3.5".let {
+	"io.github.llamalad7:mixinextras-common:0.5.4".let {
 		compileOnly(it)
 		annotationProcessor(it)
 	}
 
-	compileOnly("net.fabricmc:fabric-loader:${commonMod.dep("fabric-loader")}")
-	modApi("me.shedaniel.cloth:cloth-config-neoforge:${commonMod.depOrNull("cloth_config")}")
+	compileOnly("net.fabricmc:fabric-loader:${deps.floader}")
+	deps.cloth_config?.let { version ->
+		modApi("me.shedaniel.cloth:cloth-config-neoforge:${version}")
+	}
 }
 
 val commonJava: Configuration by configurations.creating {
