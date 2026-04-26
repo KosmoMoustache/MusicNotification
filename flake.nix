@@ -14,9 +14,9 @@
       packages = with pkgs; [
         gnumake
         git
-       	zulu21
-	just
-	jq
+       	jdk21_headless
+		just
+		jq
       ];
     };
   };
