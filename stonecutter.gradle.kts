@@ -42,3 +42,32 @@ tasks.register<Copy>("collectBuildFiles") {
 		include("**/*.jar")
 	}
 }
+
+tasks.register("runAllClients") {
+	group = "build"
+	description = "Run clients for all versions sequentially."
+	val runClients = allprojects.filter {
+		it != rootProject &&
+		it.childProjects.isEmpty() &&
+		!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("common").asFile.toPath()) &&
+		!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("versions").asFile.toPath())
+	}.mapNotNull { it.tasks.findByName("runClient") }
+	runClients.forEachIndexed { index, task ->
+		if (index > 0) {
+			task.mustRunAfter(runClients[index - 1])
+		}
+	}
+	dependsOn(runClients)
+}
+
+tasks.register("runAllClientsParallel") {
+	group = "build"
+	description = "Run clients for all versions in parallel."
+	val runClients = allprojects.filter {
+		it != rootProject &&
+		it.childProjects.isEmpty() &&
+		!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("common").asFile.toPath()) &&
+		!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("versions").asFile.toPath())
+	}.mapNotNull { it.tasks.findByName("runClient") }
+	dependsOn(runClients)
+}
