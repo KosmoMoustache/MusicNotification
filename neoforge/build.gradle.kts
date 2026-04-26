@@ -4,7 +4,7 @@ plugins {
 	kotlin("jvm")
 	id("multiloader-loader")
 	id("net.neoforged.moddev")
-	id("dev.kikugie.fletching-table.neoforge")
+	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
 }
 
 fletchingTable {

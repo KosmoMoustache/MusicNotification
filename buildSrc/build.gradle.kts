@@ -8,6 +8,6 @@ repositories {
 }
 
 dependencies {
-	implementation("dev.kikugie:stonecutter:0.9")
+	implementation("dev.kikugie:stonecutter:0.9.2")
 	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.20")
 }

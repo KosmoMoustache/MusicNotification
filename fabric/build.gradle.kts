@@ -2,9 +2,9 @@
 
 plugins {
 	kotlin("jvm")
-	 id("fabric-loom-compat")
 	id("multiloader-loader")
-	id("dev.kikugie.fletching-table.fabric")
+	id("dev.kikugie.loom-back-compat")
+	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
 // TODO: Useless ??
