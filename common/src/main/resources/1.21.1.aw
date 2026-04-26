@@ -1,4 +1,4 @@
-accessWidener	v2	named
+accessWidener v2 named
 accessible class net/minecraft/client/gui/components/toasts/ToastComponent$ToastInstance
 accessible class net/minecraft/client/gui/components/toasts/ToastComponent
 accessible method net/minecraft/client/gui/components/toasts/Toast$Visibility playSound (Lnet/minecraft/client/sounds/SoundManager;)V
