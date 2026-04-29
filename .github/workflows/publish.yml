@@ -163,7 +163,7 @@ jobs:
                 uses: Kir-Antipov/mc-publish@v3
                 with:
                     github-token: ${{ steps.publish-platforms.outputs.github == 'true' && secrets.GITHUB_TOKEN || '' }}
-                    github-tag: v${{ steps.gradle-properties.outputs.MOD_VERSION }}-${{ matrix.mod_loader }}
+                    github-tag: ${{ steps.gradle-properties.outputs.MOD_VERSION }}
 
                     curseforge-id: ${{ steps.publish-platforms.outputs.curseforge == 'true' && vars.CURSEFORGE_PROJECT_ID || 'donotupload' }}
                     curseforge-token: ${{ steps.publish-platforms.outputs.curseforge == 'true' && secrets.CURSEFORGE_TOKEN || '' }}
