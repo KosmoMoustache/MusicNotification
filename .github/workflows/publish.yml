@@ -61,13 +61,47 @@ jobs:
             -   name: Grant execute permission to generate-build-matrix.sh
                 run: chmod +x ./.github/scripts/generate-build-matrix.sh
 
-            -   name: "Generate matrix for the publish job"
+            -   name: "Generate matrix for the publish-on-platforms job"
                 id: set-matrix
                 run: ./.github/scripts/generate-build-matrix.sh "${{ inputs.mod_loaders || '' }}" "${{ inputs.versions || '' }}"
 
-    publish:
+    create-github-release:
         runs-on: ubuntu-latest
-        needs: [ build, generate-publish-matrix ]
+        name: Create github release
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v6
+                with:
+                    fetch-depth: 1
+
+            -   name: "Parse gradle properties"
+                id: gradle-properties
+                run: ./.github/scripts/parse-gradle-properties.sh ${{ matrix.version }}
+
+            -   name: Install changelog parser
+                uses: taiki-e/install-action@parse-changelog
+
+            -   name: Parse changelog
+                run: parse-changelog CHANGELOG.md ${{ steps.gradle-properties.outputs.MOD_VERSION }} > RELEASE_CHANGELOG.md
+
+            -   name: "Create github release"
+                continue-on-error: true
+                uses: ncipollo/release-action@v1
+                with:
+                    skipIfReleaseExists: true
+                    allowUpdates: true
+                    omitBodyDuringUpdate: true
+                    omitDraftDuringUpdate: true
+                    omitNameDuringUpdate: true
+                    omitPrereleaseDuringUpdate: true
+                    tag: ${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    generateReleaseNotes: true
+                    bodyFile: RELEASE_CHANGELOG.md
+
+    publish-on-platforms:
+        runs-on: ubuntu-latest
+        needs: [ build, generate-publish-matrix, create-github-release ]
         name: Publish ${{ matrix.mod_loader }} ${{ matrix.version }}
         strategy:
             max-parallel: 3
