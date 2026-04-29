@@ -159,6 +159,7 @@ jobs:
                 run: parse-changelog CHANGELOG.md ${{ steps.gradle-properties.outputs.MOD_VERSION }} > RELEASE_CHANGELOG.md
 
             -   name: Publish ${{ matrix.mod_loader }}
+                id: mc-publish
                 uses: Kir-Antipov/mc-publish@v3
                 with:
                     github-token: ${{ steps.publish-platforms.outputs.github == 'true' && secrets.GITHUB_TOKEN || '' }}
@@ -181,4 +182,42 @@ jobs:
 
                     retry-attempts: 6
                     retry-delay: 30000
-                    fail-mode: "warn"
+                    fail-mode: warn
+
+            -   name: Publish state check
+                run: |
+                    enabled_github="${{ steps.publish-platforms.outputs.github }}"
+                    enabled_curseforge="${{ steps.publish-platforms.outputs.curseforge }}"
+                    enabled_modrinth="${{ steps.publish-platforms.outputs.modrinth }}"
+
+                    github_url="${{ steps.mc-publish.outputs.github-url }}"
+                    curseforge_url="${{ steps.mc-publish.outputs.curseforge-url }}"
+                    modrinth_url="${{ steps.mc-publish.outputs.modrinth-url }}"
+
+                    error=false
+
+                    if [[ "$enabled_github" == "true" && -z "$github_url" ]]; then
+                        echo "ERROR: GitHub platform is enabled but github-url output is missing"
+                        error=true
+                    fi
+
+                    if [[ "$enabled_curseforge" == "true" && -z "$curseforge_url" ]]; then
+                        echo "ERROR: CurseForge platform is enabled but curseforge-url output is missing"
+                        error=true
+                    fi
+
+                    if [[ "$enabled_modrinth" == "true" && -z "$modrinth_url" ]]; then
+                        echo "ERROR: Modrinth platform is enabled but modrinth-url output is missing"
+                        error=true
+                    fi
+
+                    if [[ "$error" == "true" ]]; then
+                        exit 1
+                    fi
+
+                    echo "All expected publish outputs are present:"
+                    [[ "$enabled_github" == "true" ]] && echo "  ✓ GitHub: $github_url"
+                    [[ "$enabled_curseforge" == "true" ]] && echo "  ✓ CurseForge: $curseforge_url"
+                    [[ "$enabled_modrinth" == "true" ]] && echo "  ✓ Modrinth: $modrinth_url"
+                    exit 0
+
