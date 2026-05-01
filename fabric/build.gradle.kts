@@ -75,7 +75,7 @@ loom {
 			client()
 			configName = "Fabric Client"
 			ideConfigGenerated(true)
-			programArgs("--quickPlaySingleplayer", "wd_PlaygroundVoid", "--width", "1280", "--height", "720")
+			programArgs("--quickPlaySingleplayer", "wd_void", "--width", "1280", "--height", "720")
 			if (sc.current.parsed > "1.21.1") {
 				vmArgs("-XX:+AllowEnhancedClassRedefinition")
 			}

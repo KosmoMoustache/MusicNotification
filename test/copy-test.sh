@@ -9,24 +9,30 @@ for platform in fabric neoforge; do
 		if [ -d "$rundir" ]; then
 			printf 'Processing %s\n' "$rundir"
 
-			# copy wd_PlaygroundVoid
-			mkdir -p "$rundir/saves"
-			printf 'Copying test/wd_PlaygroundVoid -> %s/saves/\n' "$rundir"
-			cp -a test/wd_PlaygroundVoid "$rundir/saves/"
+			# copy wd_void
+			if [ -d "test/wd_void" ]; then
+				mkdir -p "$rundir/saves"
+				printf 'Copying test/wd_void -> %s/saves/\n' "$rundir"
+				cp -a test/wd_void "$rundir/saves/"
+			fi
 
 			# copy dp_*
-			mkdir -p "$rundir/saves/wd_PlaygroundVoid/datapacks"
-			for dp in test/dp_*; do
-				printf 'Copying %s -> %s/saves/wd_PlaygroundVoid/datapacks\n' "$dp" "$rundir"
-				cp -a "$dp" "$rundir/saves/wd_PlaygroundVoid/datapacks"
-			done
+			if ls "test/dp_*" > /dev/null 2>&1; then
+				mkdir -p "$rundir/saves/wd_void/datapacks"
+				for dp in test/dp_*; do
+					printf 'Copying %s -> %s/saves/wd_void/datapacks\n' "$dp" "$rundir"
+					cp -a "$dp" "$rundir/saves/wd_void/datapacks"
+				done
+			fi
 
 			# copy rp_*
-			mkdir -p "$rundir/resourcepacks"
-			for dp in test/rp_*; do
-				printf 'Copying %s -> %s/resourcepacks\n' "$dp" "$rundir"
-		  		cp -a "$dp" "$rundir/resourcepacks"
-			done
+			if ls "test/rp_*" > /dev/null 2>&1; then
+				mkdir -p "$rundir/resourcepacks"
+				for dp in test/rp_*; do
+					printf 'Copying %s -> %s/resourcepacks\n' "$dp" "$rundir"
+					cp -a "$dp" "$rundir/resourcepacks"
+				done
+			fi
 
 			# copy options.txt
 			if [ -f "test/options.txt" ]; then

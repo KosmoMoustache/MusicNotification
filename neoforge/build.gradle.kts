@@ -28,7 +28,7 @@ neoForge {
 		register("client") {
 			client()
 			ideName = "NeoForge Client (${project.path})"
-			programArgument("--quickPlaySingleplayer wd_PlaygroundVoid")
+			programArgument("--quickPlaySingleplayer wd_void")
 			programArgument("--width 1280")
 			programArgument("--height 720")
 		}
