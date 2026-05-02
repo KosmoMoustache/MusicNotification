@@ -1,52 +1,55 @@
 {
-  "schemaVersion": 1,
-  "id": "musicnotification",
-  "version": "${version}",
-  "name": "Music Notification",
-  "description": "Add toast notification when music is played in game with infos about the track being played. And play music any time you want.",
-  "authors": [
-    "KosmoMoustache"
-  ],
-  "contributors": [
-    {
-      "name": "carotteatomique"
-    },
-    {
-      "name": "Chiloven945"
-    },
-    {
-      "name": "akairoo"
-    },
-    {
-      "name": "Totchi Lagawi"
-    }
-  ],
-  "contact": {
-    "homepage": "https://mod.kosmo.ovh/",
-    "sources": "https://github.com/KosmoMoustache/MusicNotification"
-  },
-  "license": "LGPL-3.0-only",
-  "icon": "assets/musicnotification/icon.png",
-  "environment": "client",
-  "entrypoints": {
-    "client": [
-      "net.kosmo.music.impl.fabric.ClientMusicFabric"
-    ],
-    "modmenu": [
-      "net.kosmo.music.impl.fabric.compat.ModMenuCompatibility"
-    ]
-  },
-  "mixins": [
-    "musicnotification.common.mixins.json",
-    "musicnotification.mixins.json"
-  ],
-  "depends": {
-    "minecraft": "${minecraft_version}",
-    "fabricloader": ">=${fabric_loader_version}",
-    "fabric-api": ">=${fabric_api_version}",
-    "cloth-config": ">=${cloth_config_version}"
-  },
-  "recommends": {
-    "modmenu": ">=${modmenu_version}"
-  }
+	"schemaVersion": 1,
+	"id": "${mod_id}",
+	"version": "${mod_version}",
+	"name": "${mod_name}",
+	"description": "${mod_description}",
+	"authors": [
+		"KosmoMoustache"
+	],
+	"contributors": [
+		{
+			"name": "carotteatomique"
+		},
+		{
+			"name": "Chiloven945"
+		},
+		{
+			"name": "akairoo"
+		},
+		{
+			"name": "Totchi Lagawi"
+		}
+	],
+	"contact": {
+		"homepage": "https://mod.kosmo.ovh/",
+		"sources": "${mod_github}",
+		"issues": "${mod_github}/issues",
+		"wiki": "${mod_github}/wiki"
+	},
+	"license": "${mod_license}",
+	"icon": "icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"net.kosmo.music.fabric.MusicNotificationClientFabric"
+		],
+		"modmenu": [
+			"net.kosmo.music.fabric.compat.ModMenuCompatibility"
+		]
+	},
+	"mixins": [
+		"${mod_id}-common.mixins.json",
+		"${mod_id}.mixins.json"
+	],
+	"accessWidener": "${aw_version}.aw",
+	"depends": {
+		"minecraft": "${fabric_mc_range}",
+		"fabricloader": ">=${floader}",
+		"fabric-command-api-v2": "*",
+		"cloth-config": ">=${cloth_config}"
+	},
+	"recommends": {
+		"modmenu": "*"
+	}
 }

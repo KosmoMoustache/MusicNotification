@@ -1,0 +1,70 @@
+name: 'Bug Report'
+description: 'Use this template if you want to report a new bug or crash'
+labels: [ "bug" ]
+assignees:
+    - KosmoMoustache
+body:
+    -   type: markdown
+        attributes:
+            value: |
+                Thanks for taking the time to fill out this bug report! Anyhow before you take your time answering all of the question please make sure of the following:
+                  - Are you sure that there is not already reported same or similar bug? You can try to use the [search](https://github.com/KosmoMoustache/MusicNotification/issues).
+                  - Are you using the latest version of the mod? You can find the latest version [here](https://github.com/KosmoMoustache/MusicNotification/releases).
+    -   type: input
+        id: minecraft-version
+        attributes:
+            label: 'Minecraft version information'
+            description: 'Please provide the exact minecraft version that you are using.'
+            placeholder: 'Example: 1.19.2'
+        validations:
+            required: true
+    -   type: dropdown
+        id: mod-loader
+        attributes:
+            label: 'Mod loader information'
+            description: 'Please choose the mod loader that you are using.'
+            options:
+                - Fabric
+                - NeoForge
+        validations:
+            required: true
+    -   type: input
+        id: mod-loader-version
+        attributes:
+            label: 'Mod loader version information'
+            description: 'Please provide the exact mod loader version that you are using.'
+            placeholder: 'Example: 0.13.3 (Fabric) or 40.0.32 (Forge)'
+        validations:
+            required: true
+    -   type: input
+        id: mod-version
+        attributes:
+            label: 'Mod version information'
+            description: 'Please provide the exact mod version that you are using.'
+            placeholder: 'Example: 1.0.0'
+        validations:
+            required: true
+    -   type: textarea
+        id: mod-list
+        attributes:
+            label: 'Mod list?'
+            description: 'Please provide a list of other mods that you are using.'
+            placeholder: 'Example: Fabric API, Lithium, Phosphor, etc.'
+        validations:
+            required: true
+    -   type: textarea
+        id: report
+        attributes:
+            label: 'What happened?'
+            description: 'Please provide a clear and concise description of what the bug is.'
+            placeholder: 'Example: When I try to open a book, the game crashes.'
+        validations:
+            required: true
+    -   type: textarea
+        id: screenshots-and-files
+        attributes:
+            label: 'Screenshots & files'
+            description: 'If appropriate, add screenshots or other files to help explain your problem.'
+            placeholder: 'You can attach your files by dragging & dropping them to this textbox.'
+        validations:
+            required: false

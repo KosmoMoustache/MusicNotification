@@ -1,6 +1,15 @@
 {
-  "pack": {
-    "pack_format": 64,
-    "description": [{"translate": "text.musicnotification.resourcepack.dark_mode.description", "fallback": "Turn Music Notification UI to dark mode."}]
-  }
+	"pack": {
+		"description": {
+			"translate": "text.musicnotification.resourcepack.dark_mode.description",
+			"fallback": "Turn Music Notification UI to dark."
+		},
+		"pack_format": 64,
+		"supported_formats": [
+			64,
+			84
+		],
+		"min_format": 64,
+		"max_format": 84
+	}
 }

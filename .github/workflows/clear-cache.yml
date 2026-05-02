@@ -1,0 +1,20 @@
+name: "Clear cache"
+
+on:
+    workflow_dispatch:
+
+permissions:
+    actions: write
+
+jobs:
+    clear-cache:
+        runs-on: ubuntu-latest
+        name: "Clear cache"
+        timeout-minutes: 60
+        steps:
+            -   uses: MyAlbum/purge-cache@v2
+                with:
+                    debug: true
+                    accessed: true
+                    created: true
+                    max-age: 0

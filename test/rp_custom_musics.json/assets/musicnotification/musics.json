@@ -1,0 +1,16 @@
+{
+	"custom_disc:records/feelings_qlowdy": {
+		"album": "Custom Jukebox Songs",
+		"author": "Qlowdy",
+		"cover": "qlowdy",
+		"customId": "custom_disc:music_disc.feelings_qlowdy",
+		"title": "Feelings"
+	},
+	"custom_disc:records/amoris_galaxytones": {
+		"album": "Custom Jukebox Songs",
+		"author": "GalaxyTones",
+		"cover": "qalaxytones",
+		"customId": "custom_disc:music_disc.amoris_galaxytones",
+		"title": "Amoris"
+	}
+}

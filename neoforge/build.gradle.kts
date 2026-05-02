@@ -1,28 +1,63 @@
-architectury {
-    neoForge()
+import net.neoforged.nfrtgradle.CreateMinecraftArtifacts
+
+plugins {
+	kotlin("jvm")
+	id("multiloader-loader")
+	id("net.neoforged.moddev")
+	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
 }
 
-val common: Configuration by configurations.creating {
-    configurations.compileClasspath.get().extendsFrom(this)
-    configurations.runtimeClasspath.get().extendsFrom(this)
-    configurations["developmentNeoForge"].extendsFrom(this)
-}
-
-loom {
-    accessWidenerPath.set(project(":common").loom.accessWidenerPath)
+fletchingTable {
+	j52j.register("main") {
+		extension("json", "**/*.json5")
+	}
 }
 
 dependencies {
-    common(project(":common", configuration = "namedElements")) {
-        isTransitive = false
-    }
-    shadowCommon(project(path = ":common", configuration = "transformProductionNeoForge")) {
-        isTransitive = false
-    }
-
-    val neoforgeVersion: String by project
-    neoForge(group = "net.neoforged", name = "neoforge", version = neoforgeVersion)
-
-    val clothConfigVersion: String by project
-    api( group = "me.shedaniel.cloth", name = "cloth-config-neoforge", version = clothConfigVersion )
+	deps.cloth_config?.let { version ->
+		api("me.shedaniel.cloth:cloth-config-neoforge:${version}")
+	}
 }
+
+neoForge {
+	version = deps.neoforge
+
+	accessTransformers.from(project.file("../../src/main/resources/META-INF/accesstransformer.cfg").absolutePath)
+
+	runs {
+		register("client") {
+			client()
+			ideName = "NeoForge Client (${project.path})"
+			programArgument("--quickPlaySingleplayer wd_void")
+			programArgument("--width 1280")
+			programArgument("--height 720")
+		}
+	}
+
+	mods {
+		register(mod.id) {
+			sourceSet(sourceSets.main.get())
+		}
+	}
+
+	deps.parchment?.let {
+		parchment {
+			mappingsVersion = it
+			minecraftVersion = deps.minecraft
+		}
+	}
+}
+
+sourceSets.main {
+	resources.srcDir("src/generated/resources")
+}
+
+tasks {
+	named<ProcessResources>("processResources") {
+		exclude("**/*.aw")
+	}
+	named<CreateMinecraftArtifacts>("createMinecraftArtifacts") {
+		dependsOn(":neoforge:${deps.minecraft}:stonecutterGenerate")
+	}
+}
+

@@ -1,0 +1,25 @@
+{
+	"pack": {
+		"description": "Music Notification - Test Resource Pack",
+		"pack_format": 64,
+		"supported_formats": [
+			64,
+			75
+		],
+		"min_format": 64,
+		"max_format": 75
+	},
+	"overlays": {
+		"entries": [
+			{
+				"directory": "overlay42_61",
+				"formats": [
+					42,
+					61
+				],
+				"min_format": 42,
+				"max_format": 61
+			}
+		]
+	}
+}

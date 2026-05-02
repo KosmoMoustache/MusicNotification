@@ -1,17 +1,17 @@
 modLoader = "javafml"
 loaderVersion = "[2,)"
-issueTrackerURL = "https://github.com/KosmoMoustache/MusicNotification/issues"
-license = "LGPL-3.0-only"
+issueTrackerURL = "${mod_github}/issues"
+license = "${mod_license}"
 
 [[mods]]
-modId = "musicnotification"
-version = "${version}"
-displayName = "Music Notification"
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
 authors = "KosmoMoustache"
-description = '''
-Add toast notification when music is played in game with infos about the track being played. And play music anytime you want
-'''
-logoFile = "assets/musicnotification/icon.png"
+description = "${mod_description}"
+logoFile = "icon.png"
+logoBlur = false
+
 credits = """
 Thanks to:
     Authors:
@@ -24,23 +24,32 @@ Thanks to:
         Chiloven945
 """
 
-[[dependencies.musicnotification]]
+[[mixins]]
+config = "${mod_id}.mixins.json"
+
+[[mixins]]
+config = "${mod_id}-common.mixins.json"
+
+[[dependencies.$mod_id]]
+modId = "neoforge"
+type = "required"
+versionRange = "[$neoforge,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.$mod_id]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1, )"
+versionRange = "$neoforge_mc_range"
 ordering = "NONE"
-side = "CLIENT"
+side = "BOTH"
 
-[[dependencies.musicnotification]]
+[[dependencies.$mod_id]]
 modId = "cloth_config"
 type = "required"
-versionRange = "[1,)"
+versionRange = "[$cloth_config,)"
 ordering = "NONE"
 side = "CLIENT"
 
 
-[[mixins]]
-config = "musicnotification.mixins.json"
 
-[[mixins]]
-config = "musicnotification.common.mixins.json"

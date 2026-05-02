@@ -1,0 +1,23 @@
+{
+	"music_disc.amoris_galaxytones": {
+		"sounds": [
+			{
+				"name": "custom_disc:records/amoris_galaxytones"
+			}
+		]
+	},
+	"music_disc.feelings_qlowdy": {
+		"sounds": [
+			{
+				"name": "custom_disc:records/feelings_qlowdy"
+			}
+		]
+	},
+	"music.all_night": {
+		"sounds": [
+			{
+				"name": "custom_disc:music/all_night"
+			}
+		]
+	}
+}

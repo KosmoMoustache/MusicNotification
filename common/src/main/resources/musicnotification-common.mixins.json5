@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "net.kosmo.music.mixin",
+	"compatibilityLevel": "JAVA_${java_version}",
+	"client": [
+		"MixinMinecraft",
+		"MixinMusicManager",
+		"MixinTitleScreen",
+		"MusicManagerAccessor",
+		"SoundManagerAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
