@@ -2,11 +2,49 @@ pluginManagement {
 	repositories {
 		mavenCentral()
 		gradlePluginPortal()
-		maven("https://maven.fabricmc.net/") { name = "Fabric"}
-		maven("https://maven.neoforged.net/releases/") { name = "NeoForge"}
-		maven("https://maven.minecraftforge.net") { name = "Forge"}
-		maven("https://maven.kikugie.dev/snapshots") { name = "KikuGie Snapshots" }
-		maven("https://maven.kikugie.dev/releases") { name = "KikuGie Release" }
+		maven {
+			name = "Fabric"
+			url = uri("https://maven.fabricmc.net/")
+			content {
+				includeGroup("net.fabricmc")
+			}
+		}
+		maven {
+			name = "NeoForge"
+			url = uri("https://maven.neoforged.net/releases/")
+			content {
+				includeGroup("net.neoforged")
+			}
+		}
+		maven {
+			name = "Forge"
+			url = uri("https://maven.minecraftforge.net")
+			content {
+				includeGroup("net.minecraftforge")
+			}
+		}
+		maven {
+			name = "KikuGie Snapshots"
+			url = uri("https://maven.kikugie.dev/snapshots")
+			content {
+				includeGroup("dev.kikugie")
+				includeGroup("dev.kikugie.stonecutter")
+				includeGroup("dev.kikugie.loom-back-compat")
+				includeGroup("dev.kikugie.fletching-table.neoforge")
+				includeGroup("dev.kikugie.fletching-table.fabric")
+			}
+		}
+		maven {
+			name = "KikuGie Release"
+			url = uri("https://maven.kikugie.dev/releases")
+			content {
+				includeGroup("dev.kikugie")
+				includeGroup("dev.kikugie.stonecutter")
+				includeGroup("dev.kikugie.loom-back-compat")
+				includeGroup("dev.kikugie.fletching-table.neoforge")
+				includeGroup("dev.kikugie.fletching-table.fabric")
+			}
+		}
 	}
 }
 
