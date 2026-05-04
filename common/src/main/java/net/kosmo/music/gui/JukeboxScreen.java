@@ -13,8 +13,11 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.screens.Screen;
-//? >1.21.1
+//? >=1.21.2 && <1.21.6 {
+/*import net.minecraft.client.renderer.RenderType;
+*///? } elif >=1.21.6 {
 import net.minecraft.client.renderer.RenderPipelines;
+ //?}
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -136,8 +139,9 @@ public class JukeboxScreen extends Screen {
 		super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
 		//~ }
 		int i = this.marginX() + 3;
-		guiGraphics.blitSprite(/*? >1.21.1 {*/RenderPipelines.GUI_TEXTURED,/*?}*/BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
-		guiGraphics.blitSprite(/*? >1.21.1 {*/RenderPipelines.GUI_TEXTURED,/*?}*/SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
+
+		guiGraphics.blitSprite(/*? >=1.21.2 && <1.21.6 {*//*RenderType::guiTextured,*//*?} elif >=1.21.6 {*/RenderPipelines.GUI_TEXTURED,/*?}*/BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
+		guiGraphics.blitSprite(/*? >=1.21.2 && <1.21.6 {*//*RenderType::guiTextured,*//*?} elif >=1.21.6 {*/RenderPipelines.GUI_TEXTURED,/*?}*/SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
 	}
 
 	@Override

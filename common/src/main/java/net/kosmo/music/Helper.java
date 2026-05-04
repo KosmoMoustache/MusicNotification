@@ -60,10 +60,14 @@ public class Helper {
 
 	public static void playTrackData(Minecraft client, SoundEvent soundEvent) {
 		client.getSoundManager().stop(null, SoundSource.MUSIC);
-		SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 || <1.21.2 {*/ /*?} else {*//*, 10 *//*?}*/);
+		SimpleSoundInstance soundInstance = Helper.forMusic(soundEvent);
 		MusicManagerAccessor musicManagerAccessor = (MusicManagerAccessor) client.getMusicManager();
 		client.getSoundManager().play(soundInstance);
 		musicManagerAccessor.setCurrentMusic(soundInstance);
 		MusicNotificationClient.currentlyPlaying = soundInstance;
+	}
+
+	public static SimpleSoundInstance forMusic(SoundEvent soundEvent) {
+		return SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.6 && < 1.21.11 {*//*, 10*//*?} else {*/ /*?}*/);
 	}
 }

@@ -20,7 +20,7 @@ import net.minecraft.world.item.JukeboxSong;
 import java.util.Optional;
 
 public class JukeboxSongCommandNeoForge {
-	//~ if >1.21.1 'CommandSourceStack' -> 'SharedSuggestionProvider'
+	//~ if >=1.21.7 'CommandSourceStack' -> 'SharedSuggestionProvider'
 	public static final SuggestionProvider<SharedSuggestionProvider> AVAILABLE_JUKEBOX_SONGS = SuggestionProviders.register(
 		Identifier.withDefaultNamespace("available_jukebox_songs"),
 		((commandContext, suggestionsBuilder) ->
@@ -33,7 +33,7 @@ public class JukeboxSongCommandNeoForge {
 	public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
 		RequiredArgumentBuilder<CommandSourceStack, Identifier> argumentBuilder = Commands
 			.argument("song", IdentifierArgument.id())
-			//~ if >1.21.1 'AVAILABLE_JUKEBOX_SONGS' -> 'SuggestionProviders.cast(AVAILABLE_JUKEBOX_SONGS)'
+			//~ if >=1.21.6 'AVAILABLE_JUKEBOX_SONGS' -> 'SuggestionProviders.cast(AVAILABLE_JUKEBOX_SONGS)'
 			.suggests(SuggestionProviders.cast(AVAILABLE_JUKEBOX_SONGS))
 			.executes(commandContext -> run(
 				commandContext.getSource(),

@@ -9,8 +9,10 @@ stonecutter active "26.1" /* [SC] DO NOT EDIT */
 
 stonecutter parameters {
 	replacements {
-		string(current.parsed > "1.21.1") {
+		string(current.parsed >= "1.21.2") {
 			replace("ToastComponent", "ToastManager")
+		}
+		string(current.parsed >= "1.21.6") {
 			replace("pushPose", "pushMatrix")
 			replace("popPose", "popMatrix")
 		}
