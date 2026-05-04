@@ -53,7 +53,7 @@ public class SoundEntry extends ListEntry {
 	private void play(SoundData entry) {
 		SoundEvent soundEvent = Helper.getSoundEvent(this.client, entry.id());
 		if (soundEvent != null) {
-			SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 || <1.21.2 {*/ /*?} else {*//*, 10 *//*?}*/);
+			SimpleSoundInstance soundInstance = Helper.forMusic(soundEvent);
 			this.client.getSoundManager().stop(null, SoundSource.MASTER);
 			this.client.getSoundManager().play(soundInstance);
 		} else {

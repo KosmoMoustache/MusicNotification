@@ -82,7 +82,7 @@ public class ClientGameTest implements FabricClientGameTest {
 			return false;
 		}
 
-		SimpleSoundInstance soundInstance = SimpleSoundInstance.forMusic(soundEvent/*? >=1.21.11 {*/ /*?} else {*//*, 1 *//*?}*/);
+		SimpleSoundInstance soundInstance = Helper.forMusic(soundEvent);
 		WeighedSoundEvents weighedSoundEvents = soundInstance.resolve(soundManager);
 		if (weighedSoundEvents == null) {
 			return false;

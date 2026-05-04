@@ -5,18 +5,18 @@ import net.kosmo.music.notification.CompactNotification;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-//? if 1.21.1 {
-/*import net.minecraft.client.gui.LayeredDraw;
-import net.minecraft.client.Minecraft;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Shadow;
-*///? }
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//? if <=1.21.5 {
+/*import net.minecraft.client.gui.LayeredDraw;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Shadow;
+import net.minecraft.client.Minecraft;
+*///? }
 
 @Mixin(Gui.class)
 public abstract class MixinGui implements GuiAccessor {
@@ -24,7 +24,7 @@ public abstract class MixinGui implements GuiAccessor {
 	private Component musicnotification$compact$message;
 	@Unique
 	private int musicnotification$compact$time;
-	//? if 1.21.1 {
+	//? if <=1.21.5 {
 	/*@Final
 	@Shadow
 	private LayeredDraw layers;
@@ -40,7 +40,7 @@ public abstract class MixinGui implements GuiAccessor {
 		}
 	}
 
-	//? if >1.21.1 {
+	//? if >=1.21.6 {
 	@Inject(
 		//~ if >26 render -> extractRenderState
 		method = "extractRenderState",

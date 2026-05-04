@@ -9,7 +9,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
-//? if >1.21.1 {
+//? if >=1.21.6 {
 import net.minecraft.util.StrictJsonParser;
 //? } else {
 /*import com.google.gson.JsonParser;
@@ -28,7 +28,7 @@ public class MusicResourceReloadListener extends SimplePreparableReloadListener<
 		Map<Identifier, TrackData> map = new HashMap<>();
 		for (Resource resource : resourceManager.getResourceStack(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, MUSIC_PATH))) {
 			try (BufferedReader bufferedReader = resource.openAsReader()) {
-				//? if >1.21.1 {
+				//? if >=1.21.6 {
 				JsonElement jsonElement = StrictJsonParser.parse(bufferedReader);
 				//? } else {
 				/*JsonElement jsonElement = JsonParser.parseReader(bufferedReader);

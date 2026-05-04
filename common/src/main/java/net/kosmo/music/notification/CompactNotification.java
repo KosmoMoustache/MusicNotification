@@ -36,7 +36,7 @@ public class CompactNotification extends Notification {
 
 			if (i > 0) {
 				guiGraphics.pose().pushMatrix();
-				guiGraphics.pose().translate(guiGraphics.guiWidth(), guiGraphics.guiHeight() - 8/*? >1.21.1 {*//*?} else {*//*, 0*//*?}*/);
+				guiGraphics.pose().translate(guiGraphics.guiWidth(), guiGraphics.guiHeight() - 8/*? >=1.21.6 {*//*?} else {*//*, 0*//*?}*/);
 
 				int width = font.width(message);
 				int alpha = Config.options().STYLE_COMPACT_ALPHA;

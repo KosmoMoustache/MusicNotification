@@ -2,8 +2,11 @@ package net.kosmo.music.resource;
 
 import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-//? >1.21.1
+//? >=1.21.2 && <1.21.6 {
+/*import net.minecraft.client.renderer.RenderType;
+*///? } elif >=1.21.6 {
 import net.minecraft.client.renderer.RenderPipelines;
+//?}
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
@@ -81,7 +84,7 @@ public class AlbumCover {
 		}
 
 		public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y) {
-			guiGraphics.blitSprite(/*? >1.21.1 {*/RenderPipelines.GUI_TEXTURED,/*?}*/sprite, x, y, getWidth(), getHeight());
+			guiGraphics.blitSprite(/*? >=1.21.2 && <1.21.6 {*//*RenderType::guiTextured,*//*?} elif >=1.21.6 {*/RenderPipelines.GUI_TEXTURED,/*?}*/sprite, x, y, getWidth(), getHeight());
 		}
 	}
 
