@@ -19,10 +19,6 @@ fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
 	}
-
-	accessConverter.register(sourceSets.main) {
-		add("${mod.aw_version}.aw")
-	}
 }
 
 dependencies {

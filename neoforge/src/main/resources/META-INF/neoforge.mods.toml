@@ -24,6 +24,9 @@ Thanks to:
         Chiloven945
 """
 
+[[accessTransformers]]
+file="META-INF/${at_version}.cfg"
+
 [[mixins]]
 config = "${mod_id}.mixins.json"
 

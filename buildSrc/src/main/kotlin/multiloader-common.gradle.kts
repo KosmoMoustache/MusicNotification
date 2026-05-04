@@ -40,6 +40,7 @@ tasks.named<ProcessResources>("processResources") {
 				this["mod_license"] = mod.license
 				this["mod_github"] = mod.github
 				this["aw_version"] = mod.aw_version
+				this["at_version"] = mod.at_version
 				this["fabric_mc_range"] = mod.fabric_mc_range
 				this["neoforge_mc_range"] = mod.neoforge_mc_range
 				this["floader"] = deps.floader
