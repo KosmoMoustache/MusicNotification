@@ -61,7 +61,6 @@ public class MusicNotificationClientNeoForge {
 	//? } else {
 	/*void addClientReloadListener(RegisterClientReloadListenersEvent event) {
 		event.registerReloadListener(MusicResourceReloadListener.INSTANCE);
-//		event.addListener(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), MusicResourceReloadListener.INSTANCE);
 	}
 	*///? }
 

@@ -23,7 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.0.1] - 05/05/2025
 
-- Ported to 1.21.4 
+- Ported to 1.21.4
+- Fix built-in resource pack incompatibility
 
 ## [3.0.0] - 21/12/2025
 
