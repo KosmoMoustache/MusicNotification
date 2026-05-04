@@ -74,6 +74,9 @@ jobs:
                 with:
                     fetch-depth: 1
 
+            -   name: Grant execute permission to parse-gradle-properties.sh
+                run: chmod +x ./.github/scripts/parse-gradle-properties.sh
+
             -   name: "Parse gradle properties"
                 id: gradle-properties
                 run: ./.github/scripts/parse-gradle-properties.sh ${{ matrix.version }}
