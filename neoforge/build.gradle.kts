@@ -22,7 +22,7 @@ dependencies {
 neoForge {
 	version = deps.neoforge
 
-	accessTransformers.from(project.file("../../src/main/resources/META-INF/accesstransformer.cfg").absolutePath)
+	accessTransformers.from(project.file("../../src/main/resources/META-INF/${mod.at_version}.cfg").absolutePath)
 
 	runs {
 		register("client") {

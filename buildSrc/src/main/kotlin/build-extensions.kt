@@ -32,7 +32,8 @@ value class ModData(private val project: Project) {
 	val description: String get() = modProp("description")
 	val license: String get() = modProp("license")
 	val github: String get() = modProp("github")
-	val aw_version: String get() = modProp("aw")
+	val aw_version: String get() = modProp("aw_version")
+	val at_version: String get() = modProp("at_version")
 	val fabric_mc_range: String get() = modProp("fabric_range")
 	val neoforge_mc_range: String get() = modProp("neoforge_range")
 
