@@ -19,6 +19,9 @@ fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
 	}
+	lang.create("main") {
+		patterns.add("**/*.yml")
+	}
 }
 
 dependencies {
@@ -57,7 +60,7 @@ val commonResources: Configuration by configurations.creating {
 }
 
 artifacts {
-	afterEvaluate {
+//	afterEvaluate {
 		val mainSourceSet = sourceSets.main.get()
 		mainSourceSet.java.sourceDirectories.files.forEach {
 			add(commonJava.name, it)
@@ -65,5 +68,5 @@ artifacts {
 		mainSourceSet.resources.sourceDirectories.files.forEach {
 			add(commonResources.name, it)
 		}
-	}
+//	}
 }

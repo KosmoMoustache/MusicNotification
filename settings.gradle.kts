@@ -71,9 +71,7 @@ stonecutter {
 
 		enabledVersions.forEach { (branchName, branchVersions) ->
 			branch(branchName) {
-				branchVersions.forEach { version ->
-					version(version)
-				}
+				versions(*branchVersions.toTypedArray())
 			}
 		}
 	}
