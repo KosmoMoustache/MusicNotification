@@ -17,7 +17,7 @@ for platform in fabric neoforge; do
 			fi
 
 			# copy dp_*
-			if ls "test/dp_*" > /dev/null 2>&1; then
+			if ls test/dp_* > /dev/null 2>&1; then
 				mkdir -p "$rundir/saves/wd_void/datapacks"
 				for dp in test/dp_*; do
 					printf 'Copying %s -> %s/saves/wd_void/datapacks\n' "$dp" "$rundir"
@@ -26,7 +26,7 @@ for platform in fabric neoforge; do
 			fi
 
 			# copy rp_*
-			if ls "test/rp_*" > /dev/null 2>&1; then
+			if ls test/rp_* > /dev/null 2>&1; then
 				mkdir -p "$rundir/resourcepacks"
 				for dp in test/rp_*; do
 					printf 'Copying %s -> %s/resourcepacks\n' "$dp" "$rundir"
