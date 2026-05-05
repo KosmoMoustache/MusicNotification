@@ -20,6 +20,7 @@
 			}
 		]
 	},
+	//? if >=1.21.6 {
 	"mn.minecraft.music.game.below_and_above": {
 		"sounds": [
 			{
@@ -27,6 +28,8 @@
 			}
 		]
 	},
+	//? }
+	//? if >=1.21.6 {
 	"mn.minecraft.music.game.broken_clocks": {
 		"sounds": [
 			{
@@ -34,6 +37,7 @@
 			}
 		]
 	},
+	//? }
 	"mn.minecraft.music.game.bromeliad": {
 		"sounds": [
 			{
@@ -174,6 +178,7 @@
 			}
 		]
 	},
+	//? if >=1.21.6 {
 	"mn.minecraft.music.game.fireflies": {
 		"sounds": [
 			{
@@ -181,6 +186,7 @@
 			}
 		]
 	},
+	//? }
 	"mn.minecraft.music.game.floating_dream": {
 		"sounds": [
 			{
@@ -223,6 +229,7 @@
 			}
 		]
 	},
+	//? if >=1.21.6 {
 	"mn.minecraft.music.game.lilypad": {
 		"sounds": [
 			{
@@ -230,6 +237,7 @@
 			}
 		]
 	},
+	//? }
 	"mn.minecraft.music.game.living_mice": {
 		"sounds": [
 			{
@@ -307,6 +315,7 @@
 			}
 		]
 	},
+	//? if >=1.21.6 {
 	"mn.minecraft.music.game.os_piano": {
 		"sounds": [
 			{
@@ -314,6 +323,7 @@
 			}
 		]
 	},
+	//? }
 	"mn.minecraft.music.game.oxygene": {
 		"sounds": [
 			{

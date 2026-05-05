@@ -20,6 +20,7 @@
 		"customId": "musicnotification:mn.minecraft.music.game.ancestry",
 		"title": "Ancestry"
 	},
+	//? if >=1.21.6 {
 	"minecraft:music/game/below_and_above": {
 		"album": "Chase the Skies Update No. 2",
 		"author": "Amos Roddy",
@@ -27,6 +28,8 @@
 		"customId": "musicnotification:mn.minecraft.music.game.below_and_above",
 		"title": "Below and Above"
 	},
+	//? }
+	//? if >=1.21.6 {
 	"minecraft:music/game/broken_clocks": {
 		"album": "Chase the Skies Update No. 4",
 		"author": "Amos Roddy",
@@ -34,6 +37,7 @@
 		"customId": "musicnotification:mn.minecraft.music.game.broken_clocks",
 		"title": "Broken Clocks"
 	},
+	//? }
 	"minecraft:music/game/bromeliad": {
 		"album": "Trails & Tailes Update No.3",
 		"author": "Aaron Cherof",
@@ -173,6 +177,7 @@
 		"customId": "musicnotification:mn.minecraft.music.game.featherfall",
 		"title": "Featherfall"
 	},
+	//? if >=1.21.6 {
 	"minecraft:music/game/fireflies": {
 		"album": "Chase the Skies Update No. 5",
 		"author": "Amos Roddy",
@@ -180,6 +185,7 @@
 		"customId": "musicnotification:mn.minecraft.music.game.fireflies",
 		"title": "Fireflies"
 	},
+	//? }
 	"minecraft:music/game/floating_dream": {
 		"album": "Caves & Cliffs No. 8",
 		"author": "Kumi Tanioka",
@@ -222,6 +228,7 @@
 		"customId": "musicnotification:mn.minecraft.music.game.left_to_bloom",
 		"title": "Left to Bloom"
 	},
+	//? if >=1.21.6 {
 	"minecraft:music/game/lilypad": {
 		"album": "Chase the Skies Update No. 1",
 		"author": "Amos Roddy",
@@ -229,6 +236,7 @@
 		"customId": "musicnotification:mn.minecraft.music.game.lilypad",
 		"title": "Lilypad"
 	},
+	//? }
 	"minecraft:music/game/living_mice": {
 		"album": "Volume Alpha No. 5",
 		"author": "C418",
@@ -306,6 +314,7 @@
 		"customId": "musicnotification:mn.minecraft.music.game.one_more_day",
 		"title": "One More Day"
 	},
+	//? if >=1.21.6 {
 	"minecraft:music/game/os_piano": {
 		"album": "Chase the Skies Update No. 3",
 		"author": "Amos Roddy",
@@ -313,6 +322,7 @@
 		"customId": "musicnotification:mn.minecraft.music.game.os_piano",
 		"title": "O's Piano"
 	},
+	//? }
 	"minecraft:music/game/oxygene": {
 		"album": "Volume Alpha No. 9",
 		"author": "C418",
