@@ -11,6 +11,9 @@ fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
 	}
+	lang.create("main") {
+		patterns.add("**/*.yml")
+	}
 }
 
 dependencies {
