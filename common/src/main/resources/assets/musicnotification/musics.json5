@@ -1,6 +1,6 @@
 {
 	"minecraft:music/game/a_familiar_room": {
-		"album": "Trails & Tailes Update No.2",
+		"album": "Trails & Tailes No.2",
 		"author": "Aaron Cherof",
 		"cover": "trails_and_tales_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.a_familiar_room",
@@ -14,7 +14,7 @@
 		"title": "An Ordinary Day"
 	},
 	"minecraft:music/game/ancestry": {
-		"album": "The Wild Update No.3",
+		"album": "The Wild No.3",
 		"author": "Lena Raine",
 		"cover": "wild_update_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.ancestry",
@@ -22,7 +22,7 @@
 	},
 	//? if >=1.21.6 {
 	"minecraft:music/game/below_and_above": {
-		"album": "Chase the Skies Update No. 2",
+		"album": "Chase the Skies No. 2",
 		"author": "Amos Roddy",
 		"cover": "chase_the_skies_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.below_and_above",
@@ -31,7 +31,7 @@
 	//? }
 	//? if >=1.21.6 {
 	"minecraft:music/game/broken_clocks": {
-		"album": "Chase the Skies Update No. 4",
+		"album": "Chase the Skies No. 4",
 		"author": "Amos Roddy",
 		"cover": "chase_the_skies_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.broken_clocks",
@@ -39,7 +39,7 @@
 	},
 	//? }
 	"minecraft:music/game/bromeliad": {
-		"album": "Trails & Tailes Update No.3",
+		"album": "Trails & Tailes No.3",
 		"author": "Aaron Cherof",
 		"cover": "trails_and_tales_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.bromeliad",
@@ -102,7 +102,7 @@
 		"title": "Taswell"
 	},
 	"minecraft:music/game/crescent_dunes": {
-		"album": "Trails & Tailes Update No.4",
+		"album": "Trails & Tailes No.4",
 		"author": "Aaron Cherof",
 		"cover": "trails_and_tales_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.crescent_dunes",
@@ -116,7 +116,7 @@
 		"title": "Danny"
 	},
 	"minecraft:music/game/deeper": {
-		"album": "Tricky Trials Update No. 7",
+		"album": "Tricky Trials No. 7",
 		"author": "Lena Raine",
 		"cover": "tricky_trials_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.deeper",
@@ -130,14 +130,14 @@
 		"title": "Dry Hands"
 	},
 	"minecraft:music/game/echo_in_the_wind": {
-		"album": "Trails & Tailes Update No.1",
+		"album": "Trails & Tailes No.1",
 		"author": "Aaron Cherof",
 		"cover": "trails_and_tales_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.echo_in_the_wind",
 		"title": "Echo in the Wind"
 	},
 	"minecraft:music/game/eld_unknown": {
-		"album": "Tricky Trials Update No. 8",
+		"album": "Tricky Trials No. 8",
 		"author": "Lena Raine",
 		"cover": "tricky_trials_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.eld_unknown",
@@ -164,14 +164,14 @@
 		"title": "The End"
 	},
 	"minecraft:music/game/endless": {
-		"album": "Tricky Trials Update No. 9",
+		"album": "Tricky Trials No. 9",
 		"author": "Lena Raine",
 		"cover": "tricky_trials_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.endless",
 		"title": "Endless"
 	},
 	"minecraft:music/game/featherfall": {
-		"album": "Tricky Trials Update No. 1",
+		"album": "Tricky Trials No. 1",
 		"author": "Aaron Cherof",
 		"cover": "tricky_trials_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.featherfall",
@@ -179,7 +179,7 @@
 	},
 	//? if >=1.21.6 {
 	"minecraft:music/game/fireflies": {
-		"album": "Chase the Skies Update No. 5",
+		"album": "Chase the Skies No. 5",
 		"author": "Amos Roddy",
 		"cover": "chase_the_skies_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.fireflies",
@@ -215,7 +215,7 @@
 		"title": "Key"
 	},
 	"minecraft:music/game/komorebi": {
-		"album": "Tricky Trials Update No. 4",
+		"album": "Tricky Trials No. 4",
 		"author": "Kumi Tanioka",
 		"cover": "tricky_trials_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.komorebi",
@@ -230,7 +230,7 @@
 	},
 	//? if >=1.21.6 {
 	"minecraft:music/game/lilypad": {
-		"album": "Chase the Skies Update No. 1",
+		"album": "Chase the Skies No. 1",
 		"author": "Amos Roddy",
 		"cover": "chase_the_skies_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.lilypad",
@@ -316,7 +316,7 @@
 	},
 	//? if >=1.21.6 {
 	"minecraft:music/game/os_piano": {
-		"album": "Chase the Skies Update No. 3",
+		"album": "Chase the Skies No. 3",
 		"author": "Amos Roddy",
 		"cover": "chase_the_skies_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.os_piano",
@@ -331,14 +331,14 @@
 		"title": "Oxygène"
 	},
 	"minecraft:music/game/pokopoko": {
-		"album": "Tricky Trials Update No. 5",
+		"album": "Tricky Trials No. 5",
 		"author": "Kumi Tanioka",
 		"cover": "tricky_trials_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.pokopoko",
 		"title": "pokopoko"
 	},
 	"minecraft:music/game/puzzlebox": {
-		"album": "Tricky Trials Update No. 3",
+		"album": "Tricky Trials No. 3",
 		"author": "Aaron Cherof",
 		"cover": "tricky_trials_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.puzzlebox",
@@ -387,7 +387,7 @@
 		"title": "Sweden"
 	},
 	"minecraft:music/game/watcher": {
-		"album": "Tricky Trials Update No. 2",
+		"album": "Tricky Trials No. 2",
 		"author": "Aaron Cherof",
 		"cover": "tricky_trials_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.watcher",
@@ -429,7 +429,7 @@
 		"title": "Wet Hands"
 	},
 	"minecraft:music/game/yakusoku": {
-		"album": "Tricky Trials Update No. 6",
+		"album": "Tricky Trials No. 6",
 		"author": "Kumi Tanioka",
 		"cover": "tricky_trials_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.yakusoku",
@@ -506,14 +506,14 @@
 		"title": "Chirp"
 	},
 	"minecraft:records/creator": {
-		"album": "Tricky Trials Update No. 10",
+		"album": "Tricky Trials No. 10",
 		"author": "Lena Raine",
 		"cover": "creator",
 		"customId": "minecraft:music_disc.creator",
 		"title": "Creator"
 	},
 	"minecraft:records/creator_music_box": {
-		"album": "Tricky Trials Update No. 11",
+		"album": "Tricky Trials No. 11",
 		"author": "Lena Raine",
 		"cover": "creator_music_box",
 		"customId": "minecraft:music_disc.creator_music_box",
@@ -562,14 +562,14 @@
 		"title": "Pigstep"
 	},
 	"minecraft:records/precipice": {
-		"album": "Tricky Trials Update No. 12",
+		"album": "Tricky Trials No. 12",
 		"author": "Aaron Cherof",
 		"cover": "precipice",
 		"customId": "minecraft:music_disc.precipice",
 		"title": "Precipice"
 	},
 	"minecraft:records/relic": {
-		"album": "Trails & Tailes Update No.5",
+		"album": "Trails & Tailes No.5",
 		"author": "Aaron Cherof",
 		"cover": "relic",
 		"customId": "minecraft:music_disc.relic",
@@ -590,7 +590,7 @@
 		"title": "Strad"
 	},
 	"minecraft:records/tears": {
-		"album": "Chase the Skies Update No. 6",
+		"album": "Chase the Skies No. 6",
 		"author": "Amos Roddy",
 		"cover": "tears",
 		"customId": "minecraft:music_disc.tears",
