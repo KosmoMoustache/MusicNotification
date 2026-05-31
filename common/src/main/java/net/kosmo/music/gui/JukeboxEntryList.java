@@ -19,7 +19,7 @@ public class JukeboxEntryList extends ContainerObjectSelectionList<ListEntry> {
 	private String filter;
 
 	public JukeboxEntryList(JukeboxScreen jukeboxScreen, Minecraft minecraft, int width, int height, int y, int itemHeight) {
-		super(minecraft, width, height, y, itemHeight);
+		super(minecraft, width, height, y, itemHeight/*? <=1.20.1 {*//*, 0*//*?}*/);
 		this.parent = jukeboxScreen;
 	}
 
