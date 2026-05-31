@@ -45,7 +45,7 @@ dependencies {
 
 	compileOnly("net.fabricmc:fabric-loader:${deps.floader}")
 	deps.cloth_config?.let { version ->
-		modApi("me.shedaniel.cloth:cloth-config-neoforge:${version}")
+		modApi("me.shedaniel.cloth:cloth-config-fabric:${version}")
 	}
 }
 
