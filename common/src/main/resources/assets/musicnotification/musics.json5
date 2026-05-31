@@ -602,44 +602,44 @@
 		"title": "O's Piano"
 	},
 	//? }
-	//? if >=26.2
+	//? if >=26.2 {
 	"minecraft:music/game/shores": {
-		"album": "TODO",
+		"album": "Chaos Cubed No. 4",
 		"author": "fingerspit",
 		"cover": "chaos_cubed",
 		"customId": "musicnotification:mn.minecraft.music.game.shores",
 		"title": "Shores"
 	},
 	"minecraft:music/game/memories": {
-		"album": "TODO",
+		"album": "Chaos Cubed No. 1",
 		"author": "fingerspit",
 		"cover": "chaos_cubed",
 		"customId": "musicnotification:mn.minecraft.music.game.memories",
 		"title": "Memories"
 	},
 	"minecraft:music/game/nightly": {
-		"album": "TODO",
+		"album": "Chaos Cubed No. 5",
 		"author": "fingerspit",
 		"cover": "chaos_cubed",
 		"customId": "musicnotification:mn.minecraft.music.game.nightly",
 		"title": "Nightly"
 	},
 	"minecraft:music/game/home": {
-		"album": "TODO",
+		"album": "Chaos Cubed No. 3",
 		"author": "fingerspit",
 		"cover": "chaos_cubed",
 		"customId": "musicnotification:mn.minecraft.music.game.home",
 		"title": "Home"
 	},
 	"minecraft:music/game/Ebb": {
-		"album": "TODO",
+		"album": "Chaos Cubed No. 2",
 		"author": "fingerspit",
 		"cover": "chaos_cubed",
 		"customId": "musicnotification:mn.minecraft.music.game.ebb",
 		"title": "Ebb"
 	},
 	"minecraft:records/bounce": {
-		"album": "TODO",
+		"album": "Chaos Cubed No. 6",
 		"author": "fingerspit",
 		"cover": "chaos_cubed",
 		"customId": "minecraft:music_disc.bounce",
