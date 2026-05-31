@@ -24,8 +24,7 @@ public class CompactNotification extends Notification {
 	}
 
 	public static void render(GuiGraphicsExtractor guiGraphics, @NotNull DeltaTracker deltaTracker, Component message, int time) {
-		Minecraft client = Minecraft.getInstance();
-		Font font = client.font;
+		Font font = Minecraft.getInstance().font;
 
 		if (message != null) {
 			int f = (int) (time - deltaTracker.getGameTimeDeltaPartialTick(false));
