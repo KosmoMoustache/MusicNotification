@@ -631,7 +631,7 @@
 		"customId": "musicnotification:mn.minecraft.music.game.home",
 		"title": "Home"
 	},
-	"minecraft:music/game/Ebb": {
+	"minecraft:music/game/ebb": {
 		"album": "Chaos Cubed No. 2",
 		"author": "fingerspit",
 		"cover": "chaos_cubed",
