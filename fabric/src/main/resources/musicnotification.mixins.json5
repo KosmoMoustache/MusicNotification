@@ -3,7 +3,11 @@
 	"package": "net.kosmo.music.fabric.mixin",
 	"compatibilityLevel": "JAVA_${java_version}",
 	"client": [
-		"MixinGui"
+		//? if >=26.2 {
+		"MixinHud"
+		//? } else {
+		/*"MixinGui"
+		*///? }
 	],
 	"injectors": {
 		"defaultRequire": 1
