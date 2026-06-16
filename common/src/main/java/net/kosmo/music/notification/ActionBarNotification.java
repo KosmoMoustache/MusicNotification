@@ -11,7 +11,7 @@ import net.minecraft.resources.Identifier;
 public class ActionBarNotification extends Notification {
 
 	static public boolean canBeShown() {
-		Screen screen = Minecraft.getInstance().screen;
+		Screen screen = Minecraft.getInstance().gui.screen();
 		return screen == null || screen instanceof ChatScreen;
 	}
 
@@ -19,6 +19,6 @@ public class ActionBarNotification extends Notification {
 		super.show(resourceLocation, trackData, this.getClass());
 		// TODO: Allow customization of message time
 		// TODO: Check if a message is already being displayed and queue the next one ?
-		Minecraft.getInstance().gui.setOverlayMessage(Component.translatable("text.musicnotification.notification.action_bar", trackData.title(), trackData.author()), Config.options().STYLE_ACTION_BAR_ANIMATE_COLOR);
+		Minecraft.getInstance().gui.hud.setOverlayMessage(Component.translatable("text.musicnotification.notification.action_bar", trackData.title(), trackData.author()), Config.options().STYLE_ACTION_BAR_ANIMATE_COLOR);
 	}
 }

@@ -20,24 +20,6 @@
 			}
 		]
 	},
-	//? if >=1.21.6 {
-	"mn.minecraft.music.game.below_and_above": {
-		"sounds": [
-			{
-				"name": "music/game/below_and_above"
-			}
-		]
-	},
-	//? }
-	//? if >=1.21.6 {
-	"mn.minecraft.music.game.broken_clocks": {
-		"sounds": [
-			{
-				"name": "music/game/broken_clocks"
-			}
-		]
-	},
-	//? }
 	"mn.minecraft.music.game.bromeliad": {
 		"sounds": [
 			{
@@ -178,15 +160,6 @@
 			}
 		]
 	},
-	//? if >=1.21.6 {
-	"mn.minecraft.music.game.fireflies": {
-		"sounds": [
-			{
-				"name": "music/game/fireflies"
-			}
-		]
-	},
-	//? }
 	"mn.minecraft.music.game.floating_dream": {
 		"sounds": [
 			{
@@ -229,15 +202,6 @@
 			}
 		]
 	},
-	//? if >=1.21.6 {
-	"mn.minecraft.music.game.lilypad": {
-		"sounds": [
-			{
-				"name": "music/game/lilypad"
-			}
-		]
-	},
-	//? }
 	"mn.minecraft.music.game.living_mice": {
 		"sounds": [
 			{
@@ -315,15 +279,6 @@
 			}
 		]
 	},
-	//? if >=1.21.6 {
-	"mn.minecraft.music.game.os_piano": {
-		"sounds": [
-			{
-				"name": "music/game/os_piano"
-			}
-		]
-	},
-	//? }
 	"mn.minecraft.music.game.oxygene": {
 		"sounds": [
 			{
@@ -463,5 +418,79 @@
 				"name": "music/menu/mutation"
 			}
 		]
-	}
+	},
+	//? if >=1.21.6 {
+	"mn.minecraft.music.game.below_and_above": {
+		"sounds": [
+			{
+				"name": "music/game/below_and_above"
+			}
+		]
+	},
+	"mn.minecraft.music.game.broken_clocks": {
+		"sounds": [
+			{
+				"name": "music/game/broken_clocks"
+			}
+		]
+	},
+	"mn.minecraft.music.game.fireflies": {
+		"sounds": [
+			{
+				"name": "music/game/fireflies"
+			}
+		]
+	},
+	"mn.minecraft.music.game.lilypad": {
+		"sounds": [
+			{
+				"name": "music/game/lilypad"
+			}
+		]
+	},
+	"mn.minecraft.music.game.os_piano": {
+		"sounds": [
+			{
+				"name": "music/game/os_piano"
+			}
+		]
+	},
+	//? }
+	//? if >=26.2 {
+	"mn.minecraft.music.game.shores": {
+		"sounds": [
+			{
+				"name": "music/menu/shores"
+			}
+		]
+	},
+	"mn.minecraft.music.game.memories": {
+		"sounds": [
+			{
+				"name": "music/menu/memories"
+			}
+		]
+	},
+	"mn.minecraft.music.game.nightly": {
+		"sounds": [
+			{
+				"name": "music/menu/nightly"
+			}
+		]
+	},
+	"mn.minecraft.music.game.home": {
+		"sounds": [
+			{
+				"name": "music/menu/home"
+			}
+		]
+	},
+	"mn.minecraft.music.game.ebb": {
+		"sounds": [
+			{
+				"name": "music/menu/ebb"
+			}
+		]
+	},
+	//? }
 }

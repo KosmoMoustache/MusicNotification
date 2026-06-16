@@ -2,9 +2,21 @@
 
 set -euo pipefail
 
+# Optional argument: version to copy only (e.g. 1.21.1)
+VERSION_FILTER="${1:-}"
+
 for platform in fabric neoforge; do
-	for verdir in "$platform"/versions/*; do
-		mkdir "-p" "$verdir/run"
+	if [ -n "$VERSION_FILTER" ]; then
+		verdirs=("$platform/versions/$VERSION_FILTER")
+	else
+		verdirs=("$platform/versions"/*)
+	fi
+
+	for verdir in "${verdirs[@]}"; do
+		# skip non-existing matches
+		[ -d "$verdir" ] || continue
+
+		mkdir -p "$verdir/run"
 		rundir="$verdir/run"
 		if [ -d "$rundir" ]; then
 			printf 'Processing %s\n' "$rundir"

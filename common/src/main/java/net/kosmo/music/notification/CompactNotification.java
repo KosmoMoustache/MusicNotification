@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class CompactNotification extends Notification {
 
 	public static boolean canBeShown() {
-		Screen screen = Minecraft.getInstance().screen;
+		Screen screen = Minecraft.getInstance().gui.screen();
 		return screen == null || screen instanceof ChatScreen;
 	}
 

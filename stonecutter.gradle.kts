@@ -5,7 +5,7 @@ plugins {
 	id("com.google.devtools.ksp") version "2.3.6" apply false
 	id("net.neoforged.moddev") version "2.0.140" apply false
 }
-stonecutter active "26.1" /* [SC] DO NOT EDIT */
+stonecutter active "26.2" /* [SC] DO NOT EDIT */
 
 stonecutter parameters {
 	replacements {
@@ -27,6 +27,14 @@ stonecutter parameters {
 			replace("net.fabricmc.fabric.api.client.command.v2.ClientCommandManager", "net.fabricmc.fabric.api.client.command.v2.ClientCommands")
 			replace("net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper", "net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper")
 			replace("KeyBindingHelper.registerKeyBinding", "KeyMappingHelper.registerKeyMapping")
+		}
+		string(current.parsed >= "26.2") {
+			replace("client.setScreen", "client.gui.setScreen")
+			replace("this.minecraft.setScreen", "this.minecraft.gui.setScreen")
+			replace("client.screen", "client.gui.screen()")
+			replace("Minecraft.getInstance().screen", "Minecraft.getInstance().gui.screen()")
+			replace("Minecraft.getInstance().gui.setOverlayMessage", "Minecraft.getInstance().gui.hud.setOverlayMessage")
+			replace("getToastManager()", "gui.toastManager()")
 		}
 	}
 }

@@ -1,4 +1,5 @@
-package net.kosmo.music.fabric.mixin;
+//? if <26.2 {
+/*package net.kosmo.music.fabric.mixin;
 
 import net.kosmo.music.fabric.GuiAccessor;
 import net.kosmo.music.notification.CompactNotification;
@@ -12,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //? if <=1.21.5 {
-/*import net.minecraft.client.gui.LayeredDraw;
+/^import net.minecraft.client.gui.LayeredDraw;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Shadow;
 import net.minecraft.client.Minecraft;
-*///? }
+^///? }
 
 @Mixin(Gui.class)
 public abstract class MixinGui implements GuiAccessor {
@@ -25,10 +26,10 @@ public abstract class MixinGui implements GuiAccessor {
 	@Unique
 	private int musicnotification$compact$time;
 	//? if <=1.21.5 {
-	/*@Final
+	/^@Final
 	@Shadow
 	private LayeredDraw layers;
-	*///? }
+	^///? }
 
 	@Inject(method = "tick()V", at = @At(value = "TAIL"))
 	private void musicNotification$tickInject(CallbackInfo ci) {
@@ -50,15 +51,15 @@ public abstract class MixinGui implements GuiAccessor {
 			//~ if >26 renderSubtitleOverlay -> extractSubtitleOverlay
 			target = "Lnet/minecraft/client/gui/Gui;extractSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Z)V", ordinal = 0
 			//?} else {
-			/*target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"
-			*///?}
+			/^target = "Lnet/minecraft/client/gui/Gui;renderSubtitleOverlay(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"
+			^///?}
 		)
 	)
 	private void musicNotification$renderSubtitleOverlayInject(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 		CompactNotification.render(guiGraphics, deltaTracker, musicnotification$compact$message, musicnotification$compact$time);
 	}
 	//? } else {
-	/*@Inject(method = "<init>", at = @At("TAIL"))
+	/^@Inject(method = "<init>", at = @At("TAIL"))
 	private void musicNotification$addRenderLayer(Minecraft minecraft, CallbackInfo ci) {
 		this.layers.add(this::musicNotification$renderCompactNotification);
 	}
@@ -66,7 +67,7 @@ public abstract class MixinGui implements GuiAccessor {
 	private void musicNotification$renderCompactNotification(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
 		CompactNotification.render(guiGraphics, deltaTracker, musicnotification$compact$message, musicnotification$compact$time);
 	}
-	*///?}
+	^///?}
 
 
 	@Override
@@ -89,3 +90,4 @@ public abstract class MixinGui implements GuiAccessor {
 		return musicnotification$compact$time;
 	}
 }
+*///? }

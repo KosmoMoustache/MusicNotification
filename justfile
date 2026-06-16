@@ -57,17 +57,17 @@ run-neoforge-client:
 run-neoforge-server:
     {{ gradlew }} neoforge:runServer
 
-# Copy test resources for each loader and versions (Only for Unix-like systems)
-copy-tests:
-    just {{ copy_tests_target }}
+# Copy test resources for each loader and versions (Only for Unix-like systems) | Optional argument: version to copy only (e.g. 1.21.1)
+copy-tests version="":
+    just {{ copy_tests_target }} {{ version }}
 
 # Nuke implementation for Windows (not yet implemented)
-_copy-tests-windows:
+_copy-tests-windows version="":
     echo "Not supported on Windows. Please copy test resources manually."
 
 # Nuke implementation for Linux/macOS
-_copy-tests-unix:
-    ./test/copy-test.sh
+_copy-tests-unix version="":
+    ./test/copy-test.sh {{ version }}
 
 # Nuke the project
 nuke:

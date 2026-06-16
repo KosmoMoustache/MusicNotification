@@ -21,6 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [3.1.0] - 16/06/2026
+
+- Removed unavailable tracks from Jukebox menu
+- Adds support for Minecraft 26.2
+
 ## [3.0.1] - 05/05/2025
 
 - Ported to 1.21.4
