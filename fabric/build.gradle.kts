@@ -60,6 +60,10 @@ dependencies {
 
 	// Fabric Loader JUnit for testing
 	testImplementation("net.fabricmc:fabric-loader-junit:${deps.floader}")
+
+	// Modrinth
+//	modImplementation(fletchingTable.modrinth("more-music-discs", deps.minecraft))
+//	modImplementation(fletchingTable.modrinth("deimos", deps.minecraft))
 }
 
 //Mixin hotswap
