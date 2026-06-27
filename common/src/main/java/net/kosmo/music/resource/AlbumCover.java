@@ -40,6 +40,18 @@ public class AlbumCover {
 		return this.cover instanceof SpriteCover;
 	}
 
+	public static boolean canGetItemStack() throws Error{
+		try {
+			Identifier itemId = Identifier.tryParse("minecraft:music_disc_13");
+			//~ if >1.21.1 '.getDefaultInstance()' -> '.get().value().getDefaultInstance()'
+			BuiltInRegistries.ITEM.get(itemId).get().value().getDefaultInstance();
+			return true;
+		} catch (NullPointerException e) {
+			MusicNotificationClient.LOGGER.debug("Failed to get ItemStack for album cover, likely due to being on the TitleScreen. Error: {}", e.getMessage());
+			return false;
+		}
+	}
+
 	public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y) {
 		this.cover.drawCover(guiGraphics, x, y);
 	}
@@ -103,13 +115,18 @@ public class AlbumCover {
 			return 16;
 		}
 
-		private ItemStack getItemStack(Identifier itemId) {
+		/**
+		 * @throws NullPointerException Can throw if Holder<Item> is null in ItemStack (e.g. in the TitleScreen)
+		 */
+		private ItemStack getItemStack(Identifier itemId) throws NullPointerException {
 			if (!BuiltInRegistries.ITEM.containsKey(itemId)) {
-				MusicNotificationClient.LOGGER.error("Failed to find album cover item '{}', falling back to minecraft:music_disc_13.", itemId);
+				MusicNotificationClient.LOGGER.error("Failed to find album cover item '{}', falling back to default", itemId);
 				itemId = Identifier.tryParse("minecraft:music_disc_13");
 			}
+//			try {
 			//~ if >1.21.1 '.getDefaultInstance()' -> '.get().value().getDefaultInstance()'
 			ItemStack itemStack = BuiltInRegistries.ITEM.get(itemId).get().value().getDefaultInstance();
+
 			if (itemStack.isEmpty()) {
 				itemStack = new ItemStack(Items.MUSIC_DISC_13);
 			}

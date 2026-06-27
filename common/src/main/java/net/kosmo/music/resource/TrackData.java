@@ -67,7 +67,7 @@ public record TrackData(
 
 	public AlbumCover getAlbumCover() {
 		return ALBUM_CACHE.computeIfAbsent(this.key, k -> {
-				if (this.item.isPresent()) {
+				if (this.item.isPresent() && AlbumCover.canGetItemStack()) {
 					return AlbumCover.fromItem(this.item.get());
 				} else {
 					return AlbumCover.fromSprite(k.getNamespace(), this.cover.orElse(null));
