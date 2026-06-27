@@ -37,16 +37,22 @@ public class Test {
 
 	public void printAllResult() {
 		LOGGER.info("━━━━ Test summary ━━━━");
+		int i = 0;
+		int j = 0;
 		for (Map.Entry<Identifier, TestResult> entry : RESULT.entrySet()) {
 			if (entry.getValue().result) {
+				i++;
 				LOGGER.info("  ✔ {}", entry.getKey());
 				LOGGER.info("  ↳ {}", entry.getValue().message);
 
 			} else {
+				j++;
 				LOGGER.error(" ✖ {}", entry.getKey());
 				LOGGER.error(" ↳ {}", entry.getValue().message);
 			}
-		}
+		};
+		LOGGER.info("Valid {}/{}", i, i + j);
+		LOGGER.info("Invalid {}/{}", j, i + j);
 	}
 
 	public record TestResult(boolean result, String message) {
