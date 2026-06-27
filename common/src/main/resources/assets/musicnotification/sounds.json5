@@ -460,35 +460,35 @@
 	"mn.minecraft.music.game.shores": {
 		"sounds": [
 			{
-				"name": "music/menu/shores"
+				"name": "music/game/shores"
 			}
 		]
 	},
 	"mn.minecraft.music.game.memories": {
 		"sounds": [
 			{
-				"name": "music/menu/memories"
+				"name": "music/game/memories"
 			}
 		]
 	},
 	"mn.minecraft.music.game.nightly": {
 		"sounds": [
 			{
-				"name": "music/menu/nightly"
+				"name": "music/game/nightly"
 			}
 		]
 	},
 	"mn.minecraft.music.game.home": {
 		"sounds": [
 			{
-				"name": "music/menu/home"
+				"name": "music/game/home"
 			}
 		]
 	},
 	"mn.minecraft.music.game.ebb": {
 		"sounds": [
 			{
-				"name": "music/menu/ebb"
+				"name": "music/game/ebb"
 			}
 		]
 	},
