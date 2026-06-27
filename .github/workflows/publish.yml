@@ -18,6 +18,11 @@ on:
                 required: false
                 default: ""
                 type: string
+            version_type:
+                description: "Optional version type: alpha, beta, release"
+                required: false
+                default: "release"
+                type: string
     workflow_call:
         inputs:
             mod_loaders:
@@ -34,6 +39,11 @@ on:
                 description: "Optional list of publish targets: github, curseforge, modrinth"
                 required: false
                 default: ""
+                type: string
+            version_type:
+                description: "Optional version type: alpha, beta, release"
+                required: false
+                default: "release"
                 type: string
 
 permissions:
@@ -178,6 +188,7 @@ jobs:
                     # [Fabric|Neoforge|Forge] ModName ModVersion for MinecraftVersion
                     name: ${{ format('[{0}] {1} {2} for {3}', matrix.mod_loader == 'fabric' && 'Fabric' || matrix.mod_loader == 'neoforge' && 'Neoforge' || matrix.mod_loader == 'forge' && 'Forge' || matrix.mod_loader, steps.gradle-properties.outputs.MOD_NAME, steps.gradle-properties.outputs.MOD_VERSION, steps.gradle-properties.outputs.DEPS_MINECRAFT) }}
                     version: ${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    version-type: ${{ inputs.version_type || github.event.inputs.version_type || 'release' }}
                     loaders: ${{ join(matrix.supported_mod_loaders, ' ') }}
                     game-versions: ${{ steps.gradle-properties.outputs.MOD_NEOFORGE_RANGE }}
                     game-version-filter: releases
