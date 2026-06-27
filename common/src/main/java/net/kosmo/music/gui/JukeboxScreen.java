@@ -62,9 +62,8 @@ public class JukeboxScreen extends Screen {
 	private Button stopSoundButton;
 	private Button clearHistoryButton;
 
-	public JukeboxScreen(Screen parent) {
+	public JukeboxScreen() {
 		super(TITLE);
-		this.parent = parent;
 	}
 
 	@Override

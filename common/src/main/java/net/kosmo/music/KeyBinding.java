@@ -17,7 +17,7 @@ public class KeyBinding {
 	public static void tick() {
 		while (openJukeboxScreenKey.consumeClick()) {
 			Minecraft client = Minecraft.getInstance();
-			client.gui.setScreen(new JukeboxScreen(client.gui.screen()));
+			client.gui.setScreen(new JukeboxScreen());
 		}
 	}
 
