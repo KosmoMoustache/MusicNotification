@@ -4,11 +4,11 @@
 		"pack_format": 81,
 		"supported_formats": [
 			81,
-			101
+			107
 		],
 		"min_format": 81,
 		"max_format": [
-			101,
+			107,
 			1
 		]
 	},
@@ -18,19 +18,22 @@
 				"directory": "overlay_48_93_function",
 				"formats": [
 					48,
-					93
+					107
 				],
 				"min_format": 48,
-				"max_format": 93
+				"max_format": 107
 			},
 			{
 				"directory": "overlay_94_new_gamerules_names",
-				"formats": 94,
+				"formats": [94, 107],
 				"min_format": [
 					94,
 					1
 				],
-				"max_format": 101
+				"max_format": [
+					107,
+					1
+				]
 			}
 		]
 	}
