@@ -13,9 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.JukeboxSong;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class TrackDataManager {
 	static TrackDataManager instance;
@@ -79,6 +77,14 @@ public class TrackDataManager {
 			author = "Unknown";
 		}
 		return getEmpty(soundId, title, author);
+	}
+
+	public Set<String> getNamespaceList() {
+		Set<String> namespaces = new HashSet<>();
+		tracks.forEach((i, t) -> {
+			namespaces.add(i.getNamespace());
+		});
+		return namespaces;
 	}
 
 	private TrackData getEmpty(Identifier key, String title, String author) {
