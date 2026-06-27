@@ -55,8 +55,8 @@ public abstract class MixinGui implements GuiAccessor {
 			^///?}
 		)
 	)
-	private void musicNotification$renderSubtitleOverlayInject(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-		CompactNotification.render(guiGraphics, deltaTracker, musicnotification$compact$message, musicnotification$compact$time);
+	private void musicNotification$renderSubtitleOverlayInject(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+		CompactNotification.render(graphics, deltaTracker, musicnotification$compact$message, musicnotification$compact$time);
 	}
 	//? } else {
 	/^@Inject(method = "<init>", at = @At("TAIL"))
@@ -64,8 +64,8 @@ public abstract class MixinGui implements GuiAccessor {
 		this.layers.add(this::musicNotification$renderCompactNotification);
 	}
 	@Unique
-	private void musicNotification$renderCompactNotification(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
-		CompactNotification.render(guiGraphics, deltaTracker, musicnotification$compact$message, musicnotification$compact$time);
+	private void musicNotification$renderCompactNotification(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
+		CompactNotification.render(graphics, deltaTracker, musicnotification$compact$message, musicnotification$compact$time);
 	}
 	^///?}
 

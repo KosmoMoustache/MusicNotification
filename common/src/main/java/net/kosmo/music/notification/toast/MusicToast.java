@@ -86,7 +86,7 @@ public class MusicToast implements Toast {
 	//? if >1.21.6
 	@Override
 	//~ if >26 render -> extractRenderState
-	public void extractRenderState(GuiGraphicsExtractor guiGraphics, Font font, long visibilityTime) {
+	public void extractRenderState(GuiGraphicsExtractor graphics, Font font, long visibilityTime) {
 		if (rotation >= 360) rotation = 0;
 		rotation += 1;
 
@@ -102,22 +102,22 @@ public class MusicToast implements Toast {
 			x = (this.width() - a) - padding;
 		}
 
-		guiGraphics.blitSprite(/*? >=1.21.2 && <1.21.6 {*//*RenderType::guiTextured,*//*?} elif >=1.21.6 {*/RenderPipelines.GUI_TEXTURED,/*?}*/BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
 
 		if (Config.options().ROTATE_ALBUM_COVER && content.getAlbumCover().canBeAnimated()) {
-			renderAnimatedAlbumCover(guiGraphics, x, rotation);
+			renderAnimatedAlbumCover(graphics, x, rotation);
 		} else {
-			content.getAlbumCover().drawCover(guiGraphics, x + 6, 6);
+			content.getAlbumCover().drawCover(graphics, x + 6, 6);
 		}
 
 		// TODO: Fix: When album name is long and STYLE_LEGACY_TOAST_SCALE is true, title is not aligned properly (O's Piano; Lilypad)
 		int x1 = x + 6 + /*AlbumCover.getWidth() */ 20 + 6;
 		//~ if >=1.21.6 '-13108' -> 'CommonColors.COSMOS_PINK'
-		TextRender.drawScrollableText(guiGraphics, font, content.title(), 30, x1, 7, this.width() - 4, 7 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? CommonColors.COSMOS_PINK : -11534256, false);
-		TextRender.drawScrollableText(guiGraphics, font, content.author(), 30, x1, 18, this.width() - 4, 18 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
+		TextRender.drawScrollableText(graphics, font, content.title(), 30, x1, 7, this.width() - 4, 7 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? CommonColors.COSMOS_PINK : -11534256, false);
+		TextRender.drawScrollableText(graphics, font, content.author(), 30, x1, 18, this.width() - 4, 18 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
 
 		if (shouldRenderExtended()) {
-			TextRender.drawScrollableText(guiGraphics, font, content.album().get(), 30, x1, 29, this.width() - 4, 29 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
+			TextRender.drawScrollableText(graphics, font, content.album().get(), 30, x1, 29, this.width() - 4, 29 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
 		}
 	}
 

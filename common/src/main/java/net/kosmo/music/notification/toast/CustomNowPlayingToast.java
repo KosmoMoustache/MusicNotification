@@ -15,9 +15,9 @@ public class CustomNowPlayingToast extends NowPlayingToast {
 		content = td;
 	}
 
-	public static void renderToast(GuiGraphicsExtractor guiGraphics, Font font) {
+	public static void renderToast(GuiGraphicsExtractor graphics, Font font) {
 		//~ if >26 renderToast -> extractToast
-		NowPlayingToast.extractToast(guiGraphics, font);
+		NowPlayingToast.extractToast(graphics, font);
 	}
 
 	public static void tickMusicNotes() {

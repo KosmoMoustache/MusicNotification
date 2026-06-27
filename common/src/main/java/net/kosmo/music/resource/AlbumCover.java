@@ -83,8 +83,8 @@ public class AlbumCover {
 			return 20;
 		}
 
-		public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y) {
-			guiGraphics.blitSprite(/*? >=1.21.2 && <1.21.6 {*//*RenderType::guiTextured,*//*?} elif >=1.21.6 {*/RenderPipelines.GUI_TEXTURED,/*?}*/sprite, x, y, getWidth(), getHeight());
+		public void drawCover(GuiGraphicsExtractor graphics, int x, int y) {
+			graphics.blitSprite(RenderPipelines.GUI_TEXTURED,sprite, x, y, getWidth(), getHeight());
 		}
 	}
 

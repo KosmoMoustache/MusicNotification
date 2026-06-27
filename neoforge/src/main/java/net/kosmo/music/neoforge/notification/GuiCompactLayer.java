@@ -41,7 +41,7 @@ public class GuiCompactLayer implements GuiLayer {
 	}
 
 	@Override
-	public void render(@NotNull GuiGraphicsExtractor guiGraphics, @NotNull DeltaTracker deltaTracker) {
-		CompactNotification.render(guiGraphics, deltaTracker, this.message, this.time);
+	public void render(@NotNull GuiGraphicsExtractor graphics, @NotNull DeltaTracker deltaTracker) {
+		CompactNotification.render(graphics, deltaTracker, this.message, this.time);
 	}
 }

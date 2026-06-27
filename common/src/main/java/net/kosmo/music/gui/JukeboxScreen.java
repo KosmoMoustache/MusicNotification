@@ -135,20 +135,20 @@ public class JukeboxScreen extends Screen {
 
 	@Override
 	//~ if >26 renderBackground -> extractBackground {
-	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-		super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
-		//~ }
+	public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+		super.extractBackground(graphics, mouseX, mouseY, partialTick);
+	//~ }
 		int i = this.marginX() + 3;
 
-		guiGraphics.blitSprite(/*? >=1.21.2 && <1.21.6 {*//*RenderType::guiTextured,*//*?} elif >=1.21.6 {*/RenderPipelines.GUI_TEXTURED,/*?}*/BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
-		guiGraphics.blitSprite(/*? >=1.21.2 && <1.21.6 {*//*RenderType::guiTextured,*//*?} elif >=1.21.6 {*/RenderPipelines.GUI_TEXTURED,/*?}*/SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 24);
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,SEARCH_ICON_TEXTURE, i + 10, 96, 12, 12);
 	}
 
 	@Override
-		//~ if >26 render -> extractRenderState {
-	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float delta) {
-		super.extractRenderState(guiGraphics, mouseX, mouseY, delta);
-//~ }
+	//~ if >26 render -> extractRenderState {
+	public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+		super.extractRenderState(graphics, mouseX, mouseY, delta);
+    //~ }
 		if (this.minecraft.options.getSoundSourceVolume(SoundSource.MASTER) == 0f) {
 			this.stopSoundButton.setMessage(MASTER_VOLUME_ZERO);
 		} else if (this.minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) == 0f) {
@@ -157,13 +157,13 @@ public class JukeboxScreen extends Screen {
 
 		if (!this.soundList.isEmpty()) {
 			//~ if >26 render -> extractRenderState
-			this.soundList.extractRenderState(guiGraphics, mouseX, mouseY, delta);
+			this.soundList.extractRenderState(graphics, mouseX, mouseY, delta);
 		} else if (!this.searchBox.getValue().isEmpty()) {
 			//~ if >26 drawCenteredString -> centeredText
-			guiGraphics.centeredText(this.minecraft.font, EMPTY_SEARCH_TEXT, this.width / 2, (72 + this.listEnd()) / 2, CommonColors.WHITE);
+			graphics.centeredText(this.minecraft.font, EMPTY_SEARCH_TEXT, this.width / 2, (72 + this.listEnd()) / 2, CommonColors.WHITE);
 		} else if (this.currentTab == Tab.HISTORY) {
 			//~ if >26 drawCenteredString -> centeredText
-			guiGraphics.centeredText(this.minecraft.font, EMPTY_HISTORY_TEXT, this.width / 2, (72 + this.listEnd()) / 2, CommonColors.WHITE);
+			graphics.centeredText(this.minecraft.font, EMPTY_HISTORY_TEXT, this.width / 2, (72 + this.listEnd()) / 2, CommonColors.WHITE);
 		}
 
 		//~ if >26 render -> extractRenderState

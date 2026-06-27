@@ -11,7 +11,6 @@ import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-//~ if >1.21.1 'FastColor' -> 'ARGB'
 import net.minecraft.util.ARGB;
 import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +22,7 @@ public class CompactNotification extends Notification {
 		return screen == null || screen instanceof ChatScreen;
 	}
 
-	public static void render(GuiGraphicsExtractor guiGraphics, @NotNull DeltaTracker deltaTracker, Component message, int time) {
+	public static void render(GuiGraphicsExtractor graphics, @NotNull DeltaTracker deltaTracker, Component message, int time) {
 		Font font = Minecraft.getInstance().font;
 
 		if (message != null) {
@@ -34,8 +33,8 @@ public class CompactNotification extends Notification {
 			}
 
 			if (i > 0) {
-				guiGraphics.pose().pushMatrix();
-				guiGraphics.pose().translate(guiGraphics.guiWidth(), guiGraphics.guiHeight() - 8/*? >=1.21.6 {*//*?} else {*//*, 0*//*?}*/);
+				graphics.pose().pushMatrix();
+				graphics.pose().translate(graphics.guiWidth(), graphics.guiHeight() - 8/*? >=1.21.6 {*//*?} else {*//*, 0*//*?}*/);
 
 				int width = font.width(message);
 				int alpha = Config.options().STYLE_COMPACT_ALPHA;
@@ -43,9 +42,8 @@ public class CompactNotification extends Notification {
 					alpha = Math.min(alpha, i);
 				}
 				//~ if >26 drawStringWithBackdrop -> textWithBackdrop
-				//~ if >1.21.1 'FastColor.ARGB32' -> 'ARGB'
-				guiGraphics.textWithBackdrop(font, message, -width - 10, -4, width, ARGB.color(alpha, CommonColors.WHITE));
-				guiGraphics.pose().popMatrix();
+				graphics.textWithBackdrop(font, message, -width - 10, -4, width, ARGB.color(alpha, CommonColors.WHITE));
+				graphics.pose().popMatrix();
 			}
 		}
 	}

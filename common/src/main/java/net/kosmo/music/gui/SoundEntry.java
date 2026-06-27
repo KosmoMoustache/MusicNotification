@@ -17,7 +17,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-//~ if >1.21.1 'FastColor' -> 'ARGB'
 import net.minecraft.util.ARGB;
 import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SoundEntry extends ListEntry {
-	//~ if >1.21.1 'FastColor.ARGB32' -> 'ARGB'
 	public static final int GRAY_COLOR = ARGB.color(255, 74, 74, 74);
 	private static final WidgetSprites PLAY_BUTTON_TEXTURE = new WidgetSprites(Identifier.fromNamespaceAndPath("musicnotification", "jukebox/play_button"), Identifier.fromNamespaceAndPath("musicnotification", "jukebox/play_button_disabled"), Identifier.fromNamespaceAndPath("musicnotification", "jukebox/play_button_focused"));
 	public final SoundData entry;
@@ -63,10 +61,10 @@ public class SoundEntry extends ListEntry {
 
 	//? if >=1.21.10 {
 	@Override
-		//~ if >26 renderContent -> extractContent
-	public void extractContent(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
+	//~ if >26 renderContent -> extractContent
+	public void extractContent(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
 		render(
-			guiGraphics,
+			graphics,
 			0,
 			this.getContentY(),
 			this.getContentX(),
