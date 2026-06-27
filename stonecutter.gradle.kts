@@ -27,6 +27,13 @@ stonecutter parameters {
 			replace("net.minecraft.Util", "net.minecraft.util.Util")
 		}
 
+		string(current.parsed >= "1.21.11", "extract_contents") {
+			replace("renderWidget", "renderContents")
+		}
+		string(current.parsed >= "26.0", "extract_contents") {
+			replace("renderContents", "extractContents")
+		}
+
 		string(current.parsed > "26.0") {
 			replace("GuiGraphics", "GuiGraphicsExtractor")
 			replace("net.fabricmc.fabric.api.client.command.v2.ClientCommandManager", "net.fabricmc.fabric.api.client.command.v2.ClientCommands")

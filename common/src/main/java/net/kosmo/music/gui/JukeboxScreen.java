@@ -23,6 +23,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.CommonColors;
+import org.jetbrains.annotations.Nullable;
+
 
 import java.util.Collection;
 import java.util.Locale;
@@ -44,16 +46,18 @@ public class JukeboxScreen extends Screen {
 	private static final Component MUSIC_VOLUME_ZERO = Component.translatable("gui.musicnotification.jukebox.music_volume_zero");
 	private static final Component CLEAR_HISTORY = Component.translatable("gui.musicnotification.jukebox.clear_history");
 
+	private static final Component EXTENDED_FILTER = Component.translatable("gui.musicnotification.jukebox.extended_filter");
+
 	private static final Component SEARCH_TEXT = Component.translatable("gui.musicnotification.jukebox.search_hint").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
 	private static final Component EMPTY_SEARCH_TEXT = Component.translatable("gui.musicnotification.jukebox.search_empty").withStyle(ChatFormatting.GRAY);
 	private static final Component EMPTY_HISTORY_TEXT = Component.translatable("gui.musicnotification.jukebox.history_empty").withStyle(ChatFormatting.GRAY);
 
 	private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
-	private final Screen parent;
 
 	Tab currentTab = Tab.HOME;
 	private EditBox searchBox;
 	private JukeboxEntryList soundList;
+	@Nullable
 	private String filter;
 
 	private Button homeButton;
@@ -61,6 +65,7 @@ public class JukeboxScreen extends Screen {
 	private Button soundButton;
 	private Button stopSoundButton;
 	private Button clearHistoryButton;
+	private ExtendedFilter extendedFilter;
 
 	public JukeboxScreen() {
 		super(TITLE);
@@ -70,7 +75,7 @@ public class JukeboxScreen extends Screen {
 	public void init() {
 		this.layout.addTitleHeader(TITLE, this.font);
 
-		this.soundList = new JukeboxEntryList(this, this.minecraft, this.width, this.listEnd() - 88, 88, 36);
+		this.soundList = new JukeboxEntryList(this, this.minecraft, this.width, this.listEnd() - 110, 88, 36);
 
 		int middle = Config.options().DEBUG_MOD
 			? this.soundList.getRowWidth() / 3
@@ -87,7 +92,7 @@ public class JukeboxScreen extends Screen {
 			this.minecraft.getSoundManager().stop(null, SoundSource.MUSIC);
 			MusicNotificationClient.currentlyPlaying = null;
 //			this.setCurrentTab(this.currentTab);
-		}).bounds(this.soundList.getRowLeft() - 1, this.listEnd() + 10, this.soundList.getRowRight() - this.soundList.getRowLeft() + 1, 20).build());
+		}).bounds(this.soundList.getRowLeft() - 1, this.listEnd() + 12, this.soundList.getRowRight() - this.soundList.getRowLeft() + 3, 20).build());
 
 		this.clearHistoryButton = this.addRenderableWidget(Button.builder(CLEAR_HISTORY, button -> {
 			TrackHistory.getInstance().clear();
@@ -95,7 +100,9 @@ public class JukeboxScreen extends Screen {
 		}).bounds(10, 10, this.font.width(CLEAR_HISTORY) + 8, 20).build());
 		this.clearHistoryButton.visible = false;
 
-		this.searchBox = new EditBox(this.font, this.marginX() + 28, 74, 200, 15, SEARCH_TEXT);
+		this.extendedFilter = new ExtendedFilter(this, this.font, this.marginX() + 13, 73, 215, 15, EXTENDED_FILTER, this::onSearchChange);
+
+		this.searchBox = new EditBox(this.font, this.marginX() + 28, 96, 200, 15, SEARCH_TEXT);
 		this.searchBox.setMaxLength(255);
 		this.searchBox.setVisible(true);
 		this.searchBox.setTextColor(CommonColors.WHITE);
@@ -104,6 +111,7 @@ public class JukeboxScreen extends Screen {
 		this.searchBox.setResponder(this::onSearchChange);
 
 		this.addRenderableWidget(this.searchBox);
+		this.addRenderableWidget(this.extendedFilter);
 		this.addWidget(soundList);
 		this.setCurrentTab(Tab.HOME);
 		this.layout.addToFooter(Button.builder(CommonComponents.GUI_BACK, button -> this.onClose()).build());
@@ -117,18 +125,21 @@ public class JukeboxScreen extends Screen {
 	@Override
 	protected void repositionElements() {
 		this.layout.arrangeElements();
-		this.soundList.updateSizeAndPosition(this.width, this.listEnd() - 88, 88);
-		this.searchBox.setPosition(this.marginX() + 28, 74);
+		this.soundList.updateSizeAndPosition(this.width + 5, this.listEnd() - 103, 110);
+//		this.searchBox.setPosition(this.marginX() + 28, 89);
 		int middle = Config.options().DEBUG_MOD
 			? this.soundList.getRowWidth() / 3
 			: this.soundList.getRowWidth() / 2;
 		int rowLeft = this.soundList.getRowLeft();
 		int rowRight = this.soundList.getRowRight();
 
+		this.searchBox.setPosition(this.marginX() + 28, 93);
+		this.stopSoundButton.setPosition(this.soundList.getRowLeft() - 1, this.listEnd() + 12);
+
 		this.homeButton.setPosition(rowLeft, 45);
 		this.historyButton.setPosition((rowLeft + middle + 1), 45);
 		this.soundButton.setPosition(rowRight - middle + 1, 45);
-		this.stopSoundButton.setPosition(this.soundList.getRowLeft(), this.listEnd() + 10);
+//		this.stopSoundButton.setPosition(this.soundList.getRowLeft(), this.listEnd() + 10);
 		this.clearHistoryButton.setPosition(10, 10);
 	}
 
@@ -164,9 +175,6 @@ public class JukeboxScreen extends Screen {
 			//~ if >26 drawCenteredString -> centeredText
 			graphics.centeredText(this.minecraft.font, EMPTY_HISTORY_TEXT, this.width / 2, (72 + this.listEnd()) / 2, CommonColors.WHITE);
 		}
-
-		//~ if >26 render -> extractRenderState
-		this.searchBox.extractRenderState(guiGraphics, mouseX, mouseY, delta);
 	}
 
 	private void setCurrentTab(Tab currentTab) {
@@ -231,11 +239,16 @@ public class JukeboxScreen extends Screen {
 //		return super.keyPressed(keyCode, scanCode, modifiers);
 //	}
 
+	public String getFilter() {
+		return filter;
+	}
+
 	private void onSearchChange(String filter) {
 		if (!(filter = filter.toLowerCase(Locale.ROOT)).equals(this.filter)) {
 			this.soundList.setFilter(filter);
 			this.filter = filter;
 			this.setCurrentTab(this.currentTab);
+			this.searchBox.setValue(filter);
 		}
 	}
 
