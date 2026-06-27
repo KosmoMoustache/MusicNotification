@@ -10,9 +10,14 @@ stonecutter active "26.2" /* [SC] DO NOT EDIT */
 stonecutter parameters {
 	replacements {
 		string(current.parsed >= "1.21.2") {
+			replace("graphics.blitSprite(", "graphics.blitSprite(RenderType::guiTextured,")
+			replace("FastColor.as8BitChannel", "ARGB.white")
 			replace("ToastComponent", "ToastManager")
+			replace("FastColor.ARGB32.color", "ARGB.color");
+			replace("import net.minecraft.util.FastColor;", "import net.minecraft.util.ARGB;");
 		}
 		string(current.parsed >= "1.21.6") {
+			replace("graphics.blitSprite(RenderType::guiTextured,", "graphics.blitSprite(RenderPipelines.GUI_TEXTURED,")
 			replace("pushPose", "pushMatrix")
 			replace("popPose", "popMatrix")
 		}
@@ -58,9 +63,9 @@ tasks.register("runAllClients") {
 	description = "Run clients for all versions sequentially."
 	val runClients = allprojects.filter {
 		it != rootProject &&
-		it.childProjects.isEmpty() &&
-		!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("common").asFile.toPath()) &&
-		!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("versions").asFile.toPath())
+			it.childProjects.isEmpty() &&
+			!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("common").asFile.toPath()) &&
+			!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("versions").asFile.toPath())
 	}.mapNotNull { it.tasks.findByName("runClient") }
 	runClients.forEachIndexed { index, task ->
 		if (index > 0) {
@@ -75,9 +80,9 @@ tasks.register("runAllClientsParallel") {
 	description = "Run clients for all versions in parallel."
 	val runClients = allprojects.filter {
 		it != rootProject &&
-		it.childProjects.isEmpty() &&
-		!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("common").asFile.toPath()) &&
-		!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("versions").asFile.toPath())
+			it.childProjects.isEmpty() &&
+			!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("common").asFile.toPath()) &&
+			!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("versions").asFile.toPath())
 	}.mapNotNull { it.tasks.findByName("runClient") }
 	dependsOn(runClients)
 }
