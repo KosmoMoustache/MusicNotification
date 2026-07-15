@@ -21,6 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [3.2.0] - 15/07/2026
+
+- Fix 26.2 new sounds not playable in Jukebox menu
+- Added a new filter section in the jukebox menu to filter songs namespace, very work-in-progess, toggleable in config
+- Fix crash when trying to get item texture in title menu
+- Fix dark_mode pack mcmeta version
+
 ## [3.1.0] - 17/06/2026
 
 - Adds support for Minecraft 26.2
