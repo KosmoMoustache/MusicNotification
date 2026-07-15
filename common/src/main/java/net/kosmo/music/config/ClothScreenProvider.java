@@ -112,6 +112,10 @@ public class ClothScreenProvider {
 			.setDefaultValue(Config.Options.DEBUG_MOD_DEFAULT)
 			.setSaveConsumer(val -> options.DEBUG_MOD = val)
 			.build());
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("(Work in progress) enable filters"), options.WIP_FILTER_IN_JUKEBOX)
+			.setDefaultValue(Config.Options.WIP_FILTER_IN_JUKEBOX_DEFAULT)
+			.setSaveConsumer(val -> options.WIP_FILTER_IN_JUKEBOX = val)
+			.build());
 
 		general.add(entryBuilder.startStrList(Component.translatable("config.musicnotification.general.ignore_sound_event"), options.IGNORE_SOUND_EVENT)
 			.setDefaultValue(Config.Options.IGNORE_SOUND_EVENT_DEFAULT)
