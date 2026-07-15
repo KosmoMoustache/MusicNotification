@@ -52,11 +52,13 @@ for platform in $(echo "$enabled_platforms" | tr ',' ' '); do
     versions=$(awk -F= '/stonecutter_enabled_'$platform'_versions/{print $2}' gradle.properties | tr -d ' ')
     for version in $(echo "$versions" | tr ',' ' '); do
       if [[ ${#allowed_versions_array[@]} -eq 0 ]] || contains "$version" "${allowed_versions_array[@]}"; then
-         if [[ "$platform" == "fabric" ]]; then
-            supported_mod_loaders="\"fabric\",\"quilt\""
-         else
+#         if [[ "$platform" == "fabric" ]]; then
+#            supported_mod_loaders="\"fabric\",\"quilt\""
+#            supported_mod_loaders="\"fabric\",\"quilt\""
+#         else
+#          supported_mod_loaders="\"$platform\""
+#         fi
           supported_mod_loaders="\"$platform\""
-         fi
 
         matrix_entry="{\"mod_loader\":\"$platform\",\"version\":\"$version\",\"supported_mod_loaders\":[$supported_mod_loaders]},"
         matrix_content+="$matrix_entry"
