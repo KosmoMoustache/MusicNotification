@@ -93,6 +93,7 @@ public class Config {
 		public static final boolean STYLE_LEGACY_TOAST_SCALE_DEFAULT = false;
 		public static final int STYLE_COMPACT_ALPHA_DEFAULT = 179; // 70%
 		public static final int STYLE_COMPACT_TIME_DEFAULT = 60; // 3*20 ticks = 3 seconds
+		public static final boolean WIP_FILTER_IN_JUKEBOX_DEFAULT = false;
 		// -
 		public boolean COMPUTED_IS_DARK_MODE_ENABLED = COMPUTED_IS_DARK_MODE_ENABLED_DEFAULT;
 		public boolean SHOW_TITLE_SCREEN_BUTTON = SHOW_TITLE_SCREEN_BUTTON_DEFAULT;
@@ -109,6 +110,7 @@ public class Config {
 		public boolean STYLE_LEGACY_TOAST_SCALE = STYLE_LEGACY_TOAST_SCALE_DEFAULT;
 		public int STYLE_COMPACT_ALPHA = STYLE_COMPACT_ALPHA_DEFAULT;
 		public int STYLE_COMPACT_TIME = STYLE_COMPACT_TIME_DEFAULT;
+		public boolean WIP_FILTER_IN_JUKEBOX = WIP_FILTER_IN_JUKEBOX_DEFAULT;
 
 		public enum DisableToastSound {
 			VANILLA, MUTE_SELF/*, MUTE_ALL*/;
