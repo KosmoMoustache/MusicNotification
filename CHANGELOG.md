@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [3.2.1] - 21/07/2026
+
+- Fix crash on NeoForge 1.21.1
+
 ## [3.2.0] - 15/07/2026
 
 - Fix 26.2 new sounds not playable in Jukebox menu
