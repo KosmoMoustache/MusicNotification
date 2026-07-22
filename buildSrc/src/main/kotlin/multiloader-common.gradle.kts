@@ -23,7 +23,8 @@ repositories {
 	mavenCentral()
 	strictMaven("https://repo.spongepowered.org/repository/maven-public", "org.spongepowered", "org.spongepowered")
 	strictMaven("https://maven.parchmentmc.org", "org.parchmentmc.data", "org.parchmentmc.data")
-	strictMaven("https://maven.terraformersmc.com/releases/", "com.terraformersmc", "com.terraformersmc")
+//	strictMaven("https://maven.terraformersmc.com/releases/", "com.terraformersmc", "com.terraformersmc")
+	strictMaven("https://maven.gnomecraft.net/releases/", "com.terraformersmc", "com.terraformersmc")
 	strictMaven("https://maven.shedaniel.me/", "me.shedaniel", "me.shedaniel.cloth")
 
 	strictMaven("https://maven.nucleoid.xyz", "pb4.eu", "xyz.nucleoid")
