@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [3.3.0] - TBD
+
+- Backport Vanilla Music Frequency feature for Minecraft versions 1.21.1, 1.21.4
+
 ## [3.2.1] - 21/07/2026
 
 - Fix crash on NeoForge 1.21.1
