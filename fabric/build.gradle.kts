@@ -14,6 +14,7 @@ kotlin {
 
 stonecutter {
 	constants["modMenu"] = deps.modmenu != null
+	constants["music_frequency"] = stonecutter.eval(current.version, "<=1.21.5")
 }
 
 fletchingTable {

@@ -58,5 +58,13 @@
 	"key.musicnotification.open_screen": "Ouvrir le Jukebox",
 	"text.musicnotification.notification.action_bar": "Lecture en cours: %s - %s",
 	"text.musicnotification.resourcepack.dark_mode.description": "Active le mod sombre pour l'interface de Music Notification.",
-	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification: Mode Sombre"
+	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification: Mode Sombre",
+	"config.musicnotification.general.music_frequency": "Fréquence musicale",
+	"config.musicnotification.general.music_frequency.default": "Par défaut",
+	"config.musicnotification.general.music_frequency.default.tooltip": "Modifie le délai entre la lecture des musique dans un monde (Entre 10 - 20 minutes)",
+	"config.musicnotification.general.music_frequency.frequent": "Fréquente",
+	"config.musicnotification.general.music_frequency.frequent.tooltip": "Modifie le délai entre la lecture des musique dans un monde. (10 minutes)",
+	"config.musicnotification.general.music_frequency.constant": "En continu",
+	"config.musicnotification.general.music_frequency.constant.tooltip": "Modifie le délai entre la lecture des musique dans un monde. (5 secondes)"
 }
+

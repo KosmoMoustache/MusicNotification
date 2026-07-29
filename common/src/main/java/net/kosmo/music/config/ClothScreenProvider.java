@@ -26,7 +26,7 @@ public class ClothScreenProvider {
 		SubCategoryBuilder notification = entryBuilder.startSubCategory(Component.translatable("config.musicnotification.notification.title")).setExpanded(true);
 		SubCategoryBuilder style = entryBuilder.startSubCategory(Component.translatable("config.musicnotification.style.title")).setExpanded(true);
 		SubCategoryBuilder jukebox = entryBuilder.startSubCategory(Component.translatable("config.musicnotification.jukebox.title")).setExpanded(true);
-		SubCategoryBuilder general = entryBuilder.startSubCategory(Component.translatable("config.musicnotification.general.title")).setExpanded(false);
+		SubCategoryBuilder general = entryBuilder.startSubCategory(Component.translatable("config.musicnotification.general.title")).setExpanded(true);
 
 		notification.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.notification.show_author"), options.SHOW_AUTHOR)
 			.setDefaultValue(Config.Options.SHOW_AUTHOR_DEFAULT)
@@ -123,6 +123,19 @@ public class ClothScreenProvider {
 			.setSaveConsumer(val -> options.IGNORE_SOUND_EVENT = val)
 			.build());
 
+		//? if music_frequency {
+		/*general.add(entryBuilder.startEnumSelector(Component.translatable("config.musicnotification.general.music_frequency"), Config.Options.MusicFrequency.class, options.MUSIC_FREQUENCY)
+			.setDefaultValue(Config.Options.MUSIC_FREQUENCY_DEFAULT)
+			.setEnumNameProvider(Config.Options.MusicFrequency::name)
+			.setTooltipSupplier(Config.Options.MusicFrequency::tooltipSupplier)
+			.setSaveConsumer(val -> {
+				options.MUSIC_FREQUENCY = val;
+				Config.Options.MusicFrequency.onChange(val);
+			})
+			.build()
+		);
+		*///? }
+
 		category.addEntry(notification.build());
 		category.addEntry(style.build());
 		category.addEntry(jukebox.build());
@@ -130,8 +143,6 @@ public class ClothScreenProvider {
 
 		return builder.build();
 	}
-
-	;
 
 	private static Requirement requirementAnyOfNotificationStyles(Config.Options.NotificationStyle notificationStyle, EnumListEntry<Config.Options.NotificationStyle> style1, EnumListEntry<Config.Options.NotificationStyle> style2) {
 		return Requirement.any(Requirement.isValue(style1, notificationStyle), Requirement.isValue(style2, notificationStyle));
