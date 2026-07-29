@@ -1,12 +1,12 @@
 package net.kosmo.music.notification;
 
-import com.mojang.logging.LogUtils;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Notification {
-	Logger LOGGER = LogUtils.getLogger();
+	public static final Logger LOGGER = LoggerFactory.getLogger("MusicNotification/Notification");
 
 	public static boolean canBeShown() {
 		return true;
