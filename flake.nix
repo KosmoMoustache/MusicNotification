@@ -14,7 +14,7 @@
       packages = with pkgs; [
         gnumake
         git
-       	jdk21_headless
+       	jdk25_headless
 		just
 		jq
       ];
