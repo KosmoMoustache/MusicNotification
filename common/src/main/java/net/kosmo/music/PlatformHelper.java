@@ -12,6 +12,8 @@ public abstract class PlatformHelper {
 
 	public abstract String getModName(Identifier location);
 
+	public abstract boolean isModLoaded(String modId);
+
 	public abstract void setCompactNotification(TrackData trackData, int time);
 
 	public abstract String getDarkModeResourcePackId();

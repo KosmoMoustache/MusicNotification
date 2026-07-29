@@ -16,6 +16,11 @@ public class PlatformFabric extends PlatformHelper {
 		return namespace.get();
 	}
 
+	@Override
+	public boolean isModLoaded(String modId) {
+		return FabricLoader.getInstance().isModLoaded(modId);
+	}
+
 	public void setCompactNotification(TrackData trackData, int time) {
 		GuiAccessor gui = (GuiAccessor) Minecraft.getInstance().gui;
 		gui.musicNotification$setCompactNotificationMessage(this.getCompactNotificationMessage(trackData));

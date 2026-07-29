@@ -1,5 +1,6 @@
 package net.kosmo.music.neoforge;
 
+import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.TrackData;
@@ -8,7 +9,7 @@ import net.minecraft.resources.Identifier;
 import net.neoforged.fml.loading.FMLLoader;
 //?} else {
 /*import net.neoforged.fml.loading.LoadingModList;
- *///?}
+*///?}
 
 public class PlatformNeoForge extends PlatformHelper {
 	@Override
@@ -20,6 +21,15 @@ public class PlatformNeoForge extends PlatformHelper {
 		/*namespace = LoadingModList.get().getModFileById(namespace).moduleName();
 		 *///?}
 		return namespace;
+	}
+
+	@Override
+	public boolean isModLoaded(String modId) {
+		//? if >=1.21.10 {
+		return FMLLoader.getCurrent().getLoadingModList().getModFileById(modId) != null;
+		//?} else {
+		/*return LoadingModList.get().getModFileById(modId) != null;
+		*///?}
 	}
 
 	@Override
