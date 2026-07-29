@@ -7,8 +7,7 @@
 		"MixinMinecraft",
 		"MixinMusicManager",
 		"MixinTitleScreen",
-		"MusicManagerAccessor",
-		"SoundManagerAccessor"
+		"MusicManagerAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1
