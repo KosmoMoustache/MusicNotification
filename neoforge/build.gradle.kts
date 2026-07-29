@@ -16,6 +16,10 @@ fletchingTable {
 	}
 }
 
+stonecutter {
+	constants["music_frequency"] = stonecutter.eval(current.version, "<=1.21.5")
+}
+
 dependencies {
 	deps.cloth_config?.let { version ->
 		api("me.shedaniel.cloth:cloth-config-neoforge:${version}")

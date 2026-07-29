@@ -13,6 +13,7 @@ loom {
 
 stonecutter {
 	filters.exclude("**/*.aw")
+	constants["music_frequency"] = stonecutter.eval(current.version, "<=1.21.5")
 }
 
 fletchingTable {
