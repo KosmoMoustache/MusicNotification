@@ -4,24 +4,23 @@ import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.resources.Identifier;
-import net.neoforged.fml.loading.moddiscovery.ModFileInfo;
-//? if >=1.21.10 {
+//~ if >=1.21.10 'LoadingModList' -> 'FMLLoader'
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforgespi.language.IModInfo;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
-//?} else {
-/*import net.neoforged.fml.loading.LoadingModList;
- *///?}
 
-public class PlatformNeoForge extends PlatformHelper<ModFileInfo> {
+
+public class PlatformNeoForge extends PlatformHelper<IModInfo> {
 	@Override
-	public Optional<ModFileInfo> getModInfo(String modId) {
-		//? if >=1.21.10 {
-		return Optional.of(FMLLoader.getCurrent().getLoadingModList().getModFileById(modId));
-		//?} else {
-		/*return Optional.of(LoadingModList.get().getModFileById(modId));
-		 *///?}
+	public Optional<IModInfo> getModInfo(String modId) {
+		try {
+			//~ if >=1.21.10 'LoadingModList.get()' -> 'FMLLoader.getCurrent().getLoadingModList()'
+			return Optional.of(FMLLoader.getCurrent().getLoadingModList().getModFileById(modId).getMods().getFirst());
+		} catch (NullPointerException e) {
+			return Optional.empty();
+		}
 	}
 
 	@Override
@@ -31,7 +30,7 @@ public class PlatformNeoForge extends PlatformHelper<ModFileInfo> {
 
 	@Override
 	public @Nullable String getModName(String modId) {
-		return getModInfo(modId).map(ModFileInfo::toString).orElse(null);
+		return getModInfo(modId).map(IModInfo::getDisplayName).orElse(null);
 	}
 
 	@Override

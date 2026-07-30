@@ -21,11 +21,12 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.neoforged.neoforgespi.language.IModInfo;
 
 @Mod(value = MusicNotificationClient.MOD_ID, dist = Dist.CLIENT)
 public class MusicNotificationClientNeoForge {
 	public MusicNotificationClientNeoForge(IEventBus modEventBus) {
-		PlatformHelper<ModFileInfo> INSTANCE = new PlatformNeoForge();
+		PlatformHelper<IModInfo> INSTANCE = new PlatformNeoForge();
 		MusicNotificationClient.init(INSTANCE);
 
 		// Register config screen
