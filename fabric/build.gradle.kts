@@ -62,11 +62,11 @@ dependencies {
 	// Fabric Loader JUnit for testing
 	testImplementation("net.fabricmc:fabric-loader-junit:${deps.floader}")
 
-	// Modrinth
-//	if (sc.current.parsed.matches("<= 1.21.1")) {
-//		modImplementation(fletchingTable.modrinth("vanillabackport", deps.minecraft))
-//		modImplementation(fletchingTable.modrinth("platform", deps.minecraft))
-//	}
+	// Mods
+	if (sc.current.parsed.matches("<= 1.21.1")) {
+		modImplementation(fletchingTable.modrinth("vanillabackport", deps.minecraft))
+		modImplementation(fletchingTable.modrinth("platform", deps.minecraft))
+	}
 //	modImplementation(fletchingTable.modrinth("more-music-discs", deps.minecraft))
 //	modImplementation(fletchingTable.modrinth("deimos", deps.minecraft))
 }

@@ -11,9 +11,10 @@ import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 //? } else {
 /*import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.fabric.api.resource.PackActivationType;
 *///? }
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
 import net.kosmo.music.KeyBinding;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.PlatformHelper;
@@ -29,7 +30,7 @@ import static net.kosmo.music.MusicNotificationClient.MOD_ID;
 public class MusicNotificationClientFabric implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		PlatformHelper INSTANCE = new PlatformFabric();
+		PlatformHelper<ModContainer> INSTANCE = new PlatformFabric();
 		MusicNotificationClient.init(INSTANCE);
 
 		this.registerBuiltinPacks();
@@ -44,18 +45,22 @@ public class MusicNotificationClientFabric implements ClientModInitializer {
 		);
 		//? } else {
 		/*ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new ClientResourceListener());
-		*///? }
+		 *///? }
 	}
 
 	public void registerBuiltinPacks() {
 		FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(container -> {
-			//~ if >26 'ResourceManagerHelper.registerBuiltinResourcePack' -> 'ResourceLoader.registerBuiltinPack'
 			ResourceLoader.registerBuiltinPack(
 				Identifier.fromNamespaceAndPath(MOD_ID, "dark_mode"),
 				container,
-				Component.translatable("text.musicnotification" + ".resourcepack.dark_mode.name"),
-				//~ if >26 'ResourcePackActivationType.NORMAL' -> 'PackActivationType.NORMAL'
+				Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
 				PackActivationType.NORMAL
+			);
+			ResourceLoader.registerBuiltinPack(
+				Identifier.fromNamespaceAndPath(MOD_ID, "vanilla_backport"),
+				container,
+				Component.translatable("text.musicnotification.resourcepack.vanilla_backport.name"),
+				MusicNotificationClient.PLATFORM_HELPER.isModLoaded("vanilla_backport") ? PackActivationType.NORMAL : PackActivationType.DEFAULT_ENABLED
 			);
 		});
 	}

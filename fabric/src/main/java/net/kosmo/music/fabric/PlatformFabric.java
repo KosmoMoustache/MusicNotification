@@ -1,19 +1,29 @@
 package net.kosmo.music.fabric;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Optional;
 
-public class PlatformFabric extends PlatformHelper {
+public class PlatformFabric extends PlatformHelper<ModContainer> {
 	@Override
-	public String getModName(Identifier location) {
-		AtomicReference<String> namespace = new AtomicReference<>(location.getNamespace());
-		FabricLoader.getInstance().getModContainer(namespace.get()).ifPresent(modContainer -> namespace.set(modContainer.getMetadata().getName()));
-		return namespace.get();
+	public Optional<ModContainer> getModInfo(String modId) {
+		return FabricLoader.getInstance().getModContainer(modId);
+	}
+
+	@Override
+	public @Nullable String getModName(Identifier location) {
+		return getModName(location.getNamespace());
+	}
+
+	@Override
+	public @Nullable String getModName(String modId) {
+		return getModInfo(modId).map(container -> container.getMetadata().getName()).orElse(null);
 	}
 
 	@Override

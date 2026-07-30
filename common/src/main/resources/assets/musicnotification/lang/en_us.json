@@ -57,13 +57,8 @@
 	"key.category.musicnotification.category": "Music Notification",
 	"key.musicnotification.open_screen": "Open Jukebox",
 	"text.musicnotification.notification.action_bar": "Now playing: %s - %s",
-	"text.musicnotification.resourcepack.dark_mode.description": "Turn Music Notification UI to dark.",
+	"text.musicnotification.resourcepack.dark_mode.description": "Turn Music Notification UI to dark. (built-in: MusicNotification)",
 	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification: Dark Mode",
-	"config.musicnotification.general.music_frequency": "Music Frequency",
-	"config.musicnotification.general.music_frequency.default": "Default",
-	"config.musicnotification.general.music_frequency.default.tooltip": "Changes the delay between music tracks while in a game world. (Between 10 - 20 minutes)",
-	"config.musicnotification.general.music_frequency.frequent": "Frequent",
-	"config.musicnotification.general.music_frequency.frequent.tooltip": "Changes the delay between music tracks while in a game world. (10 minutes)",
-	"config.musicnotification.general.music_frequency.constant": "Constant",
-	"config.musicnotification.general.music_frequency.constant.tooltip": "Changes the delay between music tracks while in a game world. (5 seconds)"
+	"text.musicnotification.resourcepack.vanilla_backport.description": "If you are using Vanilla Backport by ItsBlackgear (built-in: MusicNotification)",
+	"text.musicnotification.resourcepack.vanilla_backport.name": "Add Vanilla Backport support"
 }

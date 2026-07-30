@@ -39,6 +39,8 @@ stonecutter parameters {
 			replace("net.fabricmc.fabric.api.client.command.v2.ClientCommandManager", "net.fabricmc.fabric.api.client.command.v2.ClientCommands")
 			replace("net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper", "net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper")
 			replace("KeyBindingHelper.registerKeyBinding", "KeyMappingHelper.registerKeyMapping")
+			replace("ResourceManagerHelper.registerBuiltinResourcePack", "ResourceLoader.registerBuiltinPack")
+			replace("ResourcePackActivationType", "PackActivationType")
 		}
 		string(current.parsed >= "26.2") {
 			replace("client.setScreen", "client.gui.setScreen")

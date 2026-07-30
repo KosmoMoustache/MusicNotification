@@ -1,35 +1,42 @@
 package net.kosmo.music.neoforge;
 
-import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.PlatformHelper;
 import net.kosmo.music.neoforge.notification.GuiCompactLayer;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.resources.Identifier;
+import net.neoforged.fml.loading.moddiscovery.ModFileInfo;
 //? if >=1.21.10 {
 import net.neoforged.fml.loading.FMLLoader;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 //?} else {
 /*import net.neoforged.fml.loading.LoadingModList;
-*///?}
+ *///?}
 
-public class PlatformNeoForge extends PlatformHelper {
+public class PlatformNeoForge extends PlatformHelper<ModFileInfo> {
+	@Override
+	public Optional<ModFileInfo> getModInfo(String modId) {
+		//? if >=1.21.10 {
+		return Optional.of(FMLLoader.getCurrent().getLoadingModList().getModFileById(modId));
+		//?} else {
+		/*return Optional.of(LoadingModList.get().getModFileById(modId));
+		 *///?}
+	}
+
 	@Override
 	public String getModName(Identifier location) {
-		String namespace = location.getNamespace();
-		//? if >=1.21.10 {
-		namespace = FMLLoader.getCurrent().getLoadingModList().getModFileById(namespace).toString();
-		//?} else {
-		/*namespace = LoadingModList.get().getModFileById(namespace).moduleName();
-		 *///?}
-		return namespace;
+		return getModName(location.getNamespace());
+	}
+
+	@Override
+	public @Nullable String getModName(String modId) {
+		return getModInfo(modId).map(ModFileInfo::toString).orElse(null);
 	}
 
 	@Override
 	public boolean isModLoaded(String modId) {
-		//? if >=1.21.10 {
-		return FMLLoader.getCurrent().getLoadingModList().getModFileById(modId) != null;
-		//?} else {
-		/*return LoadingModList.get().getModFileById(modId) != null;
-		*///?}
+		return getModInfo(modId).isPresent();
 	}
 
 	@Override

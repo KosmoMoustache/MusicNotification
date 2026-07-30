@@ -1,0 +1,93 @@
+{
+	"minecraft:music/game/below_and_above": {
+		"album": "Chase the Skies Update No. 2",
+		"author": "Amos Roddy",
+		"cover": "chase_the_skies_ost",
+		"customId": "musicnotification:mn.minecraft.music.game.below_and_above",
+		"title": "Below and Above"
+	},
+	"minecraft:music/game/broken_clocks": {
+		"album": "Chase the Skies Update No. 4",
+		"author": "Amos Roddy",
+		"cover": "chase_the_skies_ost",
+		"customId": "musicnotification:mn.minecraft.music.game.broken_clocks",
+		"title": "Broken Clocks"
+	},
+	"minecraft:music/game/ebb": {
+		"album": "Chaos Cubed No. 2",
+		"author": "fingerspit",
+		"cover": "chaos_cubed",
+		"customId": "musicnotification:mn.minecraft.music.game.ebb",
+		"title": "Ebb"
+	},
+	"minecraft:music/game/fireflies": {
+		"album": "Chase the Skies Update No. 5",
+		"author": "Amos Roddy",
+		"cover": "chase_the_skies_ost",
+		"customId": "musicnotification:mn.minecraft.music.game.fireflies",
+		"title": "Fireflies"
+	},
+	"minecraft:music/game/home": {
+		"album": "Chaos Cubed No. 3",
+		"author": "fingerspit",
+		"cover": "chaos_cubed",
+		"customId": "musicnotification:mn.minecraft.music.game.home",
+		"title": "Home"
+	},
+	"minecraft:music/game/lilypad": {
+		"album": "Chase the Skies Update No. 1",
+		"author": "Amos Roddy",
+		"cover": "chase_the_skies_ost",
+		"customId": "musicnotification:mn.minecraft.music.game.lilypad",
+		"title": "Lilypad"
+	},
+	"minecraft:music/game/memories": {
+		"album": "Chaos Cubed No. 1",
+		"author": "fingerspit",
+		"cover": "chaos_cubed",
+		"customId": "musicnotification:mn.minecraft.music.game.memories",
+		"title": "Memories"
+	},
+	"minecraft:music/game/nightly": {
+		"album": "Chaos Cubed No. 5",
+		"author": "fingerspit",
+		"cover": "chaos_cubed",
+		"customId": "musicnotification:mn.minecraft.music.game.nightly",
+		"title": "Nightly"
+	},
+	"minecraft:music/game/os_piano": {
+		"album": "Chase the Skies Update No. 3",
+		"author": "Amos Roddy",
+		"cover": "chase_the_skies_ost",
+		"customId": "musicnotification:mn.minecraft.music.game.os_piano",
+		"title": "O's Piano"
+	},
+	"minecraft:music/game/shores": {
+		"album": "Chaos Cubed No. 4",
+		"author": "fingerspit",
+		"cover": "chaos_cubed",
+		"customId": "musicnotification:mn.minecraft.music.game.shores",
+		"title": "Shores"
+	},
+	"minecraft:records/bounce": {
+		"album": "Chaos Cubed No. 6",
+		"author": "fingerspit",
+		"cover": "chaos_cubed",
+		"customId": "minecraft:music_disc.bounce",
+		"title": "Bounce"
+	},
+	"minecraft:records/lava_chicken": {
+		"album": "Lava Chicken",
+		"author": "Hyper Potions",
+		"cover": "lava_chicken",
+		"customId": "minecraft:music_disc.lava_chicken",
+		"title": "Lava Chicken"
+	},
+	"minecraft:records/tears": {
+		"album": "Chase the Skies Update No. 6",
+		"author": "Amos Roddy",
+		"cover": "tears",
+		"customId": "minecraft:music_disc.tears",
+		"title": "Tears"
+	}
+}
