@@ -3,6 +3,13 @@
 	"commands.jukeboxsong.success": "Jukebox %s:\ncomparator_output: %s\ndescription: %s\nlength_in_seconds: %s\nsound_event: %s",
 	"config.musicnotification.general.ignore_sound_event": "Liste de sons ignorés",
 	"config.musicnotification.general.ignore_sound_event.tooltip": "Liste de sounds events qui ne déclenchera pas de notifications.\nVous pouvez utiliser * comme métacaractère",
+	"config.musicnotification.general.music_frequency": "Fréquence musicale",
+	"config.musicnotification.general.music_frequency.constant": "En continu",
+	"config.musicnotification.general.music_frequency.constant.tooltip": "Modifie le délai entre la lecture des musique dans un monde. (5 secondes)",
+	"config.musicnotification.general.music_frequency.default": "Par défaut",
+	"config.musicnotification.general.music_frequency.default.tooltip": "Modifie le délai entre la lecture des musique dans un monde (Entre 10 - 20 minutes)",
+	"config.musicnotification.general.music_frequency.frequent": "Fréquente",
+	"config.musicnotification.general.music_frequency.frequent.tooltip": "Modifie le délai entre la lecture des musique dans un monde. (10 minutes)",
 	"config.musicnotification.general.title": "Options Générale",
 	"config.musicnotification.jukebox.debug_mod": "Affiche l'onglet \"Sons\" dans le Jukebox",
 	"config.musicnotification.jukebox.debug_mod.tooltip": "Permet de jouer n'importe quelle sons du jeu",
@@ -57,14 +64,8 @@
 	"key.category.musicnotification.category": "Music Notification",
 	"key.musicnotification.open_screen": "Ouvrir le Jukebox",
 	"text.musicnotification.notification.action_bar": "Lecture en cours: %s - %s",
-	"text.musicnotification.resourcepack.dark_mode.description": "Active le mod sombre pour l'interface de Music Notification.",
+	"text.musicnotification.resourcepack.dark_mode.description": "Active le mod sombre pour l'interface de Music Notification. (intégré: MusicNotification)",
 	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification: Mode Sombre",
-	"config.musicnotification.general.music_frequency": "Fréquence musicale",
-	"config.musicnotification.general.music_frequency.default": "Par défaut",
-	"config.musicnotification.general.music_frequency.default.tooltip": "Modifie le délai entre la lecture des musique dans un monde (Entre 10 - 20 minutes)",
-	"config.musicnotification.general.music_frequency.frequent": "Fréquente",
-	"config.musicnotification.general.music_frequency.frequent.tooltip": "Modifie le délai entre la lecture des musique dans un monde. (10 minutes)",
-	"config.musicnotification.general.music_frequency.constant": "En continu",
-	"config.musicnotification.general.music_frequency.constant.tooltip": "Modifie le délai entre la lecture des musique dans un monde. (5 secondes)"
+	"text.musicnotification.resourcepack.vanilla_backport.description": "Ajoute la prise en charge de Vanilla Backport par ItsBlackgear (intégré: MusicNotification)",
+	"text.musicnotification.resourcepack.vanilla_backport.name": "Ajoute la prise en charge de VanillaBackport"
 }
-
