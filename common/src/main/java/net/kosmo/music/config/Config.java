@@ -125,7 +125,7 @@ public class Config {
 		//public MusicFrequency MUSIC_FREQUENCY = MUSIC_FREQUENCY_DEFAULT;
 
 		public enum DisableToastSound {
-			VANILLA, MUTE_SELF/*, MUTE_ALL*/;
+			VANILLA, MUTE_SELF, MUTE_ALL;
 
 			public static Component name(Enum<DisableToastSound> disableToastSoundEnum) {
 				return Component.translatable("config.musicnotification.notification.disable_toast_sound." + disableToastSoundEnum.name().toLowerCase());

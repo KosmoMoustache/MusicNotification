@@ -7,7 +7,12 @@
 		"MixinMinecraft",
 		"MixinMusicManager",
 		"MixinTitleScreen",
-		"MusicManagerAccessor"
+		"MusicManagerAccessor",
+		//? if >=1.21.5 {
+         "ToastManager.MixinToastManager"
+		//? } else  {
+		/*"ToastManager.MixinToastManager_ToastInstance"
+		*///? }
 	],
 	"injectors": {
 		"defaultRequire": 1
