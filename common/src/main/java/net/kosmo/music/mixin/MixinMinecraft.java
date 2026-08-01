@@ -2,7 +2,6 @@ package net.kosmo.music.mixin;
 
 import net.kosmo.music.SoundListener;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.client.sounds.SoundManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,9 +15,6 @@ public class MixinMinecraft {
 	@Shadow
 	@Final
 	private SoundManager soundManager;
-	@Shadow
-	@Final
-	private MusicManager musicManager;
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	void registerSoundInstanceListener(CallbackInfo ci) {

@@ -29,7 +29,7 @@ import net.minecraft.sounds.SoundEvent;
 
 public class MusicToast implements Toast {
 	private static final Identifier BACKGROUND_SPRITE = Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "toast/background");
-	private Toast.Visibility visibility;
+	private Visibility visibility;
 
 	private TrackData content;
 	private boolean justUpdated;
@@ -64,13 +64,6 @@ public class MusicToast implements Toast {
 		}
 
 		this.visibility = computeVisibility(visibilityTime, toastManager);
-	}
-	//? }
-
-	//? >=1.21.5 {
-	@Override
-	public @Nullable SoundEvent getSoundEvent() {
-		return Config.options().DISABLE_TOAST_SOUND == Config.Options.DisableToastSound.MUTE_SELF ? null : Toast.super.getSoundEvent();
 	}
 	//? }
 

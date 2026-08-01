@@ -14,6 +14,7 @@ kotlin {
 
 stonecutter {
 	constants["modMenu"] = deps.modmenu != null
+	constants["music_frequency"] = stonecutter.eval(current.version, "<=1.21.5")
 }
 
 fletchingTable {
@@ -49,7 +50,7 @@ dependencies {
 		modImplementation("me.shedaniel.cloth:cloth-config-fabric:$version")
 	}
 
-	if (sc.current.parsed >= "1.21.5") {
+	if (sc.current.parsed.matches(">= 1.21.5")) {
 		fabricModules("command-api-v2", "gametest-api-v1", "client-gametest-api-v1")
 	} else {
 		fabricModules("command-api-v2")
@@ -61,7 +62,11 @@ dependencies {
 	// Fabric Loader JUnit for testing
 	testImplementation("net.fabricmc:fabric-loader-junit:${deps.floader}")
 
-	// Modrinth
+	// Mods
+	if (sc.current.parsed.matches("<= 1.21.1")) {
+		modImplementation(fletchingTable.modrinth("vanillabackport", deps.minecraft))
+		modImplementation(fletchingTable.modrinth("platform", deps.minecraft))
+	}
 //	modImplementation(fletchingTable.modrinth("more-music-discs", deps.minecraft))
 //	modImplementation(fletchingTable.modrinth("deimos", deps.minecraft))
 }

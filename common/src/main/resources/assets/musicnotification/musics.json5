@@ -134,7 +134,7 @@
 	},
 	"minecraft:music/game/end/boss": {
 		"album": "",
-		"author": "C148",
+		"author": "C418",
 		"customId": "musicnotification:mn.minecraft.music.game.end.boss",
 		"title": "Boss"
 	},
@@ -481,13 +481,6 @@
 		"customId": "minecraft:music_disc.far",
 		"title": "Far"
 	},
-	"minecraft:records/lava_chicken": {
-		"album": "Lava Chicken",
-		"author": "Hyper Potions",
-		"cover": "lava_chicken",
-		"customId": "minecraft:music_disc.lava_chicken",
-		"title": "Lava Chicken"
-	},
 	"minecraft:records/mall": {
 		"album": "Volume Beta No. 27",
 		"author": "C418",
@@ -544,13 +537,6 @@
 		"customId": "minecraft:music_disc.strad",
 		"title": "Strad"
 	},
-	"minecraft:records/tears": {
-		"album": "Chase the Skies Update No. 6",
-		"author": "Amos Roddy",
-		"cover": "tears",
-		"customId": "minecraft:music_disc.tears",
-		"title": "Tears"
-	},
 	"minecraft:records/wait": {
 		"album": "Volume Beta No. 21",
 		"author": "C418",
@@ -566,6 +552,13 @@
 		"title": "Ward"
 	},
 	//? if >=1.21.6 {
+	"minecraft:records/tears": {
+		"album": "Chase the Skies Update No. 6",
+		"author": "Amos Roddy",
+		"cover": "tears",
+		"customId": "minecraft:music_disc.tears",
+		"title": "Tears"
+	},
 	"minecraft:music/game/below_and_above": {
 		"album": "Chase the Skies Update No. 2",
 		"author": "Amos Roddy",
@@ -600,6 +593,15 @@
 		"cover": "chase_the_skies_ost",
 		"customId": "musicnotification:mn.minecraft.music.game.os_piano",
 		"title": "O's Piano"
+	},
+	//? }
+    //? if >=1.21.7 {
+	"minecraft:records/lava_chicken": {
+		"album": "Lava Chicken",
+		"author": "Hyper Potions",
+		"cover": "lava_chicken",
+		"customId": "minecraft:music_disc.lava_chicken",
+		"title": "Lava Chicken"
 	},
 	//? }
 	//? if >=26.2 {

@@ -25,6 +25,17 @@ public class ClientGameTest implements FabricClientGameTest {
 
 	@Override
 	public void runTest(ClientGameTestContext context) {
+//		LOGGER.info("BOTANIA   LOADED: {}", PLATFORM_HELPER.isModLoaded("botania"));
+//		LOGGER.info("VBACKPORT LOADED: {}", PLATFORM_HELPER.isModLoaded("vanillabackport"));
+//		LOGGER.info("MDISC     LOADED: {}", PLATFORM_HELPER.isModLoaded("morediscs"));
+//
+//		LOGGER.info("BOTANIA   MODINFO: {}", PLATFORM_HELPER.getModInfo("botania"));
+//		LOGGER.info("VBACKPORT MODINFO: {}", PLATFORM_HELPER.getModInfo("vanillabackport"));
+//		LOGGER.info("MDISC     MODINFO: {}", PLATFORM_HELPER.getModInfo("morediscs"));
+//
+//		LOGGER.info("BOTANIA   NAME: {}", PLATFORM_HELPER.getModName("botania"));
+//		LOGGER.info("MDISC     NAME: {}", PLATFORM_HELPER.getModName("morediscs"));
+
 		try (TestSingleplayerContext singleplayer = context.worldBuilder().create()) {
 			//~ if >26 getClientWorld -> getClientLevel
 			singleplayer.getClientLevel().waitForChunksRender();

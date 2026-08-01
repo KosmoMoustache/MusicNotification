@@ -1,16 +1,12 @@
 package net.kosmo.music.notification;
 
-import com.mojang.logging.LogUtils;
 import net.kosmo.music.config.Config;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.resources.Identifier;
-import org.slf4j.Logger;
 
 import java.util.List;
 
 public class NotificationManager {
-	public static final Logger LOGGER = LogUtils.getLogger();
-
 	public static void show(Identifier soundId, TrackData td) {
 		Config.Options.NotificationStyle style = Config.options().NOTIFICATION_STYLE;
 		show(style.canBeShown() ? style : getFallback(), soundId, td);
@@ -46,7 +42,7 @@ public class NotificationManager {
 				return style;
 			}
 		}
-		LOGGER.warn("No valid notification style found in fallback list, using LOG style");
+		Notification.LOGGER.warn("No valid notification style found in fallback list, using LOG style");
 		return Config.Options.NotificationStyle.LOG;
 	}
 }

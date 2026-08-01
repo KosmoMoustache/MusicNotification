@@ -16,15 +16,17 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.moddiscovery.ModFileInfo;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.neoforged.neoforgespi.language.IModInfo;
 
 @Mod(value = MusicNotificationClient.MOD_ID, dist = Dist.CLIENT)
 public class MusicNotificationClientNeoForge {
 	public MusicNotificationClientNeoForge(IEventBus modEventBus) {
-		PlatformHelper INSTANCE = new PlatformNeoForge();
+		PlatformHelper<IModInfo> INSTANCE = new PlatformNeoForge();
 		MusicNotificationClient.init(INSTANCE);
 
 		// Register config screen

@@ -16,10 +16,19 @@ fletchingTable {
 	}
 }
 
+stonecutter {
+	constants["music_frequency"] = stonecutter.eval(current.version, "<=1.21.5")
+}
+
 dependencies {
 	deps.cloth_config?.let { version ->
 		api("me.shedaniel.cloth:cloth-config-neoforge:${version}")
 	}
+
+//	if (sc.current.parsed.matches("<= 1.21.1")) {
+//		implementation(fletchingTable.modrinth("vanillabackport", deps.minecraft))
+//		implementation(fletchingTable.modrinth("platform", deps.minecraft))
+//	}
 }
 
 neoForge {

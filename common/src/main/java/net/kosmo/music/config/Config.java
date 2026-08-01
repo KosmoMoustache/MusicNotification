@@ -5,6 +5,14 @@ import com.google.gson.GsonBuilder;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.notification.*;
 import net.minecraft.network.chat.Component;
+//? if music_frequency {
+/*import net.kosmo.music.MusicManagerExtension;
+import net.minecraft.client.Minecraft;
+import net.minecraft.sounds.Music;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import org.jetbrains.annotations.Nullable;
+*///? }
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -19,7 +27,7 @@ public class Config {
 	private static final Path DIR_PATH = Path.of("config");
 	private static final String FILE_NAME = MusicNotificationClient.MOD_ID + ".json";
 	private static Config instance = null;
-	public final Options options = new Options();
+	private final Options options = new Options();
 
 	public static Options options() {
 		return Config.get().options;
@@ -94,6 +102,8 @@ public class Config {
 		public static final int STYLE_COMPACT_ALPHA_DEFAULT = 179; // 70%
 		public static final int STYLE_COMPACT_TIME_DEFAULT = 60; // 3*20 ticks = 3 seconds
 		public static final boolean WIP_FILTER_IN_JUKEBOX_DEFAULT = false;
+		//? music_frequency
+		//public static final MusicFrequency MUSIC_FREQUENCY_DEFAULT = MusicFrequency.DEFAULT;
 		// -
 		public boolean COMPUTED_IS_DARK_MODE_ENABLED = COMPUTED_IS_DARK_MODE_ENABLED_DEFAULT;
 		public boolean SHOW_TITLE_SCREEN_BUTTON = SHOW_TITLE_SCREEN_BUTTON_DEFAULT;
@@ -111,9 +121,11 @@ public class Config {
 		public int STYLE_COMPACT_ALPHA = STYLE_COMPACT_ALPHA_DEFAULT;
 		public int STYLE_COMPACT_TIME = STYLE_COMPACT_TIME_DEFAULT;
 		public boolean WIP_FILTER_IN_JUKEBOX = WIP_FILTER_IN_JUKEBOX_DEFAULT;
+		//? music_frequency
+		//public MusicFrequency MUSIC_FREQUENCY = MUSIC_FREQUENCY_DEFAULT;
 
 		public enum DisableToastSound {
-			VANILLA, MUTE_SELF/*, MUTE_ALL*/;
+			VANILLA, MUTE_SELF, MUTE_ALL;
 
 			public static Component name(Enum<DisableToastSound> disableToastSoundEnum) {
 				return Component.translatable("config.musicnotification.notification.disable_toast_sound." + disableToastSoundEnum.name().toLowerCase());
@@ -162,17 +174,57 @@ public class Config {
 				}
 			};
 
-			public static Component name(Enum<DisableToastSound> disableToastSoundEnum) {
-				return Component.translatable("config.musicnotification.notification.style." + disableToastSoundEnum.name().toLowerCase());
-			}
-
 			public boolean canBeShown() {
 				return false;
+			}
+
+			public static Component name(Enum<DisableToastSound> disableToastSoundEnum) {
+				return Component.translatable("config.musicnotification.notification.style." + disableToastSoundEnum.name().toLowerCase());
 			}
 
 			public Optional<Component[]> tooltipSupplier() {
 				return Optional.of(new Component[]{Component.translatable("config.musicnotification.notification.style." + this.name().toLowerCase() + ".tooltip")});
 			}
 		}
+
+		//? music_frequency {
+		/*public enum MusicFrequency {
+			DEFAULT("DEFAULT", 20),
+			FREQUENT("FREQUENT", 10),
+			CONSTANT("CONSTANT", 0);
+
+			private final String name;
+			private final int maxFrequency;
+
+			MusicFrequency(String name, int maxFrequencyMinutes) {
+				this.name = name;
+				this.maxFrequency = maxFrequencyMinutes * 1200;
+			}
+
+			public int getNextSongDelay(final @Nullable Music music, final RandomSource random) {
+				if (music == null) {
+					return this.maxFrequency;
+				} else if (this == CONSTANT) {
+					return 100;
+				} else {
+					int minFrequency = Math.min(music.getMinDelay(), this.maxFrequency);
+					int maxFrequency = Math.min(music.getMaxDelay(), this.maxFrequency);
+					return Mth.nextInt(random, minFrequency, maxFrequency);
+				}
+			}
+
+			public static void onChange(Config.Options.MusicFrequency newVal) {
+				((MusicManagerExtension) Minecraft.getInstance().getMusicManager()).setMinutesBetweenSongs(newVal);
+			}
+
+			public static Component name(Enum<DisableToastSound> disableToastSoundEnum) {
+				return Component.translatable("config.musicnotification.general.music_frequency." + disableToastSoundEnum.name().toLowerCase());
+			}
+
+			public Optional<Component[]> tooltipSupplier() {
+				return Optional.of(new Component[]{Component.translatable("config.musicnotification.general.music_frequency." + this.name().toLowerCase() + ".tooltip")});
+			}
+		}
+		*///? }
 	}
 }
