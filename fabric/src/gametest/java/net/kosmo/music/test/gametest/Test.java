@@ -15,8 +15,8 @@ public class Test {
 		this.LOGGER = logger;
 	}
 
-	public Boolean booleanTest(boolean soundEventValid, AtomicReference<String> atomicReference, String good, String bad) {
-		boolean b = booleanTest(soundEventValid, good, bad);
+	public Boolean booleanTest(boolean b1, AtomicReference<String> atomicReference, String good, String bad) {
+		boolean b = booleanTest(b1, good, bad);
 		if (!b) {
 			atomicReference.set(bad);
 		} else {
@@ -25,8 +25,8 @@ public class Test {
 		return b;
 	}
 
-	public Boolean booleanTest(boolean soundEventValid, String good, String bad) {
-		if (soundEventValid) {
+	public Boolean booleanTest(boolean b1, String good, String bad) {
+		if (b1) {
 			LOGGER.info("{}", good);
 			return true;
 		} else {
