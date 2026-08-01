@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 
-//~ if >=1.21.4 'ToastComponent' -> 'ToastManager'
 @Mixin(ToastManager.ToastInstance.class)
 class MixinToastManager_ToastInstance<T extends Toast> {
 	@Shadow
