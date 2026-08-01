@@ -23,8 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.3.0] - TBD
 
-- Backport Vanilla's Music Frequency feature for Minecraft 1.21.1 & 1.21.4
-- Adds proper support for mod Vanilla Backport by ItsBlackgear via a built-in resource pack
+- Backport Vanilla's Music Frequency feature to Minecraft 1.21.1 and 1.21.4.
+- Add proper support for the Vanilla Backport mod by ItsBlackgear through a built-in resource pack.
+- Fix the Mute Self option
+- Restore the Mute All option, which was removed several versions ago
+- Fix Boss track author typo 
 
 ## [3.2.1] - 21/07/2026
 
