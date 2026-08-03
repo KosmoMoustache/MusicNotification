@@ -12,6 +12,8 @@ val Project._mod: ModData get() = ModData(this)
 val Project._deps: DepsData get() = DepsData(this)
 
 val Project.common get() = requireNotNull(stonecutterBuild.node.sibling("common"))
+val Project.fabric get() = requireNotNull(stonecutterBuild.node.sibling("fabric"))
+val Project.neoforge get() = requireNotNull(stonecutterBuild.node.sibling("neoforge"))
 val Project.lproject get() = rootProject.project(stonecutterBuild.current.project)
 val Project.loader: String? get() = prop("loader")
 

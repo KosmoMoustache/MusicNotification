@@ -13,6 +13,7 @@ kotlin {
 }
 
 stonecutter {
+	filters.exclude("**/*.aw")
 	constants["modMenu"] = deps.modmenu != null
 	constants["music_frequency"] = stonecutter.eval(current.version, "<=1.21.5")
 }
@@ -80,7 +81,7 @@ afterEvaluate {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${mod.aw_version}.aw")
+	accessWidenerPath = fabric.project.file("../../src/main/resources/${mod.aw_version}.aw")
 
 	runs {
 		getByName("client") {

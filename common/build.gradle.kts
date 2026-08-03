@@ -8,7 +8,7 @@ plugins {
 
 loom {
 	accessWidenerPath =
-		common.project.file("../../src/main/resources/${mod.aw_version}.aw")
+		fabric.project.file("../../src/main/resources/${mod.aw_version}.aw")
 }
 
 stonecutter {
