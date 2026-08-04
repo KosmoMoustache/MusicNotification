@@ -3,6 +3,8 @@
 	"package": "net.kosmo.music.fabric.mixin",
 	"compatibilityLevel": "JAVA_${java_version}",
 	"client": [
+		//? if >=1.21.5
+		"MixinToastManager",
 		//? if >=26.2 {
 		"MixinHud"
 		//? } else {

@@ -3,7 +3,10 @@
 	"minVersion": "0.8",
 	"package": "net.kosmo.music.neoforge.mixin",
 	"compatibilityLevel": "JAVA_${java_version}",
-	"client": [],
+	"client": [
+	  //? if >=1.21.5
+      "MixinToastManager"
+    ],
 	"injectors": {
 		"defaultRequire": 1
 	}
