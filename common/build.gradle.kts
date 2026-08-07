@@ -3,16 +3,21 @@
 plugins {
 	id("multiloader-common")
 	id("dev.kikugie.loom-back-compat")
-	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
+	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.23"
 }
 
 loom {
 	accessWidenerPath =
-		fabric.project.file("../../src/main/resources/${mod.aw_version}.aw")
+		common.project.file("../../src/main/resources/accesswideners/${mod.aw_version}.aw")
+
+	if (stonecutter.eval(deps.minecraft, "<=1.21.11")) {
+		mixin {
+			useLegacyMixinAp = false
+		}
+	}
 }
 
 stonecutter {
-	filters.exclude("**/*.aw")
 	constants["music_frequency"] = stonecutter.eval(current.version, "<=1.21.5")
 }
 

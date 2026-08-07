@@ -4,7 +4,7 @@ plugins {
 	kotlin("jvm")
 	id("multiloader-loader")
 	id("dev.kikugie.loom-back-compat")
-	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
+	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.23"
 }
 
 // TODO: Useless ??
@@ -13,7 +13,9 @@ kotlin {
 }
 
 stonecutter {
-	filters.exclude("**/*.aw")
+//	filters.exclude("**/*.aw")
+//	constants["mixin_debug"] = true;
+
 	constants["modMenu"] = deps.modmenu != null
 	constants["music_frequency"] = stonecutter.eval(current.version, "<=1.21.5")
 }
@@ -81,7 +83,7 @@ afterEvaluate {
 }
 
 loom {
-	accessWidenerPath = fabric.project.file("../../src/main/resources/${mod.aw_version}.aw")
+	accessWidenerPath = common.project.file("../../src/main/resources/accesswideners/${mod.aw_version}.aw")
 
 	runs {
 		getByName("client") {
@@ -94,6 +96,24 @@ loom {
 			}
 			// "-Dfabric.log.level=debug"
 		}
+	}
+
+	if (stonecutter.eval(deps.minecraft, "<=1.21.11")) {
+		mixin {
+			useLegacyMixinAp = true
+			defaultRefmapName = "${mod.id}.refmap.json"
+		}
+	}
+}
+
+
+tasks.named<ProcessResources>("processResources") {
+	val awFile = common.project.file("../../src/main/resources/accesswideners/${mod.aw_version}.aw")
+
+	from(awFile.parentFile) {
+		include(awFile.name)
+		rename(awFile.name, "${mod.id}.aw")
+		into("")
 	}
 }
 
