@@ -1,21 +1,12 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-	kotlin("jvm")
 	id("multiloader-loader")
 	id("dev.kikugie.loom-back-compat")
 	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.23"
 }
 
-// TODO: Useless ??
-kotlin {
-	jvmToolchain(lproject.prop("java.version")!!.toInt())
-}
-
 stonecutter {
-//	filters.exclude("**/*.aw")
-//	constants["mixin_debug"] = true;
-
 	constants["modMenu"] = deps.modmenu != null
 	constants["music_frequency"] = stonecutter.eval(current.version, "<=1.21.5")
 }
@@ -23,9 +14,6 @@ stonecutter {
 fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
-	}
-	lang.create("main") {
-		patterns.add("**/*.yml")
 	}
 }
 
@@ -60,7 +48,7 @@ dependencies {
 	}
 
 	// Runtime only mods
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fapi}+${deps.minecraft}")
+	modApi("net.fabricmc.fabric-api:fabric-api:${deps.fapi}+${deps.minecraft}") // TODO: modApi
 
 	// Fabric Loader JUnit for testing
 	testImplementation("net.fabricmc:fabric-loader-junit:${deps.floader}")
@@ -117,7 +105,7 @@ tasks.named<ProcessResources>("processResources") {
 	}
 }
 
-// gametest
+// GameTest
 if (sc.current.parsed > "1.21.1") {
 	fabricApi {
 		configureTests {

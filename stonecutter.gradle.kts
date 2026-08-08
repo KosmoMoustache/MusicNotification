@@ -7,20 +7,18 @@ plugins {
 }
 stonecutter active "26.2" /* [SC] DO NOT EDIT */
 
-stonecutter parameters {
-	replacements {
-		string(current.parsed >= "1.21.2") {
 stonecutter {
 	parameters {
+		constants["mixin_debug"] = providers.gradleProperty("mixinDebug").getOrElse("false").toBoolean();
 
 		filters.exclude("**/*.aw")
 		filters.exclude("**/*.cfg")
 
 		replacements.string(current.parsed >= "1.21.2") {
-			replace("import net.minecraft.util.FastColor;", "import net.minecraft.util.ARGB;");
+			replace("import net.minecraft.util.FastColor;", "import net.minecraft.util.ARGB;")
 			replace("graphics.blitSprite(", "graphics.blitSprite(RenderType::guiTextured,")
 			replace("FastColor.as8BitChannel", "ARGB.white")
-			replace("FastColor.ARGB32.color", "ARGB.color");
+			replace("FastColor.ARGB32.color", "ARGB.color")
 			replace("ToastComponent", "ToastManager")
 		}
 		replacements.string(current.parsed >= "1.21.6") {
@@ -63,15 +61,18 @@ stonecutter {
 tasks.register<Copy>("collectBuildFiles") {
 	group = "build"
 	description = "Collect built jars into the root output directory."
-	into(layout.projectDirectory.dir("output"))
-	from(allprojects.filter {
+	val buildTargets = allprojects.filter {
 		it != rootProject &&
 			it.childProjects.isEmpty() &&
 			!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("common").asFile.toPath()) &&
 			!it.projectDir.toPath().startsWith(rootProject.layout.projectDirectory.dir("versions").asFile.toPath())
-	}.map { it.layout.buildDirectory.dir("libs") }) {
+	}.mapNotNull { it.tasks.findByName("build") }
+	dependsOn(buildTargets)
+	into(layout.projectDirectory.dir("output"))
+	from(buildTargets.map { it.project.layout.buildDirectory.dir("libs") }) {
 		include("**/*.jar")
 	}
+//	shouldRunAfter("build")
 }
 
 tasks.register("runAllClients") {

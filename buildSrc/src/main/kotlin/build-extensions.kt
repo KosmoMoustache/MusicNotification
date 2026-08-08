@@ -16,6 +16,8 @@ val Project.fabric get() = requireNotNull(stonecutterBuild.node.sibling("fabric"
 val Project.neoforge get() = requireNotNull(stonecutterBuild.node.sibling("neoforge"))
 val Project.lproject get() = rootProject.project(stonecutterBuild.current.project)
 val Project.loader: String? get() = prop("loader")
+//val Project.pfabric get() = rootProject.project("fabric")
+//val Project.pneoforge get() = rootProject.project("neoforge")
 
 val Project.mod get() = lproject._mod
 val Project.deps get() = lproject._deps
@@ -55,36 +57,4 @@ value class DepsData(private val project: Project) {
 
 	fun getOrNull(key: String): String? = project.prop("deps.$key")?.takeIf { it.isNotEmpty() && it != ""}
 	fun get(key: String) = requireNotNull(getOrNull(key)) { "Missing 'deps.$key'" }
-}
-
-/**
- * Moves a file or folder to a new destination and optionally deletes the source after moving.
- *
- * @param buildMetaInf The base directory containing the files or folders.
- * @param src The relative path of the source file or folder to move.
- * @param dest The relative path of the destination where the file or folder will be moved.
- * @param delete Specifies whether the source file or folder should be deleted after moving. Default is `true`.
- *
- * <pre>
- * moveAndDeleteFileOrFolder(
- *  file("${layout.buildDirectory.get().toString()}/resources/main/"),
- *      "data/modname/function",
- *      "data/modname/functions"
- *  )
- *  </pre>
- */
-fun moveAndDeleteFileOrFolder(
-	buildMetaInf: File,
-	src: String,
-	dest: String,
-	delete: Boolean = true
-) {
-	val srcFile = buildMetaInf.resolve(src)
-	val destFile = buildMetaInf.resolve(dest)
-	if (srcFile.exists()) {
-		srcFile.copyRecursively(destFile, overwrite = true)
-		if (delete) {
-			srcFile.deleteRecursively()
-		}
-	}
 }

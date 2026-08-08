@@ -38,17 +38,15 @@ neoForge {
 		version = deps.neoforge
 	}
 
-	val at = project.file("build/resources/main/META-INF/accesstransformer.cfg");
+	val at = project.file("build/resources/main/META-INF/accesstransformer.cfg")
 	accessTransformers.from(at.absolutePath)
 	validateAccessTransformers = true
 
 	runs {
 		register("client") {
 			client()
-			ideName = "NeoForge Client (${project.path})"
-			programArgument("--quickPlaySingleplayer wd_void")
-			programArgument("--width 1280")
-			programArgument("--height 720")
+			ideName = "NeoForge Client (${project().path})"
+			programArguments.addAll("--quickPlaySingleplayer", "wd_void", "--width", "1280", "--height", "720")
 		}
 	}
 
@@ -81,3 +79,13 @@ tasks {
 	}
 }
 
+
+//tasks {
+//	processResources {
+//		exclude("${mod.id}.accesswidener")
+//	}
+//}
+//
+//tasks.named("createMinecraftArtifacts") {
+//		dependsOn(":neoforge:${deps.minecraft}:stonecutterGenerate")
+//}

@@ -23,6 +23,8 @@ import net.kosmo.music.fabric.events.ClientResourceListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
+//? if mixin_debug
+//import org.spongepowered.asm.mixin.MixinEnvironment;
 
 import static net.kosmo.music.MusicNotificationClient.MOD_ID;
 
@@ -30,6 +32,9 @@ import static net.kosmo.music.MusicNotificationClient.MOD_ID;
 public class MusicNotificationClientFabric implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		//? if mixin_debug
+		//MixinEnvironment.getCurrentEnvironment().audit();
+
 		PlatformHelper<ModContainer> INSTANCE = new PlatformFabric();
 		MusicNotificationClient.init(INSTANCE);
 

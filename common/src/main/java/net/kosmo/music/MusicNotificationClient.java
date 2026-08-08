@@ -23,6 +23,7 @@ public final class MusicNotificationClient {
 		LOGGER.info("Music Notification initialized");
 		Config.getAndSave();
 		MusicNotificationClient.PLATFORM_HELPER = platformHelper;
+//		PLATFORM_HELPER.isModLoaded("vanillabackport")); // TODO: Handle if VanillaBackport backport the music frequency options
 	}
 
 	public static void tick() {

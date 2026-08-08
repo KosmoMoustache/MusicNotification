@@ -25,9 +25,6 @@ fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
 	}
-	lang.create("main") {
-		patterns.add("**/*.yml")
-	}
 }
 
 dependencies {
@@ -43,13 +40,12 @@ dependencies {
 	}
 
 	compileOnly("org.spongepowered:mixin:0.8.5")
-
+	compileOnly("net.fabricmc:fabric-loader:${deps.floader}")
 	"io.github.llamalad7:mixinextras-common:0.5.4".let {
 		compileOnly(it)
 		annotationProcessor(it)
 	}
 
-	compileOnly("net.fabricmc:fabric-loader:${deps.floader}")
 	deps.cloth_config?.let { version ->
 		modApi("me.shedaniel.cloth:cloth-config-neoforge:${version}")
 	}
