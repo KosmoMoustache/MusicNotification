@@ -11,12 +11,12 @@ base {
 }
 
 java {
+	val javaVersion  = lproject.prop("java.version")!!.toInt()
+
 	toolchain.vendor = JvmVendorSpec.JETBRAINS
-	toolchain.languageVersion = JavaLanguageVersion.of(lproject.prop("java.version")!!)
-//	sourceCompatibility = JavaVersion.VERSION_25
-//	targetCompatibility = JavaVersion.VERSION_25
-//	withSourcesJar()
-//	withJavadocJar()
+	toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
+	sourceCompatibility = JavaVersion.toVersion(javaVersion)
+	targetCompatibility = JavaVersion.toVersion(javaVersion)
 }
 
 repositories {
@@ -58,5 +58,8 @@ tasks.named<ProcessResources>("processResources") {
 		filesMatching(listOf("pack.mcmeta", "fabric.mod.json", "*.mixins.json", "*.mixins.json5", "META-INF/mods.toml", "META-INF/neoforge.mods.toml")) {
 			expand(props)
 		}
+
+	inputs.properties(props)
+
 	dependsOn(":common:${deps.minecraft}:stonecutterGenerate")
 }

@@ -4,15 +4,16 @@ plugins {
 	kotlin("jvm")
 	id("multiloader-loader")
 	id("net.neoforged.moddev")
-	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
+	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.23"
 }
 
 fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
 	}
-	lang.create("main") {
-		patterns.add("**/*.yml")
+
+	accessConverter.register(sourceSets.main) {
+		add("accesswideners/${mod.aw_version}.aw")
 	}
 }
 
@@ -31,18 +32,21 @@ dependencies {
 //	}
 }
 
-neoForge {
-	version = deps.neoforge
 
-	accessTransformers.from(project.file("../../src/main/resources/META-INF/${mod.at_version}.cfg").absolutePath)
+neoForge {
+	enable {
+		version = deps.neoforge
+	}
+
+	val at = project.file("build/resources/main/META-INF/accesstransformer.cfg")
+	accessTransformers.from(at.absolutePath)
+	validateAccessTransformers = true
 
 	runs {
 		register("client") {
 			client()
-			ideName = "NeoForge Client (${project.path})"
-			programArgument("--quickPlaySingleplayer wd_void")
-			programArgument("--width 1280")
-			programArgument("--height 720")
+			ideName = "NeoForge Client (${project().path})"
+			programArguments.addAll("--quickPlaySingleplayer", "wd_void", "--width", "1280", "--height", "720")
 		}
 	}
 
@@ -66,10 +70,11 @@ sourceSets.main {
 
 tasks {
 	named<ProcessResources>("processResources") {
-		exclude("**/*.aw")
-	}
-	named<CreateMinecraftArtifacts>("createMinecraftArtifacts") {
-		dependsOn(":neoforge:${deps.minecraft}:stonecutterGenerate")
+		exclude("*.aw")
 	}
 }
-
+tasks {
+	named<CreateMinecraftArtifacts>("createMinecraftArtifacts") {
+		dependsOn(":neoforge:${deps.minecraft}:processResources")
+	}
+}

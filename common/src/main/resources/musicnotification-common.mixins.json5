@@ -8,11 +8,10 @@
 		"MixinMusicManager",
 		"MixinTitleScreen",
 		"MusicManagerAccessor",
-		//? if >=1.21.5 {
-         "ToastManager.MixinToastManager"
-		//? } else  {
-		/*"ToastManager.MixinToastManager_ToastInstance"
+		//? if <=1.21.4 {
+		/*"MixinTManager"
 		*///? }
+
 	],
 	"injectors": {
 		"defaultRequire": 1

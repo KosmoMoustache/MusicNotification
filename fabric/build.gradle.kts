@@ -1,15 +1,9 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-	kotlin("jvm")
 	id("multiloader-loader")
 	id("dev.kikugie.loom-back-compat")
-	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
-}
-
-// TODO: Useless ??
-kotlin {
-	jvmToolchain(lproject.prop("java.version")!!.toInt())
+	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.23"
 }
 
 stonecutter {
@@ -20,9 +14,6 @@ stonecutter {
 fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
-	}
-	lang.create("main") {
-		patterns.add("**/*.yml")
 	}
 }
 
@@ -57,7 +48,7 @@ dependencies {
 	}
 
 	// Runtime only mods
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fapi}+${deps.minecraft}")
+	modApi("net.fabricmc.fabric-api:fabric-api:${deps.fapi}+${deps.minecraft}") // TODO: modApi
 
 	// Fabric Loader JUnit for testing
 	testImplementation("net.fabricmc:fabric-loader-junit:${deps.floader}")
@@ -80,7 +71,7 @@ afterEvaluate {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${mod.aw_version}.aw")
+	accessWidenerPath = common.project.file("../../src/main/resources/accesswideners/${mod.aw_version}.aw")
 
 	runs {
 		getByName("client") {
@@ -94,9 +85,27 @@ loom {
 			// "-Dfabric.log.level=debug"
 		}
 	}
+
+	if (stonecutter.eval(deps.minecraft, "<=1.21.11")) {
+		mixin {
+			useLegacyMixinAp = true
+			defaultRefmapName = "${mod.id}.refmap.json"
+		}
+	}
 }
 
-// gametest
+
+tasks.named<ProcessResources>("processResources") {
+	val awFile = common.project.file("../../src/main/resources/accesswideners/${mod.aw_version}.aw")
+
+	from(awFile.parentFile) {
+		include(awFile.name)
+		rename(awFile.name, "${mod.id}.aw")
+		into("")
+	}
+}
+
+// GameTest
 if (sc.current.parsed > "1.21.1") {
 	fabricApi {
 		configureTests {

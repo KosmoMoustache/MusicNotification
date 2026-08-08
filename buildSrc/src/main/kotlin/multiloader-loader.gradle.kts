@@ -24,12 +24,11 @@ tasks {
 		source(commonJava)
 	}
 	named<ProcessResources>("processResources") {
-		// Only include the right aw file
-		from(commonResources) {
-			exclude("**/*.aw")
-		}
-		from(commonResources) {
-			include("${mod.aw_version}.aw")
-		}
+		dependsOn(commonResources)
+		from(commonResources)
+	}
+
+	jar {
+		exclude("accesswideners/**")
 	}
 }

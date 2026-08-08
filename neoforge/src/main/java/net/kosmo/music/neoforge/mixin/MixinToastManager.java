@@ -1,11 +1,10 @@
 //? if >=1.21.5 {
-package net.kosmo.music.mixin.ToastManager;
+package net.kosmo.music.neoforge.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.kosmo.music.config.Config;
-import net.kosmo.music.notification.toast.MusicToast;
+import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.sounds.SoundManager;
@@ -22,13 +21,7 @@ public class MixinToastManager {
 		)
 	)
 	private void playSoundMute(Toast.Visibility instance, SoundManager handler, Operation<Void> original, @Local ToastManager.ToastInstance<?> toast) {
-		if (Config.options().DISABLE_TOAST_SOUND == Config.Options.DisableToastSound.MUTE_ALL) {
-			return;
-		}
-		if (Config.options().DISABLE_TOAST_SOUND == Config.Options.DisableToastSound.MUTE_SELF && toast.getToast() instanceof MusicToast) {
-			return;
-		}
-		original.call(instance, handler);
+		MusicNotificationClient.TManagerMixinPlaySoundMute(instance, handler, original, toast);
 	}
 }
 //? }
