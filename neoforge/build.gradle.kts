@@ -78,14 +78,3 @@ tasks {
 		dependsOn(":neoforge:${deps.minecraft}:processResources")
 	}
 }
-
-
-//tasks {
-//	processResources {
-//		exclude("${mod.id}.accesswidener")
-//	}
-//}
-//
-//tasks.named("createMinecraftArtifacts") {
-//		dependsOn(":neoforge:${deps.minecraft}:stonecutterGenerate")
-//}
