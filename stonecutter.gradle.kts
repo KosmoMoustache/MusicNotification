@@ -9,7 +9,7 @@ stonecutter active "26.2" /* [SC] DO NOT EDIT */
 
 stonecutter {
 	parameters {
-		constants["mixin_debug"] = providers.gradleProperty("mixinDebug").getOrElse("false").toBoolean();
+		constants["mixin_debug"] = providers.gradleProperty("mixin.debug").getOrElse("false").toBoolean();
 
 		filters.exclude("**/*.aw")
 		filters.exclude("**/*.cfg")

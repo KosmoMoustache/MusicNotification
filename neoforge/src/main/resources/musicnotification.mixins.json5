@@ -2,6 +2,7 @@
 	"required": true,
 	"minVersion": "0.8",
 	"package": "net.kosmo.music.neoforge.mixin",
+	"refmap": "${mod_id}.refmap.json",
 	"compatibilityLevel": "JAVA_${java_version}",
 	"client": [
 	  //? if >=1.21.5

@@ -1,6 +1,7 @@
 {
 	"required": true,
 	"package": "net.kosmo.music.fabric.mixin",
+	"refmap": "${mod_id}.refmap.json",
 	"compatibilityLevel": "JAVA_${java_version}",
 	"client": [
 		//? if >=1.21.5
