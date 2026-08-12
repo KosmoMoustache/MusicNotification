@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [3.3.1] - 12/08/2026
+
+- Fix support for the Vanilla Backport mod
+
 ## [3.3.0] - 08/08/2026
 
 - Backport Vanilla's Music Frequency feature to Minecraft 1.21.1 and 1.21.4.

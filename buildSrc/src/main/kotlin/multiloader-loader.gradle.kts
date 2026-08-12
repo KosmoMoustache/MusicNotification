@@ -26,6 +26,15 @@ tasks {
 	named<ProcessResources>("processResources") {
 		dependsOn(commonResources)
 		from(commonResources)
+
+		if (project.stonecutterBuild.eval(deps.minecraft, ">1.21.1")) {
+			// VanillaBackport resource pack
+			eachFile {
+				if (relativePath.pathString.contains("vanillabackport")) {
+					exclude()
+				}
+			}
+		}
 	}
 
 	jar {
