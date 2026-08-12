@@ -1,7 +1,7 @@
 {
 	"pack": {
 		"description": {
-			"translate": "text.musicnotification.resourcepack.vanilla_backport.description",
+			"translate": "text.musicnotification.resourcepack.vanillabackport.description",
 			"fallback": "If you are using Vanilla Backport by ItsBlackgear."
 		},
 		"pack_format": 34,

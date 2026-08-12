@@ -53,7 +53,23 @@ public class MusicNotificationClientNeoForge {
 	}
 
 	void registerBuiltinPacks(AddPackFindersEvent event) {
-		event.addPackFinders(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/dark_mode"), PackType.CLIENT_RESOURCES, Component.translatable("text.musicnotification.resourcepack.dark_mode.name"), PackSource.BUILT_IN, false, Pack.Position.TOP);
+		event.addPackFinders(
+			Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/dark_mode"),
+			PackType.CLIENT_RESOURCES,
+			Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
+			PackSource.BUILT_IN,
+			false,
+			Pack.Position.TOP);
+		//? if <=1.21.1 {
+		/*if (MusicNotificationClient.PLATFORM_HELPER.isModLoaded("vanillabackport")) {
+			event.addPackFinders(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/vanillabackport"),
+				PackType.CLIENT_RESOURCES,
+				Component.translatable("text.musicnotification.resourcepack.vanillabackport.name"),
+				PackSource.BUILT_IN,
+				true,
+				Pack.Position.TOP);
+		}
+		*///? }
 	}
 
 	void registerKeyMappings(RegisterKeyMappingsEvent event) {

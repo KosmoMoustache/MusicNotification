@@ -64,8 +64,8 @@
 	"key.category.musicnotification.category": "Music Notification",
 	"key.musicnotification.open_screen": "Open Jukebox",
 	"text.musicnotification.notification.action_bar": "Now playing: %s - %s",
-	"text.musicnotification.resourcepack.dark_mode.description": "Turn Music Notification UI to dark. (built-in: MusicNotification)",
+	"text.musicnotification.resourcepack.dark_mode.description": "Turn Music Notification UI to dark.",
 	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification: Dark Mode",
-	"text.musicnotification.resourcepack.vanilla_backport.description": "Add support for Vanilla Backport by ItsBlackgear (built-in: MusicNotification)",
-	"text.musicnotification.resourcepack.vanilla_backport.name": "Add VanillaBackport support"
+	"text.musicnotification.resourcepack.vanillabackport.description": "Add support for Vanilla Backport by ItsBlackgear",
+	"text.musicnotification.resourcepack.vanillabackport.name": "Music Notification: VanillaBackport support"
 }

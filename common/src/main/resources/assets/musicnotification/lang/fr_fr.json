@@ -64,8 +64,8 @@
 	"key.category.musicnotification.category": "Music Notification",
 	"key.musicnotification.open_screen": "Ouvrir le Jukebox",
 	"text.musicnotification.notification.action_bar": "Lecture en cours: %s - %s",
-	"text.musicnotification.resourcepack.dark_mode.description": "Active le mod sombre pour l'interface de Music Notification. (intégré: MusicNotification)",
+	"text.musicnotification.resourcepack.dark_mode.description": "Active le mod sombre pour l'interface de Music Notification.",
 	"text.musicnotification.resourcepack.dark_mode.name": "Music Notification: Mode Sombre",
-	"text.musicnotification.resourcepack.vanilla_backport.description": "Ajoute la prise en charge de Vanilla Backport par ItsBlackgear (intégré: MusicNotification)",
-	"text.musicnotification.resourcepack.vanilla_backport.name": "Ajoute la prise en charge de VanillaBackport"
+	"text.musicnotification.resourcepack.vanillabackport.description": "Ajoute la prise en charge de Vanilla Backport par ItsBlackgear",
+	"text.musicnotification.resourcepack.vanillabackport.name": "Music Notification: Prise en charge de VanillaBackport"
 }

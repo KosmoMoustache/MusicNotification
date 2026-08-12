@@ -61,12 +61,16 @@ public class MusicNotificationClientFabric implements ClientModInitializer {
 				Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
 				PackActivationType.NORMAL
 			);
+			//? if <=1.21.1 {
+			/*if (MusicNotificationClient.PLATFORM_HELPER.isModLoaded("vanillabackport")) {
 			ResourceLoader.registerBuiltinPack(
-				Identifier.fromNamespaceAndPath(MOD_ID, "vanilla_backport"),
+				Identifier.fromNamespaceAndPath(MOD_ID, "vanillabackport"),
 				container,
-				Component.translatable("text.musicnotification.resourcepack.vanilla_backport.name"),
-				MusicNotificationClient.PLATFORM_HELPER.isModLoaded("vanilla_backport") ? PackActivationType.NORMAL : PackActivationType.DEFAULT_ENABLED
+				Component.translatable("text.musicnotification.resourcepack.vanillabackport.name"),
+				PackActivationType.ALWAYS_ENABLED
 			);
+			}
+			*///? }
 		});
 	}
 
