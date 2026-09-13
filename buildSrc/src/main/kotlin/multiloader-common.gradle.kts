@@ -28,7 +28,7 @@ repositories {
 	strictMaven("https://maven.shedaniel.me/", "me.shedaniel", "me.shedaniel.cloth")
 
 	strictMaven("https://maven.nucleoid.xyz", "pb4.eu", "xyz.nucleoid")
-	strictMaven("https://maven.quiltmc.org/repository/release", "quiltmc", "org.quiltmc")
+//	strictMaven("https://maven.quiltmc.org/repository/release", "quiltmc", "org.quiltmc")
 
 	strictMaven("https://www.cursemaven.com", "Curseforge", "curse.maven")
 	strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")

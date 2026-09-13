@@ -66,7 +66,7 @@ dependencies {
 afterEvaluate {
 	loom.runs.configureEach {
 		// https://fabricmc.net/wiki/tutorial:mixin_hotswaps
-		vmArg("-javaagent:${configurations.compileClasspath.get().find { it.name.contains("sponge-mixin") }}")
+		jvmArguments.add("-javaagent:${configurations.compileClasspath.get().find { it.name.contains("sponge-mixin") }}")
 	}
 }
 
@@ -76,11 +76,11 @@ loom {
 	runs {
 		getByName("client") {
 			client()
-			configName = "Fabric Client"
-			ideConfigGenerated(true)
-			programArgs("--quickPlaySingleplayer", "wd_void", "--width", "1280", "--height", "720")
+			displayName.set("Fabric Client")
+			generateRunConfig.set(true)
+			programArguments.addAll("--quickPlaySingleplayer", "wd_void", "--width", "1280", "--height", "720")
 			if (sc.current.parsed > "1.21.1") {
-				vmArgs("-XX:+AllowEnhancedClassRedefinition")
+				jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
 			}
 			// "-Dfabric.log.level=debug"
 		}
