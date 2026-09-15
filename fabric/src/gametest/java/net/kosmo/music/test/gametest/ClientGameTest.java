@@ -38,7 +38,8 @@ public class ClientGameTest implements FabricClientGameTest {
 
 		try (TestSingleplayerContext singleplayer = context.worldBuilder().create()) {
 			//~ if >26 getClientWorld -> getClientLevel
-			singleplayer.getClientLevel().waitForChunksRender();
+			//~ if >=26.3 getClientLevel -> getConnection
+			singleplayer.getConnection().waitForChunksRender();
 
 
 			context.runOnClient(this::testSoundEventExistence);
@@ -94,7 +95,8 @@ public class ClientGameTest implements FabricClientGameTest {
 		}
 
 		SimpleSoundInstance soundInstance = Helper.forMusic(soundEvent);
-		WeighedSoundEvents weighedSoundEvents = soundInstance.resolve(soundManager);
+		//~ if >=26.3 resolve -> getOrResolve
+		WeighedSoundEvents weighedSoundEvents = soundInstance.getOrResolve(soundManager);
 		if (weighedSoundEvents == null) {
 			return false;
 		}
