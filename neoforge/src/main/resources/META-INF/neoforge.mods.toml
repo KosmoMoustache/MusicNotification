@@ -9,11 +9,13 @@ version = "${mod_version}"
 displayName = "${mod_name}"
 authors = "KosmoMoustache"
 description = "${mod_description}"
+
+bannerFile = "icon.png"
+iconFile = "icon.png"
 logoFile = "icon.png"
 logoBlur = false
 
 credits = """
-Thanks to:
     Authors:
         KosmoMoustache
     Contributors:
