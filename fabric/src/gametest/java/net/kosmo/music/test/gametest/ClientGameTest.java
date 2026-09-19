@@ -37,10 +37,10 @@ public class ClientGameTest implements FabricClientGameTest {
 //		LOGGER.info("MDISC     NAME: {}", PLATFORM_HELPER.getModName("morediscs"));
 
 		try (TestSingleplayerContext singleplayer = context.worldBuilder().create()) {
-			//? if >26 {
-			singleplayer.getClientLevel().waitForChunksRender();}
-			//? } else if >=26.3 {
-			/*singleplayer.getConnection().waitForChunksRender();
+			//? if >=26.3{
+			singleplayer.getConnection().waitForChunksRender();
+			//? } else if >26 {
+			/*singleplayer.getClientLevel().waitForChunksRender();
 			*///? } else {
 			/*singleplayer.getClientWorld().waitForChunksRender();
 			*///? }
