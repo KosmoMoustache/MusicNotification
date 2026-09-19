@@ -32,7 +32,11 @@ public class PlatformFabric extends PlatformHelper<ModContainer> {
 	}
 
 	public void setCompactNotification(TrackData trackData, int time) {
-		GuiAccessor gui = (GuiAccessor) Minecraft.getInstance().gui;
+		//? if >=26.2 {
+		GuiAccessor gui = (GuiAccessor) Minecraft.getInstance().gui.hud;
+		//? } else {
+		/*GuiAccessor gui = (GuiAccessor) Minecraft.getInstance().gui;
+		*///? }
 		gui.musicNotification$setCompactNotificationMessage(this.getCompactNotificationMessage(trackData));
 		gui.musicNotification$setCompactNotificationTime(time);
 	}

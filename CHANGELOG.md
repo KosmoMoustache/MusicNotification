@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [3.3.2] - 19/09/2026
+
+- Fix crash when notification style is set to Compact with Fabric
+
 ## [3.3.1] - 12/08/2026
 
 - Fix support for the Vanilla Backport mod
