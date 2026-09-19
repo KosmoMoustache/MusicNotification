@@ -37,9 +37,13 @@ public class ClientGameTest implements FabricClientGameTest {
 //		LOGGER.info("MDISC     NAME: {}", PLATFORM_HELPER.getModName("morediscs"));
 
 		try (TestSingleplayerContext singleplayer = context.worldBuilder().create()) {
-			//~ if >26 getClientWorld -> getClientLevel
-			singleplayer.getClientLevel().waitForChunksRender();
-
+			//? if >=26.3{
+			singleplayer.getConnection().waitForChunksRender();
+			//? } else if >26 {
+			/*singleplayer.getClientLevel().waitForChunksRender();
+			*///? } else {
+			/*singleplayer.getClientWorld().waitForChunksRender();
+			*///? }
 
 			context.runOnClient(this::testSoundEventExistence);
 		}
@@ -94,7 +98,8 @@ public class ClientGameTest implements FabricClientGameTest {
 		}
 
 		SimpleSoundInstance soundInstance = Helper.forMusic(soundEvent);
-		WeighedSoundEvents weighedSoundEvents = soundInstance.resolve(soundManager);
+		//~ if >=26.3 resolve -> getOrResolve
+		WeighedSoundEvents weighedSoundEvents = soundInstance.getOrResolve(soundManager);
 		if (weighedSoundEvents == null) {
 			return false;
 		}

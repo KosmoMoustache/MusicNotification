@@ -18,7 +18,11 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
-import org.lwjgl.glfw.GLFW;
+//? if >=26.3 {
+import com.mojang.blaze3d.platform.InputConstants;
+//? } else {
+//import org.lwjgl.glfw.GLFW;
+//? }
 
 @Mod(ClientMusic.MOD_ID)
 public class ClientMusicForge {

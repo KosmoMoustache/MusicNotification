@@ -3,13 +3,13 @@ import org.gradle.api.tasks.Copy
 plugins {
 	id("dev.kikugie.stonecutter")
 	id("com.google.devtools.ksp") version "2.3.6" apply false
-	id("net.neoforged.moddev") version "2.0.140" apply false
+	id("net.neoforged.moddev") version "2.0.147" apply false
 }
-stonecutter active "26.2" /* [SC] DO NOT EDIT */
+stonecutter active "26.3" /* [SC] DO NOT EDIT */
 
 stonecutter {
 	parameters {
-		constants["mixin_debug"] = providers.gradleProperty("mixin.debug").getOrElse("false").toBoolean();
+		constants["mixin_debug"] = providers.gradleProperty("mixin.debug").getOrElse("false").toBoolean()
 
 		filters.exclude("**/*.aw")
 		filters.exclude("**/*.cfg")
@@ -54,6 +54,9 @@ stonecutter {
 			replace("Minecraft.getInstance().screen", "Minecraft.getInstance().gui.screen()")
 			replace("Minecraft.getInstance().gui.setOverlayMessage", "Minecraft.getInstance().gui.hud.setOverlayMessage")
 			replace("getToastManager()", "gui.toastManager()")
+		}
+		replacements.string(current.parsed >= "26.3") {
+			replace("GLFW.GLFW_", "InputConstants.")
 		}
 	}
 }
