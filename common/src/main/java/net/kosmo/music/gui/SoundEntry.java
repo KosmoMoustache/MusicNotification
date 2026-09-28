@@ -17,8 +17,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.ARGB;
 import net.minecraft.util.CommonColors;
+import net.minecraft.util.ARGB;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -59,37 +59,43 @@ public class SoundEntry extends ListEntry {
 		}
 	}
 
-	//? if >=1.21.10 {
+	//? if <=1.21.8 {
+	/*@Override
+	public void render(GuiGraphicsExtractor graphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
+		generalRender(graphics, mouseX, mouseY, hovering, partialTick, left, top, height, width, left + width, top + height);
+	}
+	*///? } else {
 	@Override
 	//~ if >26 renderContent -> extractContent
 	public void extractContent(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
-		render(
-			graphics,
-			0,
-			this.getContentY(),
-			this.getContentX(),
-			this.getContentWidth(),
-			this.getContentHeight(),
-			mouseX,
-			mouseY,
-			isHovering,
-			partialTick
-		);
+		generalRender(graphics, mouseX, mouseY, isHovering, partialTick, this.getContentX(), this.getContentY(), this.getContentHeight(), this.getContentWidth(), this.getContentRight(), this.getContentBottom());
 	}
+	//? }
 
-	//?} else {
-	/*@Override
-	 *///?}
-	public void render(GuiGraphicsExtractor guiGraphics, int do_not_use_index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
-		guiGraphics.fill(left, top, left + width, top + height, GRAY_COLOR);
+	private void generalRender(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean isHovering, float partialTick, int contentX, int contentY, int contentHeight, int contentWidth, int contentRight, int contentBottom) {
+		graphics.fill(contentX, contentY, contentRight, contentBottom, GRAY_COLOR);
 
-		this.playButton.setX(left + (width - this.playButton.getWidth() - 4) - 4);
-		this.playButton.setY(top + (height - this.playButton.getHeight()) / 2);
+		int textStartX = contentX + 4;
+		int textStopX = contentX + (contentWidth - this.playButton.getWidth()) - 8;
+		int textStartY = contentY + (contentHeight - this.client.font.lineHeight) / 2;
+		int textStopY = textStartY + this.client.font.lineHeight;
+
+		TextRender.drawScrollableText(
+			graphics,
+			this.client.font,
+			Component.literal(entry.id().toString()).withColor(CommonColors.WHITE),
+			textStartX,
+			textStopX,
+			textStartY,
+			textStopY,
+			true
+		);
+
+		this.playButton.setX(contentRight - this.playButton.getWidth() - 4);
+		this.playButton.setY(contentY + contentHeight / 2 - this.playButton.getHeight() / 2);
 		this.playButton.active = !Helper.isVolumeZero();
 		//~ if >26 render -> extractRenderState
-		this.playButton.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
-
-		TextRender.drawScrollableText(guiGraphics, this.client.font, Component.literal(entry.id().toString()), left + 4, left + 4, top + (height - this.client.font.lineHeight) / 2, left + width - 24 - 8, top + (height - this.client.font.lineHeight) / 2 + this.client.font.lineHeight, CommonColors.WHITE, true);
+		this.playButton.extractRenderState(graphics, mouseX, mouseY, partialTick);
 	}
 
 	@Override

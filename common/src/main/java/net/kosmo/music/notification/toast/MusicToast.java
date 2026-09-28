@@ -2,8 +2,10 @@ package net.kosmo.music.notification.toast;
 
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.config.Config;
+import net.kosmo.music.resource.AlbumCover;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.util.TextRender;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -13,18 +15,14 @@ import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
 //? >=1.21.2 {
 import net.kosmo.music.Helper;
-//?}
+ //?}
 //? <1.21.6 {
 /*import org.joml.Quaternionf;
 *///?}
 //? >=1.21.2 && <1.21.6 {
 /*import net.minecraft.client.renderer.RenderType;
-*///? } elif >=1.21.6 {
+ *///? } elif >=1.21.6 {
 import net.minecraft.client.renderer.RenderPipelines;
-//?}
-//? if >=1.21.5 {
-import org.jetbrains.annotations.Nullable;
-import net.minecraft.sounds.SoundEvent;
 //?}
 
 public class MusicToast implements Toast {
@@ -46,6 +44,7 @@ public class MusicToast implements Toast {
 		this.justUpdated = true;
 	}
 
+
 	private Visibility computeVisibility(long visibilityTime, ToastManager toastManager) {
 		return (double) (visibilityTime - this.startTime) >= 5000.0 * toastManager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
 	}
@@ -65,21 +64,26 @@ public class MusicToast implements Toast {
 
 		this.visibility = computeVisibility(visibilityTime, toastManager);
 	}
-	//? }
+	//?}
 
 	//? if <=1.21.1 {
 	/*@Override
-	public @NotNull Visibility render(GuiGraphicsExtractor guiGraphics, ToastManager toastComponent, long timeSinceLastVisible) {
-		render(guiGraphics, toastComponent.getMinecraft().font, timeSinceLastVisible);
+	public @NotNull Visibility render(GuiGraphicsExtractor graphics, ToastManager toastComponent, long timeSinceLastVisible) {
+		generalRender(graphics, Minecraft.getInstance().font, timeSinceLastVisible);
+//		render(graphics, toastComponent.getMinecraft().font, timeSinceLastVisible);
 		this.visibility = computeVisibility(timeSinceLastVisible, toastComponent);
 		return this.visibility;
 	}
-	*///? }
+	*///?}
 
 	//? if >1.21.6
 	@Override
 	//~ if >26 render -> extractRenderState
 	public void extractRenderState(GuiGraphicsExtractor graphics, Font font, long visibilityTime) {
+		generalRender(graphics, font, visibilityTime);
+	}
+
+	private void generalRender(GuiGraphicsExtractor graphics, Font font, long visibilityTime) {
 		if (rotation >= 360) rotation = 0;
 		rotation += 1;
 
@@ -88,49 +92,87 @@ public class MusicToast implements Toast {
 			this.justUpdated = false;
 		}
 
-		int x = 0;
+		int fullWidthScale = 0;
 		if (Config.options().STYLE_LEGACY_TOAST_SCALE) {
 			int a = this.getMaxWidth(font);
 			int padding = 32 + (4 * 2) + 5;
-			x = (this.width() - a) - padding;
+			fullWidthScale = (this.width() - a) - padding;
 		}
 
-		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,BACKGROUND_SPRITE, x, 0, this.width() - x, this.height());
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,BACKGROUND_SPRITE, fullWidthScale, 0, this.width() - fullWidthScale, this.height());
 
 		if (Config.options().ROTATE_ALBUM_COVER && content.getAlbumCover().canBeAnimated()) {
-			renderAnimatedAlbumCover(graphics, x, rotation);
+			renderAnimatedAlbumCover(graphics, fullWidthScale, rotation);
 		} else {
-			content.getAlbumCover().drawCover(graphics, x + 6, 6);
+			content.getAlbumCover().drawCover(graphics, fullWidthScale + 6, 6);
 		}
 
-		// TODO: Fix: When album name is long and STYLE_LEGACY_TOAST_SCALE is true, title is not aligned properly (O's Piano; Lilypad)
-		int x1 = x + 6 + /*AlbumCover.getWidth() */ 20 + 6;
+		int textStartX = fullWidthScale + 32;
+		int textStopX = this.width() - 3;
+		int textStartY = 3 + 2;
+		int textStopY = textStartY + font.lineHeight;
+
+//		graphics.fill(textStartX, textStartY, textStopX, textStopY, CommonColors.RED);
+
 		//~ if >=1.21.6 '-13108' -> 'CommonColors.COSMOS_PINK'
-		TextRender.drawScrollableText(graphics, font, content.title(), 30, x1, 7, this.width() - 4, 7 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? CommonColors.COSMOS_PINK : -11534256, false);
-		TextRender.drawScrollableText(graphics, font, content.author(), 30, x1, 18, this.width() - 4, 18 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
+		TextRender.drawScrollableText(graphics, font,
+			content.title().copy().withColor(Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -13108 : -11534256),
+			textStartX,
+			textStopX,
+			textStartY,
+			textStopY,
+			false
+		);
+
+//		textStartX += 30;
+//		textStopX = this.width();
+		textStartY += 4 + font.lineHeight;
+		textStopY = textStartY + font.lineHeight;
+
+//		graphics.fill(textStartX, textStartY, textStopX, textStopY, CommonColors.GREEN);
+
+		TextRender.drawScrollableText(graphics, font,
+			content.author().copy().withColor(Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK),
+			textStartX,
+			textStopX,
+			textStartY,
+			textStopY,
+			false
+		);
 
 		if (shouldRenderExtended()) {
-			TextRender.drawScrollableText(graphics, font, content.album().get(), 30, x1, 29, this.width() - 4, 29 + font.lineHeight, Config.options().COMPUTED_IS_DARK_MODE_ENABLED ? -3355444 : CommonColors.BLACK, false);
+			textStartY += 4 + font.lineHeight;
+			textStopY = textStartY + font.lineHeight;
+
+//			graphics.fill(textStartX, textStartY, textStopX, textStopY, CommonColors.BLUE);
+
+			TextRender.drawScrollableText(graphics, font,
+				content.album().get().copy().withColor(CommonColors.BLACK),
+				textStartX,
+				textStopX,
+				textStartY,
+				textStopY,
+				false
+			);
 		}
 	}
 
 	private void renderAnimatedAlbumCover(GuiGraphicsExtractor guiGraphics, int x, int rotation) {
-		int cx = x + 16;
+		AlbumCover albumCover = content.getAlbumCover();
+		float coverCenterX = x + 6 + albumCover.getWidth() / 2.0f;
+		float coverCenterY = 6 + albumCover.getHeight() / 2.0f;
 		guiGraphics.pose().pushMatrix();
-		// 16 = 6 + AlbumCover.get{Width/Height}() / 2
 		//? if >=1.21.6 {
-		guiGraphics.pose().translate(cx, 16);
+		guiGraphics.pose().translate(coverCenterX, coverCenterY);
 		guiGraphics.pose().rotate((float) Math.toRadians(rotation));
-		guiGraphics.pose().translate(-16, -16);
-		content.getAlbumCover().drawCover(guiGraphics, 6, 6);
-		guiGraphics.pose().translate(x, 0);
-		//? } else {
-		/*guiGraphics.pose().translate(cx, 16, 0);
+		guiGraphics.pose().translate(-albumCover.getWidth() / 2.0f, -albumCover.getHeight() / 2.0f);
+		albumCover.drawCover(guiGraphics, 0, 0);
+		//?} else {
+		/*guiGraphics.pose().translate(coverCenterX, coverCenterY, 0);
 		guiGraphics.pose().mulPose(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
-		guiGraphics.pose().translate(-16, -16, 0);
-		content.getAlbumCover().drawCover(guiGraphics, 6, 6);
-		guiGraphics.pose().translate(x, 0, 0);
-		*///? }
+		guiGraphics.pose().translate(-albumCover.getWidth() / 2.0f, -albumCover.getHeight() / 2.0f, 0);
+		albumCover.drawCover(guiGraphics, 0, 0);
+		*///?}
 
 		guiGraphics.pose().popMatrix();
 	}
