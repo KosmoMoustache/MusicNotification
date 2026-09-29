@@ -13,11 +13,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.screens.Screen;
-//? >=1.21.2 && <1.21.6 {
-/*import net.minecraft.client.renderer.RenderType;
-*///? } elif >=1.21.6 {
-import net.minecraft.client.renderer.RenderPipelines;
- //?}
+import net.minecraft.client.gui.screens.options.SoundOptionsScreen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -25,9 +21,14 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.Nullable;
 
-
 import java.util.Collection;
 import java.util.Locale;
+
+//? >=1.21.2 && <1.21.6 {
+/*import net.minecraft.client.renderer.RenderType;
+*///? } elif >=1.21.6 {
+import net.minecraft.client.renderer.RenderPipelines;
+ //?}
 
 public class JukeboxScreen extends Screen {
 	private static final Identifier BACKGROUND_TEXTURE = Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/background");
@@ -89,6 +90,9 @@ public class JukeboxScreen extends Screen {
 		soundButton.visible = Config.options().DEBUG_MOD;
 
 		this.stopSoundButton = this.addRenderableWidget(Button.builder(STOP_SOUND_BUTTON, button -> {
+			if (this.minecraft.options.getSoundSourceVolume(SoundSource.MASTER) == 0f || this.minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) == 0f) {
+				this.minecraft.gui.setScreen(new SoundOptionsScreen(this, this.minecraft.options));
+			}
 			this.minecraft.getSoundManager().stop(null, SoundSource.MUSIC);
 			MusicNotificationClient.currentlyPlaying = null;
 //			this.setCurrentTab(this.currentTab);
@@ -110,6 +114,8 @@ public class JukeboxScreen extends Screen {
 		this.searchBox.setHint(SEARCH_TEXT);
 		this.searchBox.setResponder(this::onSearchChange);
 
+		updateStopSoundButtonMessage();
+
 		this.addRenderableWidget(this.searchBox);
 		if (Config.options().WIP_FILTER_IN_JUKEBOX) {
 			this.addRenderableWidget(this.extendedFilter);
@@ -122,6 +128,24 @@ public class JukeboxScreen extends Screen {
 //		this.layout.visitWidgets(this::addRenderableWidget);
 
 		this.repositionElements();
+	}
+
+	@Override
+	public void added() {
+		super.added();
+		updateStopSoundButtonMessage();
+	}
+
+	private void updateStopSoundButtonMessage() {
+		if (this.stopSoundButton != null) {
+			if (this.minecraft.options.getSoundSourceVolume(SoundSource.MASTER) == 0f) {
+				this.stopSoundButton.setMessage(MASTER_VOLUME_ZERO);
+			} else if (this.minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) == 0f) {
+				this.stopSoundButton.setMessage(MUSIC_VOLUME_ZERO);
+			} else {
+				this.stopSoundButton.setMessage(STOP_SOUND_BUTTON);
+			}
+		}
 	}
 
 	@Override
@@ -146,26 +170,21 @@ public class JukeboxScreen extends Screen {
 	}
 
 	@Override
-	//~ if >26 renderBackground -> extractBackground {
+		//~ if >26 renderBackground -> extractBackground {
 	public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
 		super.extractBackground(graphics, mouseX, mouseY, partialTick);
-	//~ }
+		//~}
 		int i = this.marginX() + 3;
 
-		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 24 : 16));
-		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,SEARCH_ICON_TEXTURE, i + 10, (Config.options().WIP_FILTER_IN_JUKEBOX ? 96 : 76), 12, 12);
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 24 : 16));
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SEARCH_ICON_TEXTURE, i + 10, (Config.options().WIP_FILTER_IN_JUKEBOX ? 96 : 76), 12, 12);
 	}
 
 	@Override
-	//~ if >26 render -> extractRenderState {
+		//~ if >26 render -> extractRenderState {
 	public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
 		super.extractRenderState(graphics, mouseX, mouseY, delta);
-    //~ }
-		if (this.minecraft.options.getSoundSourceVolume(SoundSource.MASTER) == 0f) {
-			this.stopSoundButton.setMessage(MASTER_VOLUME_ZERO);
-		} else if (this.minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) == 0f) {
-			this.stopSoundButton.setMessage(MUSIC_VOLUME_ZERO);
-		}
+		//~}
 
 		if (!this.soundList.isEmpty()) {
 			//~ if >26 render -> extractRenderState
