@@ -15,11 +15,11 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.CommonColors;
 import net.minecraft.util.ARGB;
+import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -53,56 +53,73 @@ public class MusicEntry extends ListEntry {
 		this.children.add(this.stopButton);
 	}
 
-	//? if >=1.21.10 {
+	//? if <=1.21.8 {
+	/*@Override
+	public void render(GuiGraphicsExtractor graphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
+		generalRender(graphics, mouseX, mouseY, hovering, partialTick, left, top, height, width, left + width, top + height);
+	}
+	*///? } else {
 	@Override
 	//~ if >26 renderContent -> extractContent
 	public void extractContent(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean isHovering, float partialTick) {
-		render(
-			graphics,
-			0,
-			this.getContentY(),
-			this.getContentX(),
-			this.getContentWidth(),
-			this.getContentHeight(),
-			mouseX,
-			mouseY,
-			isHovering,
-			partialTick
-		);
+		generalRender(graphics, mouseX, mouseY, isHovering, partialTick, this.getContentX(), this.getContentY(), this.getContentHeight(), this.getContentWidth(), this.getContentRight(), this.getContentBottom());
 	}
+	//? }
 
-	//?} else {
-	/*@Override
-		*///?}
-	public void render(GuiGraphicsExtractor graphics, int do_not_use_index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
-		int y1 = top + 4;
-		int y2 = top + (height / 2) + 3;
-		int xMargeCover = left + 4 + 24 + 4;
-
-		graphics.fill(left, top, left + width, top + height, GRAY_COLOR);
-
-		MutableComponent text = entry.title().copy().append(" - ").withColor(CommonColors.WHITE).append(entry.author().copy().withColor(CommonColors.LIGHT_GRAY));
-		TextRender.drawScrollableText(graphics, this.client.font, text, xMargeCover, xMargeCover, y1, this.playButton.getX() - 4, y1 + this.client.font.lineHeight, CommonColors.WHITE, true);
-		if (entry.album().isPresent()) {
-			//~ if >26 'graphics.drawString' -> 'graphics.text'
-			graphics.text(this.client.font, entry.album().get(), xMargeCover, y2, CommonColors.LIGHT_GRAY, false);
-		}
+	private void generalRender(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean isHovering, float partialTick, int contentX, int contentY, int contentHeight, int contentWidth, int contentRight, int contentBottom) {
+		graphics.fill(contentX, contentY, contentRight, contentBottom, GRAY_COLOR);
 
 		AlbumCover albumCover = this.entry.getAlbumCover();
-		albumCover.drawCover(graphics, left + 4, top + (height - albumCover.getHeight()) / 2);
+
+		int coverX = contentX + 4;
+		int coverY = contentY + (contentHeight - albumCover.getWidth()) / 2;
+
+		albumCover.drawCover(graphics, coverX, coverY);
+
+		//	First Line
+		int textStartX = coverX + 24 + 4;
+		int textStopX = contentX + (contentWidth - this.playButton.getWidth()) - 8;
+		int textStartY = contentY;
+		int textStopY = contentY + contentHeight / 2;
+
+//		graphics.fill(textStartX, textStartY, textStopX, textStopY, ARGB.multiplyAlpha(CommonColors.RED, 0.5F));
+
+		TextRender.drawScrollableText(
+			graphics,
+			this.client.font,
+			entry.title().copy().append(" - ").withColor(CommonColors.WHITE).append(entry.author().copy().withColor(CommonColors.LIGHT_GRAY)),
+			textStartX, textStopX, textStartY, textStopY,
+			true
+		);
+
+		// Second Line
+		textStartY += contentHeight / 2;
+		textStopY = contentY + contentHeight;
+
+//		graphics.fill(textStartX, textStartY, textStopX, textStopY, ARGB.multiplyAlpha(CommonColors.GREEN, 0.5F));
+
+		if (entry.album().isPresent()) {
+			TextRender.drawScrollableText(
+				graphics,
+				this.client.font,
+				entry.album().get().copy().setStyle(Style.EMPTY.withColor(CommonColors.LIGHT_GRAY)),
+				textStartX, textStopX, textStartY, textStopY,
+				false
+			);
+		}
 
 		boolean shouldRenderButton = this.parent.parent.currentTab != JukeboxScreen.Tab.HISTORY;
 		boolean isPlaying = isPlaying();
 
-		this.playButton.setX(left + (width - this.playButton.getWidth()) - 8);
-		this.playButton.setY(top + (height - this.playButton.getHeight()) / 2);
+		this.playButton.setX(contentRight - this.playButton.getWidth() - 4);
+		this.playButton.setY(contentY + contentHeight / 2 - this.playButton.getHeight() / 2);
 		this.playButton.active = !isPlaying && shouldRenderButton && !Helper.isVolumeZero();
 		this.playButton.visible = !isPlaying && shouldRenderButton;
 		//~ if >26 render -> extractRenderState
 		this.playButton.extractRenderState(graphics, mouseX, mouseY, partialTick);
 
-		this.stopButton.setX(left + (width - this.stopButton.getWidth()) - 8);
-		this.stopButton.setY(top + (height - this.stopButton.getHeight()) / 2);
+		this.stopButton.setX(contentRight - this.stopButton.getWidth() - 4);
+		this.stopButton.setY(contentY + contentHeight / 2 - this.stopButton.getHeight() / 2);
 		this.stopButton.active = isPlaying && shouldRenderButton;
 		this.stopButton.visible = isPlaying && shouldRenderButton;
 		//~ if >26 render -> extractRenderState
