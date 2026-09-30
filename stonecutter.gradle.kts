@@ -56,7 +56,6 @@ stonecutter {
 			replace("getToastManager()", "gui.toastManager()")
 		}
 		replacements.string(current.parsed >= "26.3") {
-			replace("GLFW.GLFW_", "InputConstants.")
 		}
 	}
 }
