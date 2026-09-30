@@ -198,7 +198,7 @@ public class MusicToast implements Toast {
 	@Override
 	public int height() {
 		if (shouldRenderExtended()) {
-			return 44;
+			return 45;
 		}
 		return 32;
 	}
