@@ -98,9 +98,9 @@ public class ClothScreenProvider {
 			.build()
 		);
 
-		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.show_on_title_screen"), options.SHOW_TITLE_SCREEN_BUTTON)
-			.setDefaultValue(Config.Options.SHOW_TITLE_SCREEN_BUTTON_DEFAULT)
-			.setSaveConsumer(val -> options.SHOW_TITLE_SCREEN_BUTTON = val)
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.show_jukebox_menu_button"), options.SHOW_JUKEBOX_MENU_BUTTON)
+			.setDefaultValue(Config.Options.SHOW_JUKEBOX_MENU_BUTTON_DEFAULT)
+			.setSaveConsumer(val -> options.SHOW_JUKEBOX_MENU_BUTTON = val)
 			.build());
 
 		jukebox.add(entryBuilder.startIntField(Component.translatable("config.musicnotification.jukebox.max_count_history"), options.MAX_COUNT_HISTORY)
