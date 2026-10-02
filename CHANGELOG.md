@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [3.4.0.alpha.1] - 03/10/2026
+## [3.4.0-alpha.1] - 03/10/2026
 
 - (Jukebox) Added a button to open the Jukebox from the Pause Menu
 - (Jukebox) Stop Sound button now redirects to Music & Sound volume options when the volume is off
