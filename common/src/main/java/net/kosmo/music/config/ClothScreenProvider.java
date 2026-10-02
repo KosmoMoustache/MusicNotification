@@ -116,6 +116,10 @@ public class ClothScreenProvider {
 			.setDefaultValue(Config.Options.WIP_FILTER_IN_JUKEBOX_DEFAULT)
 			.setSaveConsumer(val -> options.WIP_FILTER_IN_JUKEBOX = val)
 			.build());
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("Enable new work in progess ui"), options.USE_V2_UI)
+			.setDefaultValue(Config.Options.USE_V2_UI_DEFAULT)
+			.setSaveConsumer(val -> options.USE_V2_UI = val)
+			.build());
 
 		general.add(entryBuilder.startStrList(Component.translatable("config.musicnotification.general.ignore_sound_event"), options.IGNORE_SOUND_EVENT)
 			.setDefaultValue(Config.Options.IGNORE_SOUND_EVENT_DEFAULT)
@@ -134,7 +138,7 @@ public class ClothScreenProvider {
 			})
 			.build()
 		);
-		*///? }
+		*///?}
 
 		category.addEntry(notification.build());
 		category.addEntry(style.build());

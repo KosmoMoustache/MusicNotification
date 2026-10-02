@@ -1,7 +1,7 @@
 package net.kosmo.music;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import net.kosmo.music.gui.JukeboxScreen;
+import net.kosmo.music.gui.JukeboxScreenSelector;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
@@ -16,7 +16,7 @@ public class KeyBinding {
 	public static void tick() {
 		while (openJukeboxScreenKey.consumeClick()) {
 			Minecraft client = Minecraft.getInstance();
-			client.gui.setScreen(new JukeboxScreen());
+			client.gui.setScreen(JukeboxScreenSelector.create());
 		}
 	}
 
