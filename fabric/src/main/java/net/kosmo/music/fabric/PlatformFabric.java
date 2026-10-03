@@ -42,7 +42,7 @@ public class PlatformFabric extends PlatformHelper<ModContainer> {
 	}
 
 	@Override
-	public String getDarkModeResourcePackId() {
+	public String getDarkModePackId() {
 		return "musicnotification:dark_mode";
 	}
 }

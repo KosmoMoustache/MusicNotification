@@ -44,7 +44,7 @@ public class MusicResourceReloadListener extends SimplePreparableReloadListener<
 	public void apply(Map<Identifier, TrackData> sounds, ResourceManager resourceManager) {
 		TrackData.clearAlbumCache();
 		TrackDataManager.getInstance().setTracks(sounds);
-		Config.options().COMPUTED_IS_DARK_MODE_ENABLED = resourceManager.listPacks().anyMatch(resourcePack -> resourcePack.packId().equals(MusicNotificationClient.PLATFORM_HELPER.getDarkModeResourcePackId()));
+		Config.options().COMPUTED_IS_DARK_MODE_ENABLED = resourceManager.listPacks().anyMatch(resourcePack -> resourcePack.packId().equals(MusicNotificationClient.PLATFORM_HELPER.getDarkModePackId()));
 	}
 
 	@Override

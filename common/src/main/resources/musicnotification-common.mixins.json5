@@ -5,15 +5,15 @@
 	"refmap": "${mod_id}.refmap.json",
 	"compatibilityLevel": "JAVA_${java_version}",
 	"client": [
+		//? if <=1.21.4 {
+		/*"MixinTManager",
+		*///? }
 		"MixinMinecraft",
 		"MixinMusicManager",
 		"MixinTitleScreen",
 		"MusicManagerAccessor",
-		//? if <=1.21.4 {
-		/*"MixinTManager"
-		*///? }
-
-	],
+		"MixinPauseScreen"
+    ],
 	"injectors": {
 		"defaultRequire": 1
 	}

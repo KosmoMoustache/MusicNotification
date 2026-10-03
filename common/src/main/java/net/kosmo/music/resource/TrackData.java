@@ -19,7 +19,8 @@ public record TrackData(
 	Optional<Component> album,
 	Optional<String> cover,
 	Optional<Identifier> item,
-	Optional<Identifier> customId
+	Optional<Identifier> customId,
+	Optional<Integer> track
 ) {
 
 	public static final Codec<Component> COMPONENT_CODEC = Codec.STRING.xmap(Component::literal, Component::getString);
@@ -31,8 +32,9 @@ public record TrackData(
 			COMPONENT_CODEC.optionalFieldOf("album").forGetter(TrackData::album),
 			Codec.STRING.optionalFieldOf("cover").forGetter(TrackData::cover),
 			Identifier.CODEC.optionalFieldOf("item").forGetter(TrackData::item),
-			Identifier.CODEC.optionalFieldOf("customId").forGetter(TrackData::customId))
-		.apply(i, (keyOpt, title, author, album, cover, item, customId) -> new TrackData(keyOpt.orElse(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "generic")), title, author, album, cover, item, customId)));
+			Identifier.CODEC.optionalFieldOf("customId").forGetter(TrackData::customId),
+			Codec.INT.optionalFieldOf("track").forGetter(TrackData::track))
+		.apply(i, (keyOpt, title, author, album, cover, item, customId, track) -> new TrackData(keyOpt.orElse(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "generic")), title, author, album, cover, item, customId, track)));
 
 	// A map codec that stores a map<Identifier, TrackData> but injects the map key into each TrackData.key
 	public static final Codec<Map<Identifier, TrackData>> MAP_CODEC = ExtraCodecs.strictUnboundedMap(Identifier.CODEC, CODEC)
@@ -45,7 +47,7 @@ public record TrackData(
 			Identifier mapKey = e.getKey();
 			TrackData value = e.getValue();
 			if (!value.key().equals(mapKey)) {
-				value = new TrackData(mapKey, value.title(), value.author(), value.album(), value.cover(), value.item(), value.customId());
+				value = new TrackData(mapKey, value.title(), value.author(), value.album(), value.cover(), value.item(), value.customId(), value.track());
 			}
 			out.put(mapKey, value);
 		}

@@ -86,8 +86,9 @@ public class Config {
 
 	public static class Options {
 		public static final boolean COMPUTED_IS_DARK_MODE_ENABLED_DEFAULT = false;
+		public static final boolean USE_V2_UI_DEFAULT = false;
 
-		public static final boolean SHOW_TITLE_SCREEN_BUTTON_DEFAULT = true;
+		public static final boolean SHOW_JUKEBOX_MENU_BUTTON_DEFAULT = true;
 		public static final boolean SHOW_AUTHOR_DEFAULT = true;
 		public static final boolean SHOW_ALBUM_NAME_DEFAULT = false;
 		public static final boolean ROTATE_ALBUM_COVER_DEFAULT = false;
@@ -106,7 +107,8 @@ public class Config {
 		//public static final MusicFrequency MUSIC_FREQUENCY_DEFAULT = MusicFrequency.DEFAULT;
 		// -
 		public boolean COMPUTED_IS_DARK_MODE_ENABLED = COMPUTED_IS_DARK_MODE_ENABLED_DEFAULT;
-		public boolean SHOW_TITLE_SCREEN_BUTTON = SHOW_TITLE_SCREEN_BUTTON_DEFAULT;
+		public boolean USE_V2_UI = USE_V2_UI_DEFAULT;
+		public boolean SHOW_JUKEBOX_MENU_BUTTON = SHOW_JUKEBOX_MENU_BUTTON_DEFAULT;
 		public boolean SHOW_AUTHOR = SHOW_AUTHOR_DEFAULT;
 		public boolean SHOW_ALBUM_NAME = SHOW_ALBUM_NAME_DEFAULT;
 		public boolean ROTATE_ALBUM_COVER = ROTATE_ALBUM_COVER_DEFAULT;

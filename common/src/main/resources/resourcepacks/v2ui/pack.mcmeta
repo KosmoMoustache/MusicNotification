@@ -1,0 +1,12 @@
+{
+	"pack": {
+		"description": "MusicNotification: V2 UI",
+		"pack_format": 34,
+		"supported_formats": [
+			34,
+			97
+		],
+		"min_format": 34,
+		"max_format": 97
+	}
+}

@@ -1,27 +1,22 @@
 package net.kosmo.music;
 
-import net.kosmo.music.gui.JukeboxScreen;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.kosmo.music.gui.JukeboxScreenSelector;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
-//? if >=26.3 {
-import com.mojang.blaze3d.platform.InputConstants;
-//? } else {
-/*import org.lwjgl.glfw.GLFW;
-*///? }
 
 public class KeyBinding {
-	//? if <=1.21.8 {
-	/*private static final KeyMapping openJukeboxScreenKey = new KeyMapping("key.musicnotification.open_screen", InputConstants.KEY_M, "key.category.musicnotification.category");
-	 *///?} else {
+	//? if >=1.21.10
 	private static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "category"));
-	private static final KeyMapping openJukeboxScreenKey = new KeyMapping("key.musicnotification.open_screen", InputConstants.KEY_M, CATEGORY);
-	//?}
+	private static final KeyMapping openJukeboxScreenKey = new KeyMapping("key.musicnotification.open_screen", InputConstants.UNKNOWN.getValue(),
+		/*? >=1.21.10 {*/CATEGORY/*?} else {*//*"key.category.musicnotification.category"*//*?}*/
+	);
 
 	public static void tick() {
 		while (openJukeboxScreenKey.consumeClick()) {
 			Minecraft client = Minecraft.getInstance();
-			client.gui.setScreen(new JukeboxScreen());
+			client.gui.setScreen(JukeboxScreenSelector.create());
 		}
 	}
 

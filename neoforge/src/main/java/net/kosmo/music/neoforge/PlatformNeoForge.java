@@ -47,7 +47,7 @@ public class PlatformNeoForge extends PlatformHelper<IModInfo> {
 	}
 
 	@Override
-	public String getDarkModeResourcePackId() {
+	public String getDarkModePackId() {
 		return "mod/musicnotification:resourcepacks/dark_mode";
 	}
 }
