@@ -68,7 +68,7 @@ public class JukeboxScreen extends Screen {
 	private Button clearHistoryButton;
 	private ExtendedFilter extendedFilter;
 
-	public JukeboxScreen() {
+	public JukeboxScreen(@Nullable Screen parent) {
 		super(TITLE);
 	}
 

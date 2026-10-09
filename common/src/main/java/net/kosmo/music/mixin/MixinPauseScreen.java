@@ -21,7 +21,7 @@ public abstract class MixinPauseScreen extends Screen {
 	@Inject(method = "createPauseMenu", at = @At("TAIL"))
 	private void insertJukeboxMenu(CallbackInfo ci) {
 		if (Config.options().SHOW_JUKEBOX_MENU_BUTTON) {
-			SpriteIconButton openJukebox = this.addRenderableWidget(CommonComponents.jukebox(20, button -> this.minecraft.gui.setScreen(JukeboxScreenSelector.create()), true));
+			SpriteIconButton openJukebox = this.addRenderableWidget(CommonComponents.jukebox(20, _ -> this.minecraft.gui.setScreen(JukeboxScreenSelector.create(this)), true));
 			openJukebox.setPosition(12, 12);
 		}
 	}

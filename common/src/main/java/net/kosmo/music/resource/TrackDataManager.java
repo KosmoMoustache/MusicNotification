@@ -87,7 +87,7 @@ public class TrackDataManager {
 		return namespaces;
 	}
 
-	private TrackData getEmpty(Identifier key, String title, String author) {
+	public TrackData getEmpty(Identifier key, String title, String author) {
 		return new TrackData(
 			key,
 			Component.literal(title),

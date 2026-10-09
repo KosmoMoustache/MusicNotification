@@ -1,0 +1,183 @@
+package net.kosmo.music.gui.v3;
+
+import net.kosmo.music.MusicNotificationClient;
+import net.kosmo.music.TrackHistory;
+import net.kosmo.music.config.Config;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.AbstractScrollArea;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.tabs.Tab;
+import net.minecraft.client.gui.components.tabs.TabManager;
+import net.minecraft.client.gui.components.tabs.TabNavigationBar;
+import net.minecraft.client.gui.layouts.FrameLayout;
+import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.options.SoundOptionsScreen;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundSource;
+import org.jetbrains.annotations.Nullable;
+
+public class JukeboxScreenV3 extends Screen {
+	public static final int SCROLLBAR_RESERVE = AbstractScrollArea.SCROLLBAR_WIDTH + 2; // 6 + 2 = 8
+	public static final int OVERLAY_WIDTH = 228; // 220 entries + 8 reserve
+
+	private static final Identifier BACKGROUND_SPRITE = Identifier.withDefaultNamespace("friends/background");
+	private static final Component TITLE = Component.translatable("gui.musicnotification.jukebox.title");
+	private static final Component CLEAR_HISTORY = Component.translatable("gui.musicnotification.jukebox.clear_history");
+	private static final Component STOP_SOUND_BUTTON = Component.translatable("gui.musicnotification.jukebox.stop_sound_button");
+
+	private final Screen parent;
+	private final TabManager tabManager;
+
+	private final Button clearHistoryButton;
+	private final Button stopSoundButton;
+
+	private @Nullable HomeTab homeTab;
+	private @Nullable HistoryTab historyTab;
+	private @Nullable MuteTab muteTab;
+	private @Nullable DebugTab debugTab;
+	private @Nullable TabNavigationBar tabNavigationBar;
+
+	private @Nullable LinearLayout layout;
+	private @Nullable LinearLayout contentLayout;
+
+	public JukeboxScreenV3(@Nullable Screen parent) {
+		super(TITLE);
+		this.parent = parent;
+		this.tabManager = new TabManager(this::addRenderableWidget, this::removeWidget, this::selectTab, this::deselectTab);
+
+		this.clearHistoryButton = this.addRenderableWidget(Button.builder(CLEAR_HISTORY, button -> {
+			TrackHistory.getInstance().clear();
+			this.refreshLists();
+			button.setFocused(false);
+		}).bounds(10, 10, this.font.width(CLEAR_HISTORY) + 8, 20).build());
+		this.clearHistoryButton.visible = false;
+
+		this.stopSoundButton = this.addRenderableWidget(Button.builder(STOP_SOUND_BUTTON, button -> {
+			if (this.minecraft.options.getSoundSourceVolume(SoundSource.MASTER) == 0f || this.minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) == 0f) {
+				this.minecraft.gui.setScreen(new SoundOptionsScreen(this, this.minecraft.options));
+			}
+			this.minecraft.getSoundManager().stop(null, SoundSource.MUSIC);
+			MusicNotificationClient.currentlyPlaying = null;
+		}).build());
+//			.bounds(this.la.getRowLeft() - 1, this.listEnd() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 12 : 10), this.soundList.getRowRight() - this.soundList.getRowLeft() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 3 : 1), 20).build());
+
+	}
+
+	@Override
+	public void init() {
+		if (this.parent != null) {
+			this.parent.init(this.width, this.height);
+		}
+
+		this.homeTab = new HomeTab(this.minecraft, this, getOverlayWidth(), 220);
+		this.historyTab = new HistoryTab(this.minecraft, this, getOverlayWidth(), 220);
+		this.muteTab = new MuteTab(this.minecraft, this, getOverlayWidth(), 220);
+		this.debugTab = new DebugTab(this.minecraft, this, getOverlayWidth(), 220);
+
+		boolean showMute = Config.options().SHOW_MUTE;
+		boolean showDebug = Config.options().DEBUG_MOD;
+		int visibleTabs = 2 + (showMute ? 1 : 0) + (showDebug ? 1 : 0);
+		int tabWidth = getOverlayWidth() / visibleTabs;
+
+		TabNavigationBar.Builder builder = TabNavigationBar.builder(this.tabManager, 0, 0, getOverlayWidth(), 20)
+			.addTab(new JukeboxTabButton(this.tabManager, this.homeTab, tabWidth, 20), homeTab)
+			.addTab(new JukeboxTabButton(this.tabManager, this.historyTab, tabWidth, 20), historyTab);
+
+		if (showMute)
+			builder.addTab(new JukeboxTabButton(this.tabManager, this.muteTab, tabWidth, 20), muteTab);
+		if (showDebug)
+			builder.addTab(new JukeboxTabButton(this.tabManager, this.debugTab, tabWidth, 20), debugTab);
+
+		this.tabNavigationBar = builder.build();
+		this.addRenderableWidget(tabNavigationBar);
+
+		this.layout = LinearLayout.vertical();
+		this.contentLayout = this.layout.addChild(LinearLayout.vertical());
+		this.tabManager.setCurrentTab(this.homeTab, false, false);
+		this.layout.visitWidgets(this::addRenderableWidget);
+		this.repositionElements();
+	}
+
+	@Override
+	protected void repositionElements() {
+		if (this.parent != null) {
+			this.parent.resize(this.width, this.height);
+		}
+
+		this.homeTab.setHeight(this.height - 80);
+		this.historyTab.setHeight(this.height - 80);
+		this.muteTab.setHeight(this.height - 80);
+		this.debugTab.setHeight(this.height - 80);
+
+		this.layout.arrangeElements();
+		FrameLayout.alignInRectangle(this.layout, this.getRectangle(), 0.5F, 0.5F);
+		this.tabNavigationBar.setPosition(this.layout.getX(), this.layout.getY() - 20 - 7);
+		this.tabNavigationBar.arrangeElements(this.width);
+
+		this.stopSoundButton.setPosition(this.layout.getX(), this.layout.getY() + this.layout.getHeight());
+	}
+
+	@Override
+	public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+//		if (this.parent != null) {
+//			this.parent.extractBackground(graphics, mouseX, mouseY, a);
+//			graphics.nextStratum();
+//			this.parent.extractRenderState(graphics, -1, -1, a);
+//			graphics.nextStratum();
+//			this.extractBlurredBackground(graphics);
+//		} else {
+//			super.extractBackground(graphics, mouseX, mouseY, a);
+//		}
+
+		super.extractBackground(graphics, mouseX, mouseY, a);
+
+		graphics.blitSprite(
+			RenderPipelines.GUI_TEXTURED,
+			BACKGROUND_SPRITE,
+			this.layout.getX() - 8,
+			this.layout.getY() - 8,
+			this.layout.getWidth() + 16,
+			this.layout.getHeight() + 16 + 1
+		);
+	}
+
+	private void selectTab(Tab tab) {
+		if (this.contentLayout != null) {
+			this.contentLayout.addChild(tab.getLayout());
+		}
+		this.refreshLists();
+		this.conditionalVisibility(tab);
+	}
+
+	private void deselectTab(Tab tab) {
+		if (this.contentLayout != null) {
+			this.contentLayout.removeChildren();
+		}
+	}
+
+	private void conditionalVisibility(Tab tab) {
+		this.clearHistoryButton.visible = tab instanceof HistoryTab;
+		// TODO: Album filter only on Home
+	}
+
+	public int getOverlayWidth() {
+		// panel width
+		return OVERLAY_WIDTH;
+	}
+
+	public int getContentWidth() {
+		// 220, entries
+		return OVERLAY_WIDTH - SCROLLBAR_RESERVE;
+	}
+
+	public void refreshLists() {
+		if (this.tabManager.getCurrentTab() instanceof AbstractJukeboxTab tab) {
+			tab.refresh();
+		}
+		this.repositionElements();
+	}
+}
