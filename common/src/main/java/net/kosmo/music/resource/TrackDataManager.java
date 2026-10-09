@@ -81,9 +81,7 @@ public class TrackDataManager {
 
 	public Set<String> getNamespaceList() {
 		Set<String> namespaces = new HashSet<>();
-		tracks.forEach((i, t) -> {
-			namespaces.add(i.getNamespace());
-		});
+		tracks.forEach((i, t) -> namespaces.add(i.getNamespace()));
 		return namespaces;
 	}
 

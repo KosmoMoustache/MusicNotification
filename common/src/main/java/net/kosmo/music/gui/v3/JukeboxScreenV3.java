@@ -3,7 +3,6 @@ package net.kosmo.music.gui.v3;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.TrackHistory;
 import net.kosmo.music.config.Config;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractScrollArea;
 import net.minecraft.client.gui.components.Button;
@@ -62,6 +61,7 @@ public class JukeboxScreenV3 extends Screen {
 			}
 			this.minecraft.getSoundManager().stop(null, SoundSource.MUSIC);
 			MusicNotificationClient.currentlyPlaying = null;
+			button.setFocused(false);
 		}).build());
 //			.bounds(this.la.getRowLeft() - 1, this.listEnd() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 12 : 10), this.soundList.getRowRight() - this.soundList.getRowLeft() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 3 : 1), 20).build());
 

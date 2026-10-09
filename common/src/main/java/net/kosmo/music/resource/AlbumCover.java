@@ -68,9 +68,6 @@ public class AlbumCover {
 	interface AlbumCoverType {
 		/**
 		 *
-		 * @param guiGraphics
-		 * @param x
-		 * @param y
 		 * @param width ignored when type is sprite cover // TODO
 		 * @param height ignored when type is sprite cover // TODO
 		 */

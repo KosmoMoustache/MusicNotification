@@ -108,7 +108,7 @@ public abstract class AbstractJukeboxTab implements Tab {
 		List<TrackEntry> entries = new ArrayList<>(tracks.size());
 		for (TrackData track : tracks) {
 			if (this.filter != null && !TrackFilter.fromQuery(this.filter).test(track)) continue;
-			entries.add(new TrackEntry(this.minecraft, this.parent, track, false));
+			entries.add(new TrackEntry(this.minecraft, this.parent, track));
 		}
 		return entries;
 	}

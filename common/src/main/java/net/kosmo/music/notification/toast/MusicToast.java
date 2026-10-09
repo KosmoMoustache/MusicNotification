@@ -5,7 +5,6 @@ import net.kosmo.music.config.Config;
 import net.kosmo.music.resource.AlbumCover;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.util.TextRender;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;

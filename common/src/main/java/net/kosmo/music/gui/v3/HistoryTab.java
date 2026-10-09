@@ -1,9 +1,7 @@
 package net.kosmo.music.gui.v3;
 
 import net.kosmo.music.TrackHistory;
-import net.kosmo.music.gui.JukeboxScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import org.jspecify.annotations.NonNull;
 
