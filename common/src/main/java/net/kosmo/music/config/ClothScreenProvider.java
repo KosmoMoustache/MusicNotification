@@ -120,6 +120,10 @@ public class ClothScreenProvider {
 			.setDefaultValue(Config.Options.USE_V2_UI_DEFAULT)
 			.setSaveConsumer(val -> options.USE_V2_UI = val)
 			.build());
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("Show Mute tab in Jukebox"), options.SHOW_MUTE)
+			.setDefaultValue(Config.Options.SHOW_MUTE_DEFAULT)
+			.setSaveConsumer(val -> options.SHOW_MUTE = val)
+			.build());
 
 		general.add(entryBuilder.startStrList(Component.translatable("config.musicnotification.general.ignore_sound_event"), options.IGNORE_SOUND_EVENT)
 			.setDefaultValue(Config.Options.IGNORE_SOUND_EVENT_DEFAULT)

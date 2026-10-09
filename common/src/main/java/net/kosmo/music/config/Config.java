@@ -96,6 +96,7 @@ public class Config {
 		public static final List<String> IGNORE_SOUND_EVENT_DEFAULT = List.of("minecraft:note/*");
 		public static final int MAX_COUNT_HISTORY_DEFAULT = 20;
 		public static final boolean DEBUG_MOD_DEFAULT = false;
+		public static final boolean SHOW_MUTE_DEFAULT = true;
 		public static final NotificationStyle NOTIFICATION_STYLE_DEFAULT = NotificationStyle.LEGACY_TOAST;
 		public static final List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK_DEFAULT = List.of(NotificationStyle.COMPACT, NotificationStyle.LOG);
 		public static final boolean STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT = false;
@@ -116,6 +117,7 @@ public class Config {
 		public List<String> IGNORE_SOUND_EVENT = IGNORE_SOUND_EVENT_DEFAULT;
 		public int MAX_COUNT_HISTORY = MAX_COUNT_HISTORY_DEFAULT;
 		public boolean DEBUG_MOD = DEBUG_MOD_DEFAULT;
+		public boolean SHOW_MUTE = SHOW_MUTE_DEFAULT;
 		public NotificationStyle NOTIFICATION_STYLE = NOTIFICATION_STYLE_DEFAULT;
 		public List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK = NOTIFICATION_STYLE_FALLBACK_DEFAULT;
 		public boolean STYLE_ACTION_BAR_ANIMATE_COLOR = STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT;
