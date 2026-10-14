@@ -117,8 +117,8 @@ public abstract class AbstractJukeboxTab implements Tab {
 		List<SoundEntry> entries = new ArrayList<>(sounds.size());
 		for (Identifier id : sounds) {
 			if (this.filter != null && !id.toString().toLowerCase(Locale.ROOT).contains(filter.toLowerCase())) continue; // filter fix
-				TrackDataManager.getInstance().getEmpty(id, id.toString(), id.getNamespace())));
 			entries.add(new SoundEntry(this.minecraft, this.parent, this.scrollableLayout,
+				TrackDataManager.getEmpty(id, id.toString(), id.getNamespace())));
 		}
 		return entries;
 	}

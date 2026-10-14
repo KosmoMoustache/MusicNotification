@@ -26,6 +26,23 @@ public class TrackDataManager {
 		return instance;
 	}
 
+	public static TrackData getEmpty() {
+		return getEmpty(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "empty"), "Track title", "Track author");
+	}
+
+	public static TrackData getEmpty(Identifier key, String title, String author) {
+		return new TrackData(
+			key,
+			Component.literal(title),
+			Component.literal(author),
+			Optional.empty(),
+			Optional.empty(),
+			Optional.empty(),
+			Optional.of(key),
+			Optional.empty()
+		);
+	}
+
 	public void setTracks(Map<Identifier, TrackData> sounds) {
 		this.tracks = sounds;
 	}
@@ -83,18 +100,5 @@ public class TrackDataManager {
 		Set<String> namespaces = new HashSet<>();
 		tracks.forEach((i, t) -> namespaces.add(i.getNamespace()));
 		return namespaces;
-	}
-
-	public TrackData getEmpty(Identifier key, String title, String author) {
-		return new TrackData(
-			key,
-			Component.literal(title),
-			Component.literal(author),
-			Optional.empty(),
-			Optional.empty(),
-			Optional.empty(),
-			Optional.of(key),
-			Optional.empty()
-		);
 	}
 }
