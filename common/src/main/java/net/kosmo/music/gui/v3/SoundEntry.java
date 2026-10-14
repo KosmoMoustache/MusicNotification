@@ -5,6 +5,7 @@ import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.ScrollableLayout;
 import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -15,12 +16,12 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.CommonColors;
 
 public class SoundEntry extends AbstractJukeboxEntryContainerWidget {
-	public SoundEntry(Minecraft minecraft, JukeboxScreenV3 screen, TrackData trackData) {
-		this(minecraft, screen, trackData, false);
+	public SoundEntry(Minecraft minecraft, JukeboxScreenV3 screen, ScrollableLayout scrollableLayout, TrackData trackData) {
+		this(minecraft, screen, scrollableLayout, trackData, false);
 	}
 
-	public SoundEntry(Minecraft minecraft, JukeboxScreenV3 screen, TrackData trackData, boolean animated) {
-		super(minecraft, screen, 0, 0, screen.getContentWidth(), 36, trackData, animated);
+	public SoundEntry(Minecraft minecraft, JukeboxScreenV3 screen, ScrollableLayout scrollableLayout, TrackData trackData, boolean animated) {
+		super(minecraft, screen, scrollableLayout, 0, 0, screen.getContentWidth(), 36, trackData, animated);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractContainerWidget;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.ScrollableLayout;
 import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.layouts.LinearLayout;
@@ -25,17 +26,20 @@ import java.util.List;
 public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContainerWidget {
 	protected final Minecraft minecraft;
 	protected final JukeboxScreenV3 screen;
+	protected final ScrollableLayout scrollableLayout;
 	protected final TrackData trackData;
 	private final List<AbstractWidget> children = new ArrayList<>();
 
 	protected AlbumCoverWidget albumCoverWidget;
 	protected StringWidget line1Widget;
 	protected StringWidget line2Widget;
+	protected LinearLayout layout;
 
-	public AbstractJukeboxEntryContainerWidget(Minecraft minecraft, JukeboxScreenV3 screen, int x, int y, int width, int height, TrackData trackData, boolean animated) {
+	public AbstractJukeboxEntryContainerWidget(Minecraft minecraft, JukeboxScreenV3 screen, ScrollableLayout scrollableLayout, int x, int y, int width, int height, TrackData trackData, boolean animated) {
 		super(x, y, width, height, Component.empty());
 		this.minecraft = minecraft;
 		this.screen = screen;
+		this.scrollableLayout = scrollableLayout;
 		this.trackData = trackData;
 		this.initWidgets(width, animated);
 	}
@@ -57,6 +61,11 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 
 	@Override
 	protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+		if (this.getY() + this.getHeight() < this.scrollableLayout.getY()
+			|| this.getY() > this.scrollableLayout.getY() + this.scrollableLayout.getHeight()) {
+			return;
+		}
+
 		graphics.fill(this.getX(), this.getY() + this.getHeight() - 2, this.getRight(), this.getY() + this.getHeight(), CommonColors.DARK_GRAY);
 
 		if (this.isHoveredOrFocused()) {
@@ -110,6 +119,11 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 		);
 		this.line2Widget.setMaxWidth(width, StringWidget.TextOverflow.SCROLLING);
 
+		this.layout = LinearLayout.vertical();
+		this.layout.addChild(this.line1Widget, s -> s.paddingBottom(3));
+		this.layout.addChild(this.line2Widget);
+		this.layout.arrangeElements();
+
 		this.addChild(this.albumCoverWidget);
 		this.addChild(this.line1Widget);
 		this.addChild(this.line2Widget);
@@ -119,13 +133,8 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 		this.albumCoverWidget.setPosition(this.getX() + 4, this.getY() + (this.getHeight() - this.albumCoverWidget.getHeight()) / 2 - 1);
 		this.albumCoverWidget.extractRenderState(graphics, mouseX, mouseY, a);
 
-		LinearLayout layout = LinearLayout.vertical();
-		layout.addChild(line1Widget, s -> s.paddingBottom(3));
-		layout.addChild(line2Widget);
-
-		layout.arrangeElements();
-		layout.setPosition(this.albumCoverWidget.getX() + this.albumCoverWidget.getWidth() + 4, this.getY() + (this.getHeight() - layout.getHeight()) / 2);
-		layout.visitWidgets(child -> child.extractRenderState(graphics, mouseX, mouseY, a));
+		this.layout.setPosition(this.albumCoverWidget.getX() + this.albumCoverWidget.getWidth() + 4, this.getY() + (this.getHeight() - this.layout.getHeight()) / 2);
+		this.layout.visitWidgets(child -> child.extractRenderState(graphics, mouseX, mouseY, a));
 
 //		ScreenRectangle rec = layout.getRectangle();
 //		graphics.fill(rec.left(), rec.top(), rec.right(), rec.bottom(), CommonColors.RED);

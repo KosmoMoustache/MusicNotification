@@ -108,7 +108,7 @@ public abstract class AbstractJukeboxTab implements Tab {
 		List<TrackEntry> entries = new ArrayList<>(tracks.size());
 		for (TrackData track : tracks) {
 			if (this.filter != null && !TrackFilter.fromQuery(this.filter).test(track)) continue;
-			entries.add(new TrackEntry(this.minecraft, this.parent, track));
+			entries.add(new TrackEntry(this.minecraft, this.parent, this.scrollableLayout, track));
 		}
 		return entries;
 	}
@@ -117,8 +117,8 @@ public abstract class AbstractJukeboxTab implements Tab {
 		List<SoundEntry> entries = new ArrayList<>(sounds.size());
 		for (Identifier id : sounds) {
 			if (this.filter != null && !id.toString().toLowerCase(Locale.ROOT).contains(filter.toLowerCase())) continue; // filter fix
-			entries.add(new SoundEntry(this.minecraft, this.parent,
 				TrackDataManager.getInstance().getEmpty(id, id.toString(), id.getNamespace())));
+			entries.add(new SoundEntry(this.minecraft, this.parent, this.scrollableLayout,
 		}
 		return entries;
 	}
