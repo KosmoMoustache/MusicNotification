@@ -1,10 +1,5 @@
 package net.kosmo.music.resource;
 
-//? if <=1.21.1 {
-/*import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-*///? }
-import org.jetbrains.annotations.Nullable;
 import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
@@ -12,8 +7,14 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.JukeboxSong;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+
+//? if <=1.21.1 {
+/*import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+*///? }
 
 public class TrackDataManager {
 	static TrackDataManager instance;
@@ -65,12 +66,12 @@ public class TrackDataManager {
 				if (songOpt.isPresent()) {
 					return getTrackDataFromJukeboxSong(soundId, songOpt.get());
 				}
-				//? } else {
+				//?} else {
 				/*Optional<Holder.Reference<JukeboxSong>> registryLookup = Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.JUKEBOX_SONG).getHolder(soundEventId);
 				if (registryLookup.isPresent()) {
 					return getTrackDataFromJukeboxSong(soundId, registryLookup.get().value());
 				}
-				*///? }
+				*///?}
 			} catch (IllegalStateException ignored) {
 			}
 		} else {
@@ -98,7 +99,7 @@ public class TrackDataManager {
 
 	public Set<String> getNamespaceList() {
 		Set<String> namespaces = new HashSet<>();
-		tracks.forEach((i, t) -> namespaces.add(i.getNamespace()));
+		tracks.forEach((i, _) -> namespaces.add(i.getNamespace()));
 		return namespaces;
 	}
 }

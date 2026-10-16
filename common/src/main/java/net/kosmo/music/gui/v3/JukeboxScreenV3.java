@@ -33,7 +33,6 @@ public class JukeboxScreenV3 extends Screen {
 
 	private final Screen parent;
 	private final TabManager tabManager;
-
 	private final Button clearHistoryButton;
 	private final Button stopSoundButton;
 	private final LinearLayout layout = LinearLayout.vertical();
@@ -110,9 +109,6 @@ public class JukeboxScreenV3 extends Screen {
 
 	@Override
 	protected void repositionElements() {
-		if (this.parent != null) {
-			this.parent.resize(this.width, this.height);
-		}
 
 		this.homeTab.setHeight(this.height - 80);
 		this.historyTab.setHeight(this.height - 80);
@@ -137,16 +133,6 @@ public class JukeboxScreenV3 extends Screen {
 
 	@Override
 	public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-//		if (this.parent != null) {
-//			this.parent.extractBackground(graphics, mouseX, mouseY, a);
-//			graphics.nextStratum();
-//			this.parent.extractRenderState(graphics, -1, -1, a);
-//			graphics.nextStratum();
-//			this.extractBlurredBackground(graphics);
-//		} else {
-//			super.extractBackground(graphics, mouseX, mouseY, a);
-//		}
-
 		super.extractBackground(graphics, mouseX, mouseY, a);
 
 		graphics.blitSprite(
@@ -163,6 +149,9 @@ public class JukeboxScreenV3 extends Screen {
 		}
 	}
 
+	/**
+	 * Tab Manager onSelected
+	 */
 	private void selectTab(Tab tab) {
 		if (this.contentLayout != null) {
 			this.contentLayout.addChild(tab.getLayout());
@@ -183,15 +172,13 @@ public class JukeboxScreenV3 extends Screen {
 		}
 	}
 
+	/**
+	 * TabManager onDeselected
+	 */
 	private void deselectTab(Tab tab) {
 		if (this.contentLayout != null) {
 			this.contentLayout.removeChildren();
 		}
-	}
-
-	private void conditionalVisibility(Tab tab) {
-		this.clearHistoryButton.visible = tab instanceof HistoryTab;
-		// TODO: Album filter only on Home
 	}
 
 	public int getOverlayWidth() {
@@ -204,6 +191,9 @@ public class JukeboxScreenV3 extends Screen {
 		return OVERLAY_WIDTH - SCROLLBAR_RESERVE;
 	}
 
+	/**
+	 * Refresh the current tab's list and reposition elements.
+	 */
 	public void refreshLists() {
 		if (this.tabManager.getCurrentTab() instanceof AbstractJukeboxTab tab) {
 			tab.refresh();

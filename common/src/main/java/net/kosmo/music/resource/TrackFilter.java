@@ -14,6 +14,10 @@ public final class TrackFilter implements Predicate<TrackData> {
 	private final @Nullable String title;
 	private final @Nullable String author;
 
+	public TrackFilter() {
+		this(null, null, null, null, null);
+	}
+
 	private TrackFilter(@Nullable String namespace, @Nullable String album, @Nullable Integer trackNumber, @Nullable String title, @Nullable String author) {
 		this.namespace = namespace;
 		this.album = album;
@@ -37,6 +41,20 @@ public final class TrackFilter implements Predicate<TrackData> {
 		};
 	}
 
+	private static String[] searchStrings(TrackData track) {
+		return new String[]{
+			track.key().getNamespace().toLowerCase(Locale.ROOT),
+			track.title().getString().toLowerCase(Locale.ROOT),
+			track.author().getString().toLowerCase(Locale.ROOT),
+			track.album().map(component -> component.getString().toLowerCase(Locale.ROOT)).orElse(""),
+			track.track().map(String::valueOf).orElse("")
+		};
+	}
+
+	private static boolean contains(String value, String query) {
+		return value.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT));
+	}
+
 	@Override
 	public boolean test(TrackData track) {
 		if (this.namespace != null && !this.namespace.equalsIgnoreCase(track.key().getNamespace())) {
@@ -55,20 +73,6 @@ public final class TrackFilter implements Predicate<TrackData> {
 			return false;
 		}
 		return true;
-	}
-
-	private static String[] searchStrings(TrackData track) {
-		return new String[] {
-			track.key().getNamespace().toLowerCase(Locale.ROOT),
-			track.title().getString().toLowerCase(Locale.ROOT),
-			track.author().getString().toLowerCase(Locale.ROOT),
-			track.album().map(component -> component.getString().toLowerCase(Locale.ROOT)).orElse(""),
-			track.track().map(String::valueOf).orElse("")
-		};
-	}
-
-	private static boolean contains(String value, String query) {
-		return value.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT));
 	}
 
 	public static final class Builder {

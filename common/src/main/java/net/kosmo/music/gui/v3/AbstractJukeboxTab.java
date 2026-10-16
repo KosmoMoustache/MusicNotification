@@ -52,7 +52,6 @@ public abstract class AbstractJukeboxTab implements Tab {
 		this.scrollableLayout = new ScrollableLayout(minecraft, this.trackScrollableContent, height, ScrollableLayout.ReserveStrategy.RIGHT);
 		this.scrollableLayout.setScrollbarSpacing(2);
 
-		// TODO: Remplacer 3 par une VARIABLE final GLOBAL
 		this.layout.addChild(searchBox.layout(), settings -> settings.paddingTop(SEARCH_BOX_PADDING).paddingBottom(SEARCH_BOX_PADDING));
 		this.layout.addChild(this.scrollableLayout);
 		this.rearrangeElements();
