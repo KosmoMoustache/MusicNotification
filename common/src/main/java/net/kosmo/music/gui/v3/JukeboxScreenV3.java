@@ -3,6 +3,8 @@ package net.kosmo.music.gui.v3;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.TrackHistory;
 import net.kosmo.music.config.Config;
+import net.kosmo.music.gui.v3.filter.FilterPanel;
+import net.kosmo.music.resource.TrackFilter;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractScrollArea;
 import net.minecraft.client.gui.components.Button;
@@ -22,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public class JukeboxScreenV3 extends Screen {
 	public static final int SCROLLBAR_RESERVE = AbstractScrollArea.SCROLLBAR_WIDTH + 2; // 6 + 2 = 8
 	public static final int OVERLAY_WIDTH = 228; // 220 entries + 8 reserve
+	private static final int FILTER_WIDTH = 150;
 
 	private static final Identifier BACKGROUND_SPRITE = Identifier.withDefaultNamespace("friends/background");
 	private static final Component TITLE = Component.translatable("gui.musicnotification.jukebox.title");
@@ -33,25 +36,25 @@ public class JukeboxScreenV3 extends Screen {
 
 	private final Button clearHistoryButton;
 	private final Button stopSoundButton;
-
+	private final LinearLayout layout = LinearLayout.vertical();
+	public TrackFilter trackFilter;
+	private @Nullable FilterPanel filterPanel;
 	private @Nullable HomeTab homeTab;
 	private @Nullable HistoryTab historyTab;
 	private @Nullable MuteTab muteTab;
 	private @Nullable DebugTab debugTab;
 	private @Nullable TabNavigationBar tabNavigationBar;
-
-	private @Nullable LinearLayout layout;
 	private @Nullable LinearLayout contentLayout;
 
 	public JukeboxScreenV3(@Nullable Screen parent) {
 		super(TITLE);
 		this.parent = parent;
 		this.tabManager = new TabManager(this::addRenderableWidget, this::removeWidget, this::selectTab, this::deselectTab);
+		this.trackFilter = new TrackFilter();
 
 		this.clearHistoryButton = this.addRenderableWidget(Button.builder(CLEAR_HISTORY, button -> {
 			TrackHistory.getInstance().clear();
 			this.refreshLists();
-			button.setFocused(false);
 		}).bounds(10, 10, this.font.width(CLEAR_HISTORY) + 8, 20).build());
 		this.clearHistoryButton.visible = false;
 
@@ -95,7 +98,10 @@ public class JukeboxScreenV3 extends Screen {
 		this.tabNavigationBar = builder.build();
 		this.addRenderableWidget(tabNavigationBar);
 
-		this.layout = LinearLayout.vertical();
+		this.filterPanel = new FilterPanel(this.minecraft, this, FILTER_WIDTH, this.height - 80);
+		this.filterPanel.visitChildren(this::addRenderableWidget);
+		this.filterPanel.setVisible(false);
+
 		this.contentLayout = this.layout.addChild(LinearLayout.vertical());
 		this.tabManager.setCurrentTab(this.homeTab, false, false);
 		this.layout.visitWidgets(this::addRenderableWidget);
@@ -114,11 +120,19 @@ public class JukeboxScreenV3 extends Screen {
 		this.debugTab.setHeight(this.height - 80);
 
 		this.layout.arrangeElements();
+
 		FrameLayout.alignInRectangle(this.layout, this.getRectangle(), 0.5F, 0.5F);
 		this.tabNavigationBar.setPosition(this.layout.getX(), this.layout.getY() - 20 - 7);
 		this.tabNavigationBar.arrangeElements(this.width);
 
-		this.stopSoundButton.setPosition(this.layout.getX(), this.layout.getY() + this.layout.getHeight());
+		if (this.filterPanel != null) {
+			this.filterPanel.setHeight(this.height - 80);
+			this.filterPanel.arrangeElements();
+			this.filterPanel.setPosition(this.layout.getX() - FILTER_WIDTH - 16, this.layout.getY());
+		}
+
+		conditionalVisibility(this.tabManager.getCurrentTab());
+		this.stopSoundButton.setPosition(this.layout.getX() + this.getContentWidth() / 2 - this.stopSoundButton.getWidth() / 2, this.layout.getY() + this.layout.getHeight() + 5);
 	}
 
 	@Override
@@ -143,6 +157,10 @@ public class JukeboxScreenV3 extends Screen {
 			this.layout.getWidth() + 16,
 			this.layout.getHeight() + 16 + 1
 		);
+
+		if (this.filterPanel != null && this.filterPanel.isVisible()) {
+			this.filterPanel.extractBackground(graphics);
+		}
 	}
 
 	private void selectTab(Tab tab) {
@@ -150,7 +168,19 @@ public class JukeboxScreenV3 extends Screen {
 			this.contentLayout.addChild(tab.getLayout());
 		}
 		this.refreshLists();
+
+		if (this.filterPanel != null) {
+			this.filterPanel.refresh();
+		}
+
 		this.conditionalVisibility(tab);
+	}
+
+	private void conditionalVisibility(Tab tab) {
+		this.clearHistoryButton.visible = tab instanceof HistoryTab;
+		if (this.filterPanel != null) {
+			this.filterPanel.setVisible(tab instanceof HomeTab && this.minecraft.getWindow().getGuiScaledWidth() / 2 > OVERLAY_WIDTH / 2 + FILTER_WIDTH + 16);
+		}
 	}
 
 	private void deselectTab(Tab tab) {
