@@ -25,7 +25,7 @@ public class SoundEntry extends AbstractJukeboxEntryContainerWidget {
 	}
 
 	@Override
-	boolean play() {
+	boolean primaryAction() {
 		SoundEvent soundEvent = Helper.getSoundEvent(this.minecraft, trackData.key());
 		if (soundEvent != null) {
 			SimpleSoundInstance soundInstance = Helper.forMusic(soundEvent);

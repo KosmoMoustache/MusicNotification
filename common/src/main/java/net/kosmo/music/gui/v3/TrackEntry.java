@@ -15,7 +15,7 @@ public class TrackEntry extends AbstractJukeboxEntryContainerWidget {
 	}
 
 	@Override
-	boolean play() {
+	boolean primaryAction() {
 		Helper.playTrackData(this.minecraft, this.trackData);
 		return true;
 	}

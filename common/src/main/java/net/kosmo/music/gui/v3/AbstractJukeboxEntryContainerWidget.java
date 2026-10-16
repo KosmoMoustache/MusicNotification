@@ -78,14 +78,14 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-		this.play();
+		this.primaryAction();
 		return super.mouseClicked(event, doubleClick);
 	}
 
 	@Override
 	public boolean keyPressed(KeyEvent event) {
 		if (event.isConfirmation()) {
-			this.play();
+			this.primaryAction();
 		}
 		return super.keyPressed(event);
 	}
@@ -153,5 +153,5 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 		}
 	}
 
-	abstract boolean play();
+	abstract boolean primaryAction();
 }
