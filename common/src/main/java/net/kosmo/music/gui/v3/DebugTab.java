@@ -18,12 +18,12 @@ public class DebugTab extends AbstractJukeboxTab {
 
 	@Override
 	Component emptyListMessage() {
-		return Component.translatable("gui.mn.jukebox.debug.empty");
+		return Component.translatable("gui.musicnotification.jukebox.debug.empty");
 	}
 
 	@Override
 	public @NonNull Component getTabTitle() {
-		return Component.translatable("gui.mn.jukebox.debug.title");
+		return Component.translatable("gui.musicnotification.jukebox.debug.title");
 	}
 
 	@Override

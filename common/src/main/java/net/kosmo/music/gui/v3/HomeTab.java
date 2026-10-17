@@ -20,7 +20,7 @@ public class HomeTab extends AbstractJukeboxTab {
 
 	@Override
 	public @NonNull Component getTabTitle() {
-		return Component.translatable("gui.mn.jukebox.home.title");
+		return Component.translatable("gui.musicnotification.jukebox.home.title");
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class HomeTab extends AbstractJukeboxTab {
 
 	@Override
 	Component emptyListMessage() {
-		return Component.translatable("gui.mn.jukebox.home.empty");
+		return Component.translatable("gui.musicnotification.jukebox.home.empty");
 	}
 
 }

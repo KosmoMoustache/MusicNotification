@@ -22,6 +22,6 @@ public class TrackEntry extends AbstractJukeboxEntryContainerWidget {
 
 	@Override
 	protected Component getEntryNarration() {
-		return Component.translatable("gui.mn.jukebox.entry.track", this.trackData.title().getString());
+		return Component.translatable("gui.musicnotification.jukebox.entry.track", this.trackData.title().getString());
 	}
 }

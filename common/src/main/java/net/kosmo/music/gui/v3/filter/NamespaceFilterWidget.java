@@ -53,8 +53,8 @@ public class NamespaceFilterWidget extends AbstractContainerWidget {
 		super(0, 0, width, height, Component.empty());
 		this.responder = responder;
 
-		this.leftArrow = new ImageButton(0, 0, ARROW_WIDTH, height, LEFT_ARROW, button -> this.moveSelection(-1, 0), Component.translatable("gui.mn.jukebox.filter.namespace_previous"));
-		this.rightArrow = new ImageButton(0, 0, ARROW_WIDTH, height, RIGHT_ARROW, button -> this.moveSelection(1, 1), Component.translatable("gui.mn.jukebox.filter.namespace_next"));
+		this.leftArrow = new ImageButton(0, 0, ARROW_WIDTH, height, LEFT_ARROW, button -> this.moveSelection(-1, 0), Component.translatable("gui.musicnotification.jukebox.filter.namespace_previous"));
+		this.rightArrow = new ImageButton(0, 0, ARROW_WIDTH, height, RIGHT_ARROW, button -> this.moveSelection(1, 1), Component.translatable("gui.musicnotification.jukebox.filter.namespace_next"));
 
 		for (int slot = 0; slot < VISIBLE_NAMESPACES; slot++) {
 			this.pills[slot] = new PillButton(0, 0, 0, height, Component.empty(), this::onPillPressed);

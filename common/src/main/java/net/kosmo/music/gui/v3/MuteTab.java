@@ -18,12 +18,12 @@ public class MuteTab extends AbstractJukeboxTab {
 
 	@Override
 	Component emptyListMessage() {
-		return Component.translatable("gui.mn.jukebox.mute.empty");
+		return Component.translatable("gui.musicnotification.jukebox.mute.empty");
 	}
 
 	@Override
 	public Component getTabTitle() {
-		return Component.translatable("gui.mn.jukebox.mute.title");
+		return Component.translatable("gui.musicnotification.jukebox.mute.title");
 	}
 
 	@Override

@@ -47,10 +47,10 @@ public class FilterPanel {
 		this.scrollableLayout = new ScrollableLayout(minecraft, this.trackScrollableContent, height - NAMESPACE_HEIGHT - SPACING, ScrollableLayout.ReserveStrategy.RIGHT);
 		this.scrollableLayout.setScrollbarSpacing(2);
 
-		this.layout.addChild(new StringWidget(Component.translatable("gui.mn.jukebox.filter.title"), minecraft.font), s -> s.paddingTop(3).alignHorizontallyCenter());
+		this.layout.addChild(new StringWidget(Component.translatable("gui.musicnotification.jukebox.filter.title"), minecraft.font), s -> s.paddingTop(3).alignHorizontallyCenter());
 		this.layout.addChild(this.namespaceFilter);
 		this.layout.addChild(this.scrollableLayout);
-		this.layout.addChild(Button.builder(Component.translatable("gui.mn.jukebox.filter.clear_button"), _ -> this.screen.clearFilters()).build());
+		this.layout.addChild(Button.builder(Component.translatable("gui.musicnotification.jukebox.filter.clear_button"), _ -> this.screen.clearFilters()).build());
 
 		this.setHeight(height);
 		this.refresh();
@@ -116,7 +116,7 @@ public class FilterPanel {
 
 	private FrameLayout createEmptyListFrame(int contentWidth) {
 		StringWidget stringWidget = new StringWidget(
-			contentWidth, 20, Component.translatable("gui.mn.jukebox.filter.album.empty"), this.minecraft.font);
+			contentWidth, 20, Component.translatable("gui.musicnotification.jukebox.filter.album.empty"), this.minecraft.font);
 
 		FrameLayout frame = new FrameLayout(contentWidth, stringWidget.getHeight());
 		frame.defaultChildLayoutSetting().alignHorizontallyCenter().alignVerticallyMiddle();

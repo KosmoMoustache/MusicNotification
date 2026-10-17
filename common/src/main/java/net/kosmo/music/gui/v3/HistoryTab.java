@@ -19,12 +19,12 @@ public class HistoryTab extends AbstractJukeboxTab {
 
 	@Override
 	Component emptyListMessage() {
-		return Component.translatable("gui.mn.jukebox.history.empty");
+		return Component.translatable("gui.musicnotification.jukebox.history.empty");
 	}
 
 	@Override
 	public @NonNull Component getTabTitle() {
-		return Component.translatable("gui.mn.jukebox.history.title");
+		return Component.translatable("gui.musicnotification.jukebox.history.title");
 	}
 
 	@Override
