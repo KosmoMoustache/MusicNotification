@@ -1,9 +1,9 @@
 package net.kosmo.music.gui.v3.filter;
 
-import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.gui.v3.JukeboxScreenV3;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.resource.TrackDataManager;
+import net.kosmo.music.resource.TrackFilter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -18,10 +18,6 @@ import net.minecraft.util.ARGB;
 import java.util.*;
 import java.util.function.Consumer;
 
-/**
- * Not a widget: exposes a vertical layout (namespace pager + scrollable album list)
- * whose widgets are registered directly with the screen, like a {@code Tab}.
- */
 public class FilterPanel {
 	private static final int NAMESPACE_HEIGHT = 20;
 	private static final int SPACING = 4;
@@ -46,45 +42,55 @@ public class FilterPanel {
 		this.layout.defaultCellSetting().alignHorizontallyCenter();
 
 		this.namespaceFilter = new NamespaceFilterWidget(minecraft, width, NAMESPACE_HEIGHT, this::onNamespaceSelected);
-		this.layout.addChild(this.namespaceFilter);
 
 		this.trackScrollableContent = LinearLayout.vertical();
 		this.scrollableLayout = new ScrollableLayout(minecraft, this.trackScrollableContent, height - NAMESPACE_HEIGHT - SPACING, ScrollableLayout.ReserveStrategy.RIGHT);
 		this.scrollableLayout.setScrollbarSpacing(2);
 
 		this.layout.addChild(new StringWidget(Component.translatable("gui.mn.jukebox.filter.title"), minecraft.font), s -> s.paddingTop(3).alignHorizontallyCenter());
+		this.layout.addChild(this.namespaceFilter);
 		this.layout.addChild(this.scrollableLayout);
-		this.layout.addChild(Button.builder(Component.literal("Clear Filter"), _ -> {
-			MusicNotificationClient.LOGGER.info("Clear Filter");
-		}).build());
+		this.layout.addChild(Button.builder(Component.translatable("gui.mn.jukebox.filter.clear_button"), _ -> this.screen.clearFilters()).build());
 
 		this.setHeight(height);
 		this.refresh();
 	}
 
 	private void onNamespaceSelected(String namespace) {
-//		this.namespace = namespace == null ? "" : namespace;
+		this.screen.updateFilter(filter -> filter.withNamespace(namespace));
 		this.rebuildAlbums();
 	}
 
-	private void onAlbumSelected(AlbumFilterWidgetEntry selected, boolean hasMultiSelection) {
-		if (hasMultiSelection) return;
-		// TODO: Add to track filter
+	/**
+	 * Plain click: exclusive selection (clicking the only selected album clears it).
+	 * Ctrl-click: toggles the album within the current selection.
+	 */
+	private void onAlbumSelected(AlbumFilterWidgetEntry selected, boolean multiSelection) {
+		String album = selected.getAlbum();
+		boolean wasSelected = this.screen.getTrackFilter().isAlbumSelected(album);
 
-		for (AlbumFilterWidgetEntry entry : this.albumEntries) {
-			if (entry != selected) {
-				entry.setSelected(false);
+		this.screen.updateFilter(filter -> {
+			if (multiSelection) {
+				return wasSelected ? filter.removeAlbum(album) : filter.addAlbum(album);
 			}
-		}
+			if (wasSelected && filter.albums().size() == 1) {
+				return filter.clearAlbums();
+			}
+			return filter.clearAlbums().addAlbum(album);
+		});
+		this.syncAlbumSelection();
 	}
 
 	private void rebuildAlbums() {
+		TrackFilter filter = this.screen.getTrackFilter();
+		String namespace = filter.namespace();
+
 		Collection<TrackData> tracks = TrackDataManager.getInstance().tracks.values();
 		Map<String, TrackData> albums = new TreeMap<>();
 		for (TrackData track : tracks) {
-//			if (!this.namespace.isEmpty() && !track.key().getNamespace().equals(this.namespace)) {
-//				continue;
-//			}
+			if (namespace != null && !namespace.equals(track.key().getNamespace())) {
+				continue;
+			}
 			track.album().map(Component::getString).filter(name -> !name.isEmpty()).ifPresent(name -> albums.putIfAbsent(name, track));
 		}
 
@@ -99,7 +105,15 @@ public class FilterPanel {
 		if (this.albumEntries.isEmpty()) {
 			this.trackScrollableContent.addChild(this.createEmptyListFrame(contentWidth));
 		}
+		this.syncAlbumSelection();
 		this.scrollableLayout.arrangeElements();
+	}
+
+	private void syncAlbumSelection() {
+		TrackFilter filter = this.screen.getTrackFilter();
+		for (AlbumFilterWidgetEntry entry : this.albumEntries) {
+			entry.setSelected(filter.isAlbumSelected(entry.getAlbum()));
+		}
 	}
 
 	private FrameLayout createEmptyListFrame(int contentWidth) {
@@ -149,7 +163,7 @@ public class FilterPanel {
 	}
 
 	public void refresh() {
-		this.namespaceFilter.refresh();
+		this.namespaceFilter.refresh(this.screen.getTrackFilter().namespace());
 		this.rebuildAlbums();
 	}
 }

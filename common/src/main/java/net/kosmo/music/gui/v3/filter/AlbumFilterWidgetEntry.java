@@ -1,8 +1,10 @@
 package net.kosmo.music.gui.v3.filter;
 
+import com.mojang.blaze3d.platform.cursor.CursorType;
 import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.gui.component.AlbumCoverWidget;
+import net.kosmo.music.gui.v3.JukeboxScreenV3;
 import net.kosmo.music.resource.AlbumCover;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -26,6 +28,7 @@ public class AlbumFilterWidgetEntry extends AbstractContainerWidget {
 	private final AlbumCoverWidget albumCoverWidget;
 	private final StringWidget albumNameWidget;
 	private final BiConsumer<AlbumFilterWidgetEntry, Boolean> onSelect;
+	private final String album;
 	private boolean selected;
 
 	public AlbumFilterWidgetEntry(Minecraft minecraft, int width, int height, String album, AlbumCover cover, BiConsumer<AlbumFilterWidgetEntry, Boolean> onSelect) {
@@ -35,6 +38,7 @@ public class AlbumFilterWidgetEntry extends AbstractContainerWidget {
 	public AlbumFilterWidgetEntry(Minecraft minecraft, int x, int y, int width, int height, String album, AlbumCover cover, BiConsumer<AlbumFilterWidgetEntry, Boolean> onSelect) {
 		super(x, y, width, height, Component.empty());
 		this.onSelect = onSelect;
+		this.album = album;
 		this.selected = false;
 
 		this.albumCoverWidget = new AlbumCoverWidget(20, 20, cover, false);
@@ -42,6 +46,10 @@ public class AlbumFilterWidgetEntry extends AbstractContainerWidget {
 
 		this.children.add(this.albumCoverWidget);
 		this.children.add(this.albumNameWidget);
+	}
+
+	public String getAlbum() {
+		return this.album;
 	}
 
 	public boolean isSelected() {
@@ -105,7 +113,6 @@ public class AlbumFilterWidgetEntry extends AbstractContainerWidget {
 	public boolean primaryAction(boolean multiSelection) {
 		MusicNotificationClient.LOGGER.info("AlbumFilterWidgetEntry::primaryAction");
 		this.onSelect.accept(this, multiSelection);
-		this.setSelected(true);
 		return true;
 	}
 }

@@ -14,6 +14,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,15 +63,27 @@ public class NamespaceFilterWidget extends AbstractContainerWidget {
 		this.children.add(this.leftArrow);
 		this.children.add(this.rightArrow);
 
-		this.refresh();
+		this.refresh(null);
 	}
 
-	public void refresh() {
+	/**
+	 * Reloads the namespace list and syncs the highlighted pill with the active namespace filter.
+	 *
+	 * @param activeNamespace namespace currently applied to the TrackFilter, or null if none
+	 */
+	public void refresh(@Nullable String activeNamespace) {
 		this.namespaces = new ArrayList<>(TrackDataManager.getInstance().getNamespaceList());
 		Collections.sort(this.namespaces);
-		this.selectedIndex = this.wrap(this.selectedIndex);
-		this.windowStart = this.selectedIndex;
-		if (this.namespaces.isEmpty()) {
+
+		int activeIndex = activeNamespace == null ? -1 : this.namespaces.indexOf(activeNamespace);
+		if (activeIndex >= 0) {
+			this.selectedIndex = activeIndex;
+			this.windowStart = activeIndex;
+			this.filterActive = true;
+			this.highlighted = true;
+		} else {
+			this.selectedIndex = this.wrap(this.selectedIndex);
+			this.windowStart = this.selectedIndex;
 			this.filterActive = false;
 			this.highlighted = false;
 		}

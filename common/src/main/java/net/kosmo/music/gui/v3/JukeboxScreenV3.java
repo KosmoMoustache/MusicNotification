@@ -1,5 +1,6 @@
 package net.kosmo.music.gui.v3;
 
+import com.mojang.blaze3d.platform.cursor.CursorType;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.TrackHistory;
 import net.kosmo.music.config.Config;
@@ -21,6 +22,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.UnaryOperator;
+
 public class JukeboxScreenV3 extends Screen {
 	public static final int SCROLLBAR_RESERVE = AbstractScrollArea.SCROLLBAR_WIDTH + 2; // 6 + 2 = 8
 	public static final int OVERLAY_WIDTH = 228; // 220 entries + 8 reserve
@@ -36,8 +39,8 @@ public class JukeboxScreenV3 extends Screen {
 	private final Button clearHistoryButton;
 	private final Button stopSoundButton;
 	private final LinearLayout layout = LinearLayout.vertical();
-	public TrackFilter trackFilter;
-	private @Nullable FilterPanel filterPanel;
+	private final FilterPanel filterPanel;
+	private TrackFilter trackFilter;
 	private @Nullable HomeTab homeTab;
 	private @Nullable HistoryTab historyTab;
 	private @Nullable MuteTab muteTab;
@@ -49,7 +52,8 @@ public class JukeboxScreenV3 extends Screen {
 		super(TITLE);
 		this.parent = parent;
 		this.tabManager = new TabManager(this::addRenderableWidget, this::removeWidget, this::selectTab, this::deselectTab);
-		this.trackFilter = new TrackFilter();
+		this.filterPanel = new FilterPanel(this.minecraft, this, FILTER_WIDTH, this.height - 80);
+		this.trackFilter = TrackFilter.empty();
 
 		this.clearHistoryButton = this.addRenderableWidget(Button.builder(CLEAR_HISTORY, button -> {
 			TrackHistory.getInstance().clear();
@@ -65,8 +69,6 @@ public class JukeboxScreenV3 extends Screen {
 			MusicNotificationClient.currentlyPlaying = null;
 			button.setFocused(false);
 		}).build());
-//			.bounds(this.la.getRowLeft() - 1, this.listEnd() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 12 : 10), this.soundList.getRowRight() - this.soundList.getRowLeft() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 3 : 1), 20).build());
-
 	}
 
 	@Override
@@ -97,7 +99,6 @@ public class JukeboxScreenV3 extends Screen {
 		this.tabNavigationBar = builder.build();
 		this.addRenderableWidget(tabNavigationBar);
 
-		this.filterPanel = new FilterPanel(this.minecraft, this, FILTER_WIDTH, this.height - 80);
 		this.filterPanel.visitChildren(this::addRenderableWidget);
 		this.filterPanel.setVisible(false);
 
@@ -121,11 +122,9 @@ public class JukeboxScreenV3 extends Screen {
 		this.tabNavigationBar.setPosition(this.layout.getX(), this.layout.getY() - 20 - 7);
 		this.tabNavigationBar.arrangeElements(this.width);
 
-		if (this.filterPanel != null) {
-			this.filterPanel.setHeight(this.height - 80);
-			this.filterPanel.arrangeElements();
-			this.filterPanel.setPosition(this.layout.getX() - FILTER_WIDTH - 16, this.layout.getY());
-		}
+		this.filterPanel.setHeight(this.height - 80);
+		this.filterPanel.arrangeElements();
+		this.filterPanel.setPosition(this.layout.getX() - FILTER_WIDTH - 16, this.layout.getY() - 20 - 7);
 
 		conditionalVisibility(this.tabManager.getCurrentTab());
 		this.stopSoundButton.setPosition(this.layout.getX() + this.getContentWidth() / 2 - this.stopSoundButton.getWidth() / 2, this.layout.getY() + this.layout.getHeight() + 5);
@@ -144,7 +143,7 @@ public class JukeboxScreenV3 extends Screen {
 			this.layout.getHeight() + 16 + 1
 		);
 
-		if (this.filterPanel != null && this.filterPanel.isVisible()) {
+		if (this.filterPanel.isVisible()) {
 			this.filterPanel.extractBackground(graphics);
 		}
 	}
@@ -156,20 +155,42 @@ public class JukeboxScreenV3 extends Screen {
 		if (this.contentLayout != null) {
 			this.contentLayout.addChild(tab.getLayout());
 		}
-		this.refreshLists();
-
-		if (this.filterPanel != null) {
-			this.filterPanel.refresh();
+		// The search query is shared by the tabs that use TrackFilter: keep their search box in sync.
+		if (tab instanceof AbstractJukeboxTab jukeboxTab) {
+			jukeboxTab.setSearchText(this.trackFilter.query());
 		}
-
+		this.refreshLists();
+		this.filterPanel.refresh();
 		this.conditionalVisibility(tab);
+	}
+
+	public TrackFilter getTrackFilter() {
+		return this.trackFilter;
+	}
+
+	/**
+	 * Applies a change to the track filter, then refreshes the current list.
+	 */
+	public void updateFilter(UnaryOperator<TrackFilter> change) {
+		this.trackFilter = change.apply(this.trackFilter);
+		this.refreshLists();
+	}
+
+	/**
+	 * Resets every filter (query, namespace, albums) and syncs the UI.
+	 */
+	public void clearFilters() {
+		this.trackFilter = TrackFilter.empty();
+		if (this.tabManager.getCurrentTab() instanceof AbstractJukeboxTab tab) {
+			tab.setSearchText("");
+		}
+		this.refreshLists();
+		this.filterPanel.refresh();
 	}
 
 	private void conditionalVisibility(Tab tab) {
 		this.clearHistoryButton.visible = tab instanceof HistoryTab;
-		if (this.filterPanel != null) {
-			this.filterPanel.setVisible(tab instanceof HomeTab && this.minecraft.getWindow().getGuiScaledWidth() / 2 > OVERLAY_WIDTH / 2 + FILTER_WIDTH + 16);
-		}
+		this.filterPanel.setVisible(tab instanceof HomeTab && this.minecraft.getWindow().getGuiScaledWidth() / 2 > OVERLAY_WIDTH / 2 + FILTER_WIDTH + 16);
 	}
 
 	/**

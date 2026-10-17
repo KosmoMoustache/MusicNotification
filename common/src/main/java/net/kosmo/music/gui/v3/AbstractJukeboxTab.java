@@ -75,7 +75,7 @@ public abstract class AbstractJukeboxTab implements Tab {
 
 	private void editBoxResponder(String value) {
 		this.filter = value;
-		this.parent.refreshLists();
+		this.parent.updateFilter(f -> f.withQuery(value));
 	}
 
 	private FrameLayout createEmptyListFrame() {
@@ -105,8 +105,9 @@ public abstract class AbstractJukeboxTab implements Tab {
 
 	protected List<TrackEntry> buildTrackEntries(Collection<TrackData> tracks) {
 		List<TrackEntry> entries = new ArrayList<>(tracks.size());
+		TrackFilter trackFilter = this.parent.getTrackFilter();
 		for (TrackData track : tracks) {
-			if (this.filter != null && !TrackFilter.fromQuery(this.filter).test(track)) continue;
+			if (!trackFilter.test(track)) continue;
 			entries.add(new TrackEntry(this.minecraft, this.parent, this.scrollableLayout, track));
 		}
 		return entries;
@@ -114,12 +115,19 @@ public abstract class AbstractJukeboxTab implements Tab {
 
 	protected List<SoundEntry> buildSoundEntries(Collection<Identifier> sounds) {
 		List<SoundEntry> entries = new ArrayList<>(sounds.size());
+		TrackFilter trackFilter = this.parent.getTrackFilter();
 		for (Identifier id : sounds) {
-			if (this.filter != null && !id.toString().toLowerCase(Locale.ROOT).contains(filter.toLowerCase())) continue; // filter fix
+			if (!trackFilter.test(id)) continue;
 			entries.add(new SoundEntry(this.minecraft, this.parent, this.scrollableLayout,
 				TrackDataManager.getEmpty(id, id.toString(), id.getNamespace())));
 		}
 		return entries;
+	}
+
+	void setSearchText(String text) {
+		if (!this.searchBox.editBox().getValue().equals(text)) {
+			this.searchBox.editBox().setValue(text);
+		}
 	}
 
 	public final void refresh() {
@@ -127,8 +135,8 @@ public abstract class AbstractJukeboxTab implements Tab {
 	}
 
 	void rearrangeElements() {
-		this.scrollableLayout.setMinHeight(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING *2);
-		this.scrollableLayout.setMaxHeight(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING *2);
+		this.scrollableLayout.setMinHeight(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING * 2);
+		this.scrollableLayout.setMaxHeight(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING * 2);
 	}
 
 	void setHeight(int height) {
