@@ -1,6 +1,5 @@
 package net.kosmo.music.gui.v3;
 
-import com.mojang.blaze3d.platform.cursor.CursorType;
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.TrackHistory;
 import net.kosmo.music.config.Config;
@@ -110,6 +109,10 @@ public class JukeboxScreenV3 extends Screen {
 
 	@Override
 	protected void repositionElements() {
+		assert this.homeTab != null;
+		assert this.historyTab != null;
+		assert this.muteTab != null;
+		assert this.debugTab != null;
 
 		this.homeTab.setHeight(this.height - 80);
 		this.historyTab.setHeight(this.height - 80);
@@ -181,7 +184,7 @@ public class JukeboxScreenV3 extends Screen {
 	 * Resets every filter (query, namespace, albums) and syncs the UI.
 	 */
 	public void clearFilters() {
-		this.updateFilter(f -> TrackFilter.empty());
+		this.updateFilter(_ -> TrackFilter.empty());
 		if (this.tabManager.getCurrentTab() instanceof AbstractJukeboxTab tab) {
 			tab.setSearchText("");
 		}

@@ -2,7 +2,7 @@
 
 ## JSON schema for `musics.json`
 
-Default file: [musics.json](./common/src/main/resources/assets/musicnotification/musics.json)
+Default file: [musics.json](./common/src/main/resources/assets/musicnotification/musics.json5)
 
 The information shown in the toast notifications is taken from this file; jukebox entries are also pulled from it.
 
