@@ -61,14 +61,6 @@ public class MusicNotificationClientNeoForge {
 			false,
 			Pack.Position.TOP
 		);
-		event.addPackFinders(
-			Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/v2ui"),
-			PackType.CLIENT_RESOURCES,
-			Component.translatable("MusicNotification: V2 UI"),
-			PackSource.BUILT_IN,
-			false,
-			Pack.Position.TOP
-		);
 		//? if <=1.21.1 {
 		/*if (MusicNotificationClient.PLATFORM_HELPER.isModLoaded("vanillabackport")) {
 			event.addPackFinders(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/vanillabackport"),
