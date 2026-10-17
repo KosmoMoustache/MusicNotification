@@ -6,7 +6,7 @@ import net.minecraft.client.gui.screens.Screen;
 
 public class JukeboxScreenSelector {
 	public static Screen create(Screen parent) {
-		if (Config.options().USE_V2_UI) {
+		if (Config.options().USE_NEW_UI) {
 			return new JukeboxScreenV3(parent);
 		}
 		return new JukeboxScreen(parent);

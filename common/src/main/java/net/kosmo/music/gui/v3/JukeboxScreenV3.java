@@ -189,7 +189,7 @@ public class JukeboxScreenV3 extends Screen {
 
 	private void conditionalVisibility(Tab tab) {
 		this.clearHistoryButton.visible = tab instanceof HistoryTab;
-		this.filterPanel.setVisible(tab instanceof HomeTab && this.minecraft.getWindow().getGuiScaledWidth() / 2 > OVERLAY_WIDTH / 2 + FILTER_WIDTH + 16);
+		this.filterPanel.setVisible(tab instanceof HomeTab && this.minecraft.getWindow().getGuiScaledWidth() / 2 > OVERLAY_WIDTH / 2 + FILTER_WIDTH + 16 && Config.options().SHOW_FILTER_PANEL);
 	}
 
 	/**
