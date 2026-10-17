@@ -52,8 +52,8 @@ public class JukeboxScreenV3 extends Screen {
 		super(TITLE);
 		this.parent = parent;
 		this.tabManager = new TabManager(this::addRenderableWidget, this::removeWidget, this::selectTab, this::deselectTab);
-		this.filterPanel = new FilterPanel(this.minecraft, this, FILTER_WIDTH, this.height - 80);
 		this.trackFilter = TrackFilter.empty();
+		this.filterPanel = new FilterPanel(this.minecraft, this, FILTER_WIDTH, this.height - 80);
 
 		this.clearHistoryButton = this.addRenderableWidget(Button.builder(CLEAR_HISTORY, button -> {
 			TrackHistory.getInstance().clear();
@@ -174,18 +174,17 @@ public class JukeboxScreenV3 extends Screen {
 	public void updateFilter(UnaryOperator<TrackFilter> change) {
 		this.trackFilter = change.apply(this.trackFilter);
 		this.refreshLists();
+		this.filterPanel.refresh();
 	}
 
 	/**
 	 * Resets every filter (query, namespace, albums) and syncs the UI.
 	 */
 	public void clearFilters() {
-		this.trackFilter = TrackFilter.empty();
+		this.updateFilter(f -> TrackFilter.empty());
 		if (this.tabManager.getCurrentTab() instanceof AbstractJukeboxTab tab) {
 			tab.setSearchText("");
 		}
-		this.refreshLists();
-		this.filterPanel.refresh();
 	}
 
 	private void conditionalVisibility(Tab tab) {

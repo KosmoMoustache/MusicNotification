@@ -32,7 +32,6 @@ public abstract class AbstractJukeboxTab implements Tab {
 	protected final SearchBox searchBox;
 	protected final Minecraft minecraft;
 	private final JukeboxScreenV3 parent;
-	private @Nullable String filter;
 	private int width;
 	private int height;
 
@@ -74,7 +73,8 @@ public abstract class AbstractJukeboxTab implements Tab {
 	}
 
 	private void editBoxResponder(String value) {
-		this.filter = value;
+		// Ignore programmatic syncs (setSearchText) that do not change the query.
+		if (value.equals(this.parent.getTrackFilter().query())) return;
 		this.parent.updateFilter(f -> f.withQuery(value));
 	}
 

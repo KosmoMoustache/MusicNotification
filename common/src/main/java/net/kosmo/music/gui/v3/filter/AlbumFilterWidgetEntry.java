@@ -111,7 +111,6 @@ public class AlbumFilterWidgetEntry extends AbstractContainerWidget {
 	}
 
 	public boolean primaryAction(boolean multiSelection) {
-		MusicNotificationClient.LOGGER.info("AlbumFilterWidgetEntry::primaryAction");
 		this.onSelect.accept(this, multiSelection);
 		return true;
 	}

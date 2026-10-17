@@ -58,7 +58,6 @@ public class FilterPanel {
 
 	private void onNamespaceSelected(String namespace) {
 		this.screen.updateFilter(filter -> filter.withNamespace(namespace));
-		this.rebuildAlbums();
 	}
 
 	/**
@@ -78,7 +77,6 @@ public class FilterPanel {
 			}
 			return filter.clearAlbums().addAlbum(album);
 		});
-		this.syncAlbumSelection();
 	}
 
 	private void rebuildAlbums() {
