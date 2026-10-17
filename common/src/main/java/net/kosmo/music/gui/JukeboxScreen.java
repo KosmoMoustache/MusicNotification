@@ -35,9 +35,9 @@ public class JukeboxScreen extends Screen {
 	private static final Identifier SEARCH_ICON_TEXTURE = Identifier.fromNamespaceAndPath("minecraft", "icon/search");
 
 	private static final Component TITLE = Component.translatable("gui.musicnotification.jukebox.title");
-	private static final Component HOME_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.tab_home");
+	private static final Component HOME_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.home.title");
 	private static final Component SOUND_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.tab_sound");
-	private static final Component HISTORY_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.tab_history");
+	private static final Component HISTORY_TAB_TITLE = Component.translatable("gui.musicnotification.jukebox.history.title");
 	private static final Component SELECTED_HOME_TAB_TITLE = HOME_TAB_TITLE.plainCopy().withStyle(ChatFormatting.UNDERLINE);
 	private static final Component SELECTED_SOUND_TAB_TITLE = SOUND_TAB_TITLE.plainCopy().withStyle(ChatFormatting.UNDERLINE);
 	private static final Component SELECTED_HISTORY_TAB_TITLE = HISTORY_TAB_TITLE.plainCopy().withStyle(ChatFormatting.UNDERLINE);
@@ -50,8 +50,8 @@ public class JukeboxScreen extends Screen {
 	private static final Component EXTENDED_FILTER = Component.translatable("gui.musicnotification.jukebox.extended_filter");
 
 	private static final Component SEARCH_TEXT = Component.translatable("gui.musicnotification.jukebox.search_hint").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY);
-	private static final Component EMPTY_SEARCH_TEXT = Component.translatable("gui.musicnotification.jukebox.search_empty").withStyle(ChatFormatting.GRAY);
-	private static final Component EMPTY_HISTORY_TEXT = Component.translatable("gui.musicnotification.jukebox.history_empty").withStyle(ChatFormatting.GRAY);
+	private static final Component EMPTY_SEARCH_TEXT = Component.translatable("gui.musicnotification.jukebox.home.empty").withStyle(ChatFormatting.GRAY);
+	private static final Component EMPTY_HISTORY_TEXT = Component.translatable("gui.musicnotification.jukebox.history.empty").withStyle(ChatFormatting.GRAY);
 
 	private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
 
