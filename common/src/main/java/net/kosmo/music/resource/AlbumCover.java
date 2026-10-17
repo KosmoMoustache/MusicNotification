@@ -2,16 +2,17 @@ package net.kosmo.music.resource;
 
 import net.kosmo.music.MusicNotificationClient;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-//? >=1.21.2 && <1.21.6 {
-/*import net.minecraft.client.renderer.RenderType;
-*///? } elif >=1.21.6 {
-import net.minecraft.client.renderer.RenderPipelines;
-//?}
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Nullable;
+
+//? >=1.21.2 && <1.21.6 {
+/*import net.minecraft.client.renderer.RenderType;
+*///? } elif >=1.21.6 {
+import net.minecraft.client.renderer.RenderPipelines;
+//?}
 
 public class AlbumCover {
 	private final AlbumCoverType cover;
@@ -28,6 +29,18 @@ public class AlbumCover {
 		return new AlbumCover(new ItemCover(itemId));
 	}
 
+	public static boolean canGetItemStack() throws Error {
+		try {
+			Identifier itemId = Identifier.tryParse("minecraft:music_disc_13");
+			//~ if >1.21.1 '.getDefaultInstance()' -> '.get().value().getDefaultInstance()'
+			BuiltInRegistries.ITEM.get(itemId).get().value().getDefaultInstance();
+			return true;
+		} catch (NullPointerException e) {
+			MusicNotificationClient.LOGGER.debug("Failed to get ItemStack for album cover, likely due to being on the TitleScreen. Error: {}", e.getMessage());
+			return false;
+		}
+	}
+
 	public int getWidth() {
 		return this.cover.getWidth();
 	}
@@ -40,24 +53,25 @@ public class AlbumCover {
 		return this.cover instanceof SpriteCover;
 	}
 
-	public static boolean canGetItemStack() throws Error{
-		try {
-			Identifier itemId = Identifier.tryParse("minecraft:music_disc_13");
-			//~ if >1.21.1 '.getDefaultInstance()' -> '.get().value().getDefaultInstance()'
-			BuiltInRegistries.ITEM.get(itemId).get().value().getDefaultInstance();
-			return true;
-		} catch (NullPointerException e) {
-			MusicNotificationClient.LOGGER.debug("Failed to get ItemStack for album cover, likely due to being on the TitleScreen. Error: {}", e.getMessage());
-			return false;
-		}
+	public void drawCover(GuiGraphicsExtractor guiGraphics) {
+		drawCover(guiGraphics, 0, 0);
+	}
+
+	public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height) {
+		this.cover.drawCover(guiGraphics, x, y, width, height);
 	}
 
 	public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y) {
-		this.cover.drawCover(guiGraphics, x, y);
+		this.cover.drawCover(guiGraphics, x, y, getWidth(), getHeight());
 	}
 
 	interface AlbumCoverType {
-		void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y);
+		/**
+		 *
+		 * @param width ignored when type is sprite cover // TODO
+		 * @param height ignored when type is sprite cover // TODO
+		 */
+		void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height);
 
 		int getHeight();
 
@@ -95,8 +109,8 @@ public class AlbumCover {
 			return 20;
 		}
 
-		public void drawCover(GuiGraphicsExtractor graphics, int x, int y) {
-			graphics.blitSprite(RenderPipelines.GUI_TEXTURED,sprite, x, y, getWidth(), getHeight());
+		public void drawCover(GuiGraphicsExtractor graphics, int x, int y, int width, int height) {
+			graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, width, height);
 		}
 	}
 
@@ -133,7 +147,7 @@ public class AlbumCover {
 			return itemStack;
 		}
 
-		public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y) {
+		public void drawCover(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height) {
 			//~ if >26 renderFakeItem -> fakeItem
 			guiGraphics.fakeItem(this.stack, x, y);
 		}

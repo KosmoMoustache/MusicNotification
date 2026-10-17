@@ -5,7 +5,6 @@ import net.kosmo.music.config.Config;
 import net.kosmo.music.resource.AlbumCover;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.util.TextRender;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -102,7 +101,7 @@ public class MusicToast implements Toast {
 		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,BACKGROUND_SPRITE, fullWidthScale, 0, this.width() - fullWidthScale, this.height());
 
 		if (Config.options().ROTATE_ALBUM_COVER && content.getAlbumCover().canBeAnimated()) {
-			renderAnimatedAlbumCover(graphics, fullWidthScale, rotation);
+			renderAnimatedAlbumCover(graphics, fullWidthScale,6, 6, rotation);
 		} else {
 			content.getAlbumCover().drawCover(graphics, fullWidthScale + 6, 6);
 		}
@@ -157,10 +156,10 @@ public class MusicToast implements Toast {
 		}
 	}
 
-	private void renderAnimatedAlbumCover(GuiGraphicsExtractor guiGraphics, int x, int rotation) {
+	private void renderAnimatedAlbumCover(GuiGraphicsExtractor guiGraphics, int x, int xOffest, int yOffest, int rotation) {
 		AlbumCover albumCover = content.getAlbumCover();
-		float coverCenterX = x + 6 + albumCover.getWidth() / 2.0f;
-		float coverCenterY = 6 + albumCover.getHeight() / 2.0f;
+		float coverCenterX = x + xOffest + albumCover.getWidth() / 2.0f;
+		float coverCenterY = yOffest + albumCover.getHeight() / 2.0f;
 		guiGraphics.pose().pushMatrix();
 		//? if >=1.21.6 {
 		guiGraphics.pose().translate(coverCenterX, coverCenterY);

@@ -2,38 +2,39 @@
 
 ## JSON schema for `musics.json`
 
-Default file: [musics.json](./common/src/main/resources/assets/musicnotification/musics.json)
+Default file: [musics.json](./common/src/main/resources/assets/musicnotification/musics.json5)
 
 The information shown in the toast notifications is taken from this file; jukebox entries are also pulled from it.
 
 ```json
 {
 	"key": {
-		"album": "string",
+		"title": "string",
 		"author": "string",
+		"album": "string",
 		"cover": "string",
 		"item": "identifier",
 		"customId": "identifier",
-		"title": "string"
+		"track": "int"
 	}
 }
 ```
 
 - `key`: The sound event identifier of the track
-- `album`: The album name of the track
+- `title`: The title of the track
 - `author`: The author of the track
+- `album`: (Optional) The album name of the track
 - `cover`: (Optional) the filename of the cover image located in `musicnotification/textures/gui/sprites/toast/` of your
   resource pack
-- `item`: (Optional) The item identifier whose sprite will be shown in the toast or Jukebox
+- `item`: (Optional) The item identifier whose sprite will be shown instead of cover
 - `customId`: (Optional) Custom identifier for the track. For the jukebox to work, you must provide a sound event for
   every track
-- `title`: The title of the track
+- `track`: (Optional) The track number within its album, shown as `#N` in the Jukebox menu
 
 The `item` and `cover` fields correspond to the image shown in a toast notification and jukebox. If both are present,
-`item` takes
-precedence over `cover`.
+`item` takes precedence over `cover`.
 
-If the provided item identifier is invalid, the texture for `minecraft:music_disc_13` will be used instead. If `cover`
+If the provided item identifier is invalid, item `minecraft:music_disc_13` will be used instead. If `cover`
 is missing or invalid, a default image will be used.
 
 ### Examples & Test
