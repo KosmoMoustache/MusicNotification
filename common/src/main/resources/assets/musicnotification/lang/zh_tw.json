@@ -4,7 +4,7 @@
 	"config.musicnotification.general.ignore_sound_event": "忽略的聲音 ID 列表",
 	"config.musicnotification.general.ignore_sound_event.tooltip": "不會觸發通知的聲音事件列表。\n你可以使用 * 作為萬用字元",
 	"config.musicnotification.general.title": "一般選項",
-	"config.musicnotification.jukebox.debug_mod": "在點唱機中顯示「聲音」分頁",
+	"config.musicnotification.jukebox.show_debug_tab": "在點唱機中顯示「聲音」分頁",
 	"config.musicnotification.jukebox.debug_mod.tooltip": "允許播放遊戲中的任意聲音",
 	"config.musicnotification.jukebox.max_count_history": "最大歷史記錄數",
 	"config.musicnotification.jukebox.show_on_title_screen": "在標題畫面顯示點唱機按鈕",

@@ -38,10 +38,10 @@ public class ExtendedFilter extends AbstractContainerWidget {
 
 		this.leftArrow = new ImageButton(this.getX(), this.getY(), 15, 20, LEFT_ARROW, button -> {
 			this.moveSelectedPillLeft();
-		}, Component.translatable("gui.musicnotification.jukebox.filter.<left_arrow"));
+		}, Component.translatable("gui.musicnotification.jukebox.filter.namespace_previous"));
 		this.rightArrow = new ImageButton(this.getX() + (this.width - 15), this.getY(), 15, 20, RIGHT_ARROW, button -> {
 			this.moveSelectedPillRight();
-		}, Component.translatable("gui.musicnotification.jukebox.filter.right_arrow"));
+		}, Component.translatable("gui.musicnotification.jukebox.filter.namespace_next"));
 
 		this.addChild(this.leftArrow);
 		this.addChild(this.rightArrow);

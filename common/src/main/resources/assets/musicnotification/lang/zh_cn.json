@@ -4,7 +4,7 @@
 	"config.musicnotification.general.ignore_sound_event": "忽略的声音 ID 列表",
 	"config.musicnotification.general.ignore_sound_event.tooltip": "不会触发通知的声音事件列表。\n你可以使用 * 作为通配符",
 	"config.musicnotification.general.title": "常规选项",
-	"config.musicnotification.jukebox.debug_mod": "在点唱机中显示“声音”标签页",
+	"config.musicnotification.jukebox.show_debug_tab": "在点唱机中显示“声音”标签页",
 	"config.musicnotification.jukebox.debug_mod.tooltip": "允许播放游戏中的任意声音",
 	"config.musicnotification.jukebox.max_count_history": "最大历史记录数",
 	"config.musicnotification.jukebox.show_on_title_screen": "在标题界面显示点唱机按钮",
