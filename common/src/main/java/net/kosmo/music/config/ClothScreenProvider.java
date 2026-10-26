@@ -114,11 +114,11 @@ public class ClothScreenProvider {
 			.setSaveConsumer(val -> options.DEBUG_MOD = val)
 			.build());
 
-		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.show_mute_tab"), options.SHOW_MUTE)
-			.setDefaultValue(Config.Options.SHOW_MUTE_DEFAULT)
-			.setTooltip(Component.translatable("config.musicnotification.jukebox.show_mute_tab.tooltip"))
-			.setSaveConsumer(val -> options.SHOW_MUTE = val)
-			.build());
+//		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.show_mute_tab"), options.SHOW_MUTE)
+//			.setDefaultValue(Config.Options.SHOW_MUTE_DEFAULT)
+//			.setTooltip(Component.translatable("config.musicnotification.jukebox.show_mute_tab.tooltip"))
+//			.setSaveConsumer(val -> options.SHOW_MUTE = val)
+//			.build());
 
 		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.wip_namespace_filter"), options.WIP_NAMESPACE_FILTER)
 			.setDefaultValue(Config.Options.WIP_NAMESPACE_FILTER_DEFAULT)
