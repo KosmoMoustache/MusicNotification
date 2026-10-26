@@ -1,15 +1,14 @@
 package net.kosmo.music.gui.v3.filter;
 
+import net.kosmo.music.compat.MeScrollableLayout;
 import net.kosmo.music.gui.v3.JukeboxScreenV3;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.resource.TrackDataManager;
 import net.kosmo.music.resource.TrackFilter;
+import net.kosmo.music.compat.LayoutCompact;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ScrollableLayout;
-import net.minecraft.client.gui.components.StringWidget;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
@@ -27,7 +26,7 @@ public class FilterPanel {
 	private final JukeboxScreenV3 screen;
 	private final NamespaceFilterWidget namespaceFilter;
 	private final LinearLayout trackScrollableContent;
-	private final ScrollableLayout scrollableLayout;
+	private final MeScrollableLayout scrollableLayout;
 	private final LinearLayout layout;
 	private final int width;
 	private final List<AlbumFilterWidgetEntry> albumEntries = new ArrayList<>();
@@ -44,13 +43,13 @@ public class FilterPanel {
 		this.namespaceFilter = new NamespaceFilterWidget(minecraft, width, NAMESPACE_HEIGHT, this::onNamespaceSelected);
 
 		this.trackScrollableContent = LinearLayout.vertical();
-		this.scrollableLayout = new ScrollableLayout(minecraft, this.trackScrollableContent, height - NAMESPACE_HEIGHT - SPACING, ScrollableLayout.ReserveStrategy.RIGHT);
+		this.scrollableLayout = new MeScrollableLayout(minecraft, this.trackScrollableContent, height - NAMESPACE_HEIGHT - SPACING);
 		this.scrollableLayout.setScrollbarSpacing(2);
 
 		this.layout.addChild(new StringWidget(Component.translatable("gui.musicnotification.jukebox.filter.title"), minecraft.font), s -> s.paddingTop(3).alignHorizontallyCenter());
 		this.layout.addChild(this.namespaceFilter);
 		this.layout.addChild(this.scrollableLayout);
-		this.layout.addChild(Button.builder(Component.translatable("gui.musicnotification.jukebox.filter.clear_button"), _ -> this.screen.clearFilters()).build());
+		this.layout.addChild(Button.builder(Component.translatable("gui.musicnotification.jukebox.filter.clear_button"), button -> this.screen.clearFilters()).build());
 
 		this.setHeight(height);
 		this.refresh();
@@ -98,7 +97,7 @@ public class FilterPanel {
 			this.albumEntries.add(new AlbumFilterWidgetEntry(this.minecraft, contentWidth, 36, album.getKey(), album.getValue().getAlbumCover(), this::onAlbumSelected));
 		}
 
-		this.trackScrollableContent.removeChildren();
+		LayoutCompact.removeChildren(trackScrollableContent);
 		this.albumEntries.forEach(this.trackScrollableContent::addChild);
 		if (this.albumEntries.isEmpty()) {
 			this.trackScrollableContent.addChild(this.createEmptyListFrame(contentWidth));

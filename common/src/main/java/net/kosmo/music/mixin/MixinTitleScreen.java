@@ -22,7 +22,7 @@ public abstract class MixinTitleScreen extends Screen {
 	@Inject(method = "init()V", at = @At("RETURN"))
 	private void insertJukeboxMenu(CallbackInfo ci) {
 		if (Config.options().SHOW_JUKEBOX_MENU_BUTTON) {
-			SpriteIconButton openJukebox = this.addRenderableWidget(CommonComponents.jukebox(20, _ -> this.minecraft.gui.setScreen(JukeboxScreenSelector.create(this)), true));
+			SpriteIconButton openJukebox = this.addRenderableWidget(CommonComponents.jukebox(20, button -> this.minecraft.gui.setScreen(JukeboxScreenSelector.create(this)), true));
 			openJukebox.setPosition(12, 12);
 		}
 	}

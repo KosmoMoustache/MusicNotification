@@ -26,8 +26,8 @@ public class JukeboxTabButton extends TabButton {
 
 	@Override
 	public void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-		graphics.blitSprite(
-			RenderPipelines.GUI_TEXTURED, this.sprites.get(this.isSelected(), this.isHoveredOrFocused()), this.getX(), this.getY(), this.width, this.height
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,
+			this.sprites.get(this.isSelected(), this.isHoveredOrFocused()), this.getX(), this.getY(), this.width, this.height
 		);
 		Font font = Minecraft.getInstance().font;
 		int underlineColor = this.active ? -1 : -6250336;

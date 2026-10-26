@@ -8,12 +8,17 @@
 		//? if <=1.21.4 {
 		/*"MixinTManager",
 		*///? }
+		//? if <=26.1 {
+		/*"compat.MixinLinearLayout",
+		"compat.MixinGridLayout",
+		"compat.ScrollableLayoutAccessor",
+		*///? }
 		"MixinMinecraft",
 		"MixinMusicManager",
 		"MixinTitleScreen",
 		"MusicManagerAccessor",
 		"MixinPauseScreen"
-    ],
+	],
 	"injectors": {
 		"defaultRequire": 1
 	}

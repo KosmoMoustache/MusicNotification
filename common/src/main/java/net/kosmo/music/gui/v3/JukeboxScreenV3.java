@@ -5,6 +5,7 @@ import net.kosmo.music.TrackHistory;
 import net.kosmo.music.config.Config;
 import net.kosmo.music.gui.v3.filter.FilterPanel;
 import net.kosmo.music.resource.TrackFilter;
+import net.kosmo.music.compat.LayoutCompact;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractScrollArea;
 import net.minecraft.client.gui.components.Button;
@@ -22,6 +23,11 @@ import net.minecraft.sounds.SoundSource;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.UnaryOperator;
+
+//? if >=26.2 {
+//? } else {
+/*import net.minecraft.client.gui.navigation.ScreenRectangle;
+*///? }
 
 public class JukeboxScreenV3 extends Screen {
 	public static final int SCROLLBAR_RESERVE = AbstractScrollArea.SCROLLBAR_WIDTH + 2; // 6 + 2 = 8
@@ -86,14 +92,30 @@ public class JukeboxScreenV3 extends Screen {
 		int visibleTabs = 2 + (showMute ? 1 : 0) + (showDebug ? 1 : 0);
 		int tabWidth = getOverlayWidth() / visibleTabs;
 
-		TabNavigationBar.Builder builder = TabNavigationBar.builder(this.tabManager, 0, 0, getOverlayWidth(), 20)
+
+		TabNavigationBar.Builder builder = TabNavigationBar.builder(this.tabManager, 0/*? >=26.2 {*/, 0, getOverlayWidth(), 20/*?} else {*//*?}*/)
+			//? if >=26.2 {
 			.addTab(new JukeboxTabButton(this.tabManager, this.homeTab, tabWidth, 20), homeTab)
 			.addTab(new JukeboxTabButton(this.tabManager, this.historyTab, tabWidth, 20), historyTab);
+		//?} else {
+		/*.addTabs(homeTab, historyTab);
+		 *///?}
 
-		if (showMute)
+
+		if (showMute) {
+			//? if >=26.2 {
 			builder.addTab(new JukeboxTabButton(this.tabManager, this.muteTab, tabWidth, 20), muteTab);
-		if (showDebug)
+			//?} else {
+			/*builder.addTabs(muteTab);
+			 *///?}
+		}
+		if (showDebug) {
+			//? if >=26.2 {
 			builder.addTab(new JukeboxTabButton(this.tabManager, this.debugTab, tabWidth, 20), debugTab);
+			//?} else {
+			/*builder.addTabs(debugTab);
+			 *///?}
+		}
 
 		this.tabNavigationBar = builder.build();
 		this.addRenderableWidget(tabNavigationBar);
@@ -102,7 +124,7 @@ public class JukeboxScreenV3 extends Screen {
 		this.filterPanel.setVisible(false);
 
 		this.contentLayout = this.layout.addChild(LinearLayout.vertical());
-		this.tabManager.setCurrentTab(this.homeTab, false, false);
+		this.tabManager.setCurrentTab(this.homeTab, false/*? >=26.2 {*/, false/*?} else {*//*?}*/);
 		this.layout.visitWidgets(this::addRenderableWidget);
 		this.repositionElements();
 	}
@@ -122,8 +144,18 @@ public class JukeboxScreenV3 extends Screen {
 		this.layout.arrangeElements();
 
 		FrameLayout.alignInRectangle(this.layout, this.getRectangle(), 0.5F, 0.5F);
+		//? if >=26.2 {
 		this.tabNavigationBar.setPosition(this.layout.getX(), this.layout.getY() - 20 - 7);
 		this.tabNavigationBar.arrangeElements(this.width);
+		//?} else {
+		/*this.tabNavigationBar.updateWidth(this.width);
+		int tabAreaTop = this.tabNavigationBar.getRectangle().bottom();
+		ScreenRectangle tabArea = new ScreenRectangle(0, tabAreaTop, this.width, this.height - tabAreaTop);
+		this.tabNavigationBar.getTabs().forEach(tab -> tab.visitChildren(child -> child.setHeight(tabArea.height())));
+		this.tabManager.setTabArea(tabArea);
+//		this.tabNavigationBar.setPosition(this.layout.getX(), this.layout.getY() - 20 - 7);
+		this.tabNavigationBar.arrangeElements();
+		*///?}
 
 		this.filterPanel.setHeight(this.height - 80);
 		this.filterPanel.arrangeElements();
@@ -137,8 +169,7 @@ public class JukeboxScreenV3 extends Screen {
 	public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
 		super.extractBackground(graphics, mouseX, mouseY, a);
 
-		graphics.blitSprite(
-			RenderPipelines.GUI_TEXTURED,
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,
 			BACKGROUND_SPRITE,
 			this.layout.getX() - 8,
 			this.layout.getY() - 8,
@@ -156,7 +187,7 @@ public class JukeboxScreenV3 extends Screen {
 	 */
 	private void selectTab(Tab tab) {
 		if (this.contentLayout != null) {
-			this.contentLayout.addChild(tab.getLayout());
+			this.contentLayout.addChild(/*? >=26.2 {*/tab.getLayout()/*?} else {*//*((AbstractJukeboxTab) tab).getLayout()*//*?}*/);
 		}
 		// The search query is shared by the tabs that use TrackFilter: keep their search box in sync.
 		if (tab instanceof AbstractJukeboxTab jukeboxTab) {
@@ -184,7 +215,7 @@ public class JukeboxScreenV3 extends Screen {
 	 * Resets every filter (query, namespace, albums) and syncs the UI.
 	 */
 	public void clearFilters() {
-		this.updateFilter(_ -> TrackFilter.empty());
+		this.updateFilter(f -> TrackFilter.empty());
 		if (this.tabManager.getCurrentTab() instanceof AbstractJukeboxTab tab) {
 			tab.setSearchText("");
 		}
@@ -200,7 +231,7 @@ public class JukeboxScreenV3 extends Screen {
 	 */
 	private void deselectTab(Tab tab) {
 		if (this.contentLayout != null) {
-			this.contentLayout.removeChildren();
+			LayoutCompact.removeChildren(this.contentLayout);
 		}
 	}
 

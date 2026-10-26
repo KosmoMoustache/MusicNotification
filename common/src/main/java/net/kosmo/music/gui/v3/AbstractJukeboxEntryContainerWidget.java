@@ -5,10 +5,7 @@ import net.kosmo.music.gui.component.AlbumCoverWidget;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.components.AbstractContainerWidget;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.ScrollableLayout;
-import net.minecraft.client.gui.components.StringWidget;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.narration.NarratedElementType;
@@ -36,7 +33,7 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 	protected LinearLayout layout;
 
 	public AbstractJukeboxEntryContainerWidget(Minecraft minecraft, JukeboxScreenV3 screen, ScrollableLayout scrollableLayout, int x, int y, int width, int height, TrackData trackData, boolean animated) {
-		super(x, y, width, height, Component.empty());
+		super(x, y, width, height, Component.empty()/*? >=26.1 {*/,AbstractScrollArea.defaultSettings(0)/*?} else {*//*?}*/);
 		this.minecraft = minecraft;
 		this.screen = screen;
 		this.scrollableLayout = scrollableLayout;
