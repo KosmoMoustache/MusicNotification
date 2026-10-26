@@ -67,32 +67,28 @@ public class NamespaceFilterWidget extends AbstractContainerWidget {
 		this.refresh(null);
 	}
 
-	/**
-	 * Reloads the namespace list and syncs the highlighted pill with the active namespace filter.
-	 *
-	 * @param activeNamespace namespace currently applied to the TrackFilter, or null if none
-	 */
-	public void refresh(@Nullable String activeNamespace) {
-		this.namespaces = new ArrayList<>(TrackDataManager.getInstance().getNamespaceList());
-		Collections.sort(this.namespaces);
-
-		int activeIndex = activeNamespace == null ? -1 : this.namespaces.indexOf(activeNamespace);
-		if (activeIndex >= 0) {
-			this.selectedIndex = activeIndex;
-			this.windowStart = activeIndex;
-			this.filterActive = true;
-			this.highlighted = true;
-		} else {
-			this.selectedIndex = this.wrap(this.selectedIndex);
-			this.windowStart = this.selectedIndex;
-			this.filterActive = false;
-			this.highlighted = false;
-		}
-		this.updateState();
+	@Override
+	protected int contentHeight() {
+		return this.height;
 	}
 
-	public String getSelectedNamespace() {
-		return this.filterActive ? this.namespaces.get(this.selectedIndex) : "";
+	@Override
+		//~ if >26 renderWidget -> extractWidgetRenderState
+	protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+		this.layoutSlots();
+		for (AbstractWidget child : this.children) {
+			//~ if >26 render -> extractRenderState
+			child.extractRenderState(graphics, mouseX, mouseY, a);
+		}
+	}
+
+	@Override
+	protected void updateWidgetNarration(NarrationElementOutput output) {
+	}
+
+	@Override
+	public List<? extends GuiEventListener> children() {
+		return this.children;
 	}
 
 	private int wrap(int index) {
@@ -171,28 +167,32 @@ public class NamespaceFilterWidget extends AbstractContainerWidget {
 		}
 	}
 
-	@Override
-	protected int contentHeight() {
-		return this.height;
-	}
+	/**
+	 * Reloads the namespace list and syncs the highlighted pill with the active namespace filter.
+	 *
+	 * @param activeNamespace namespace currently applied to the TrackFilter, or null if none
+	 */
+	public void refresh(@Nullable String activeNamespace) {
+		this.namespaces = new ArrayList<>(TrackDataManager.getInstance().getNamespaceList());
+		Collections.sort(this.namespaces);
 
-	@Override
-	//~ if >26 renderWidget -> extractWidgetRenderState
-	protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-		this.layoutSlots();
-		for (AbstractWidget child : this.children) {
-			//~ if >26 render -> extractRenderState
-			child.extractRenderState(graphics, mouseX, mouseY, a);
+		int activeIndex = activeNamespace == null ? -1 : this.namespaces.indexOf(activeNamespace);
+		if (activeIndex >= 0) {
+			this.selectedIndex = activeIndex;
+			this.windowStart = activeIndex;
+			this.filterActive = true;
+			this.highlighted = true;
+		} else {
+			this.selectedIndex = this.wrap(this.selectedIndex);
+			this.windowStart = this.selectedIndex;
+			this.filterActive = false;
+			this.highlighted = false;
 		}
+		this.updateState();
 	}
 
-	@Override
-	protected void updateWidgetNarration(NarrationElementOutput output) {
-	}
-
-	@Override
-	public List<? extends GuiEventListener> children() {
-		return this.children;
+	public String getSelectedNamespace() {
+		return this.filterActive ? this.namespaces.get(this.selectedIndex) : "";
 	}
 }
 //? }

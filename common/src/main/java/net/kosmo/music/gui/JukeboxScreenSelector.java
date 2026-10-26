@@ -1,6 +1,8 @@
 package net.kosmo.music.gui;
 
+//? if >=26.2 {
 import net.kosmo.music.gui.nouveau.JukeboxScreenNouveau;
+//? }
 import net.minecraft.client.gui.screens.Screen;
 
 public class JukeboxScreenSelector {
