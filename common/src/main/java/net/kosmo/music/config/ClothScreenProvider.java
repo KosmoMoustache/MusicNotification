@@ -120,14 +120,17 @@ public class ClothScreenProvider {
 			.setSaveConsumer(val -> options.SHOW_MUTE = val)
 			.build());
 
-		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.wip_namespace_filter"), options.WIP_FILTER_IN_JUKEBOX)
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.wip_namespace_filter"), options.WIP_NAMESPACE_FILTER)
 			.setDefaultValue(Config.Options.WIP_NAMESPACE_FILTER_DEFAULT)
-			.setSaveConsumer(val -> options.WIP_FILTER_IN_JUKEBOX = val)
+			.setSaveConsumer(val -> options.WIP_NAMESPACE_FILTER = val)
 			.build());
+
+		//? if >=26.2 {
 		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.show_filter_panel"), options.SHOW_FILTER_PANEL)
 			.setDefaultValue(Config.Options.SHOW_FILTER_PANEL_DEFAULT)
 			.setSaveConsumer(val -> options.SHOW_FILTER_PANEL = val)
 			.build());
+		//? }
 
 		general.add(entryBuilder.startStrList(Component.translatable("config.musicnotification.general.ignore_sound_event"), options.IGNORE_SOUND_EVENT)
 			.setDefaultValue(Config.Options.IGNORE_SOUND_EVENT_DEFAULT)

@@ -76,7 +76,7 @@ public class JukeboxScreen extends Screen {
 	public void init() {
 		this.layout.addTitleHeader(TITLE, this.font);
 
-		this.soundList = new JukeboxEntryList(this, this.minecraft, this.width, this.listEnd() - (Config.options().WIP_FILTER_IN_JUKEBOX ? 110 : 88), 88, 36);
+		this.soundList = new JukeboxEntryList(this, this.minecraft, this.width, this.listEnd() - (Config.options().WIP_NAMESPACE_FILTER ? 110 : 88), 88, 36);
 
 		int middle = Config.options().DEBUG_MOD
 			? this.soundList.getRowWidth() / 3
@@ -96,7 +96,7 @@ public class JukeboxScreen extends Screen {
 			this.minecraft.getSoundManager().stop(null, SoundSource.MUSIC);
 			MusicNotificationClient.currentlyPlaying = null;
 //			this.setCurrentTab(this.currentTab);
-		}).bounds(this.soundList.getRowLeft() - 1, this.listEnd() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 12 : 10), this.soundList.getRowRight() - this.soundList.getRowLeft() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 3 : 1), 20).build());
+		}).bounds(this.soundList.getRowLeft() - 1, this.listEnd() + (Config.options().WIP_NAMESPACE_FILTER ? 12 : 10), this.soundList.getRowRight() - this.soundList.getRowLeft() + (Config.options().WIP_NAMESPACE_FILTER ? 3 : 1), 20).build());
 
 		this.clearHistoryButton = this.addRenderableWidget(Button.builder(CLEAR_HISTORY, button -> {
 			TrackHistory.getInstance().clear();
@@ -106,7 +106,7 @@ public class JukeboxScreen extends Screen {
 
 		this.extendedFilter = new ExtendedFilter(this, this.font, this.marginX() + 13, 73, 215, 15, EXTENDED_FILTER, this::onSearchChange);
 
-		this.searchBox = new EditBox(this.font, this.marginX() + 28, (Config.options().WIP_FILTER_IN_JUKEBOX ? 96 : 74), 200, 15, SEARCH_TEXT);
+		this.searchBox = new EditBox(this.font, this.marginX() + 28, (Config.options().WIP_NAMESPACE_FILTER ? 96 : 74), 200, 15, SEARCH_TEXT);
 		this.searchBox.setMaxLength(255);
 		this.searchBox.setVisible(true);
 		this.searchBox.setTextColor(CommonColors.WHITE);
@@ -117,7 +117,7 @@ public class JukeboxScreen extends Screen {
 		updateStopSoundButtonMessage();
 
 		this.addRenderableWidget(this.searchBox);
-		if (Config.options().WIP_FILTER_IN_JUKEBOX) {
+		if (Config.options().WIP_NAMESPACE_FILTER) {
 			this.addRenderableWidget(this.extendedFilter);
 		}
 		this.addWidget(soundList);
@@ -150,7 +150,7 @@ public class JukeboxScreen extends Screen {
 	@Override
 	protected void repositionElements() {
 		this.layout.arrangeElements();
-		this.soundList.updateSizeAndPosition(this.width + 5, this.listEnd() - (Config.options().WIP_FILTER_IN_JUKEBOX ? 103 : 88), (Config.options().WIP_FILTER_IN_JUKEBOX ? 110 : 88));
+		this.soundList.updateSizeAndPosition(this.width + 5, this.listEnd() - (Config.options().WIP_NAMESPACE_FILTER ? 103 : 88), (Config.options().WIP_NAMESPACE_FILTER ? 110 : 88));
 //		this.searchBox.setPosition(this.marginX() + 28, 89);
 		int middle = Config.options().DEBUG_MOD
 			? this.soundList.getRowWidth() / 3
@@ -158,7 +158,7 @@ public class JukeboxScreen extends Screen {
 		int rowLeft = this.soundList.getRowLeft();
 		int rowRight = this.soundList.getRowRight();
 
-		this.searchBox.setPosition(this.marginX() + 28, (Config.options().WIP_FILTER_IN_JUKEBOX ? 93 : 74));
+		this.searchBox.setPosition(this.marginX() + 28, (Config.options().WIP_NAMESPACE_FILTER ? 93 : 74));
 		this.stopSoundButton.setPosition(this.soundList.getRowLeft() - 1, this.listEnd() + 12);
 
 		this.homeButton.setPosition(rowLeft, 45);
@@ -175,8 +175,8 @@ public class JukeboxScreen extends Screen {
 		//~}
 		int i = this.marginX() + 3;
 
-		graphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + (Config.options().WIP_FILTER_IN_JUKEBOX ? 24 : 16));
-		graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SEARCH_ICON_TEXTURE, i + 10, (Config.options().WIP_FILTER_IN_JUKEBOX ? 96 : 76), 12, 12);
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + (Config.options().WIP_NAMESPACE_FILTER ? 24 : 16));
+		graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SEARCH_ICON_TEXTURE, i + 10, (Config.options().WIP_NAMESPACE_FILTER ? 96 : 76), 12, 12);
 	}
 
 	@Override

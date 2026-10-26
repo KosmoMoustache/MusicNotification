@@ -2,12 +2,15 @@
 package net.kosmo.music.gui.nouveau;
 
 import net.kosmo.music.Helper;
+import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.gui.component.AlbumCoverWidget;
+import net.kosmo.music.mixin.MusicManagerAccessor;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ScrollableLayout;
 import net.minecraft.client.gui.components.StringWidget;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -24,15 +27,27 @@ public class TrackEntry extends AbstractJukeboxEntryContainerWidget {
 		super(minecraft, screen, scrollableLayout, 0, 0, screen.getContentWidth(), 36, trackData, animated);
 	}
 
+//	private boolean isCurrentMusic() {
+//		Sound sound1 = MusicNotificationClient.currentlyPlaying != null ? MusicNotificationClient.currentlyPlaying.getSound() : null;
+//		Sound sound2 = ((MusicManagerAccessor) minecraft.getMusicManager()).getCurrentMusic() != null ? ((MusicManagerAccessor) minecraft.getMusicManager()).getCurrentMusic().getSound() : null;
+//		if (sound1 != null) {
+//			return sound1.getLocation().equals(trackData.key());
+//		} else if (sound2 != null) {
+//			return sound2.getLocation().equals(trackData.key());
+//		}
+//		return false;
+//	}
+
 	@Override
 	boolean primaryAction() {
 		Helper.playTrackData(this.minecraft, this.trackData);
+//		this.albumCoverWidget.setAnimated(true);
 		return true;
 	}
 
 	@Override
 	protected void initWidgets(int width, boolean animated) {
-		this.albumCoverWidget = new AlbumCoverWidget(20, 20, this.trackData.getAlbumCover(), animated);
+		this.albumCoverWidget = new AlbumCoverWidget(20, 20, this.trackData.getAlbumCover(), false /*isCurrentMusic()*/);
 
 		this.line1Widget = new StringWidget(
 			this.trackData.title().copy()

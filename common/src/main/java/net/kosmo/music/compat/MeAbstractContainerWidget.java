@@ -18,7 +18,7 @@ public abstract class MeAbstractContainerWidget extends AbstractContainerWidget 
 		 *///? }
 	}
 
-	//? if <=1.21.11 {
+	//? if >1.21.1 && <=1.21.11 {
 	/*@Override
 	protected double scrollRate() {
 		return 0;

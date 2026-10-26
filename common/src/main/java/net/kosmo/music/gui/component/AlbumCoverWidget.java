@@ -5,6 +5,10 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+//? if >=1.21.6 {
+//?} else {
+/*import org.joml.Quaternionf;
+*///? }
 
 public class AlbumCoverWidget extends AbstractWidget {
 	private final AlbumCover cover;
@@ -45,7 +49,7 @@ public class AlbumCoverWidget extends AbstractWidget {
 			//?} else {
 			/*graphics.pose().translate(coverX, coverY, 0);
 			graphics.pose().mulPose(new Quaternionf().rotateLocalZ((float) Math.toRadians(rotation)));
-			graphics.pose().translate(-albumCover.getWidth() / 2.0f, -albumCover.getHeight() / 2.0f, 0);
+			graphics.pose().translate(-this.cover.getWidth() / 2.0f, -this.cover.getHeight() / 2.0f, 0);
 			this.cover.drawCover(graphics, coverX, coverY);
 			*///?}
 			graphics.pose().popMatrix();

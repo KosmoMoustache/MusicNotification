@@ -38,6 +38,8 @@ public class JukeboxScreenNouveau extends Screen {
 	private static final Component TITLE = Component.translatable("gui.musicnotification.jukebox.title");
 	private static final Component CLEAR_HISTORY = Component.translatable("gui.musicnotification.jukebox.clear_history");
 	private static final Component STOP_SOUND_BUTTON = Component.translatable("gui.musicnotification.jukebox.stop_sound_button");
+	private static final Component MASTER_VOLUME_ZERO = Component.translatable("gui.musicnotification.jukebox.master_volume_zero");
+	private static final Component MUSIC_VOLUME_ZERO = Component.translatable("gui.musicnotification.jukebox.music_volume_zero");
 
 	private final Screen parent;
 	private final TabManager tabManager;
@@ -74,6 +76,18 @@ public class JukeboxScreenNouveau extends Screen {
 			MusicNotificationClient.currentlyPlaying = null;
 			button.setFocused(false);
 		}).build());
+	}
+
+	private void updateStopSoundButtonMessage() {
+		if (this.stopSoundButton != null) {
+			if (this.minecraft.options.getSoundSourceVolume(SoundSource.MASTER) == 0f) {
+				this.stopSoundButton.setMessage(MASTER_VOLUME_ZERO);
+			} else if (this.minecraft.options.getSoundSourceVolume(SoundSource.MUSIC) == 0f) {
+				this.stopSoundButton.setMessage(MUSIC_VOLUME_ZERO);
+			} else {
+				this.stopSoundButton.setMessage(STOP_SOUND_BUTTON);
+			}
+		}
 	}
 
 	@Override
@@ -164,6 +178,7 @@ public class JukeboxScreenNouveau extends Screen {
 
 		conditionalVisibility(this.tabManager.getCurrentTab());
 		this.stopSoundButton.setPosition(this.layout.getX() + this.getContentWidth() / 2 - this.stopSoundButton.getWidth() / 2, this.layout.getY() + this.layout.getHeight() + 5);
+		this.updateStopSoundButtonMessage();
 	}
 
 	@Override

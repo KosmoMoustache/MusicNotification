@@ -1,6 +1,7 @@
 //? if >=26.2 {
 package net.kosmo.music.gui.nouveau.filter;
 
+import net.kosmo.music.config.Config;
 import net.kosmo.music.gui.nouveau.JukeboxScreenNouveau;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.resource.TrackDataManager;
@@ -46,7 +47,9 @@ public class FilterPanel {
 		this.scrollableLayout.setScrollbarSpacing(2);
 
 		this.layout.addChild(new StringWidget(Component.translatable("gui.musicnotification.jukebox.filter.title"), minecraft.font), s -> s.paddingTop(3).alignHorizontallyCenter());
-		this.layout.addChild(this.namespaceFilter);
+		if (Config.options().WIP_NAMESPACE_FILTER) {
+			this.layout.addChild(this.namespaceFilter);
+		}
 		this.layout.addChild(this.scrollableLayout);
 		this.layout.addChild(Button.builder(Component.translatable("gui.musicnotification.jukebox.filter.clear_button"), button -> this.screen.clearFilters()).build());
 
@@ -154,8 +157,8 @@ public class FilterPanel {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
-		this.namespaceFilter.visible = visible;
 		this.layout.visitWidgets(widget -> widget.visible = visible);
+		this.namespaceFilter.visible = visible && Config.options().WIP_NAMESPACE_FILTER;
 	}
 
 	public void refresh() {

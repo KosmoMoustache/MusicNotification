@@ -12,6 +12,9 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.CommonColors;
 import org.jetbrains.annotations.NotNull;
+//? 1.21.1 {
+/*import net.minecraft.client.Minecraft;
+*///? }
 //? >=1.21.2 {
 import net.kosmo.music.Helper;
  //?}
