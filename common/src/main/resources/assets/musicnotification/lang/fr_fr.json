@@ -19,7 +19,6 @@
 	"config.musicnotification.jukebox.show_mute_tab": "Affiche l'onglet \"Mute\" dans le Jukebox",
 	"config.musicnotification.jukebox.show_mute_tab.tooltip": "Étouffez le son d’un son spécifique",
 	"config.musicnotification.jukebox.title": "Options du Jukebox",
-	"config.musicnotification.jukebox.use_new_ui": "Utilise la nouvelle interface",
 	"config.musicnotification.jukebox.wip_namespace_filter": "(Work in progress) Enable namespace filter",
 	"config.musicnotification.notification.animate_cover": "Animer la pochette de l'album",
 	"config.musicnotification.notification.disable_toast_sound": "Mute l'effet sonore \"woosh\" produit par les toasts",

@@ -19,7 +19,6 @@
 	"config.musicnotification.jukebox.show_mute_tab": "Show \"Mute\" tab in Jukebox",
 	"config.musicnotification.jukebox.show_mute_tab.tooltip": "Muffle the sound of a specific sound",
 	"config.musicnotification.jukebox.title": "Jukebox Options",
-	"config.musicnotification.jukebox.use_new_ui": "Use new UI",
 	"config.musicnotification.jukebox.wip_namespace_filter": "(Work in progress) Enable namespace filter",
 	"config.musicnotification.notification.animate_cover": "Animate the album cover",
 	"config.musicnotification.notification.disable_toast_sound": "Mute the woosh sound made by toasts",

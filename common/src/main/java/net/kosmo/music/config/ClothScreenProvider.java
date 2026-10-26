@@ -129,11 +129,6 @@ public class ClothScreenProvider {
 			.setSaveConsumer(val -> options.SHOW_FILTER_PANEL = val)
 			.build());
 
-		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.use_new_ui"), options.USE_NEW_UI)
-			.setDefaultValue(Config.Options.UI_NEW_UI_DEFAULT)
-			.setSaveConsumer(val -> options.USE_NEW_UI = val)
-			.build());
-
 		general.add(entryBuilder.startStrList(Component.translatable("config.musicnotification.general.ignore_sound_event"), options.IGNORE_SOUND_EVENT)
 			.setDefaultValue(Config.Options.IGNORE_SOUND_EVENT_DEFAULT)
 			.setTooltip(Component.translatable("config.musicnotification.general.ignore_sound_event.tooltip"))
