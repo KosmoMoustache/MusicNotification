@@ -20,16 +20,23 @@ import net.minecraft.util.Mth;
 public class PillButton extends Button {
 	private static final WidgetSprites SPRITES = new WidgetSprites(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/namespace"), Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/namespace_focused"));
 
+	private boolean selected = false;
+
 	public PillButton(int x, int y, int width, int height, Component message, OnPress onPress) {
 		super(x, y, width, height, message, onPress, DEFAULT_NARRATION);
 		this.setMessage(message);
 	}
 
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
 	@Override
 	protected void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+		boolean highlighted = this.selected || this.isHovered();
 		//? if >=1.21.4 {
 		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,
-			SPRITES.get(this.isActive(), this.isHoveredOrFocused()),
+			SPRITES.get(this.isActive(), highlighted),
 			this.getX(),
 			this.getY(),
 			this.getWidth(),
@@ -38,7 +45,7 @@ public class PillButton extends Button {
 		);
 		//? } else {
 		/*graphics.blitSprite(RenderPipelines.GUI_TEXTURED,
-			SPRITES.get(this.isActive(), this.isHoveredOrFocused()),
+			SPRITES.get(this.isActive(), highlighted),
 			this.getX(),
 			this.getY(),
 			0,

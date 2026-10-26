@@ -12,8 +12,8 @@
 		"MixinMusicManager",
 		"MixinTitleScreen",
 		"MusicManagerAccessor",
-		"MixinPauseScreen"
-    ],
+		"MixinPauseScreen",
+	],
 	"injectors": {
 		"defaultRequire": 1
 	}

@@ -1,6 +1,7 @@
 package net.kosmo.music.gui;
 
 import net.kosmo.music.MusicNotificationClient;
+import net.kosmo.music.compat.MeAbstractContainerWidget;
 import net.kosmo.music.gui.component.PillButton;
 import net.kosmo.music.resource.TrackDataManager;
 import net.minecraft.client.gui.Font;
@@ -15,7 +16,7 @@ import net.minecraft.resources.Identifier;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class ExtendedFilter extends AbstractContainerWidget {
+public class ExtendedFilter extends MeAbstractContainerWidget {
 	private static final WidgetSprites LEFT_ARROW = new WidgetSprites(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/left_arrow"), Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/left_arrow_disabled"), Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/left_arrow_focused"));
 	private static final WidgetSprites RIGHT_ARROW = new WidgetSprites(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/right_arrow"), Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/right_arrow_disabled"), Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/right_arrow_focused"));
 
@@ -31,17 +32,17 @@ public class ExtendedFilter extends AbstractContainerWidget {
 	private int pillIndex = -1;
 
 	public ExtendedFilter(JukeboxScreen parent, Font font, int x, int y, int width, int height, Component narration, Consumer<String> responder) {
-		super(x, y, width, height, narration/*? >=26.1 {*/,AbstractScrollArea.defaultSettings(1)/*?} else {*//*?}*/);
+		super(x, y, width, height, narration);
 		this.parent = parent;
 		this.font = font;
 		this.responder = responder;
 
 		this.leftArrow = new ImageButton(this.getX(), this.getY(), 15, 20, LEFT_ARROW, button -> {
 			this.moveSelectedPillLeft();
-		}, Component.translatable("gui.musicnotification.jukebox.filter.<left_arrow"));
+		}, Component.translatable("gui.musicnotification.jukebox.filter.namespace_previous"));
 		this.rightArrow = new ImageButton(this.getX() + (this.width - 15), this.getY(), 15, 20, RIGHT_ARROW, button -> {
 			this.moveSelectedPillRight();
-		}, Component.translatable("gui.musicnotification.jukebox.filter.right_arrow"));
+		}, Component.translatable("gui.musicnotification.jukebox.filter.namespace_next"));
 
 		this.addChild(this.leftArrow);
 		this.addChild(this.rightArrow);

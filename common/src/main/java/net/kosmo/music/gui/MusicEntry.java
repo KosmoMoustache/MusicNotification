@@ -135,7 +135,6 @@ public class MusicEntry extends ListEntry {
 			return sound2.getLocation().equals(entry.key());
 		}
 		return false;
-
 	}
 
 	@Override

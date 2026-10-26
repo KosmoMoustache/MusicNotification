@@ -1,14 +1,17 @@
 package net.kosmo.music.gui;
 
-import net.kosmo.music.config.Config;
-import net.kosmo.music.gui.v2.JukeboxScreenV2;
+//? if >=26.2 {
+import net.kosmo.music.gui.nouveau.JukeboxScreenNouveau;
+//? }
 import net.minecraft.client.gui.screens.Screen;
 
 public class JukeboxScreenSelector {
-	public static Screen create() {
-		if (Config.options().USE_V2_UI) {
-			return new JukeboxScreenV2();
-		}
-		return new JukeboxScreen();
+	public static Screen create(Screen parent) {
+		//? if >=26.2 {
+		return new JukeboxScreenNouveau(parent);
+		//? } else {
+		/*return new JukeboxScreen(parent);
+		*///? }
+
 	}
 }

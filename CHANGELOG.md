@@ -21,14 +21,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [3.4.0-alpha.1] - 03/10/2026
+## [3.4.0] - 03/10/2026
 
+- (Jukebox) Keybind is now unassigned by default
 - (Jukebox) Added a button to open the Jukebox from the Pause Menu
 - (Jukebox) Stop Sound button now redirects to Music & Sound volume options when the volume is off
-- (Jukebox) Menu open keybind is now unassigned by default
-- (Jukebox) Added experimental new ui
 - (Toast) Fixed blank toast info in 1.21.1 (#152)
 - (Toast) Fixed missing pixels
+
+### 26.2 & 26.3
+- (Jukebox) new ui
 
 ## [3.3.2] - 19/09/2026
 

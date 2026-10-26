@@ -62,7 +62,7 @@ public class Helper {
 		client.getSoundManager().stop(null, SoundSource.MUSIC);
 		SimpleSoundInstance soundInstance = Helper.forMusic(soundEvent);
 		MusicManagerAccessor musicManagerAccessor = (MusicManagerAccessor) client.getMusicManager();
-		client.getSoundManager().play(soundInstance);
+		client.getSoundManager().play(soundInstance); // TODO: Return PlayResult
 		musicManagerAccessor.setCurrentMusic(soundInstance);
 		MusicNotificationClient.currentlyPlaying = soundInstance;
 	}

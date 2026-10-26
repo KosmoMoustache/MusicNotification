@@ -108,18 +108,29 @@ public class ClothScreenProvider {
 			.setSaveConsumer(val -> options.MAX_COUNT_HISTORY = val)
 			.build());
 
-		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.debug_mod"), options.DEBUG_MOD)
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.show_debug_tab"), options.DEBUG_MOD)
 			.setDefaultValue(Config.Options.DEBUG_MOD_DEFAULT)
+			.setTooltip(Component.translatable("config.musicnotification.jukebox.show_debug_tab.tooltip"))
 			.setSaveConsumer(val -> options.DEBUG_MOD = val)
 			.build());
-		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("(Work in progress) enable filters"), options.WIP_FILTER_IN_JUKEBOX)
-			.setDefaultValue(Config.Options.WIP_FILTER_IN_JUKEBOX_DEFAULT)
-			.setSaveConsumer(val -> options.WIP_FILTER_IN_JUKEBOX = val)
+
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.show_mute_tab"), options.SHOW_MUTE)
+			.setDefaultValue(Config.Options.SHOW_MUTE_DEFAULT)
+			.setTooltip(Component.translatable("config.musicnotification.jukebox.show_mute_tab.tooltip"))
+			.setSaveConsumer(val -> options.SHOW_MUTE = val)
 			.build());
-		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("Enable new work in progess ui"), options.USE_V2_UI)
-			.setDefaultValue(Config.Options.USE_V2_UI_DEFAULT)
-			.setSaveConsumer(val -> options.USE_V2_UI = val)
+
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.wip_namespace_filter"), options.WIP_NAMESPACE_FILTER)
+			.setDefaultValue(Config.Options.WIP_NAMESPACE_FILTER_DEFAULT)
+			.setSaveConsumer(val -> options.WIP_NAMESPACE_FILTER = val)
 			.build());
+
+		//? if >=26.2 {
+		jukebox.add(entryBuilder.startBooleanToggle(Component.translatable("config.musicnotification.jukebox.show_filter_panel"), options.SHOW_FILTER_PANEL)
+			.setDefaultValue(Config.Options.SHOW_FILTER_PANEL_DEFAULT)
+			.setSaveConsumer(val -> options.SHOW_FILTER_PANEL = val)
+			.build());
+		//? }
 
 		general.add(entryBuilder.startStrList(Component.translatable("config.musicnotification.general.ignore_sound_event"), options.IGNORE_SOUND_EVENT)
 			.setDefaultValue(Config.Options.IGNORE_SOUND_EVENT_DEFAULT)

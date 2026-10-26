@@ -68,6 +68,7 @@ val enabledUniqueVersions = enabledVersions.values.flatten().distinct()
 stonecutter {
 	create(rootProject) {
 		versions(*enabledUniqueVersions.toTypedArray())
+		vcsVersion = enabledUniqueVersions.last()
 
 		enabledVersions.forEach { (branchName, branchVersions) ->
 			branch(branchName) {

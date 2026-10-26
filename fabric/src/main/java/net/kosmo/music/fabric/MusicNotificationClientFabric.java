@@ -62,13 +62,6 @@ public class MusicNotificationClientFabric implements ClientModInitializer {
 				Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
 				PackActivationType.NORMAL
 			);
-			ResourceLoader.registerBuiltinPack(
-				Identifier.fromNamespaceAndPath(MOD_ID, "v2ui"),
-				container,
-				Component.literal("MusicNotification: V2 UI"),
-				PackActivationType.DEFAULT_ENABLED
-			);
-
 			//? if <=1.21.1 {
 			/*if (MusicNotificationClient.PLATFORM_HELPER.isModLoaded("vanillabackport")) {
 			ResourceLoader.registerBuiltinPack(
