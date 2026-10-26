@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - (Jukebox) Stop Sound button now redirects to Music & Sound volume options when the volume is off
 - (Toast) Fixed blank toast info in 1.21.1 (#152)
 - (Toast) Fixed missing pixels
+- Fix track Thirteen cover art
 
 ### 26.2 & 26.3
 - (Jukebox) new ui
