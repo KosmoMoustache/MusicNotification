@@ -140,7 +140,7 @@ public class FilterPanel {
 
 	public void setHeight(int height) {
 		int scrollableHeight = height - NAMESPACE_HEIGHT - SPACING;
-		scrollableLayout.setMinWidth(scrollableHeight);
+		this.scrollableLayout.setMinHeight(scrollableHeight);
 		this.scrollableLayout.setMaxHeight(scrollableHeight);
 	}
 

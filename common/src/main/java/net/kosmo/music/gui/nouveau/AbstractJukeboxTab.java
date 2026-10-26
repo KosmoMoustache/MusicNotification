@@ -50,7 +50,7 @@ public abstract class AbstractJukeboxTab implements Tab {
 		this.scrollableLayout = new ScrollableLayout(minecraft, this.trackScrollableContent, height);
 		this.scrollableLayout.setScrollbarSpacing(2);
 
-//		this.layout.addChild(searchBox.layout(), settings -> settings.paddingTop(SEARCH_BOX_PADDING).paddingBottom(SEARCH_BOX_PADDING));
+		this.layout.addChild(searchBox.layout(), settings -> settings.paddingTop(SEARCH_BOX_PADDING).paddingBottom(SEARCH_BOX_PADDING));
 		this.layout.addChild(this.scrollableLayout);
 		this.rearrangeElements();
 	}
@@ -136,7 +136,7 @@ public abstract class AbstractJukeboxTab implements Tab {
 	}
 
 	void rearrangeElements() {
-		this.scrollableLayout.setMinWidth(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING * 2);
+		this.scrollableLayout.setMinHeight(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING * 2);
 		this.scrollableLayout.setMaxHeight(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING * 2);
 	}
 
