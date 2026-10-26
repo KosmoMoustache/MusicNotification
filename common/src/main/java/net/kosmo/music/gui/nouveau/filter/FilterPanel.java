@@ -1,6 +1,7 @@
-package net.kosmo.music.gui.v3.filter;
+//? if >=26.2 {
+package net.kosmo.music.gui.nouveau.filter;
 
-import net.kosmo.music.gui.v3.JukeboxScreenV3;
+import net.kosmo.music.gui.nouveau.JukeboxScreenNouveau;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.resource.TrackDataManager;
 import net.kosmo.music.resource.TrackFilter;
@@ -21,16 +22,16 @@ public class FilterPanel {
 	private static final int BACKGROUND_COLOR = ARGB.color(200, 12, 12, 12);
 
 	private final Minecraft minecraft;
-	private final JukeboxScreenV3 screen;
-	private final NamespaceFilterWidget namespaceFilter;
+	private final JukeboxScreenNouveau screen;
+	private final net.kosmo.music.gui.nouveau.filter.NamespaceFilterWidget namespaceFilter;
 	private final LinearLayout trackScrollableContent;
 	private final ScrollableLayout scrollableLayout;
 	private final LinearLayout layout;
 	private final int width;
-	private final List<AlbumFilterWidgetEntry> albumEntries = new ArrayList<>();
+	private final List<net.kosmo.music.gui.nouveau.filter.AlbumFilterWidgetEntry> albumEntries = new ArrayList<>();
 	private boolean visible = true;
 
-	public FilterPanel(Minecraft minecraft, JukeboxScreenV3 screen, int width, int height) {
+	public FilterPanel(Minecraft minecraft, JukeboxScreenNouveau screen, int width, int height) {
 		this.minecraft = minecraft;
 		this.screen = screen;
 		this.width = width;
@@ -38,7 +39,7 @@ public class FilterPanel {
 		this.layout = LinearLayout.vertical().spacing(SPACING);
 		this.layout.defaultCellSetting().alignHorizontallyCenter();
 
-		this.namespaceFilter = new NamespaceFilterWidget(minecraft, width, NAMESPACE_HEIGHT, this::onNamespaceSelected);
+		this.namespaceFilter = new net.kosmo.music.gui.nouveau.filter.NamespaceFilterWidget(minecraft, width, NAMESPACE_HEIGHT, this::onNamespaceSelected);
 
 		this.trackScrollableContent = LinearLayout.vertical();
 		this.scrollableLayout = new ScrollableLayout(minecraft, this.trackScrollableContent, height - NAMESPACE_HEIGHT - SPACING);
@@ -61,7 +62,7 @@ public class FilterPanel {
 	 * Plain click: exclusive selection (clicking the only selected album clears it).
 	 * Ctrl-click: toggles the album within the current selection.
 	 */
-	private void onAlbumSelected(AlbumFilterWidgetEntry selected, boolean multiSelection) {
+	private void onAlbumSelected(net.kosmo.music.gui.nouveau.filter.AlbumFilterWidgetEntry selected, boolean multiSelection) {
 		String album = selected.getAlbum();
 		boolean wasSelected = this.screen.getTrackFilter().isAlbumSelected(album);
 
@@ -92,7 +93,7 @@ public class FilterPanel {
 		int contentWidth = this.getContentWidth();
 		this.albumEntries.clear();
 		for (Map.Entry<String, TrackData> album : albums.entrySet()) {
-			this.albumEntries.add(new AlbumFilterWidgetEntry(this.minecraft, contentWidth, 36, album.getKey(), album.getValue().getAlbumCover(), this::onAlbumSelected));
+			this.albumEntries.add(new net.kosmo.music.gui.nouveau.filter.AlbumFilterWidgetEntry(this.minecraft, contentWidth, 36, album.getKey(), album.getValue().getAlbumCover(), this::onAlbumSelected));
 		}
 
 		trackScrollableContent.removeChildren();
@@ -106,7 +107,7 @@ public class FilterPanel {
 
 	private void syncAlbumSelection() {
 		TrackFilter filter = this.screen.getTrackFilter();
-		for (AlbumFilterWidgetEntry entry : this.albumEntries) {
+		for (net.kosmo.music.gui.nouveau.filter.AlbumFilterWidgetEntry entry : this.albumEntries) {
 			entry.setSelected(filter.isAlbumSelected(entry.getAlbum()));
 		}
 	}
@@ -122,7 +123,7 @@ public class FilterPanel {
 	}
 
 	private int getContentWidth() {
-		return this.width - JukeboxScreenV3.SCROLLBAR_RESERVE;
+		return this.width - JukeboxScreenNouveau.SCROLLBAR_RESERVE;
 	}
 
 	public void visitChildren(Consumer<AbstractWidget> visitor) {
@@ -162,3 +163,4 @@ public class FilterPanel {
 		this.rebuildAlbums();
 	}
 }
+//? }

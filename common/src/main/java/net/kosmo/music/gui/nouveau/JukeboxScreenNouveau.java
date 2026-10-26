@@ -1,9 +1,10 @@
-package net.kosmo.music.gui.v3;
+//? if >=26.2 {
+package net.kosmo.music.gui.nouveau;
 
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.TrackHistory;
 import net.kosmo.music.config.Config;
-import net.kosmo.music.gui.v3.filter.FilterPanel;
+import net.kosmo.music.gui.nouveau.filter.FilterPanel;
 import net.kosmo.music.resource.TrackFilter;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractScrollArea;
@@ -28,7 +29,7 @@ import java.util.function.UnaryOperator;
 /*import net.minecraft.client.gui.navigation.ScreenRectangle;
 *///? }
 
-public class JukeboxScreenV3 extends Screen {
+public class JukeboxScreenNouveau extends Screen {
 	public static final int SCROLLBAR_RESERVE = AbstractScrollArea.SCROLLBAR_WIDTH + 2; // 6 + 2 = 8
 	public static final int OVERLAY_WIDTH = 228; // 220 entries + 8 reserve
 	private static final int FILTER_WIDTH = 150;
@@ -45,14 +46,14 @@ public class JukeboxScreenV3 extends Screen {
 	private final LinearLayout layout = LinearLayout.vertical();
 	private final FilterPanel filterPanel;
 	private TrackFilter trackFilter;
-	private @Nullable HomeTab homeTab;
-	private @Nullable HistoryTab historyTab;
-	private @Nullable MuteTab muteTab;
-	private @Nullable DebugTab debugTab;
+	private @Nullable net.kosmo.music.gui.nouveau.HomeTab homeTab;
+	private @Nullable net.kosmo.music.gui.nouveau.HistoryTab historyTab;
+	private @Nullable net.kosmo.music.gui.nouveau.MuteTab muteTab;
+	private @Nullable net.kosmo.music.gui.nouveau.DebugTab debugTab;
 	private @Nullable TabNavigationBar tabNavigationBar;
 	private @Nullable LinearLayout contentLayout;
 
-	public JukeboxScreenV3(@Nullable Screen parent) {
+	public JukeboxScreenNouveau(@Nullable Screen parent) {
 		super(TITLE);
 		this.parent = parent;
 		this.tabManager = new TabManager(this::addRenderableWidget, this::removeWidget, this::onSelectedTab, this::onDeselectedTab);
@@ -81,10 +82,10 @@ public class JukeboxScreenV3 extends Screen {
 			this.parent.init(this.width, this.height);
 		}
 
-		this.homeTab = new HomeTab(this.minecraft, this, getOverlayWidth(), 220);
-		this.historyTab = new HistoryTab(this.minecraft, this, getOverlayWidth(), 220);
-		this.muteTab = new MuteTab(this.minecraft, this, getOverlayWidth(), 220);
-		this.debugTab = new DebugTab(this.minecraft, this, getOverlayWidth(), 220);
+		this.homeTab = new net.kosmo.music.gui.nouveau.HomeTab(this.minecraft, this, getOverlayWidth(), 220);
+		this.historyTab = new net.kosmo.music.gui.nouveau.HistoryTab(this.minecraft, this, getOverlayWidth(), 220);
+		this.muteTab = new net.kosmo.music.gui.nouveau.MuteTab(this.minecraft, this, getOverlayWidth(), 220);
+		this.debugTab = new net.kosmo.music.gui.nouveau.DebugTab(this.minecraft, this, getOverlayWidth(), 220);
 
 		boolean showMute = Config.options().SHOW_MUTE;
 		boolean showDebug = Config.options().DEBUG_MOD;
@@ -94,8 +95,8 @@ public class JukeboxScreenV3 extends Screen {
 
 		TabNavigationBar.Builder builder = TabNavigationBar.builder(this.tabManager, 0/*? >=26.2 {*/, 0, getOverlayWidth(), 20/*?} else {*//*?}*/)
 			//? if >=26.2 {
-			.addTab(new JukeboxTabButton(this.tabManager, this.homeTab, tabWidth, 20), homeTab)
-			.addTab(new JukeboxTabButton(this.tabManager, this.historyTab, tabWidth, 20), historyTab);
+			.addTab(new net.kosmo.music.gui.nouveau.JukeboxTabButton(this.tabManager, this.homeTab, tabWidth, 20), homeTab)
+			.addTab(new net.kosmo.music.gui.nouveau.JukeboxTabButton(this.tabManager, this.historyTab, tabWidth, 20), historyTab);
 		//?} else {
 		/*.addTabs(homeTab, historyTab);
 		 *///?}
@@ -103,14 +104,14 @@ public class JukeboxScreenV3 extends Screen {
 
 		if (showMute) {
 			//? if >=26.2 {
-			builder.addTab(new JukeboxTabButton(this.tabManager, this.muteTab, tabWidth, 20), muteTab);
+			builder.addTab(new net.kosmo.music.gui.nouveau.JukeboxTabButton(this.tabManager, this.muteTab, tabWidth, 20), muteTab);
 			//?} else {
 			/*builder.addTabs(muteTab);
 			 *///?}
 		}
 		if (showDebug) {
 			//? if >=26.2 {
-			builder.addTab(new JukeboxTabButton(this.tabManager, this.debugTab, tabWidth, 20), debugTab);
+			builder.addTab(new net.kosmo.music.gui.nouveau.JukeboxTabButton(this.tabManager, this.debugTab, tabWidth, 20), debugTab);
 			//?} else {
 			/*builder.addTabs(debugTab);
 			 *///?}
@@ -189,7 +190,7 @@ public class JukeboxScreenV3 extends Screen {
 			this.contentLayout.addChild(/*? >=26.2 {*/tab.getLayout()/*?} else {*//*((AbstractJukeboxTab) tab).getLayout()*//*?}*/);
 		}
 		// The search query is shared by the tabs that use TrackFilter: keep their search box in sync.
-		if (tab instanceof AbstractJukeboxTab jukeboxTab) {
+		if (tab instanceof net.kosmo.music.gui.nouveau.AbstractJukeboxTab jukeboxTab) {
 			jukeboxTab.setSearchText(this.trackFilter.query());
 		}
 		this.refreshLists();
@@ -215,14 +216,14 @@ public class JukeboxScreenV3 extends Screen {
 	 */
 	public void clearFilters() {
 		this.updateFilter(f -> TrackFilter.empty());
-		if (this.tabManager.getCurrentTab() instanceof AbstractJukeboxTab tab) {
+		if (this.tabManager.getCurrentTab() instanceof net.kosmo.music.gui.nouveau.AbstractJukeboxTab tab) {
 			tab.setSearchText("");
 		}
 	}
 
 	private void conditionalVisibility(Tab tab) {
-		this.clearHistoryButton.visible = tab instanceof HistoryTab;
-		this.filterPanel.setVisible(tab instanceof HomeTab && this.minecraft.getWindow().getGuiScaledWidth() / 2 > OVERLAY_WIDTH / 2 + FILTER_WIDTH + 16 && Config.options().SHOW_FILTER_PANEL);
+		this.clearHistoryButton.visible = tab instanceof net.kosmo.music.gui.nouveau.HistoryTab;
+		this.filterPanel.setVisible(tab instanceof net.kosmo.music.gui.nouveau.HomeTab && this.minecraft.getWindow().getGuiScaledWidth() / 2 > OVERLAY_WIDTH / 2 + FILTER_WIDTH + 16 && Config.options().SHOW_FILTER_PANEL);
 	}
 
 	/**
@@ -248,9 +249,10 @@ public class JukeboxScreenV3 extends Screen {
 	 * Refresh the current tab's list and reposition elements.
 	 */
 	public void refreshLists() {
-		if (this.tabManager.getCurrentTab() instanceof AbstractJukeboxTab tab) {
+		if (this.tabManager.getCurrentTab() instanceof net.kosmo.music.gui.nouveau.AbstractJukeboxTab tab) {
 			tab.refresh();
 		}
 		this.repositionElements();
 	}
 }
+//? }

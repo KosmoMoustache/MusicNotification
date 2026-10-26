@@ -1,4 +1,5 @@
-package net.kosmo.music.gui.v3;
+//? if >=26.2 {
+package net.kosmo.music.gui.nouveau;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ActiveTextCollector;
@@ -54,3 +55,4 @@ public class JukeboxTabButton extends TabButton {
 		graphics.fill(left, top, left + width, top + 1, color);
 	}
 }
+//? }

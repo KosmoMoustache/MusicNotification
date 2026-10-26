@@ -1,4 +1,5 @@
-package net.kosmo.music.gui.v3;
+//? if >=26.2 {
+package net.kosmo.music.gui.nouveau;
 
 import net.kosmo.music.gui.component.SearchBox;
 import net.kosmo.music.resource.TrackData;
@@ -29,12 +30,12 @@ public abstract class AbstractJukeboxTab implements Tab {
 	protected final LinearLayout layout;
 	protected final SearchBox searchBox;
 	protected final Minecraft minecraft;
-	private final JukeboxScreenV3 parent;
+	private final JukeboxScreenNouveau parent;
 	private int width;
 	private int height;
 
 
-	AbstractJukeboxTab(Minecraft minecraft, JukeboxScreenV3 parent, int width, int height) {
+	AbstractJukeboxTab(Minecraft minecraft, JukeboxScreenNouveau parent, int width, int height) {
 		this.parent = parent;
 		this.minecraft = minecraft;
 		this.width = width;
@@ -90,12 +91,12 @@ public abstract class AbstractJukeboxTab implements Tab {
 	}
 
 	protected int getListContentWidth() {
-		return this.width - JukeboxScreenV3.SCROLLBAR_RESERVE;
+		return this.width - JukeboxScreenNouveau.SCROLLBAR_RESERVE;
 	}
 
-	protected abstract List<? extends AbstractJukeboxEntryContainerWidget> buildEntries();
+	protected abstract List<? extends net.kosmo.music.gui.nouveau.AbstractJukeboxEntryContainerWidget> buildEntries();
 
-	protected final void updateEntries(List<? extends AbstractJukeboxEntryContainerWidget> entries) {
+	protected final void updateEntries(List<? extends net.kosmo.music.gui.nouveau.AbstractJukeboxEntryContainerWidget> entries) {
 		this.trackScrollableContent.removeChildren();
 		entries.forEach(this.trackScrollableContent::addChild);
 
@@ -103,22 +104,22 @@ public abstract class AbstractJukeboxTab implements Tab {
 			this.trackScrollableContent.addChild(this.createEmptyListFrame());
 	}
 
-	protected List<TrackEntry> buildTrackEntries(Collection<TrackData> tracks) {
-		List<TrackEntry> entries = new ArrayList<>(tracks.size());
+	protected List<net.kosmo.music.gui.nouveau.TrackEntry> buildTrackEntries(Collection<TrackData> tracks) {
+		List<net.kosmo.music.gui.nouveau.TrackEntry> entries = new ArrayList<>(tracks.size());
 		TrackFilter trackFilter = this.parent.getTrackFilter();
 		for (TrackData track : tracks) {
 			if (!trackFilter.test(track)) continue;
-			entries.add(new TrackEntry(this.minecraft, this.parent, this.scrollableLayout, track));
+			entries.add(new net.kosmo.music.gui.nouveau.TrackEntry(this.minecraft, this.parent, this.scrollableLayout, track));
 		}
 		return entries;
 	}
 
-	protected List<SoundEntry> buildSoundEntries(Collection<Identifier> sounds) {
-		List<SoundEntry> entries = new ArrayList<>(sounds.size());
+	protected List<net.kosmo.music.gui.nouveau.SoundEntry> buildSoundEntries(Collection<Identifier> sounds) {
+		List<net.kosmo.music.gui.nouveau.SoundEntry> entries = new ArrayList<>(sounds.size());
 		TrackFilter trackFilter = this.parent.getTrackFilter();
 		for (Identifier id : sounds) {
 			if (!trackFilter.test(id)) continue;
-			entries.add(new SoundEntry(this.minecraft, this.parent, this.scrollableLayout,
+			entries.add(new net.kosmo.music.gui.nouveau.SoundEntry(this.minecraft, this.parent, this.scrollableLayout,
 				TrackDataManager.getEmpty(id, id.toString(), id.getNamespace())));
 		}
 		return entries;
@@ -146,3 +147,4 @@ public abstract class AbstractJukeboxTab implements Tab {
 
 	abstract Component emptyListMessage();
 }
+//? }

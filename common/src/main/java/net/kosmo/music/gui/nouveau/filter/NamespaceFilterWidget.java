@@ -1,4 +1,5 @@
-package net.kosmo.music.gui.v3.filter;
+//? if >=26.2 {
+package net.kosmo.music.gui.nouveau.filter;
 
 import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.gui.component.PillButton;
@@ -194,3 +195,4 @@ public class NamespaceFilterWidget extends AbstractContainerWidget {
 		return this.children;
 	}
 }
+//? }

@@ -1,4 +1,5 @@
-package net.kosmo.music.gui.v3;
+//? if >=26.2 {
+package net.kosmo.music.gui.nouveau;
 
 import net.kosmo.music.Helper;
 import net.kosmo.music.gui.component.AlbumCoverWidget;
@@ -12,14 +13,14 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.CommonColors;
 
-public class TrackEntry extends AbstractJukeboxEntryContainerWidget {
+public class TrackEntry extends net.kosmo.music.gui.nouveau.AbstractJukeboxEntryContainerWidget {
 	protected AlbumCoverWidget albumCoverWidget;
 
-	public TrackEntry(Minecraft minecraft, JukeboxScreenV3 screen, ScrollableLayout scrollableLayout, TrackData trackData) {
+	public TrackEntry(Minecraft minecraft, JukeboxScreenNouveau screen, ScrollableLayout scrollableLayout, TrackData trackData) {
 		this(minecraft, screen, scrollableLayout, trackData, false);
 	}
 
-	public TrackEntry(Minecraft minecraft, JukeboxScreenV3 screen, ScrollableLayout scrollableLayout, TrackData trackData, boolean animated) {
+	public TrackEntry(Minecraft minecraft, JukeboxScreenNouveau screen, ScrollableLayout scrollableLayout, TrackData trackData, boolean animated) {
 		super(minecraft, screen, scrollableLayout, 0, 0, screen.getContentWidth(), 36, trackData, animated);
 	}
 
@@ -79,5 +80,4 @@ public class TrackEntry extends AbstractJukeboxEntryContainerWidget {
 		return Component.translatable("gui.musicnotification.jukebox.entry.track", this.trackData.title().getString());
 	}
 }
-
-
+//? }

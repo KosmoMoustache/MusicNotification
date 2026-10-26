@@ -1,4 +1,5 @@
-package net.kosmo.music.gui.v3;
+//? if >=26.2 {
+package net.kosmo.music.gui.nouveau;
 
 import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.kosmo.music.resource.TrackData;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContainerWidget {
 	protected final Minecraft minecraft;
-	protected final JukeboxScreenV3 screen;
+	protected final JukeboxScreenNouveau screen;
 	protected final ScrollableLayout scrollableLayout;
 	protected final TrackData trackData;
 	private final List<AbstractWidget> children = new ArrayList<>();
@@ -28,7 +29,7 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 	protected StringWidget line2Widget;
 	protected LinearLayout layout;
 
-	public AbstractJukeboxEntryContainerWidget(Minecraft minecraft, JukeboxScreenV3 screen, ScrollableLayout scrollableLayout, int x, int y, int width, int height, TrackData trackData, boolean animated) {
+	public AbstractJukeboxEntryContainerWidget(Minecraft minecraft, JukeboxScreenNouveau screen, ScrollableLayout scrollableLayout, int x, int y, int width, int height, TrackData trackData, boolean animated) {
 		super(x, y, width, height, Component.empty());
 		this.minecraft = minecraft;
 		this.screen = screen;
@@ -109,3 +110,4 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 
 	abstract boolean primaryAction();
 }
+//? }

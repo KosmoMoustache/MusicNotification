@@ -1,4 +1,5 @@
-package net.kosmo.music.gui.v3.filter;
+//? if >=26.2 {
+package net.kosmo.music.gui.nouveau.filter;
 
 import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.kosmo.music.gui.component.AlbumCoverWidget;
@@ -112,3 +113,4 @@ public class AlbumFilterWidgetEntry extends AbstractContainerWidget {
 		return true;
 	}
 }
+//? }
