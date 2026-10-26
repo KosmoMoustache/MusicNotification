@@ -27,6 +27,7 @@ public class AlbumCoverWidget extends AbstractWidget {
 	}
 
 	@Override
+	//~ if >26 renderWidget -> extractWidgetRenderState
 	protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
 		if (!this.animated) {
 			this.cover.drawCover(graphics, this.getX(), this.getY(), this.width, this.height);

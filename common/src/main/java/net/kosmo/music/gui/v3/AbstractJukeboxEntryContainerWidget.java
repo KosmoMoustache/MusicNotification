@@ -1,7 +1,6 @@
 package net.kosmo.music.gui.v3;
 
 import com.mojang.blaze3d.platform.cursor.CursorTypes;
-import net.kosmo.music.gui.component.AlbumCoverWidget;
 import net.kosmo.music.resource.TrackData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -13,8 +12,6 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
 import net.minecraft.util.CommonColors;
 
 import java.util.ArrayList;
@@ -27,17 +24,18 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 	protected final TrackData trackData;
 	private final List<AbstractWidget> children = new ArrayList<>();
 
-	protected AlbumCoverWidget albumCoverWidget;
 	protected StringWidget line1Widget;
 	protected StringWidget line2Widget;
 	protected LinearLayout layout;
 
 	public AbstractJukeboxEntryContainerWidget(Minecraft minecraft, JukeboxScreenV3 screen, ScrollableLayout scrollableLayout, int x, int y, int width, int height, TrackData trackData, boolean animated) {
-		super(x, y, width, height, Component.empty()/*? >=26.1 {*/,AbstractScrollArea.defaultSettings(0)/*?} else {*//*?}*/);
+		super(x, y, width, height, Component.empty());
 		this.minecraft = minecraft;
 		this.screen = screen;
 		this.scrollableLayout = scrollableLayout;
 		this.trackData = trackData;
+
+		this.layout = LinearLayout.vertical();
 		this.initWidgets(width, animated);
 	}
 
@@ -70,7 +68,8 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 			graphics.requestCursor(CursorTypes.POINTING_HAND);
 		}
 
-		this.renderWidget(graphics, mouseX, mouseY, a);
+//		ScreenRectangle rec = layout.getRectangle();
+//		graphics.fill(rec.left(), rec.top(), rec.right(), rec.bottom(), CommonColors.RED);
 	}
 
 	@Override
@@ -93,48 +92,6 @@ public abstract class AbstractJukeboxEntryContainerWidget extends AbstractContai
 	}
 
 	protected void initWidgets(int width, boolean animated) {
-		this.albumCoverWidget = new AlbumCoverWidget(20, 20, this.trackData.getAlbumCover(), animated);
-
-		this.line1Widget = new StringWidget(
-			this.trackData.title().copy()
-				.append(" - ").withColor(CommonColors.WHITE)
-				.append(this.trackData.author().copy()
-					.withColor(CommonColors.LIGHT_GRAY)),
-			this.minecraft.font
-		);
-		this.line1Widget.setMaxWidth(width, StringWidget.TextOverflow.SCROLLING);
-
-		MutableComponent trackNumber = this.trackData.track()
-			.filter(num -> num != 0)
-			.map(num -> Component.literal("#" + num + " "))
-			.orElse(Component.empty());
-
-		this.line2Widget = new StringWidget(
-			trackNumber.append(this.trackData.album().orElse(Component.empty()))
-				.withStyle(Style.EMPTY.withColor(CommonColors.LIGHT_GRAY).withoutShadow()),
-			this.minecraft.font
-		);
-		this.line2Widget.setMaxWidth(width, StringWidget.TextOverflow.SCROLLING);
-
-		this.layout = LinearLayout.vertical();
-		this.layout.addChild(this.line1Widget, s -> s.paddingBottom(3));
-		this.layout.addChild(this.line2Widget);
-		this.layout.arrangeElements();
-
-		this.addChild(this.albumCoverWidget);
-		this.addChild(this.line1Widget);
-		this.addChild(this.line2Widget);
-	}
-
-	protected void renderWidget(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-		this.albumCoverWidget.setPosition(this.getX() + 4, this.getY() + (this.getHeight() - this.albumCoverWidget.getHeight()) / 2 - 1);
-		this.albumCoverWidget.extractRenderState(graphics, mouseX, mouseY, a);
-
-		this.layout.setPosition(this.albumCoverWidget.getX() + this.albumCoverWidget.getWidth() + 4, this.getY() + (this.getHeight() - this.layout.getHeight()) / 2);
-		this.layout.visitWidgets(child -> child.extractRenderState(graphics, mouseX, mouseY, a));
-
-//		ScreenRectangle rec = layout.getRectangle();
-//		graphics.fill(rec.left(), rec.top(), rec.right(), rec.bottom(), CommonColors.RED);
 	}
 
 	// ? TODO: Narrator things

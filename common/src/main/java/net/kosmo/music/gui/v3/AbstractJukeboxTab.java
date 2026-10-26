@@ -1,13 +1,12 @@
 package net.kosmo.music.gui.v3;
 
-import net.kosmo.music.compat.MeScrollableLayout;
 import net.kosmo.music.gui.component.SearchBox;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.resource.TrackDataManager;
 import net.kosmo.music.resource.TrackFilter;
-import net.kosmo.music.compat.LayoutCompact;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.ScrollableLayout;
 import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.components.tabs.Tab;
 import net.minecraft.client.gui.layouts.FrameLayout;
@@ -25,8 +24,8 @@ import java.util.function.Consumer;
 public abstract class AbstractJukeboxTab implements Tab {
 	private static final int SEARCH_BOX_PADDING = 3;
 
-	protected final LinearLayout trackScrollableContent;
-	protected final MeScrollableLayout scrollableLayout;
+	public final LinearLayout trackScrollableContent;
+	public final ScrollableLayout scrollableLayout;
 	protected final LinearLayout layout;
 	protected final SearchBox searchBox;
 	protected final Minecraft minecraft;
@@ -47,10 +46,10 @@ public abstract class AbstractJukeboxTab implements Tab {
 		this.layout.defaultCellSetting().alignHorizontallyCenter();
 
 		this.trackScrollableContent = LinearLayout.vertical();
-		this.scrollableLayout = new MeScrollableLayout(minecraft, this.trackScrollableContent, height);
+		this.scrollableLayout = new ScrollableLayout(minecraft, this.trackScrollableContent, height);
 		this.scrollableLayout.setScrollbarSpacing(2);
 
-		this.layout.addChild(searchBox.layout(), settings -> settings.paddingTop(SEARCH_BOX_PADDING).paddingBottom(SEARCH_BOX_PADDING));
+//		this.layout.addChild(searchBox.layout(), settings -> settings.paddingTop(SEARCH_BOX_PADDING).paddingBottom(SEARCH_BOX_PADDING));
 		this.layout.addChild(this.scrollableLayout);
 		this.rearrangeElements();
 	}
@@ -97,7 +96,7 @@ public abstract class AbstractJukeboxTab implements Tab {
 	protected abstract List<? extends AbstractJukeboxEntryContainerWidget> buildEntries();
 
 	protected final void updateEntries(List<? extends AbstractJukeboxEntryContainerWidget> entries) {
-		LayoutCompact.removeChildren(this.trackScrollableContent);
+		this.trackScrollableContent.removeChildren();
 		entries.forEach(this.trackScrollableContent::addChild);
 
 		if (entries.isEmpty())
@@ -136,7 +135,7 @@ public abstract class AbstractJukeboxTab implements Tab {
 	}
 
 	void rearrangeElements() {
-		this.scrollableLayout.setMinHeight(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING * 2);
+		this.scrollableLayout.setMinWidth(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING * 2);
 		this.scrollableLayout.setMaxHeight(this.height - this.searchBox.contentHeight() - SEARCH_BOX_PADDING * 2);
 	}
 

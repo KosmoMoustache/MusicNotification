@@ -125,7 +125,6 @@ public class JukeboxScreen extends Screen {
 		this.layout.addToFooter(Button.builder(CommonComponents.GUI_BACK, button -> this.onClose()).build());
 
 		this.layout.visitWidgets(this::addRenderableWidget);
-//		this.layout.visitWidgets(this::addRenderableWidget);
 
 		this.repositionElements();
 	}

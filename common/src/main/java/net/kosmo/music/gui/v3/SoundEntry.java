@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ScrollableLayout;
 import net.minecraft.client.gui.components.StringWidget;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -43,17 +42,18 @@ public class SoundEntry extends AbstractJukeboxEntryContainerWidget {
 		this.line2Widget = new StringWidget(this.trackData.author().copy().setStyle(Style.EMPTY.withColor(CommonColors.LIGHT_GRAY)), this.minecraft.font);
 		this.addChild(this.line1Widget);
 		this.addChild(this.line2Widget);
+
+		this.layout.addChild(line1Widget, s -> s.paddingBottom(3));
+		this.layout.addChild(line2Widget);
+		this.layout.arrangeElements();
 	}
 
 	@Override
-	protected void renderWidget(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-		LinearLayout layout = LinearLayout.vertical();
-		layout.addChild(line1Widget, s -> s.paddingBottom(3));
-		layout.addChild(line2Widget);
+	protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+		super.extractWidgetRenderState(graphics, mouseX, mouseY, a);
 
-		layout.arrangeElements();
-		layout.setPosition(this.getX() + 4, this.getY() + (this.getHeight() - layout.getHeight()) / 2);
-		layout.visitWidgets(child -> child.extractRenderState(graphics, mouseX, mouseY, a));
+		this.layout.setPosition(this.getX() + 4, this.getY() + (this.getHeight() - this.layout.getHeight()) / 2);
+		this.layout.visitWidgets(child -> child.extractRenderState(graphics, mouseX, mouseY, a));
 	}
 
 	@Override

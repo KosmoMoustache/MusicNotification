@@ -1,11 +1,9 @@
 package net.kosmo.music.gui.v3.filter;
 
-import net.kosmo.music.compat.MeScrollableLayout;
 import net.kosmo.music.gui.v3.JukeboxScreenV3;
 import net.kosmo.music.resource.TrackData;
 import net.kosmo.music.resource.TrackDataManager;
 import net.kosmo.music.resource.TrackFilter;
-import net.kosmo.music.compat.LayoutCompact;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.*;
@@ -26,7 +24,7 @@ public class FilterPanel {
 	private final JukeboxScreenV3 screen;
 	private final NamespaceFilterWidget namespaceFilter;
 	private final LinearLayout trackScrollableContent;
-	private final MeScrollableLayout scrollableLayout;
+	private final ScrollableLayout scrollableLayout;
 	private final LinearLayout layout;
 	private final int width;
 	private final List<AlbumFilterWidgetEntry> albumEntries = new ArrayList<>();
@@ -43,7 +41,7 @@ public class FilterPanel {
 		this.namespaceFilter = new NamespaceFilterWidget(minecraft, width, NAMESPACE_HEIGHT, this::onNamespaceSelected);
 
 		this.trackScrollableContent = LinearLayout.vertical();
-		this.scrollableLayout = new MeScrollableLayout(minecraft, this.trackScrollableContent, height - NAMESPACE_HEIGHT - SPACING);
+		this.scrollableLayout = new ScrollableLayout(minecraft, this.trackScrollableContent, height - NAMESPACE_HEIGHT - SPACING);
 		this.scrollableLayout.setScrollbarSpacing(2);
 
 		this.layout.addChild(new StringWidget(Component.translatable("gui.musicnotification.jukebox.filter.title"), minecraft.font), s -> s.paddingTop(3).alignHorizontallyCenter());
@@ -97,7 +95,7 @@ public class FilterPanel {
 			this.albumEntries.add(new AlbumFilterWidgetEntry(this.minecraft, contentWidth, 36, album.getKey(), album.getValue().getAlbumCover(), this::onAlbumSelected));
 		}
 
-		LayoutCompact.removeChildren(trackScrollableContent);
+		trackScrollableContent.removeChildren();
 		this.albumEntries.forEach(this.trackScrollableContent::addChild);
 		if (this.albumEntries.isEmpty()) {
 			this.trackScrollableContent.addChild(this.createEmptyListFrame(contentWidth));
@@ -141,7 +139,7 @@ public class FilterPanel {
 
 	public void setHeight(int height) {
 		int scrollableHeight = height - NAMESPACE_HEIGHT - SPACING;
-		this.scrollableLayout.setMinHeight(scrollableHeight);
+		scrollableLayout.setMinWidth(scrollableHeight);
 		this.scrollableLayout.setMaxHeight(scrollableHeight);
 	}
 

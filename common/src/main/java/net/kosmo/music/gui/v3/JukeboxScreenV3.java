@@ -5,7 +5,6 @@ import net.kosmo.music.TrackHistory;
 import net.kosmo.music.config.Config;
 import net.kosmo.music.gui.v3.filter.FilterPanel;
 import net.kosmo.music.resource.TrackFilter;
-import net.kosmo.music.compat.LayoutCompact;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractScrollArea;
 import net.minecraft.client.gui.components.Button;
@@ -34,7 +33,7 @@ public class JukeboxScreenV3 extends Screen {
 	public static final int OVERLAY_WIDTH = 228; // 220 entries + 8 reserve
 	private static final int FILTER_WIDTH = 150;
 
-	private static final Identifier BACKGROUND_SPRITE = Identifier.withDefaultNamespace("friends/background");
+	private static final Identifier BACKGROUND_SPRITE = Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/background");
 	private static final Component TITLE = Component.translatable("gui.musicnotification.jukebox.title");
 	private static final Component CLEAR_HISTORY = Component.translatable("gui.musicnotification.jukebox.clear_history");
 	private static final Component STOP_SOUND_BUTTON = Component.translatable("gui.musicnotification.jukebox.stop_sound_button");
@@ -56,7 +55,7 @@ public class JukeboxScreenV3 extends Screen {
 	public JukeboxScreenV3(@Nullable Screen parent) {
 		super(TITLE);
 		this.parent = parent;
-		this.tabManager = new TabManager(this::addRenderableWidget, this::removeWidget, this::selectTab, this::deselectTab);
+		this.tabManager = new TabManager(this::addRenderableWidget, this::removeWidget, this::onSelectedTab, this::onDeselectedTab);
 		this.trackFilter = TrackFilter.empty();
 		this.filterPanel = new FilterPanel(this.minecraft, this, FILTER_WIDTH, this.height - 80);
 
@@ -148,7 +147,8 @@ public class JukeboxScreenV3 extends Screen {
 		this.tabNavigationBar.setPosition(this.layout.getX(), this.layout.getY() - 20 - 7);
 		this.tabNavigationBar.arrangeElements(this.width);
 		//?} else {
-		/*this.tabNavigationBar.updateWidth(this.width);
+		/*//~ if >26 setWidth -> updateWidth
+		this.tabNavigationBar.updateWidth(this.width);
 		int tabAreaTop = this.tabNavigationBar.getRectangle().bottom();
 		ScreenRectangle tabArea = new ScreenRectangle(0, tabAreaTop, this.width, this.height - tabAreaTop);
 		this.tabNavigationBar.getTabs().forEach(tab -> tab.visitChildren(child -> child.setHeight(tabArea.height())));
@@ -168,7 +168,6 @@ public class JukeboxScreenV3 extends Screen {
 	@Override
 	public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
 		super.extractBackground(graphics, mouseX, mouseY, a);
-
 		graphics.blitSprite(RenderPipelines.GUI_TEXTURED,
 			BACKGROUND_SPRITE,
 			this.layout.getX() - 8,
@@ -185,7 +184,7 @@ public class JukeboxScreenV3 extends Screen {
 	/**
 	 * Tab Manager onSelected
 	 */
-	private void selectTab(Tab tab) {
+	private void onSelectedTab(Tab tab) {
 		if (this.contentLayout != null) {
 			this.contentLayout.addChild(/*? >=26.2 {*/tab.getLayout()/*?} else {*//*((AbstractJukeboxTab) tab).getLayout()*//*?}*/);
 		}
@@ -229,9 +228,9 @@ public class JukeboxScreenV3 extends Screen {
 	/**
 	 * TabManager onDeselected
 	 */
-	private void deselectTab(Tab tab) {
+	private void onDeselectedTab(Tab tab) {
 		if (this.contentLayout != null) {
-			LayoutCompact.removeChildren(this.contentLayout);
+			this.contentLayout.removeChildren();
 		}
 	}
 

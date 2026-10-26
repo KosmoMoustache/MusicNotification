@@ -1,11 +1,11 @@
 package net.kosmo.music.gui.v3.filter;
 
 import com.mojang.blaze3d.platform.cursor.CursorTypes;
-import net.kosmo.music.compat.MeAbstractContainerWidget;
 import net.kosmo.music.gui.component.AlbumCoverWidget;
 import net.kosmo.music.resource.AlbumCover;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.AbstractContainerWidget;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class AlbumFilterWidgetEntry extends MeAbstractContainerWidget {
+public class AlbumFilterWidgetEntry extends AbstractContainerWidget {
 	private final List<AbstractWidget> children = new ArrayList<>();
 
 	private final AlbumCoverWidget albumCoverWidget;

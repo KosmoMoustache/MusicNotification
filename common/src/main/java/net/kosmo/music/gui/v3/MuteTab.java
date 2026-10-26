@@ -2,7 +2,6 @@ package net.kosmo.music.gui.v3;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 

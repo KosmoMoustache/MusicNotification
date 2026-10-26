@@ -1,7 +1,6 @@
 package net.kosmo.music.gui.v3.filter;
 
 import net.kosmo.music.MusicNotificationClient;
-import net.kosmo.music.compat.MeAbstractContainerWidget;
 import net.kosmo.music.gui.component.PillButton;
 import net.kosmo.music.resource.TrackDataManager;
 import net.minecraft.client.Minecraft;
@@ -22,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class NamespaceFilterWidget extends MeAbstractContainerWidget {
+public class NamespaceFilterWidget extends AbstractContainerWidget {
 	private static final WidgetSprites LEFT_ARROW = new WidgetSprites(
 		Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/left_arrow"),
 		Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/left_arrow_disabled"),
@@ -177,9 +176,11 @@ public class NamespaceFilterWidget extends MeAbstractContainerWidget {
 	}
 
 	@Override
+	//~ if >26 renderWidget -> extractWidgetRenderState
 	protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
 		this.layoutSlots();
 		for (AbstractWidget child : this.children) {
+			//~ if >26 render -> extractRenderState
 			child.extractRenderState(graphics, mouseX, mouseY, a);
 		}
 	}
