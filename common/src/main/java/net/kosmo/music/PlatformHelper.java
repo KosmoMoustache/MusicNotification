@@ -22,6 +22,6 @@ public abstract class PlatformHelper<T> {
 
 	public abstract void setCompactNotification(TrackData trackData, int time);
 
-	public abstract String getDarkModeResourcePackId();
+	public abstract String getDarkModePackId();
 }
 

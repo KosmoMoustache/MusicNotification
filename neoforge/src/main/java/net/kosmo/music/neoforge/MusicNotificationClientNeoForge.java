@@ -59,7 +59,8 @@ public class MusicNotificationClientNeoForge {
 			Component.translatable("text.musicnotification.resourcepack.dark_mode.name"),
 			PackSource.BUILT_IN,
 			false,
-			Pack.Position.TOP);
+			Pack.Position.TOP
+		);
 		//? if <=1.21.1 {
 		/*if (MusicNotificationClient.PLATFORM_HELPER.isModLoaded("vanillabackport")) {
 			event.addPackFinders(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "resourcepacks/vanillabackport"),
@@ -69,7 +70,7 @@ public class MusicNotificationClientNeoForge {
 				true,
 				Pack.Position.TOP);
 		}
-		*///? }
+		*///?}
 	}
 
 	void registerKeyMappings(RegisterKeyMappingsEvent event) {
@@ -80,11 +81,11 @@ public class MusicNotificationClientNeoForge {
 	void addClientReloadListener(AddClientReloadListenersEvent event) {
 		event.addListener(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "json"), MusicResourceReloadListener.INSTANCE);
 	}
-	//? } else {
+	//?} else {
 	/*void addClientReloadListener(RegisterClientReloadListenersEvent event) {
 		event.registerReloadListener(MusicResourceReloadListener.INSTANCE);
 	}
-	*///? }
+	*///?}
 
 	void registerGuiCompactLayer(RegisterGuiLayersEvent event) {
 		event.registerBelowAll(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "gui_notification_compact"), new GuiCompactLayer());

@@ -45,11 +45,11 @@ set_output() {
 }
 
 matrix_content="{\"include\":["
-enabled_platforms=$(awk -F= '/stonecutter_enabled_platforms/{print $2}' gradle.properties | tr -d ' ')
+enabled_platforms=$(awk -F= '/^stonecutter_enabled_platforms/{print $2}' gradle.properties | tr -d ' ')
 
 for platform in $(echo "$enabled_platforms" | tr ',' ' '); do
   if [[ ${#allowed_mod_loaders_array[@]} -eq 0 ]] || contains "$platform" "${allowed_mod_loaders_array[@]}"; then
-    versions=$(awk -F= '/stonecutter_enabled_'$platform'_versions/{print $2}' gradle.properties | tr -d ' ')
+    versions=$(awk -F= '/^stonecutter_enabled_'$platform'_versions/{print $2}' gradle.properties | tr -d ' ')
     for version in $(echo "$versions" | tr ',' ' '); do
       if [[ ${#allowed_versions_array[@]} -eq 0 ]] || contains "$version" "${allowed_versions_array[@]}"; then
 #         if [[ "$platform" == "fabric" ]]; then

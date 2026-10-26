@@ -87,7 +87,7 @@ public class Config {
 	public static class Options {
 		public static final boolean COMPUTED_IS_DARK_MODE_ENABLED_DEFAULT = false;
 
-		public static final boolean SHOW_TITLE_SCREEN_BUTTON_DEFAULT = true;
+		public static final boolean SHOW_JUKEBOX_MENU_BUTTON_DEFAULT = true;
 		public static final boolean SHOW_AUTHOR_DEFAULT = true;
 		public static final boolean SHOW_ALBUM_NAME_DEFAULT = false;
 		public static final boolean ROTATE_ALBUM_COVER_DEFAULT = false;
@@ -95,18 +95,20 @@ public class Config {
 		public static final List<String> IGNORE_SOUND_EVENT_DEFAULT = List.of("minecraft:note/*");
 		public static final int MAX_COUNT_HISTORY_DEFAULT = 20;
 		public static final boolean DEBUG_MOD_DEFAULT = false;
+		public static final boolean SHOW_MUTE_DEFAULT = false;
 		public static final NotificationStyle NOTIFICATION_STYLE_DEFAULT = NotificationStyle.LEGACY_TOAST;
 		public static final List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK_DEFAULT = List.of(NotificationStyle.COMPACT, NotificationStyle.LOG);
 		public static final boolean STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT = false;
 		public static final boolean STYLE_LEGACY_TOAST_SCALE_DEFAULT = false;
 		public static final int STYLE_COMPACT_ALPHA_DEFAULT = 179; // 70%
 		public static final int STYLE_COMPACT_TIME_DEFAULT = 60; // 3*20 ticks = 3 seconds
-		public static final boolean WIP_FILTER_IN_JUKEBOX_DEFAULT = false;
+		public static final boolean WIP_NAMESPACE_FILTER_DEFAULT = false;
+		public static final boolean SHOW_FILTER_PANEL_DEFAULT = true;
 		//? music_frequency
 		//public static final MusicFrequency MUSIC_FREQUENCY_DEFAULT = MusicFrequency.DEFAULT;
 		// -
 		public boolean COMPUTED_IS_DARK_MODE_ENABLED = COMPUTED_IS_DARK_MODE_ENABLED_DEFAULT;
-		public boolean SHOW_TITLE_SCREEN_BUTTON = SHOW_TITLE_SCREEN_BUTTON_DEFAULT;
+		public boolean SHOW_JUKEBOX_MENU_BUTTON = SHOW_JUKEBOX_MENU_BUTTON_DEFAULT;
 		public boolean SHOW_AUTHOR = SHOW_AUTHOR_DEFAULT;
 		public boolean SHOW_ALBUM_NAME = SHOW_ALBUM_NAME_DEFAULT;
 		public boolean ROTATE_ALBUM_COVER = ROTATE_ALBUM_COVER_DEFAULT;
@@ -114,13 +116,15 @@ public class Config {
 		public List<String> IGNORE_SOUND_EVENT = IGNORE_SOUND_EVENT_DEFAULT;
 		public int MAX_COUNT_HISTORY = MAX_COUNT_HISTORY_DEFAULT;
 		public boolean DEBUG_MOD = DEBUG_MOD_DEFAULT;
+		public boolean SHOW_MUTE = SHOW_MUTE_DEFAULT;
 		public NotificationStyle NOTIFICATION_STYLE = NOTIFICATION_STYLE_DEFAULT;
 		public List<NotificationStyle> NOTIFICATION_STYLE_FALLBACK = NOTIFICATION_STYLE_FALLBACK_DEFAULT;
 		public boolean STYLE_ACTION_BAR_ANIMATE_COLOR = STYLE_ACTION_BAR_ANIMATE_COLOR_DEFAULT;
 		public boolean STYLE_LEGACY_TOAST_SCALE = STYLE_LEGACY_TOAST_SCALE_DEFAULT;
 		public int STYLE_COMPACT_ALPHA = STYLE_COMPACT_ALPHA_DEFAULT;
 		public int STYLE_COMPACT_TIME = STYLE_COMPACT_TIME_DEFAULT;
-		public boolean WIP_FILTER_IN_JUKEBOX = WIP_FILTER_IN_JUKEBOX_DEFAULT;
+		public boolean WIP_NAMESPACE_FILTER = WIP_NAMESPACE_FILTER_DEFAULT;
+		public boolean SHOW_FILTER_PANEL = SHOW_FILTER_PANEL_DEFAULT;
 		//? music_frequency
 		//public MusicFrequency MUSIC_FREQUENCY = MUSIC_FREQUENCY_DEFAULT;
 

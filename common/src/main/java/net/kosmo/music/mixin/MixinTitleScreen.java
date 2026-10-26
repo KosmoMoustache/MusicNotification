@@ -1,14 +1,12 @@
 package net.kosmo.music.mixin;
 
-import net.kosmo.music.MusicNotificationClient;
 import net.kosmo.music.config.Config;
-import net.kosmo.music.gui.JukeboxScreen;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.WidgetSprites;
+import net.kosmo.music.gui.JukeboxScreenSelector;
+import net.kosmo.music.util.CommonComponents;
+import net.minecraft.client.gui.components.SpriteIconButton;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,11 +20,10 @@ public abstract class MixinTitleScreen extends Screen {
 	}
 
 	@Inject(method = "init()V", at = @At("RETURN"))
-	private void init(CallbackInfo ci) {
-		if (Config.options().SHOW_TITLE_SCREEN_BUTTON) {
-			this.addRenderableWidget(new ImageButton(12, 12, 20, 20, new WidgetSprites(Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/icon"), Identifier.fromNamespaceAndPath(MusicNotificationClient.MOD_ID, "jukebox/icon_focused")), (button) -> {
-				this.minecraft.gui.setScreen(new JukeboxScreen());
-			}));
+	private void insertJukeboxMenu(CallbackInfo ci) {
+		if (Config.options().SHOW_JUKEBOX_MENU_BUTTON) {
+			SpriteIconButton openJukebox = this.addRenderableWidget(CommonComponents.jukebox(20, button -> this.minecraft.gui.setScreen(JukeboxScreenSelector.create(this)), true));
+			openJukebox.setPosition(12, 12);
 		}
 	}
 }
