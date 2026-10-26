@@ -9,13 +9,13 @@ import org.jspecify.annotations.NonNull;
 import java.util.List;
 
 
-public class HomeTab extends net.kosmo.music.gui.nouveau.AbstractJukeboxTab {
+public class HomeTab extends AbstractJukeboxTab {
 	HomeTab(Minecraft minecraft, JukeboxScreenNouveau screen, int width, int height) {
 		super(minecraft, screen, width, height);
 	}
 
 	@Override
-	protected List<? extends net.kosmo.music.gui.nouveau.AbstractJukeboxEntryContainerWidget> buildEntries() {
+	protected List<? extends AbstractJukeboxEntryContainerWidget> buildEntries() {
 		return buildTrackEntries(TrackDataManager.getInstance().tracks.values());
 	}
 

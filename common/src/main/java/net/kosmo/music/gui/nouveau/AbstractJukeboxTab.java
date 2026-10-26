@@ -94,9 +94,9 @@ public abstract class AbstractJukeboxTab implements Tab {
 		return this.width - JukeboxScreenNouveau.SCROLLBAR_RESERVE;
 	}
 
-	protected abstract List<? extends net.kosmo.music.gui.nouveau.AbstractJukeboxEntryContainerWidget> buildEntries();
+	protected abstract List<? extends AbstractJukeboxEntryContainerWidget> buildEntries();
 
-	protected final void updateEntries(List<? extends net.kosmo.music.gui.nouveau.AbstractJukeboxEntryContainerWidget> entries) {
+	protected final void updateEntries(List<? extends AbstractJukeboxEntryContainerWidget> entries) {
 		this.trackScrollableContent.removeChildren();
 		entries.forEach(this.trackScrollableContent::addChild);
 
@@ -106,20 +106,22 @@ public abstract class AbstractJukeboxTab implements Tab {
 
 	protected List<net.kosmo.music.gui.nouveau.TrackEntry> buildTrackEntries(Collection<TrackData> tracks) {
 		List<net.kosmo.music.gui.nouveau.TrackEntry> entries = new ArrayList<>(tracks.size());
+	protected List<TrackEntry> buildTrackEntries(Collection<TrackData> tracks) {
+		List<TrackEntry> entries = new ArrayList<>(tracks.size());
 		TrackFilter trackFilter = this.parent.getTrackFilter();
 		for (TrackData track : tracks) {
 			if (!trackFilter.test(track)) continue;
-			entries.add(new net.kosmo.music.gui.nouveau.TrackEntry(this.minecraft, this.parent, this.scrollableLayout, track));
+			entries.add(new TrackEntry(this.minecraft, this.parent, this.scrollableLayout, track));
 		}
 		return entries;
 	}
 
-	protected List<net.kosmo.music.gui.nouveau.SoundEntry> buildSoundEntries(Collection<Identifier> sounds) {
-		List<net.kosmo.music.gui.nouveau.SoundEntry> entries = new ArrayList<>(sounds.size());
+	protected List<SoundEntry> buildSoundEntries(Collection<Identifier> sounds) {
+		List<SoundEntry> entries = new ArrayList<>(sounds.size());
 		TrackFilter trackFilter = this.parent.getTrackFilter();
 		for (Identifier id : sounds) {
 			if (!trackFilter.test(id)) continue;
-			entries.add(new net.kosmo.music.gui.nouveau.SoundEntry(this.minecraft, this.parent, this.scrollableLayout,
+			entries.add(new SoundEntry(this.minecraft, this.parent, this.scrollableLayout,
 				TrackDataManager.getEmpty(id, id.toString(), id.getNamespace())));
 		}
 		return entries;

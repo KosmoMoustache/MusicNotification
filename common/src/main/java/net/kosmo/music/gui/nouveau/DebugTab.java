@@ -13,7 +13,7 @@ public class DebugTab extends net.kosmo.music.gui.nouveau.AbstractJukeboxTab {
 	}
 
 	@Override
-	protected List<? extends net.kosmo.music.gui.nouveau.AbstractJukeboxEntryContainerWidget> buildEntries() {
+	protected List<? extends AbstractJukeboxEntryContainerWidget> buildEntries() {
 		return buildSoundEntries(this.minecraft.getSoundManager().getAvailableSounds());
 	}
 
