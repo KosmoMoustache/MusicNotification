@@ -13,7 +13,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.CommonColors;
 
-public class TrackEntry extends net.kosmo.music.gui.nouveau.AbstractJukeboxEntryContainerWidget {
+public class TrackEntry extends AbstractJukeboxEntryContainerWidget {
 	protected AlbumCoverWidget albumCoverWidget;
 
 	public TrackEntry(Minecraft minecraft, JukeboxScreenNouveau screen, ScrollableLayout scrollableLayout, TrackData trackData) {

@@ -104,8 +104,6 @@ public abstract class AbstractJukeboxTab implements Tab {
 			this.trackScrollableContent.addChild(this.createEmptyListFrame());
 	}
 
-	protected List<net.kosmo.music.gui.nouveau.TrackEntry> buildTrackEntries(Collection<TrackData> tracks) {
-		List<net.kosmo.music.gui.nouveau.TrackEntry> entries = new ArrayList<>(tracks.size());
 	protected List<TrackEntry> buildTrackEntries(Collection<TrackData> tracks) {
 		List<TrackEntry> entries = new ArrayList<>(tracks.size());
 		TrackFilter trackFilter = this.parent.getTrackFilter();

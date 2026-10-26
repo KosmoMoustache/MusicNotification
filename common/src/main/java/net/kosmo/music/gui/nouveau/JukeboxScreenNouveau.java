@@ -190,7 +190,7 @@ public class JukeboxScreenNouveau extends Screen {
 			this.contentLayout.addChild(/*? >=26.2 {*/tab.getLayout()/*?} else {*//*((AbstractJukeboxTab) tab).getLayout()*//*?}*/);
 		}
 		// The search query is shared by the tabs that use TrackFilter: keep their search box in sync.
-		if (tab instanceof net.kosmo.music.gui.nouveau.AbstractJukeboxTab jukeboxTab) {
+		if (tab instanceof AbstractJukeboxTab jukeboxTab) {
 			jukeboxTab.setSearchText(this.trackFilter.query());
 		}
 		this.refreshLists();

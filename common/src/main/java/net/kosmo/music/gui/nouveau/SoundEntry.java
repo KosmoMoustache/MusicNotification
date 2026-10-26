@@ -15,7 +15,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.CommonColors;
 
-public class SoundEntry extends net.kosmo.music.gui.nouveau.AbstractJukeboxEntryContainerWidget {
+public class SoundEntry extends AbstractJukeboxEntryContainerWidget {
 	public SoundEntry(Minecraft minecraft, JukeboxScreenNouveau screen, ScrollableLayout scrollableLayout, TrackData trackData) {
 		this(minecraft, screen, scrollableLayout, trackData, false);
 	}

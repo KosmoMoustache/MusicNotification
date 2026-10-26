@@ -7,7 +7,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
-public class DebugTab extends net.kosmo.music.gui.nouveau.AbstractJukeboxTab {
+public class DebugTab extends AbstractJukeboxTab {
 	DebugTab(Minecraft minecraft, JukeboxScreenNouveau screen, int width, int height) {
 		super(minecraft, screen, width, height);
 	}
