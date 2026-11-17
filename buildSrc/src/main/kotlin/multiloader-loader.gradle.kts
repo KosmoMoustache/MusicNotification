@@ -4,10 +4,10 @@ plugins {
 	id("multiloader-common")
 }
 
-val commonJava: Configuration by configurations.creating {
+val commonJava = configurations.create("commonJava") {
 	isCanBeResolved = true
 }
-val commonResources: Configuration by configurations.creating {
+val commonResources = configurations.create("commonResources") {
 	isCanBeResolved = true
 }
 
