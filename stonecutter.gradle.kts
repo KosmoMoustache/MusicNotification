@@ -3,7 +3,7 @@ import org.gradle.api.tasks.Copy
 plugins {
 	id("dev.kikugie.stonecutter")
 	id("com.google.devtools.ksp") version "2.3.6" apply false
-	id("net.neoforged.moddev") version "2.0.147" apply false
+	id("net.neoforged.moddev") version "2.0.148" apply false
 }
 stonecutter active "26.3" /* [SC] DO NOT EDIT */
 
@@ -11,8 +11,8 @@ stonecutter {
 	parameters {
 		constants["mixin_debug"] = providers.gradleProperty("mixin.debug").getOrElse("false").toBoolean()
 
-		filters.exclude("**/*.aw")
-		filters.exclude("**/*.cfg")
+		files.exclude("**/*.aw")
+		files.exclude("**/*.cfg")
 
 		replacements.string(current.parsed >= "1.21.2") {
 			replace("import net.minecraft.util.FastColor;", "import net.minecraft.util.ARGB;")
