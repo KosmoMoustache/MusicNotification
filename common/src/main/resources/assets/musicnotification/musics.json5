@@ -732,6 +732,16 @@
 		"cover": "chaos_cubed",
 		"customId": "minecraft:music_disc.bounce",
 		"title": "Bounce"
+	},
+	//? }
+	//? if 26.4 {
+	"minecraft:records/flurry": {
+		"album": "Deep Freeze",
+		"track": 6,
+		"author": "Hyper Potion",
+		"cover": "deep_freeze",
+		"customId": "minecraft:music_disc.flurry",
+		"title": "Flurry"
 	}
 	//? }
 }
