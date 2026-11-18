@@ -61,8 +61,9 @@ val commonResources = configurations.create("commonResources") {
 	isCanBeConsumed = true
 }
 
-artifacts {
-//	afterEvaluate {
+// Stonecutter adds generated source directories during project configuration.
+afterEvaluate {
+	artifacts {
 		val mainSourceSet = sourceSets.main.get()
 		mainSourceSet.java.sourceDirectories.files.forEach {
 			add(commonJava.name, it)
@@ -70,5 +71,5 @@ artifacts {
 		mainSourceSet.resources.sourceDirectories.files.forEach {
 			add(commonResources.name, it)
 		}
-//	}
+	}
 }
